@@ -1,8 +1,11 @@
 ---
 title: "中文測試"
 date: 2023-05-15T23:45:15+08:00
-draft: false 
-toc: true
+draft: false
+categories:
+  - test
+tags:
+  - wtf 
 ---
 
 # toc 測試

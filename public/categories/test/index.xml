@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on JYu&#39;s Blog</title>
-        <link>https://jyu1999.com/post/</link>
-        <description>Recent content in Posts on JYu&#39;s Blog</description>
+        <title>test on JYu&#39;s Blog</title>
+        <link>https://jyu1999.com/categories/test/</link>
+        <description>Recent content in test on JYu&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Tue, 16 May 2023 11:03:54 +0800</lastBuildDate><atom:link href="https://jyu1999.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 16 May 2023 11:03:54 +0800</lastBuildDate><atom:link href="https://jyu1999.com/categories/test/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>My Third Post</title>
         <link>https://jyu1999.com/post/my-third-post/</link>
         <pubDate>Tue, 16 May 2023 11:03:54 +0800</pubDate>

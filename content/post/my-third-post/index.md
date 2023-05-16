@@ -1,8 +1,11 @@
 ---
 title: "My Third Post"
 date: 2023-05-16T11:03:54+08:00
-draft: false 
-toc: true
+draft: false
+categories:
+  - test
+tags:
+  - wtf 
 ---
 
 ## fdfd

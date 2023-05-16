@@ -2,8 +2,14 @@
 title: "My First Post"
 date: 2023-05-15T23:37:40+08:00
 draft: false
-toc: true
+tags:
+  - Hello
+  - Hi
+categories:
+  - test 
 ---
+![image](image1.png)
+
 ## This is My First Post
 dasdasdfadsfadsfaf
 

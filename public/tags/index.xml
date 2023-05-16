@@ -5,6 +5,31 @@
         <link>https://jyu1999.com/tags/</link>
         <description>Recent content in Tags on JYu&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-tw</language><atom:link href="https://jyu1999.com/tags/index.xml" rel="self" type="application/rss+xml" />
+        <language>zh-tw</language>
+        <lastBuildDate>Tue, 16 May 2023 11:03:54 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>wtf</title>
+        <link>https://jyu1999.com/tags/wtf/</link>
+        <pubDate>Tue, 16 May 2023 11:03:54 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/tags/wtf/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Hello</title>
+        <link>https://jyu1999.com/tags/hello/</link>
+        <pubDate>Mon, 15 May 2023 23:37:40 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/tags/hello/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Hi</title>
+        <link>https://jyu1999.com/tags/hi/</link>
+        <pubDate>Mon, 15 May 2023 23:37:40 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/tags/hi/</guid>
+        <description></description>
+        </item>
+        
     </channel>
 </rss>
