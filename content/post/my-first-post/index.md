@@ -8,7 +8,6 @@ tags:
 categories:
   - test 
 ---
-![image](image1.png)
 
 ## This is My First Post
 dasdasdfadsfadsfaf
@@ -26,6 +25,7 @@ dsf
 
 
 adf
+![image](image1.png)
 
 a
 sdfasd
