@@ -37,7 +37,7 @@
                  height="{{ $Height }}"
                  loading="lazy">
             {{ else }}
-            <img src="{{ $image.permalink }}" loading="lazy" />
+            <img src="{{ $image.permalink }}" loading="lazy"/>
             {{ end }}
         </div>
         {{ end }}
@@ -72,42 +72,45 @@
 
 <label for="sortMethods"></label>
 
-<select name="sortMethods" id="sortMethods">
-    <option value="">Default</option>
-    <option value="ByTitle">Title</option>
-    <option value="ByLastmod">Last Modified Date</option>
-    <option value="ByPublishDate">Publish Date</option>
-</select>
+<div class="section-center">
+    <select name="sortMethods" id="sortMethods" class="sortMethods" >
+        <option value="" class="sortOption">Sort</option>
+        <option value="ByTitle" class="sortOption">Title</option>
+        <option value="ByLastmod" class="sortOption">Last Modified Date</option>
+        <option value="ByPublishDate" class="sortOption">Publish Date</option>
+    </select>
+</div>
+
+
+
+
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // Get the dropdown element
         var sortMethodDropdown = document.getElementById("sortMethods");
 
-        sortMethodDropdown.addEventListener("change", function() {
+        sortMethodDropdown.addEventListener("change", function () {
             var selectedOption = sortMethodDropdown.value;
             // Update the paginator based on the selected option
             var articleList = document.querySelector(".article-list--compact");
-            articleList.innerHTML="";
+            articleList.innerHTML = "";
             if (selectedOption === "ByTitle") {
                 // Use $paginator.Pages.ByTitle
-                articleList.innerHTML="{{ range $paginator.Pages.ByTitle}}" +
+                articleList.innerHTML = "{{ range $paginator.Pages.ByTitle}}" +
                     '{{ partial "article-list/compact" . }}' +
                     "{{ end }}";
-            }
-            else if(selectedOption === "ByLastmod"){
-                articleList.innerHTML="{{ range $paginator.Pages.ByLastmod}}" +
+            } else if (selectedOption === "ByLastmod") {
+                articleList.innerHTML = "{{ range $paginator.Pages.ByLastmod}}" +
                     '{{ partial "article-list/compact" . }}' +
                     "{{ end }}";
-            }
-            else if(selectedOption === "ByPublishDate"){
-                articleList.innerHTML="{{ range $paginator.Pages.ByPublishDate}}" +
+            } else if (selectedOption === "ByPublishDate") {
+                articleList.innerHTML = "{{ range $paginator.Pages.ByPublishDate}}" +
                     '{{ partial "article-list/compact" . }}' +
                     "{{ end }}";
-            }
-            else {
+            } else {
                 // Use the default $paginator.Pages
-                articleList.innerHTML="{{ range $paginator.Pages}}" +
+                articleList.innerHTML = "{{ range $paginator.Pages}}" +
                     '{{ partial "article-list/compact" . }}' +
                     "{{ end }}";
             }

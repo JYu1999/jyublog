@@ -7,7 +7,7 @@
 
 <link rel='canonical' href='https://jyu1999.com/categories/test/'>
 
-<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Category: test - Me are 結語JYu'>
+<link rel="stylesheet" href="/scss/style.min.81d98ac4a0760c4e0d4cd6b5bb14a5a4d7057c2445b3fd1448f4927b9b077409.css"><meta property='og:title' content='Category: test - Me are 結語JYu'>
 <meta property='og:description' content='Hi, 我是 結語JYu。
  在這裡我會分享一些我的想法和所學～'>
 <meta property='og:url' content='https://jyu1999.com/categories/test/'>
@@ -188,26 +188,32 @@
 
 <label for="sortMethods"></label>
 
-<select name="sortMethods" id="sortMethods">
-    <option value="">Default</option>
-    <option value="ByTitle">Title</option>
-    <option value="ByLastmod">Last Modified Date</option>
-    <option value="ByPublishDate">Publish Date</option>
-</select>
+<div class="section-center">
+    <select name="sortMethods" id="sortMethods" class="sortMethods" >
+        <option value="" class="sortOption">Sort</option>
+        <option value="ByTitle" class="sortOption">Title</option>
+        <option value="ByLastmod" class="sortOption">Last Modified Date</option>
+        <option value="ByPublishDate" class="sortOption">Publish Date</option>
+    </select>
+</div>
+
+
+
+
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         
         var sortMethodDropdown = document.getElementById("sortMethods");
 
-        sortMethodDropdown.addEventListener("change", function() {
+        sortMethodDropdown.addEventListener("change", function () {
             var selectedOption = sortMethodDropdown.value;
             
             var articleList = document.querySelector(".article-list--compact");
-            articleList.innerHTML="";
+            articleList.innerHTML = "";
             if (selectedOption === "ByTitle") {
                 
-                articleList.innerHTML="" +
+                articleList.innerHTML = "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-first-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eMy First Post\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-15T23:37:40\u0026#43;08:00\u0027\u003eMay 15, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-third-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eMy Third Post\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-16T11:03:54\u0026#43;08:00\u0027\u003eMay 16, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
@@ -216,9 +222,8 @@
                     "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-second-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e中文測試\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-15T23:45:15\u0026#43;08:00\u0027\u003eMay 15, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "";
-            }
-            else if(selectedOption === "ByLastmod"){
-                articleList.innerHTML="" +
+            } else if (selectedOption === "ByLastmod") {
+                articleList.innerHTML = "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-first-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eMy First Post\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-15T23:37:40\u0026#43;08:00\u0027\u003eMay 15, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-second-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e中文測試\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-15T23:45:15\u0026#43;08:00\u0027\u003eMay 15, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
@@ -227,9 +232,8 @@
                     "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-third-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eMy Third Post\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-16T11:03:54\u0026#43;08:00\u0027\u003eMay 16, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "";
-            }
-            else if(selectedOption === "ByPublishDate"){
-                articleList.innerHTML="" +
+            } else if (selectedOption === "ByPublishDate") {
+                articleList.innerHTML = "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-first-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eMy First Post\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-15T23:37:40\u0026#43;08:00\u0027\u003eMay 15, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-second-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e中文測試\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-15T23:45:15\u0026#43;08:00\u0027\u003eMay 15, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
@@ -238,10 +242,9 @@
                     "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-third-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eMy Third Post\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-16T11:03:54\u0026#43;08:00\u0027\u003eMay 16, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "";
-            }
-            else {
+            } else {
                 
-                articleList.innerHTML="" +
+                articleList.innerHTML = "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/my-third-post\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eMy Third Post\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-16T11:03:54\u0026#43;08:00\u0027\u003eMay 16, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "" +
                     '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/%E4%B8%AD%E6%96%87%E6%9C%83%E6%80%8E%E6%A8%A3\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e中文會怎樣\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-15T23:46:26\u0026#43;08:00\u0027\u003eMay 15, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
