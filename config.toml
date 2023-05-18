@@ -12,7 +12,7 @@ min = "0.87.0"
 [[menu.social]]
 identifier = "github"
 name = "github"
-url = "https://github.com/vincentthh35"
+url = "https://github.com/JYu1999"
 weight = -30
 [menu.social.params]
 icon = "brand-github"
@@ -20,7 +20,7 @@ newTab = true
 [[menu.social]]
 identifier = "linkedin"
 name = "linkedin"
-url = "https://www.linkedin.com/in/vincentthh/"
+url = "https://www.linkedin.com/in/chieh-yu-chan-123814190/"
 weight = -20
 [menu.social.params]
 icon = ""
@@ -28,7 +28,7 @@ newTab = true
 [[menu.social]]
 identifier = "cv"
 name = "cv"
-url = ""
+url = "#"
 weight = -10
 [menu.social.params]
 icon = ""
@@ -36,7 +36,7 @@ newTab = true
 [[menu.social]]
 identifier = "email"
 name = "email"
-url = "mailto:vincentthh35@gmail.com"
+url = "jk29666338@gmail.com"
 weight = -5
 [menu.social.params]
 icon = ""
