@@ -6,6 +6,23 @@ tags:
   - 好想工作室
 categories:
   - 好想工作室 — 後端 (backend Camp)培訓心得
+keywords:
+  - 結語
+  - JYu
+  - 傑宇
+  - 好想工作室
+  - Goodidea Studio
+  - 台南
+  - 免費軟體培訓
+  - 後端
+  - 後端學習
+  - Tainan
+  - 轉職
+  - 軟體工程師
+  - 轉職軟體工程師
+  - Backend
+  - 軟體課程
+  - 程式教育
 ---
 
 （本文同步更新在 [vocus](https://vocus.cc/article/642851c3fd89780001133a74) 和 [medium](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-四-我快崩潰了-怎麼辦-2d874d660eb3) 上）

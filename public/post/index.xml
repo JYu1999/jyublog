@@ -540,6 +540,10 @@
         <description>&lt;h2 id=&#34;about-me&#34;&gt;About me&lt;/h2&gt;
 &lt;p&gt;Hi, 我是 結語JYu。目前在森淨科技擔任後端工程師，主要開發語言以 Ruby 為主。&lt;/p&gt;
 &lt;p&gt;同時，我也在好想工作室 Backend Camp 擔任小 mentor。&lt;/p&gt;
+&lt;h2 id=&#34;about-this-site&#34;&gt;About This Site&lt;/h2&gt;
+&lt;p&gt;這個網站是用 hugo 建的喔～&lt;/p&gt;
+&lt;h3 id=&#34;about-this-theme&#34;&gt;About This Theme&lt;/h3&gt;
+&lt;p&gt;這個 Theme 是 hugo stack&lt;/p&gt;
 </description>
         </item>
         
