@@ -32,7 +32,7 @@
         <guid>https://jyu1999.com/backendlearningpath/api_learning_path/</guid>
         <description>&lt;h2 id=&#34;basic&#34;&gt;Basic&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;可以先完成 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;li&gt;可以先完成 &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/deploy_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Deploy Learning Path&lt;/a&gt;再來看較佳，這樣可以直接用 server 的 API 來測&lt;/li&gt;
 &lt;li&gt;剛開始學 API，可以先以 RESTful API 為主&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/WXsD0ZgxjRw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -54,7 +54,7 @@
         
         <guid>https://jyu1999.com/backendlearningpath/deploy_learning_path/</guid>
         <description>&lt;ol&gt;
-&lt;li&gt;建議在第六點之前，完成&lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;li&gt;建議在第六點之前，完成&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/laravel_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Laravel Learning Path&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;先了解 hosting 是什麼，有哪些種類
 &lt;ul&gt;
@@ -73,7 +73,7 @@
     &gt;How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cloudcone.com/docs/article/how-to-install-lemp-stack-on-ubuntu-22-04/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;How To Install LEMP Stack On Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;安裝過程中，務必注意啟用 ufw 之後，要把 ssh 開起來，否則會出現 server 還活著，但就是 ssh 不進去的狀況。
+&lt;li&gt;安裝過程中，務必注意啟用 ufw 之後，要把 ssh 開起來，否則會出現 server 還活著，但就是 ssh 不進去的狀況。 =&amp;gt; 後來發現其實很多雲端服務都有自帶防火牆，所以其實可以不用裝 ufw。
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://linuxhint.com/ufw-firewall-allow-ssh/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Ufw Firewall Allow SSH&lt;/a&gt;&lt;/li&gt;
@@ -204,7 +204,7 @@
     &gt;Laracast: PHP for Beginners (2023 Edition)&lt;/a&gt;：熟悉基礎語法之後，我們來看看實作起來的感覺&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/object-oriented-principles-in-php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Laracast: Object-Oriented Principles in PHP&lt;/a&gt;：現代很多程式語言都有物件導向的概念。&lt;/li&gt;
-&lt;li&gt;建議在看 PDO  之前，先把 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;li&gt;建議在看 PDO  之前，先把 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/database_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Database Learning Path&lt;/a&gt; 看完&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://phpdelusions.net/pdo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;(The only proper) PDO tutorial&lt;/a&gt;: 參考就行，不需要全部翻完&lt;/li&gt;
@@ -267,10 +267,10 @@
 &lt;p&gt;初學者安裝完以上的東西應該已經心力交瘁，甚至重灌好幾次，但接下來才是挑戰的開始&amp;hellip;
 以下四個基本上是後端工程師的必備技能。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&#34;-php-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterphp20learning20pathmd&#34;&gt;🤨 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/PHP%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;-php-learning-pathhttpsjyu1999combackendlearningpathphp_learning_path&#34;&gt;🤨 &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/php_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;PHP Learning Path&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;用來寫後端的語言，沒什麼好說的&lt;/p&gt;
-&lt;h3 id=&#34;-git-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmastergit20learning20pathmd&#34;&gt;😗 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Git%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;-git-learning-pathhttpsjyu1999combackendlearningpathgit_learning_path&#34;&gt;😗 &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/git_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Git Learning Path&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;用來版本控制，每個工程師都該會&lt;/p&gt;
 &lt;h3 id=&#34;-html--css-learning-path&#34;&gt;😶 HTML &amp;amp; CSS Learning Path&lt;/h3&gt;
@@ -278,7 +278,7 @@
 網路上相關資源非常多，這裡就不列出資源。
 要特別注意的是，後端不用特別在意切版，只要對 HTML tag, attribute, flexbox, grid 等稍微有概念即可。
 如果有意想要找全端工作的話，這部份可能就要略為多花一些時間了。&lt;/p&gt;
-&lt;h3 id=&#34;-basic-database-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdatabase20learning20pathmd&#34;&gt;😯 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;-basic-database-learning-pathhttpsjyu1999combackendlearningpathdatabase_learning_path&#34;&gt;😯 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/database_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Database Learning Path&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;跟資料庫互動也是一定要會的，不過這裡只單純指 sql 語法，還不用去優化效率和容量。&lt;/p&gt;
 &lt;h3 id=&#34;-stop-to-practice&#34;&gt;😲 Stop to Practice!&lt;/h3&gt;
@@ -302,7 +302,7 @@
 &lt;h3 id=&#34;-javascript-learning-path&#34;&gt;🫤 Javascript Learning Path&lt;/h3&gt;
 &lt;p&gt;主要集中在 DOM 的部分，這裡大概知道 DOM 會怎麼跟 HTML  做互動即可。沒空的話，詳細的 JS 概念（e.g. hoisting, callstack)可以不用了解。
 有空的話當然就去把 JS 概念補一補～&lt;/p&gt;
-&lt;h3 id=&#34;-laravel-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterlaravel20learning20pathmd&#34;&gt;😵‍💫 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;-laravel-learning-pathhttpsjyu1999combackendlearningpathlaravel_learning_path&#34;&gt;😵‍💫 &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/laravel_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Laravel Learning Path&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;PHP 的框架，藉由 Convention 讓工程師的溝通協作更順暢，也不用擔心架構。&lt;/p&gt;
 &lt;hr&gt;
@@ -311,15 +311,15 @@
 &lt;p&gt;學完 Sec. 2，對於本地端開發應該已經熟悉了。
 不過後端要會怎麼把網站 Deploy 到 Server 上。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&#34;-linux-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterlinux20learning20pathmd&#34;&gt;😨 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Linux%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;-linux-learning-pathhttpsjyu1999combackendlearningpathlinux_learning_path&#34;&gt;😨 &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/linux_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Linux Learning Path&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;學完 Laravel  應該就具備基礎網頁製作的能力，接下來就是要把網頁上 Server。不過在上 Server 之前最好徹底熟悉一下 Linux，否則會不斷搞砸、不斷重啟、然後還不知道問題在哪&amp;hellip;
 而且 Linux 也跟系統安全性息息相關，千萬不要隨意略過。
 在學 Linux 的同時，也一併把 vim 學起來吧～&lt;/p&gt;
-&lt;h3 id=&#34;-deploy-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdeploy20learning20pathmd&#34;&gt;🥺 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;-deploy-learning-pathhttpsjyu1999combackendlearningpathdeploy_learning_path&#34;&gt;🥺 &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/deploy_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Deploy Learning Path&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;再來要先知道如何把辛苦做的網站部署到 Host 上，並熟悉其原理。當然可以只看著教學一步步做，不管背後發生了什麼。但缺點就是發生了問題，也很難 debug&amp;hellip;&lt;/p&gt;
-&lt;h3 id=&#34;-basic-api-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterapi20learning20pathmd&#34;&gt;😥 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;-basic-api-learning-pathhttpsjyu1999combackendlearningpathapi_learning_path&#34;&gt;😥 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/api_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;API Learning Path&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;基礎的 API 以 RESTful 為主，且先不用管安全性、認證之類的東西。&lt;/p&gt;
 &lt;h3 id=&#34;stop-to-practice&#34;&gt;Stop to Practice!&lt;/h3&gt;
@@ -330,7 +330,7 @@
 &lt;p&gt;如果要繼續學習的話，可能要思考一下自己想去的公司種類或職業別是什麼。如果公司以接案為主的話，你可能需要多熟悉網頁框架（Laravel, Django, RoR&amp;hellip;）。如果是產品公司的話，DevOps、架構師、後端工程師&amp;hellip;都是潛在的發展方向。&lt;/p&gt;
 &lt;p&gt;建議是花多一些時間在思考這個，不然之後學習會愈學愈迷惘。&lt;/p&gt;
 &lt;h2 id=&#34;sec-4&#34;&gt;Sec. 4&lt;/h2&gt;
-&lt;h3 id=&#34;docker-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdocker20learning20pathmd&#34;&gt;🥶&lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Docker%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;docker-learning-pathhttpsjyu1999combackendlearningpathdocker_learning_path&#34;&gt;🥶&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/docker_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Docker Learning Path&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Docker 是一個可以幫助個人和團隊省下不少時間的工具，簡單來說就是將 application 和其所有的相依元件打包。
 不僅很多公司會要求應徵者有使用 docker 的經驗，在 &lt;a class=&#34;link&#34; href=&#34;https://survey.stackoverflow.co/2022/#technology-worked-with-vs-want-to-work-with&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -345,9 +345,9 @@
 &lt;p&gt;上面的路程基本上都是以「會使用」工具為主，到這邊開始會需要深入去探討安全性、效能相關的問題&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;algorithm-learning-path&#34;&gt;Algorithm Learning Path&lt;/h3&gt;
-&lt;h3 id=&#34;advanced-database-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdatabase20learning20pathmd&#34;&gt;(Advanced) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;advanced-database-learning-pathhttpsjyu1999combackendlearningpathdatabase_learning_path&#34;&gt;(Advanced) &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/database_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Database Learning Path&lt;/a&gt;&lt;/h3&gt;
-&lt;h3 id=&#34;advanced-api-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterapi20learning20pathmd&#34;&gt;(Advanced) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;advanced-api-learning-pathhttpsjyu1999combackendlearningpathapi_learning_path&#34;&gt;(Advanced) &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/api_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;API Learning Path&lt;/a&gt;&lt;/h3&gt;
 </description>
         </item>

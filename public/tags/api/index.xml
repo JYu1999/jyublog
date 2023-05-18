@@ -14,7 +14,7 @@
         <guid>https://jyu1999.com/backendlearningpath/api_learning_path/</guid>
         <description>&lt;h2 id=&#34;basic&#34;&gt;Basic&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;可以先完成 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;li&gt;可以先完成 &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/deploy_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Deploy Learning Path&lt;/a&gt;再來看較佳，這樣可以直接用 server 的 API 來測&lt;/li&gt;
 &lt;li&gt;剛開始學 API，可以先以 RESTful API 為主&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/WXsD0ZgxjRw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

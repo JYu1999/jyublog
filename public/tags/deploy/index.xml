@@ -13,7 +13,7 @@
         
         <guid>https://jyu1999.com/backendlearningpath/deploy_learning_path/</guid>
         <description>&lt;ol&gt;
-&lt;li&gt;建議在第六點之前，完成&lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;li&gt;建議在第六點之前，完成&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/laravel_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Laravel Learning Path&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;先了解 hosting 是什麼，有哪些種類
 &lt;ul&gt;
@@ -32,7 +32,7 @@
     &gt;How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cloudcone.com/docs/article/how-to-install-lemp-stack-on-ubuntu-22-04/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;How To Install LEMP Stack On Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;安裝過程中，務必注意啟用 ufw 之後，要把 ssh 開起來，否則會出現 server 還活著，但就是 ssh 不進去的狀況。
+&lt;li&gt;安裝過程中，務必注意啟用 ufw 之後，要把 ssh 開起來，否則會出現 server 還活著，但就是 ssh 不進去的狀況。 =&amp;gt; 後來發現其實很多雲端服務都有自帶防火牆，所以其實可以不用裝 ufw。
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://linuxhint.com/ufw-firewall-allow-ssh/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Ufw Firewall Allow SSH&lt;/a&gt;&lt;/li&gt;

@@ -11,7 +11,7 @@ categories:
 ---
 
 ## Basic
-1. 可以先完成 [Deploy Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md)再來看較佳，這樣可以直接用 server 的 API 來測
+1. 可以先完成 [Deploy Learning Path](https://jyu1999.com/backendlearningpath/deploy_learning_path/)再來看較佳，這樣可以直接用 server 的 API 來測
 2. 剛開始學 API，可以先以 RESTful API 為主
 3. [APIs for Beginners 2023 - How to use an API (Full Course / Tutorial)](https://youtu.be/WXsD0ZgxjRw)
    看這部影片，了解一些 API 的基礎

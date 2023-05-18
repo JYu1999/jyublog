@@ -10,7 +10,7 @@ categories:
   - 後端學習路徑
 ---
 
-1. 建議在第六點之前，完成[Laravel Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md)
+1. 建議在第六點之前，完成[Laravel Learning Path](https://jyu1999.com/backendlearningpath/laravel_learning_path/)
 2. 先了解 hosting 是什麼，有哪些種類
     - [不是工程師 架站用VPS還是Web Hosting，中文翻譯都有「虛擬」到底差在哪？](https://progressbar.tw/posts/102)
     - [學習VPS的重要性與各大Linux VPS 比較與推薦 (Linode, DigitalOcean, Vultr, AWS Lightsail)
@@ -20,7 +20,7 @@ categories:
 4. 安裝 LEMP
     - [How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-22-04)
     - [How To Install LEMP Stack On Ubuntu 22.04](https://cloudcone.com/docs/article/how-to-install-lemp-stack-on-ubuntu-22-04/)
-    - 安裝過程中，務必注意啟用 ufw 之後，要把 ssh 開起來，否則會出現 server 還活著，但就是 ssh 不進去的狀況。
+    - 安裝過程中，務必注意啟用 ufw 之後，要把 ssh 開起來，否則會出現 server 還活著，但就是 ssh 不進去的狀況。 => 後來發現其實很多雲端服務都有自帶防火牆，所以其實可以不用裝 ufw。
         - [Ufw Firewall Allow SSH](https://linuxhint.com/ufw-firewall-allow-ssh/)
         - [How To Install MariaDB on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-22-04)
 5. (optional) 在這邊最好把使用的 web server 摸透，反正遲早的事情。有了前面 Linux 的經驗，這個應該不算太難（吧）XD

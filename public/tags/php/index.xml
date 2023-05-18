@@ -45,7 +45,7 @@
     &gt;Laracast: PHP for Beginners (2023 Edition)&lt;/a&gt;：熟悉基礎語法之後，我們來看看實作起來的感覺&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/object-oriented-principles-in-php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Laracast: Object-Oriented Principles in PHP&lt;/a&gt;：現代很多程式語言都有物件導向的概念。&lt;/li&gt;
-&lt;li&gt;建議在看 PDO  之前，先把 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;li&gt;建議在看 PDO  之前，先把 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/database_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Database Learning Path&lt;/a&gt; 看完&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://phpdelusions.net/pdo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;(The only proper) PDO tutorial&lt;/a&gt;: 參考就行，不需要全部翻完&lt;/li&gt;

@@ -46,10 +46,10 @@ categories:
 > 初學者安裝完以上的東西應該已經心力交瘁，甚至重灌好幾次，但接下來才是挑戰的開始...
 > 以下四個基本上是後端工程師的必備技能。
 
-### 🤨 [PHP Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/PHP%20Learning%20Path.md)
+### 🤨 [PHP Learning Path](https://jyu1999.com/backendlearningpath/php_learning_path/)
 用來寫後端的語言，沒什麼好說的
 
-### 😗 [Git Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Git%20Learning%20Path.md)
+### 😗 [Git Learning Path](https://jyu1999.com/backendlearningpath/git_learning_path/)
 用來版本控制，每個工程師都該會
 
 ### 😶 HTML & CSS Learning Path
@@ -58,7 +58,7 @@ categories:
 要特別注意的是，後端不用特別在意切版，只要對 HTML tag, attribute, flexbox, grid 等稍微有概念即可。
 如果有意想要找全端工作的話，這部份可能就要略為多花一些時間了。
 
-### 😯 (Basic) [Database Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md)
+### 😯 (Basic) [Database Learning Path](https://jyu1999.com/backendlearningpath/database_learning_path/)
 跟資料庫互動也是一定要會的，不過這裡只單純指 sql 語法，還不用去優化效率和容量。
 
 ### 😲 Stop to Practice!
@@ -81,7 +81,7 @@ categories:
 主要集中在 DOM 的部分，這裡大概知道 DOM 會怎麼跟 HTML  做互動即可。沒空的話，詳細的 JS 概念（e.g. hoisting, callstack)可以不用了解。
 有空的話當然就去把 JS 概念補一補～
 
-### 😵‍💫 [Laravel Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md)
+### 😵‍💫 [Laravel Learning Path](https://jyu1999.com/backendlearningpath/laravel_learning_path/)
 PHP 的框架，藉由 Convention 讓工程師的溝通協作更順暢，也不用擔心架構。
 
 ---
@@ -89,15 +89,15 @@ PHP 的框架，藉由 Convention 讓工程師的溝通協作更順暢，也不�
 > 學完 Sec. 2，對於本地端開發應該已經熟悉了。
 > 不過後端要會怎麼把網站 Deploy 到 Server 上。
 
-### 😨 [Linux Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Linux%20Learning%20Path.md)
+### 😨 [Linux Learning Path](https://jyu1999.com/backendlearningpath/linux_learning_path/)
 學完 Laravel  應該就具備基礎網頁製作的能力，接下來就是要把網頁上 Server。不過在上 Server 之前最好徹底熟悉一下 Linux，否則會不斷搞砸、不斷重啟、然後還不知道問題在哪...
 而且 Linux 也跟系統安全性息息相關，千萬不要隨意略過。
 在學 Linux 的同時，也一併把 vim 學起來吧～
 
-### 🥺 [Deploy Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md)
+### 🥺 [Deploy Learning Path](https://jyu1999.com/backendlearningpath/deploy_learning_path/)
 再來要先知道如何把辛苦做的網站部署到 Host 上，並熟悉其原理。當然可以只看著教學一步步做，不管背後發生了什麼。但缺點就是發生了問題，也很難 debug...
 
-### 😥 (Basic) [API Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md)
+### 😥 (Basic) [API Learning Path](https://jyu1999.com/backendlearningpath/api_learning_path/)
 基礎的 API 以 RESTful 為主，且先不用管安全性、認證之類的東西。
 
 ### Stop to Practice!
@@ -114,7 +114,7 @@ PHP 的框架，藉由 Convention 讓工程師的溝通協作更順暢，也不�
 
 ## Sec. 4
 
-### 🥶[Docker Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Docker%20Learning%20Path.md)
+### 🥶[Docker Learning Path](https://jyu1999.com/backendlearningpath/docker_learning_path/)
 Docker 是一個可以幫助個人和團隊省下不少時間的工具，簡單來說就是將 application 和其所有的相依元件打包。
 不僅很多公司會要求應徵者有使用 docker 的經驗，在 [Stack Overflow 2022 的問卷調查](https://survey.stackoverflow.co/2022/#technology-worked-with-vs-want-to-work-with)中，docker 和 npm 可以說是在 other tool 類別裡面稱霸了。
 
@@ -132,9 +132,9 @@ Docker 是一個可以幫助個人和團隊省下不少時間的工具，簡單�
 
 ### Algorithm Learning Path
 
-### (Advanced) [Database Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md)
+### (Advanced) [Database Learning Path](https://jyu1999.com/backendlearningpath/database_learning_path/)
 
-### (Advanced) [API Learning Path](https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md)
+### (Advanced) [API Learning Path](https://jyu1999.com/backendlearningpath/api_learning_path/)
 
 
 
