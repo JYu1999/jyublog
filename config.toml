@@ -4,7 +4,13 @@ title = "Me are 結語JYu"
 theme = 'hugo-theme-stack'
 
 googleAnalytics = "G-Y2E5HHC8CW"
-#paginate = 2
+
+enableRobotsTXT = true
+
+[sitemap]
+changefreq = "weekly"
+filename = "sitemap.xml"
+priority = 0.7
 
 
 [module.hugoVersion]
