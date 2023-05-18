@@ -7,6 +7,12 @@ tags:
   - Hi
 categories:
   - test 
+menu:
+  main:
+    name: About
+    weight: -90
+    params:
+      icon: user
 ---
 
 ## This is My First Post
