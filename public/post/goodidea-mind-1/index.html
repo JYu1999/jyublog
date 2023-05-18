@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='（本文同步更新在 vocus 和 medium 上）
+前言 嗨大家好，我是結語 JYu。
+開始撰寫這個系列的時間是 2023 四月，也是我在好想工作室 backend camp 培訓的倒數一個月，想說可以分享一些心得，給對轉職為後端工程師的人參考。
+➡️【好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介】：簡單介紹好想工作室。
+【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】：會講後端培訓的點點滴滴。
+【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】：會給想進 backend camp 的一些建議。
+【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】：會講學員的心態管理。
+【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】：會講學員的學習技巧。
+【好想工作室 — 後端 (backend Camp)培訓心得（六）：我好想要錢（找工作）】：會講我自己的求職心得。等我找到工作後（應該會）再寫
+本系列文章純以我的觀察和想法為出發點，不一定就是實際狀況，也不帶任何批判。
+如果覺得資訊對你有用的話，不妨按下方拍手鼓勵一下我喔！
+然後我都是想到什麼就寫什麼，難免會有沒有提及到的，如果你有任何疑問，歡迎寄信至 jk29666338@gmail.com 來詢問我。
+好，廢話都講完了，那就讓我們開始吧！
+好想工作室？ 如果你是透過搜尋而找到這篇文章，想必你早已知道好想工作室在幹嘛了，但這裡我還是快速說明一下。
+好想工作室是一個「資訊聚落」，目前位於台南火車站旁。
+裡面主要存在三種人，一種是「進駐者」，意指那些有著全職資訊相關工作的人。他們付費租借了一個工作室的位置，在工作室裡面工作。
+第二種人是「學員」，學員是指那些想要成為軟體工程師，正在全職進行培訓的人。
+第三種是「mentor」，就是引導學員學習的天使們XD
+這樣說的話，好想工作室有點類似一個，co-working space 和 教育機構的綜合體，不過只限定資訊領域，因此，我才會說他是一個「資訊聚落」。
+軟體工程師培訓？ 好想工作室非常佛心的提供了免費的軟體工程師培訓，根據專業不同，分為四個 camp：
+前端：主要負責一個網頁中你看得到的部分。 後端：主要負責一個網頁的後台。 Android：寫 android 手機的 app IOS：寫 IOS 系統的 app 每次培訓會是六個月，在這六個月的期間完全免費。在這六個月當中你必須在好想工作室裡面全職自學。'>
+<title>好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/goodidea-mind-1/'>
+
+<link rel="stylesheet" href="/scss/style.min.720a97ad430befdda3f89f7814a97a693cd387017bdc6f6e332bf0722b59a949.css"><meta property='og:title' content='好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介'>
+<meta property='og:description' content='（本文同步更新在 vocus 和 medium 上）
+前言 嗨大家好，我是結語 JYu。
+開始撰寫這個系列的時間是 2023 四月，也是我在好想工作室 backend camp 培訓的倒數一個月，想說可以分享一些心得，給對轉職為後端工程師的人參考。
+➡️【好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介】：簡單介紹好想工作室。
+【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】：會講後端培訓的點點滴滴。
+【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】：會給想進 backend camp 的一些建議。
+【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】：會講學員的心態管理。
+【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】：會講學員的學習技巧。
+【好想工作室 — 後端 (backend Camp)培訓心得（六）：我好想要錢（找工作）】：會講我自己的求職心得。等我找到工作後（應該會）再寫
+本系列文章純以我的觀察和想法為出發點，不一定就是實際狀況，也不帶任何批判。
+如果覺得資訊對你有用的話，不妨按下方拍手鼓勵一下我喔！
+然後我都是想到什麼就寫什麼，難免會有沒有提及到的，如果你有任何疑問，歡迎寄信至 jk29666338@gmail.com 來詢問我。
+好，廢話都講完了，那就讓我們開始吧！
+好想工作室？ 如果你是透過搜尋而找到這篇文章，想必你早已知道好想工作室在幹嘛了，但這裡我還是快速說明一下。
+好想工作室是一個「資訊聚落」，目前位於台南火車站旁。
+裡面主要存在三種人，一種是「進駐者」，意指那些有著全職資訊相關工作的人。他們付費租借了一個工作室的位置，在工作室裡面工作。
+第二種人是「學員」，學員是指那些想要成為軟體工程師，正在全職進行培訓的人。
+第三種是「mentor」，就是引導學員學習的天使們XD
+這樣說的話，好想工作室有點類似一個，co-working space 和 教育機構的綜合體，不過只限定資訊領域，因此，我才會說他是一個「資訊聚落」。
+軟體工程師培訓？ 好想工作室非常佛心的提供了免費的軟體工程師培訓，根據專業不同，分為四個 camp：
+前端：主要負責一個網頁中你看得到的部分。 後端：主要負責一個網頁的後台。 Android：寫 android 手機的 app IOS：寫 IOS 系統的 app 每次培訓會是六個月，在這六個月的期間完全免費。在這六個月當中你必須在好想工作室裡面全職自學。'>
+<meta property='og:url' content='https://jyu1999.com/post/goodidea-mind-1/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='好想工作室' /><meta property='article:published_time' content='2023-05-18T16:34:03&#43;08:00'/><meta property='article:modified_time' content='2023-05-18T16:34:03&#43;08:00'/>
+<meta name="twitter:title" content="好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介">
+<meta name="twitter:description" content="（本文同步更新在 vocus 和 medium 上）
+前言 嗨大家好，我是結語 JYu。
+開始撰寫這個系列的時間是 2023 四月，也是我在好想工作室 backend camp 培訓的倒數一個月，想說可以分享一些心得，給對轉職為後端工程師的人參考。
+➡️【好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介】：簡單介紹好想工作室。
+【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】：會講後端培訓的點點滴滴。
+【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】：會給想進 backend camp 的一些建議。
+【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】：會講學員的心態管理。
+【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】：會講學員的學習技巧。
+【好想工作室 — 後端 (backend Camp)培訓心得（六）：我好想要錢（找工作）】：會講我自己的求職心得。等我找到工作後（應該會）再寫
+本系列文章純以我的觀察和想法為出發點，不一定就是實際狀況，也不帶任何批判。
+如果覺得資訊對你有用的話，不妨按下方拍手鼓勵一下我喔！
+然後我都是想到什麼就寫什麼，難免會有沒有提及到的，如果你有任何疑問，歡迎寄信至 jk29666338@gmail.com 來詢問我。
+好，廢話都講完了，那就讓我們開始吧！
+好想工作室？ 如果你是透過搜尋而找到這篇文章，想必你早已知道好想工作室在幹嘛了，但這裡我還是快速說明一下。
+好想工作室是一個「資訊聚落」，目前位於台南火車站旁。
+裡面主要存在三種人，一種是「進駐者」，意指那些有著全職資訊相關工作的人。他們付費租借了一個工作室的位置，在工作室裡面工作。
+第二種人是「學員」，學員是指那些想要成為軟體工程師，正在全職進行培訓的人。
+第三種是「mentor」，就是引導學員學習的天使們XD
+這樣說的話，好想工作室有點類似一個，co-working space 和 教育機構的綜合體，不過只限定資訊領域，因此，我才會說他是一個「資訊聚落」。
+軟體工程師培訓？ 好想工作室非常佛心的提供了免費的軟體工程師培訓，根據專業不同，分為四個 camp：
+前端：主要負責一個網頁中你看得到的部分。 後端：主要負責一個網頁的後台。 Android：寫 android 手機的 app IOS：寫 IOS 系統的 app 每次培訓會是六個月，在這六個月的期間完全免費。在這六個月當中你必須在好想工作室裡面全職自學。">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                            height="353" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/JYu1999'
+                        target="_blank"
+                        title="github"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                        target="_blank"
+                        title="linkedin"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://jyu1999.notion.site/CHIEH-YU-CHAN-49db0f414780421aae1fb2288114586c'
+                        target="_blank"
+                        title="cv"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:jk29666338@gmail.com'
+                        
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/post/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#好想工作室">好想工作室？</a></li>
+    <li><a href="#軟體工程師培訓">軟體工程師培訓？</a></li>
+    <li><a href="#自學">自學？</a></li>
+    <li><a href="#我怎麼會在好想工作室">我怎麼會在好想工作室？</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97/" class="font_size_1">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_1">
+                好想工作室
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97/" >
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/goodidea-mind-1/">好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 18, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>（本文同步更新在 <a class="link" href="https://vocus.cc/article/64282945fd89780001119de4"  target="_blank" rel="noopener"
+    >vocus</a> 和 <a class="link" href="https://jyu1999.medium.com/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp-%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97-%E4%B8%80-%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4%E7%B0%A1%E4%BB%8B-e484bb7993f2"  target="_blank" rel="noopener"
+    >medium</a> 上）</p>
+<h2 id="前言">前言</h2>
+<p>嗨大家好，我是結語 JYu。</p>
+<p>開始撰寫這個系列的時間是 2023 四月，也是我在好想工作室 backend camp 培訓的倒數一個月，想說可以分享一些心得，給對轉職為後端工程師的人參考。</p>
+<p>➡️<a class="link" href="https://jyu1999.medium.com/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp-%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97-%E4%B8%80-%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4%E7%B0%A1%E4%BB%8B-e484bb7993f2"  target="_blank" rel="noopener"
+    >【好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介】</a>：簡單介紹好想工作室。</p>
+<p><a class="link" href="https://jyu1999.medium.com/%e5%a5%bd%e6%83%b3%e5%b7%a5%e4%bd%9c%e5%ae%a4-%e5%be%8c%e7%ab%af-backend-camp-%e5%9f%b9%e8%a8%93%e5%bf%83%e5%be%97-%e4%ba%8c-backend-camp-%e5%9c%a8%e5%b9%b9%e5%98%9b-65e930feac71"  target="_blank" rel="noopener"
+    >【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】</a>：會講後端培訓的點點滴滴。</p>
+<p><a class="link" href="https://jyu1999.medium.com/%e5%a5%bd%e6%83%b3%e5%b7%a5%e4%bd%9c%e5%ae%a4-%e5%be%8c%e7%ab%af-backend-camp-%e5%9f%b9%e8%a8%93%e5%bf%83%e5%be%97-%e4%b8%89-%e6%88%91%e5%a5%bd%e6%83%b3%e9%80%b2%e4%be%86%e5%a5%bd%e6%83%b3-a5cb1ee83922"  target="_blank" rel="noopener"
+    >【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】</a>：會給想進 backend camp 的一些建議。</p>
+<p><a class="link" href="https://jyu1999.medium.com/%e5%a5%bd%e6%83%b3%e5%b7%a5%e4%bd%9c%e5%ae%a4-%e5%be%8c%e7%ab%af-backend-camp-%e5%9f%b9%e8%a8%93%e5%bf%83%e5%be%97-%e5%9b%9b-%e6%88%91%e5%bf%ab%e5%b4%a9%e6%bd%b0%e4%ba%86-%e6%80%8e%e9%ba%bc%e8%be%a6-2d874d660eb3"  target="_blank" rel="noopener"
+    >【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】</a>：會講學員的心態管理。</p>
+<p><a class="link" href="https://jyu1999.medium.com/%e5%a5%bd%e6%83%b3%e5%b7%a5%e4%bd%9c%e5%ae%a4-%e5%be%8c%e7%ab%af-backend-camp-%e5%9f%b9%e8%a8%93%e5%bf%83%e5%be%97-%e4%ba%94-%e9%80%99%e9%ba%bc%e5%a4%9a%e6%9d%b1%e8%a5%bf-%e8%a6%81%e6%80%8e%e9%ba%bc%e5%ad%b8%e6%9c%80%e6%9c%89%e6%95%88%e7%8e%87-c1aafaa7939"  target="_blank" rel="noopener"
+    >【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】</a>：會講學員的學習技巧。</p>
+<p>【好想工作室 — 後端 (backend Camp)培訓心得（六）：我好想要錢（找工作）】：會講我自己的求職心得。等我找到工作後（應該會）再寫</p>
+<p>本系列文章純以我的觀察和想法為出發點，不一定就是實際狀況，也不帶任何批判。</p>
+<p>如果覺得資訊對你有用的話，不妨按下方拍手鼓勵一下我喔！</p>
+<p>然後我都是想到什麼就寫什麼，難免會有沒有提及到的，如果你有任何疑問，歡迎寄信至 <a class="link" href="mailto:jk29666338@gmail.com" >jk29666338@gmail.com</a> 來詢問我。</p>
+<p>好，廢話都講完了，那就讓我們開始吧！</p>
+<hr>
+<h2 id="好想工作室">好想工作室？</h2>
+<p><img src="/post/goodidea-mind-1/1.webp"
+	width="225"
+	height="225"
+	srcset="/post/goodidea-mind-1/1_huaa350ea6dd52b4e70d1da18adc3880c4_3978_480x0_resize_q75_h2_box_2.webp 480w, /post/goodidea-mind-1/1_huaa350ea6dd52b4e70d1da18adc3880c4_3978_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+		alt="好想工作室的 logo"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="100"
+		data-flex-basis="240px"
+	
+></p>
+<p>如果你是透過搜尋而找到這篇文章，想必你早已知道好想工作室在幹嘛了，但這裡我還是快速說明一下。</p>
+<p>好想工作室是一個「資訊聚落」，目前位於台南火車站旁。</p>
+<p>裡面主要存在三種人，一種是「進駐者」，意指那些有著<strong>全職資訊相關工作</strong>的人。他們<strong>付費</strong>租借了一個工作室的位置，在工作室裡面工作。</p>
+<p>第二種人是「學員」，學員是指那些<strong>想要成為軟體工程師</strong>，正在<strong>全職進行培訓</strong>的人。</p>
+<p>第三種是「mentor」，就是<strong>引導學員學習</strong>的天使們XD</p>
+<p>這樣說的話，好想工作室有點類似一個，co-working space 和 教育機構的綜合體，不過只限定資訊領域，因此，我才會說他是一個「資訊聚落」。</p>
+<hr>
+<h2 id="軟體工程師培訓">軟體工程師培訓？</h2>
+<p>好想工作室非常佛心的提供了<strong>免費</strong>的軟體工程師培訓，根據專業不同，分為四個 camp：</p>
+<ul>
+<li>前端：主要負責一個網頁中你看得到的部分。</li>
+<li>後端：主要負責一個網頁的後台。</li>
+<li>Android：寫 android 手機的 app</li>
+<li>IOS：寫 IOS 系統的 app</li>
+</ul>
+<p>每次培訓會是<strong>六個月</strong>，在這六個月的期間完全免費。在這六個月當中你必須在好想工作室裡面<strong>全職自學</strong>。</p>
+<p>但資訊領域博大精深，如果六個月學不完也不用擔心，如果學習態度良好，可以跟 mentor 討論成為「付費學員」，繼續在好想工作室學習。</p>
+<hr>
+<h2 id="自學">自學？</h2>
+<p>初來乍到的人也許會想：「我看其他的培訓營都有課綱、都有老師上課，自學真的學的會嗎？」</p>
+<p>其實我從小到大的學習歷程就很討厭一句話：</p>
+<blockquote>
+<p>你就先學，總有一天你會用到的。</p>
+</blockquote>
+<p>在現代社會中，我們光是學「會用到的東西」，就算拼進全力也未必學的完了，更何況是去學「總有一天」會用到的東西。</p>
+<p>而自學的好處就在此，沒人告訴你要學什麼，也意味著你能挑真正對你有用的東西來學。</p>
+<p>沒有老師上課，在網路世界早已不是一個理由。除非領域真的特別偏門或新穎，不然以軟體工程師來說，youtube 隨便一個程式語言，可能就有幾百個課程，等於你實質上有幾百個老師可以教你。</p>
+<p>如果你需要作業，也有人針對語言設計了互動式的網頁和題目可以給你練習，甚至你可以直接請 chatgpt 幫忙出作業。</p>
+<p><img src="/post/goodidea-mind-1/2.webp"
+	width="720"
+	height="630"
+	srcset="/post/goodidea-mind-1/2_hu42a0d9d79f4ef82988d1faf20393aa0f_34296_480x0_resize_q75_h2_box_2.webp 480w, /post/goodidea-mind-1/2_hu42a0d9d79f4ef82988d1faf20393aa0f_34296_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+		alt="chatgpt 幫忙出測驗題"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="114"
+		data-flex-basis="274px"
+	
+></p>
+<p>可能又有人會問：「那我怎麼知道哪些東西重要？」</p>
+<p>但我認為「找重點」的能力本來就是一個軟體工程師必備的技能。就像我們寫程式 debug 的時候會需要分析錯誤，再設法解決。對自己也是一樣，身為軟體工程師，我們也要時時刻刻分析自己，看見自己的不足，而這些「不足」就是我們需要學習的重點。</p>
+<p>至於要怎麼分析？要怎麼針對自己的不足逐一改善？我在後面的文章也許會提。</p>
+<p>總而言之，自學是一個軟體工程師的必備技能，而如果能在工作前就能鍛鍊這個技能，不香嗎？</p>
+<hr>
+<h2 id="我怎麼會在好想工作室">我怎麼會在好想工作室？</h2>
+<p>因為我的背景也和之後培訓的過程息息相關，因此在這裡我想先提我是怎麼入教的。</p>
+<p>2022 年我大學畢業之後，想找後端工程師的工作。但由於我不是純資訊科系出生的，在學校只有修過少少、不到三十學分資工系的課。於是我便告訴自己，要利用畢業後這一年，好好學習後端相關技能。</p>
+<p>一開始我是在 udemy 找課程，學習全端。但學沒多久我就發現效果不佳，不是因為內容太難我不會，而是缺乏別人可以討論和交流。當時的我對前後端都一無所知，也還不知道網路上大概有哪些資源可以善用。</p>
+<p>於是我開始尋找資訊培訓的機會，一開始是找到台北的 Appworks School，但沒有錄取。後來在入伍前一個禮拜，我赫然發現台南也有人在做資訊培訓，身為台南人的我狂喜。但猛一看早已超過報名期限。</p>
+<p>軍中的五天，我思索之後決定嘗試直接到好想工作室成為「進駐者」，等於是把好想工作室當 K 書中心的概念XD</p>
+<p>實際跟工作室的人見面之後，她告訴我要成為進駐者必須要有資訊相關工作，建議我可以先從學員開始，並鼓勵我寄信去問問看 mentor。</p>
+<p>後來我跟 mentor 聊過之後，他認為我三觀還算端正，也算願意學習，就讓我加入了 backend camp。</p>
+<p>於是，我比後端 camp 的其他成員晚一個月開始培訓，也要比大家晚一個月走QQ</p>
+<p>培訓的辛酸血淚史也從這邊開始了…</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/">好想工作室</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

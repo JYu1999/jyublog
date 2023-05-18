@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Me are 結語JYu</title>
-        <link>https://jyu1999.com/post/</link>
-        <description>Recent content in Posts on Me are 結語JYu</description>
+        <title>好想工作室 — 後端 (backend Camp)培訓心得 on Me are 結語JYu</title>
+        <link>https://jyu1999.com/categories/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97/</link>
+        <description>Recent content in 好想工作室 — 後端 (backend Camp)培訓心得 on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Thu, 18 May 2023 16:34:03 +0800</lastBuildDate><atom:link href="https://jyu1999.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 18 May 2023 16:34:03 +0800</lastBuildDate><atom:link href="https://jyu1999.com/categories/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介</title>
         <link>https://jyu1999.com/post/goodidea-mind-1/</link>
         <pubDate>Thu, 18 May 2023 16:34:03 +0800</pubDate>
@@ -106,16 +106,6 @@
 &lt;p&gt;後來我跟 mentor 聊過之後，他認為我三觀還算端正，也算願意學習，就讓我加入了 backend camp。&lt;/p&gt;
 &lt;p&gt;於是，我比後端 camp 的其他成員晚一個月開始培訓，也要比大家晚一個月走QQ&lt;/p&gt;
 &lt;p&gt;培訓的辛酸血淚史也從這邊開始了…&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>About</title>
-        <link>https://jyu1999.com/post/about/</link>
-        <pubDate>Thu, 18 May 2023 16:31:17 +0800</pubDate>
-        
-        <guid>https://jyu1999.com/post/about/</guid>
-        <description>&lt;h2 id=&#34;about-me&#34;&gt;About me&lt;/h2&gt;
-&lt;p&gt;Hi, 我是 結語JYu。&lt;/p&gt;
 </description>
         </item>
         

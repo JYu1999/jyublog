@@ -174,15 +174,16 @@ fieldset:disabled a.btn {
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: #5a6268;
+  background-color: #87c0eb;
   border-color: #545b62;
+  box-shadow: 0 0 25px rgba(176, 184, 228, 0.45);
 }
 
 .btn-secondary:focus, .btn-secondary.focus {
-  color: #102770;
-  background: #ffeba7;
+  color: #fff;
+  background: #87c0eb;
   border-color: #545b62;
-  box-shadow: 0 0 25px rgba(255,235,167,.45);
+  box-shadow: 0 0 25px rgba(176, 184, 228, 0.45);
 }
 
 .btn-secondary.disabled, .btn-secondary:disabled {
