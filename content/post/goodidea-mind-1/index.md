@@ -6,6 +6,7 @@ tags:
   - 好想工作室 
 categories:
   - 好想工作室 — 後端 (backend Camp)培訓心得
+image: "1.webp"
 ---
 
 （本文同步更新在 [vocus](https://vocus.cc/article/64282945fd89780001119de4) 和 [medium](https://jyu1999.medium.com/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp-%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97-%E4%B8%80-%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4%E7%B0%A1%E4%BB%8B-e484bb7993f2) 上）
@@ -15,15 +16,15 @@ categories:
 
 開始撰寫這個系列的時間是 2023 四月，也是我在好想工作室 backend camp 培訓的倒數一個月，想說可以分享一些心得，給對轉職為後端工程師的人參考。
 
-➡️[【好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介】](https://jyu1999.medium.com/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp-%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97-%E4%B8%80-%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4%E7%B0%A1%E4%BB%8B-e484bb7993f2)：簡單介紹好想工作室。
+➡️[【好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介】](https://jyu1999.com/post/goodidea-mind-1/)：簡單介紹好想工作室。
 
-[【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-二-backend-camp-在幹嘛-65e930feac71)：會講後端培訓的點點滴滴。
+[【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】](https://jyu1999.com/post/goodidea-mind-2/)：會講後端培訓的點點滴滴。
 
-[【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-三-我好想進來好想-a5cb1ee83922)：會給想進 backend camp 的一些建議。
+[【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】](https://jyu1999.com/post/goodidea-mind-3/)：會給想進 backend camp 的一些建議。
 
-[【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-四-我快崩潰了-怎麼辦-2d874d660eb3)：會講學員的心態管理。
+[【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】](https://jyu1999.com/post/goodidea-mind-4/)：會講學員的心態管理。
 
-[【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-五-這麼多東西-要怎麼學最有效率-c1aafaa7939)：會講學員的學習技巧。
+[【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】](https://jyu1999.com/post/goodidea-mind-5/)：會講學員的學習技巧。
 
 【好想工作室 — 後端 (backend Camp)培訓心得（六）：我好想要錢（找工作）】：會講我自己的求職心得。等我找到工作後（應該會）再寫
 
@@ -116,3 +117,7 @@ categories:
 於是，我比後端 camp 的其他成員晚一個月開始培訓，也要比大家晚一個月走QQ
 
 培訓的辛酸血淚史也從這邊開始了…
+
+---
+
+下一篇：[【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】](https://jyu1999.com/post/goodidea-mind-2/)：會講後端培訓的點點滴滴。

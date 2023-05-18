@@ -1,12 +1,15 @@
 ---
-title: "【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】"
+title: "好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛"
 date: 2023-05-18T19:07:31+08:00
 draft: false
 tags:
   - 好想工作室
 categories:
   - 好想工作室 — 後端 (backend Camp)培訓心得
+image: "1.JPG"
 ---
+
+（本文同步更新在 [vocus](https://vocus.cc/article/64284d7ffd89780001130f8b) 和 [medium](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-二-backend-camp-在幹嘛-65e930feac71) 上）
 
 嗨大家好，我是結語 JYu。
 
@@ -14,13 +17,13 @@ categories:
 
 [【好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介】](https://jyu1999.com/post/goodidea-mind-1/)：簡單介紹好想工作室。
 
-➡️[【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-二-backend-camp-在幹嘛-65e930feac71)：會講後端培訓的點點滴滴。
+➡️[【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】](https://jyu1999.com/post/goodidea-mind-2/)：會講後端培訓的點點滴滴。
 
-[【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-三-我好想進來好想-a5cb1ee83922)：會給想進 backend camp 的一些建議。
+[【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】](https://jyu1999.com/post/goodidea-mind-3/)：會給想進 backend camp 的一些建議。
 
-[【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-四-我快崩潰了-怎麼辦-2d874d660eb3)：會講學員的心態管理。
+[【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】](https://jyu1999.com/post/goodidea-mind-4/)：會講學員的心態管理。
 
-[【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】](https://jyu1999.medium.com/好想工作室-後端-backend-camp-培訓心得-五-這麼多東西-要怎麼學最有效率-c1aafaa7939)：會講學員的學習技巧。
+[【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】](https://jyu1999.com/post/goodidea-mind-5/)：會講學員的學習技巧。
 
 【好想工作室 — 後端 (backend Camp)培訓心得（六）：我好想要錢（找工作）】：會講我自己的求職心得。等我找到工作後（應該會）再寫
 
@@ -111,7 +114,7 @@ SoJ 大大是目前後端的 mentor，SoJ 其實不常出現在工作室，但�
 
 ### 月
 
-上一篇文章有提到，我比其他 camp 成員慢一個月進來。
+[上一篇文章](https://jyu1999.com/post/goodidea-mind-1/)有提到，我比其他 camp 成員慢一個月進來。
 
 據他們所說，他們那個月基本上都在練英文打字、學習安裝環境和版本管理。
 
@@ -184,4 +187,8 @@ SoJ 大大是目前後端的 mentor，SoJ 其實不常出現在工作室，但�
 
 當然，我也不是鼓勵大家隨便學學。你還是要保有基本的學習態度，但在學程式之餘也別忘了多享受一下生活喔 : )
 
-如果對心態管理有興趣的，我會在第四篇的時候提及。
+如果對心態管理有興趣的，我會在[第四篇](https://jyu1999.com/post/goodidea-mind-4/)的時候提及。
+
+---
+
+下一篇：[【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】](https://jyu1999.com/post/goodidea-mind-3/)：會給想進 backend camp 的一些建議。
