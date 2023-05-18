@@ -9,6 +9,7 @@ menu:
     params:
       icon: user
 description: "About 結語JYu and this site."
+image: "1.png"
 keywords:
   - 結語
   - JYu

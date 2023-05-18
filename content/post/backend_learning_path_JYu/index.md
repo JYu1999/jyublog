@@ -6,6 +6,7 @@ tags:
   - backend
 categories:
   - 後端學習路徑
+image: "1.jpg"
 ---
 
 - 這是我自己學習後端的路程，和使用到的一些資源，以工具為主。

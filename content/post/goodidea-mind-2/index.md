@@ -6,7 +6,7 @@ tags:
   - 好想工作室
 categories:
   - 好想工作室 — 後端 (backend Camp)培訓心得
-image: "1.JPG"
+image: "4.png"
 keywords:
   - 結語
   - JYu
