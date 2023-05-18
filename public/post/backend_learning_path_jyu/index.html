@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='這是我自己學習後端的路程，和使用到的一些資源，以工具為主。
+語言/框架以 PHP/Laravel 為主，如果你是學其他語言的，自己代換即可。差異不大。
+在某些檔案中，我會註明最好先學什麼，再繼續進行下去。但也沒有絕對的先後順序，端看個人學習狀態。
+每個 Section 後面我會標完全零經驗者大概要花多久完成該 Section。
+我提供的資源（網站/課程/影片/書籍），不一定適用於所有人。建議大家從我提供的資源中，找出一些關鍵字，去搜尋對自己最有幫助的資源。
+完成到 Sec. 4 可以嘗試求職，完成 Sec. 5 去找工作「可能」會比較穩，但還是依公司型態和個人背景而定，沒有絕對。
+Sec. 0 在開始之前 (Est. 1 Week) 😄 環境設置： OS: Linux or MacOS，不建議 Windows。你也可以開一台 Host，直接從純 CLI 介面開始。 Database: MySQL or Mariadb or PostgreSQL Webserver: Nginx(推) or Apache Language: PHP or others 😀 工具安裝（自己選擇要裝什麼） texteditor: vscode or Neovim or phpstorm
+進框架前，用什麼都可以。進框架後建議用 phpStorm。
+Git GUI: sourcetree
+這個不一定要裝，看個人。
+Database GUI: tableplus, datagrip
+這個也不一定要裝，但裝了之後，看 table 會比較好看一點。
+Sec. 1 (Est.'>
+<title>JYu&#39;s Backend Learning Path</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/backend_learning_path_jyu/'>
+
+<link rel="stylesheet" href="/scss/style.min.720a97ad430befdda3f89f7814a97a693cd387017bdc6f6e332bf0722b59a949.css"><meta property='og:title' content='JYu&#39;s Backend Learning Path'>
+<meta property='og:description' content='這是我自己學習後端的路程，和使用到的一些資源，以工具為主。
+語言/框架以 PHP/Laravel 為主，如果你是學其他語言的，自己代換即可。差異不大。
+在某些檔案中，我會註明最好先學什麼，再繼續進行下去。但也沒有絕對的先後順序，端看個人學習狀態。
+每個 Section 後面我會標完全零經驗者大概要花多久完成該 Section。
+我提供的資源（網站/課程/影片/書籍），不一定適用於所有人。建議大家從我提供的資源中，找出一些關鍵字，去搜尋對自己最有幫助的資源。
+完成到 Sec. 4 可以嘗試求職，完成 Sec. 5 去找工作「可能」會比較穩，但還是依公司型態和個人背景而定，沒有絕對。
+Sec. 0 在開始之前 (Est. 1 Week) 😄 環境設置： OS: Linux or MacOS，不建議 Windows。你也可以開一台 Host，直接從純 CLI 介面開始。 Database: MySQL or Mariadb or PostgreSQL Webserver: Nginx(推) or Apache Language: PHP or others 😀 工具安裝（自己選擇要裝什麼） texteditor: vscode or Neovim or phpstorm
+進框架前，用什麼都可以。進框架後建議用 phpStorm。
+Git GUI: sourcetree
+這個不一定要裝，看個人。
+Database GUI: tableplus, datagrip
+這個也不一定要裝，但裝了之後，看 table 會比較好看一點。
+Sec. 1 (Est.'>
+<meta property='og:url' content='https://jyu1999.com/post/backend_learning_path_jyu/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='backend' /><meta property='article:published_time' content='2023-05-18T23:37:13&#43;08:00'/><meta property='article:modified_time' content='2023-05-18T23:37:13&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/img/avatar.png' />
+<meta name="twitter:site" content="@IamJYu">
+    <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="JYu&#39;s Backend Learning Path">
+<meta name="twitter:description" content="這是我自己學習後端的路程，和使用到的一些資源，以工具為主。
+語言/框架以 PHP/Laravel 為主，如果你是學其他語言的，自己代換即可。差異不大。
+在某些檔案中，我會註明最好先學什麼，再繼續進行下去。但也沒有絕對的先後順序，端看個人學習狀態。
+每個 Section 後面我會標完全零經驗者大概要花多久完成該 Section。
+我提供的資源（網站/課程/影片/書籍），不一定適用於所有人。建議大家從我提供的資源中，找出一些關鍵字，去搜尋對自己最有幫助的資源。
+完成到 Sec. 4 可以嘗試求職，完成 Sec. 5 去找工作「可能」會比較穩，但還是依公司型態和個人背景而定，沒有絕對。
+Sec. 0 在開始之前 (Est. 1 Week) 😄 環境設置： OS: Linux or MacOS，不建議 Windows。你也可以開一台 Host，直接從純 CLI 介面開始。 Database: MySQL or Mariadb or PostgreSQL Webserver: Nginx(推) or Apache Language: PHP or others 😀 工具安裝（自己選擇要裝什麼） texteditor: vscode or Neovim or phpstorm
+進框架前，用什麼都可以。進框架後建議用 phpStorm。
+Git GUI: sourcetree
+這個不一定要裝，看個人。
+Database GUI: tableplus, datagrip
+這個也不一定要裝，但裝了之後，看 table 會比較好看一點。
+Sec. 1 (Est."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/img/avatar.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://jyu1999.notion.site/CHIEH-YU-CHAN-49db0f414780421aae1fb2288114586c'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#sec-0-在開始之前-est-1-week">Sec. 0 在開始之前 (Est. 1 Week)</a>
+      <ul>
+        <li><a href="#-環境設置">😄 環境設置：</a></li>
+        <li><a href="#-工具安裝自己選擇要裝什麼">😀 工具安裝（自己選擇要裝什麼）</a></li>
+      </ul>
+    </li>
+    <li><a href="#sec-1-est-2535-month">Sec. 1 (Est. 2.5~3.5 Month)</a>
+      <ul>
+        <li><a href="#-php-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterphp20learning20pathmd">🤨 <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/PHP%20Learning%20Path.md">PHP Learning Path</a></a></li>
+        <li><a href="#-git-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmastergit20learning20pathmd">😗 <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/Git%20Learning%20Path.md">Git Learning Path</a></a></li>
+        <li><a href="#-html--css-learning-path">😶 HTML &amp; CSS Learning Path</a></li>
+        <li><a href="#-basic-database-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdatabase20learning20pathmd">😯 (Basic) <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md">Database Learning Path</a></a></li>
+        <li><a href="#-stop-to-practice">😲 Stop to Practice!</a></li>
+      </ul>
+    </li>
+    <li><a href="#sec-2-est-225-month">Sec. 2 (Est. 2~2.5 Month)</a>
+      <ul>
+        <li><a href="#-javascript-learning-path">🫤 Javascript Learning Path</a></li>
+        <li><a href="#-laravel-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterlaravel20learning20pathmd">😵‍💫 <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md">Laravel Learning Path</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#sec-3-est-23-month">Sec. 3 (Est. 2~3 Month)</a>
+      <ul>
+        <li><a href="#-linux-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterlinux20learning20pathmd">😨 <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/Linux%20Learning%20Path.md">Linux Learning Path</a></a></li>
+        <li><a href="#-deploy-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdeploy20learning20pathmd">🥺 <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md">Deploy Learning Path</a></a></li>
+        <li><a href="#-basic-api-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterapi20learning20pathmd">😥 (Basic) <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md">API Learning Path</a></a></li>
+        <li><a href="#stop-to-practice">Stop to Practice!</a></li>
+        <li><a href="#嘗試求職--想想未來方向">嘗試求職 &amp; 想想未來方向</a></li>
+      </ul>
+    </li>
+    <li><a href="#sec-4">Sec. 4</a>
+      <ul>
+        <li><a href="#docker-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdocker20learning20pathmd">🥶<a href="https://github.com/JYu1999/BackendLearningPath/blob/master/Docker%20Learning%20Path.md">Docker Learning Path</a></a></li>
+        <li><a href="#testing-learning-path">Testing Learning Path</a></li>
+        <li><a href="#cicd-learning-path">CI/CD Learning Path</a></li>
+      </ul>
+    </li>
+    <li><a href="#sec-5-進階">Sec. 5 進階</a>
+      <ul>
+        <li><a href="#algorithm-learning-path">Algorithm Learning Path</a></li>
+        <li><a href="#advanced-database-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdatabase20learning20pathmd">(Advanced) <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md">Database Learning Path</a></a></li>
+        <li><a href="#advanced-api-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterapi20learning20pathmd">(Advanced) <a href="https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md">API Learning Path</a></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/%E5%BE%8C%E7%AB%AF%E5%AD%B8%E7%BF%92%E8%B7%AF%E5%BE%91/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97/" class="font_size_5">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_9">
+                backend
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_5">
+                好想工作室
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_3">
+                Laravel
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+            <a href="/tags/docker/" class="font_size_1">
+                docker
+            </a>
+        
+            <a href="/tags/git/" class="font_size_1">
+                git
+            </a>
+        
+            <a href="/tags/github/" class="font_size_1">
+                github
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%BE%8C%E7%AB%AF%E5%AD%B8%E7%BF%92%E8%B7%AF%E5%BE%91/" >
+                後端學習路徑
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/backend_learning_path_jyu/">JYu&#39;s Backend Learning Path</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 18, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <ul>
+<li>
+<p>這是我自己學習後端的路程，和使用到的一些資源，以工具為主。</p>
+</li>
+<li>
+<p>語言/框架以 PHP/Laravel 為主，如果你是學其他語言的，自己代換即可。差異不大。</p>
+</li>
+<li>
+<p>在某些檔案中，我會註明最好先學什麼，再繼續進行下去。但也<strong>沒有絕對的先後順序</strong>，端看個人學習狀態。</p>
+</li>
+<li>
+<p>每個 Section 後面我會標完全零經驗者大概要花多久完成該 Section。</p>
+</li>
+<li>
+<p>我提供的資源（網站/課程/影片/書籍），不一定適用於所有人。建議大家從我提供的資源中，找出一些關鍵字，去搜尋對自己最有幫助的資源。</p>
+</li>
+<li>
+<p>完成到 Sec. 4 可以嘗試求職，完成 Sec. 5 去找工作「可能」會比較穩，但還是依公司型態和個人背景而定，沒有絕對。</p>
+</li>
+</ul>
+<hr>
+<h2 id="sec-0-在開始之前-est-1-week">Sec. 0 在開始之前 (Est. 1 Week)</h2>
+<h3 id="-環境設置">😄 環境設置：</h3>
+<ul>
+<li>OS: Linux or MacOS，不建議 Windows。你也可以開一台 Host，直接從純 CLI 介面開始。</li>
+<li>Database: MySQL or Mariadb or PostgreSQL</li>
+<li>Webserver: Nginx(推) or Apache</li>
+<li>Language: PHP or others</li>
+</ul>
+<h3 id="-工具安裝自己選擇要裝什麼">😀 工具安裝（自己選擇要裝什麼）</h3>
+<ul>
+<li>
+<p>texteditor: vscode or Neovim or phpstorm</p>
+<p>進框架前，用什麼都可以。進框架後建議用 phpStorm。</p>
+</li>
+<li>
+<p>Git GUI: sourcetree</p>
+<p>這個不一定要裝，看個人。</p>
+</li>
+<li>
+<p>Database GUI: tableplus, datagrip</p>
+<p>這個也不一定要裝，但裝了之後，看 table 會比較好看一點。</p>
+</li>
+</ul>
+<hr>
+<h2 id="sec-1-est-2535-month">Sec. 1 (Est. 2.5~3.5 Month)</h2>
+<blockquote>
+<p>初學者安裝完以上的東西應該已經心力交瘁，甚至重灌好幾次，但接下來才是挑戰的開始&hellip;
+以下四個基本上是後端工程師的必備技能。</p>
+</blockquote>
+<h3 id="-php-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterphp20learning20pathmd">🤨 <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/PHP%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >PHP Learning Path</a></h3>
+<p>用來寫後端的語言，沒什麼好說的</p>
+<h3 id="-git-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmastergit20learning20pathmd">😗 <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/Git%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >Git Learning Path</a></h3>
+<p>用來版本控制，每個工程師都該會</p>
+<h3 id="-html--css-learning-path">😶 HTML &amp; CSS Learning Path</h3>
+<p>後端基本上還是要會「看得懂」前端。
+網路上相關資源非常多，這裡就不列出資源。
+要特別注意的是，後端不用特別在意切版，只要對 HTML tag, attribute, flexbox, grid 等稍微有概念即可。
+如果有意想要找全端工作的話，這部份可能就要略為多花一些時間了。</p>
+<h3 id="-basic-database-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdatabase20learning20pathmd">😯 (Basic) <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >Database Learning Path</a></h3>
+<p>跟資料庫互動也是一定要會的，不過這裡只單純指 sql 語法，還不用去優化效率和容量。</p>
+<h3 id="-stop-to-practice">😲 Stop to Practice!</h3>
+<p>看完以上幾個，可以先作一個小作品出來。像是留言板、TodoList 之類的
+並嘗試在此作品中用到以下概念：</p>
+<ul>
+<li>Session/Cookie</li>
+<li>MVC</li>
+<li>CRUD</li>
+<li>OOP</li>
+<li>SQL/HTML Injection</li>
+<li>Validation</li>
+<li>約定式提交</li>
+</ul>
+<hr>
+<h2 id="sec-2-est-225-month">Sec. 2 (Est. 2~2.5 Month)</h2>
+<blockquote>
+<p>完成以上的路程，對後端也有一定的認識了。
+接著我們進到稍微複雜一點的地帶&hellip;</p>
+</blockquote>
+<h3 id="-javascript-learning-path">🫤 Javascript Learning Path</h3>
+<p>主要集中在 DOM 的部分，這裡大概知道 DOM 會怎麼跟 HTML  做互動即可。沒空的話，詳細的 JS 概念（e.g. hoisting, callstack)可以不用了解。
+有空的話當然就去把 JS 概念補一補～</p>
+<h3 id="-laravel-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterlaravel20learning20pathmd">😵‍💫 <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >Laravel Learning Path</a></h3>
+<p>PHP 的框架，藉由 Convention 讓工程師的溝通協作更順暢，也不用擔心架構。</p>
+<hr>
+<h2 id="sec-3-est-23-month">Sec. 3 (Est. 2~3 Month)</h2>
+<blockquote>
+<p>學完 Sec. 2，對於本地端開發應該已經熟悉了。
+不過後端要會怎麼把網站 Deploy 到 Server 上。</p>
+</blockquote>
+<h3 id="-linux-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterlinux20learning20pathmd">😨 <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/Linux%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >Linux Learning Path</a></h3>
+<p>學完 Laravel  應該就具備基礎網頁製作的能力，接下來就是要把網頁上 Server。不過在上 Server 之前最好徹底熟悉一下 Linux，否則會不斷搞砸、不斷重啟、然後還不知道問題在哪&hellip;
+而且 Linux 也跟系統安全性息息相關，千萬不要隨意略過。
+在學 Linux 的同時，也一併把 vim 學起來吧～</p>
+<h3 id="-deploy-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdeploy20learning20pathmd">🥺 <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >Deploy Learning Path</a></h3>
+<p>再來要先知道如何把辛苦做的網站部署到 Host 上，並熟悉其原理。當然可以只看著教學一步步做，不管背後發生了什麼。但缺點就是發生了問題，也很難 debug&hellip;</p>
+<h3 id="-basic-api-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterapi20learning20pathmd">😥 (Basic) <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >API Learning Path</a></h3>
+<p>基礎的 API 以 RESTful 為主，且先不用管安全性、認證之類的東西。</p>
+<h3 id="stop-to-practice">Stop to Practice!</h3>
+<p>到這邊可以嘗試去買一個網域，連接到自己的 cloud host，並在 cloud host 上部署專案，讓別人可以 call api 取得資料。
+你可能需要了解 Postman 使用、SSL、DNS、前後端分離等等概念。也需要了解一些常用的功能，包含但不限於上傳檔案、Validation、Cache 機制等等。</p>
+<h3 id="嘗試求職--想想未來方向">嘗試求職 &amp; 想想未來方向</h3>
+<p>如果你的目標是放在 junior 後端工程師的話，可能要考慮一下是否要繼續往下學，還是要先找工作了。就我的求職經驗來說，下面的內容對於 junior 後端工程師來說，是較少遇到的。</p>
+<p>如果要繼續學習的話，可能要思考一下自己想去的公司種類或職業別是什麼。如果公司以接案為主的話，你可能需要多熟悉網頁框架（Laravel, Django, RoR&hellip;）。如果是產品公司的話，DevOps、架構師、後端工程師&hellip;都是潛在的發展方向。</p>
+<p>建議是花多一些時間在思考這個，不然之後學習會愈學愈迷惘。</p>
+<h2 id="sec-4">Sec. 4</h2>
+<h3 id="docker-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdocker20learning20pathmd">🥶<a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/Docker%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >Docker Learning Path</a></h3>
+<p>Docker 是一個可以幫助個人和團隊省下不少時間的工具，簡單來說就是將 application 和其所有的相依元件打包。
+不僅很多公司會要求應徵者有使用 docker 的經驗，在 <a class="link" href="https://survey.stackoverflow.co/2022/#technology-worked-with-vs-want-to-work-with"  target="_blank" rel="noopener"
+    >Stack Overflow 2022 的問卷調查</a>中，docker 和 npm 可以說是在 other tool 類別裡面稱霸了。</p>
+<hr>
+<p>以下僅為草稿，期待後續我繼續往下走的時候更新。</p>
+<hr>
+<h3 id="testing-learning-path">Testing Learning Path</h3>
+<h3 id="cicd-learning-path">CI/CD Learning Path</h3>
+<h2 id="sec-5-進階">Sec. 5 進階</h2>
+<blockquote>
+<p>上面的路程基本上都是以「會使用」工具為主，到這邊開始會需要深入去探討安全性、效能相關的問題</p>
+</blockquote>
+<h3 id="algorithm-learning-path">Algorithm Learning Path</h3>
+<h3 id="advanced-database-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdatabase20learning20pathmd">(Advanced) <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >Database Learning Path</a></h3>
+<h3 id="advanced-api-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterapi20learning20pathmd">(Advanced) <a class="link" href="https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md"  target="_blank" rel="noopener"
+    >API Learning Path</a></h3>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/backend/">backend</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

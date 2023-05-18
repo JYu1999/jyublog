@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Laravel on Me are 結語JYu</title>
+        <link>https://jyu1999.com/tags/laravel/</link>
+        <description>Recent content in Laravel on Me are 結語JYu</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Thu, 18 May 2023 23:51:56 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/laravel/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>API Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/api_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:51:56 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/api_learning_path/</guid>
+        <description>&lt;h2 id=&#34;basic&#34;&gt;Basic&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;可以先完成 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Deploy Learning Path&lt;/a&gt;再來看較佳，這樣可以直接用 server 的 API 來測&lt;/li&gt;
+&lt;li&gt;剛開始學 API，可以先以 RESTful API 為主&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/WXsD0ZgxjRw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;APIs for Beginners 2023 - How to use an API (Full Course / Tutorial)&lt;/a&gt;
+看這部影片，了解一些 API 的基礎&lt;/li&gt;
+&lt;li&gt;嘗試用 PHP 手刻一個具有 CRUD 的 API，以及初步嘗試 Postman：&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLillGF-RfqbZ3_Xr8do7Q2R752xYrDRAo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PHP REST API From Scratch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;用 Laravel 寫一個 API 看看：&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/bvvVX9Pny84&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Build REST API in Laravel 8&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;advanced&#34;&gt;Advanced&lt;/h2&gt;
+</description>
+        </item>
+        <item>
+        <title>Deploy Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/deploy_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:51:48 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/deploy_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;建議在第六點之前，完成&lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laravel Learning Path&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;先了解 hosting 是什麼，有哪些種類
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://progressbar.tw/posts/102&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;不是工程師 架站用VPS還是Web Hosting，中文翻譯都有「虛擬」到底差在哪？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://progressbar.tw/posts/131&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;學習VPS的重要性與各大Linux VPS 比較與推薦 (Linode, DigitalOcean, Vultr, AWS Lightsail)
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;想辦法開一個 VPS 或 Cloud Host，然後 ssh 進去
+在下面的步驟中，我使用的作業系統主要是 ubuntu，如果你心有餘力的話，最好是也把紅帽系列(CentOS, Rocky)的也部署看看。&lt;/li&gt;
+&lt;li&gt;安裝 LEMP
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-22-04&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cloudcone.com/docs/article/how-to-install-lemp-stack-on-ubuntu-22-04/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How To Install LEMP Stack On Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;安裝過程中，務必注意啟用 ufw 之後，要把 ssh 開起來，否則會出現 server 還活著，但就是 ssh 不進去的狀況。
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://linuxhint.com/ufw-firewall-allow-ssh/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ufw Firewall Allow SSH&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-22-04&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How To Install MariaDB on Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(optional) 在這邊最好把使用的 web server 摸透，反正遲早的事情。有了前面 Linux 的經驗，這個應該不算太難（吧）XD
+&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLmOn9nNkQxJFKkgL4kqBtbX3J2FHmq8Ib&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【尚硅谷】2022版Nginx教程（进阶高程架构师必备）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;serve複數個網站: 如果你想在一個 server 啟多個網站的話。也是可以跳過啦～
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cloudpanel.io/tutorial/how-to-host-multiple-websites-on-one-server/#steps-to-host-multiple-websites-on-one-server--nginx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Host Multiple Websites on One Server&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://webdock.io/en/docs/how-guides/shared-hosting-multiple-websites/how-configure-nginx-to-serve-multiple-websites-single-vps&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Configure Nginx to serve Multiple Websites on a Single VPS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Install and deploy Multiple Laravel Projects
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-laravel-with-lemp-on-ubuntu-18-04&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Install and Configure Laravel 8 with Nginx (LEMP) on Ubuntu 18.04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.iankumu.com/blog/how-to-deploy-a-laravel-app-on-lemp-stack/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Deploy A Laravel App With Nginx on Ubuntu(LEMP)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(optional) 研究關於 Deploy 的其他內容，例如 cloud host 的服務（e.g. Laravel 怎麼上傳檔案到 AWS s3）、實務上架站的方式（https, DNS&amp;hellip;）、前後端分離&amp;hellip;之類的。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Laravel Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/laravel_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:48:29 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/laravel_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;確認自己完成 Sec. 1 的所有內容，再進入這裡較好&lt;/li&gt;
+&lt;li&gt;(optional) 先自己用 PHP 寫一個簡單框架，再進入 Laravel：&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLLQuc_7jk__Uk_QnJMPndbdKECcTEwTA1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Build PHP MVC Framework&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;中文社群學 Laravel ，龍哥絕對是首選：&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLBd8JGCAcUAFtnWuuqd0tzMwYsVAN4es_&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;為你自己學 Laravel&lt;/a&gt;。但是龍哥有些東西沒有講清楚，自己看文件有霧煞煞&amp;hellip; 而且龍哥使用的版本較舊。&lt;/li&gt;
+&lt;li&gt;看 Laracast的&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/laravel-8-from-scratch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laravel 8 From Scratch&lt;/a&gt;。這個大概至少要看兩週，最好要有點心理準備&lt;/li&gt;
+&lt;li&gt;了解一下 Laravel 的改版，不用到特別熟悉，知道大概改了什麼就好
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/whats-new-in-laravel-9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What&amp;rsquo;s New in Laravel 9&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/whats-new-in-laravel-10&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What&amp;rsquo;s New in Laravel 10&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(optional) 針對自己想要的套件、功能去作學習。這部份不急，Laravel的套件很多。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

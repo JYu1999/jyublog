@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>git on Me are 結語JYu</title>
+        <link>https://jyu1999.com/tags/git/</link>
+        <description>Recent content in git on Me are 結語JYu</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Thu, 18 May 2023 23:45:23 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/git/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Git Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/git_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:45:23 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/git_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbook.tw/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;為你自己學 Git&lt;/a&gt;： Git 基本上就是把龍哥的這本看熟，就可以應付大部分情況了。但要記得，看完之後也要常用，不然會很快就忘記了。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

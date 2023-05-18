@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>API on Me are 結語JYu</title>
+        <link>https://jyu1999.com/tags/api/</link>
+        <description>Recent content in API on Me are 結語JYu</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Thu, 18 May 2023 23:51:56 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/api/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>API Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/api_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:51:56 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/api_learning_path/</guid>
+        <description>&lt;h2 id=&#34;basic&#34;&gt;Basic&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;可以先完成 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Deploy Learning Path&lt;/a&gt;再來看較佳，這樣可以直接用 server 的 API 來測&lt;/li&gt;
+&lt;li&gt;剛開始學 API，可以先以 RESTful API 為主&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/WXsD0ZgxjRw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;APIs for Beginners 2023 - How to use an API (Full Course / Tutorial)&lt;/a&gt;
+看這部影片，了解一些 API 的基礎&lt;/li&gt;
+&lt;li&gt;嘗試用 PHP 手刻一個具有 CRUD 的 API，以及初步嘗試 Postman：&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLillGF-RfqbZ3_Xr8do7Q2R752xYrDRAo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PHP REST API From Scratch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;用 Laravel 寫一個 API 看看：&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/bvvVX9Pny84&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Build REST API in Laravel 8&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;advanced&#34;&gt;Advanced&lt;/h2&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

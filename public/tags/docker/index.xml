@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>docker on Me are 結語JYu</title>
+        <link>https://jyu1999.com/tags/docker/</link>
+        <description>Recent content in docker on Me are 結語JYu</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Thu, 18 May 2023 23:52:05 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/docker/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Docker Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/docker_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:52:05 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/docker_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/3c-iBn73dDE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Docker Tutorial for Beginners [FULL COURSE in 3 Hours]&lt;/a&gt;: 目前在 youtube 上觀看數量最多的 docker 影片，真滴不錯。&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/the-docker-tutorial&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laracast: The Docker Tutorial&lt;/a&gt;: 這系列影片會教你怎麼從無到有，建一個 Laravel 的 container 環境。完成之後，電腦裡面甚至不用裝 MNMP!&lt;/li&gt;
+&lt;li&gt;(optional) &lt;a class=&#34;link&#34; href=&#34;https://www.tenlong.com.tw/products/9789863126799?list_name=srh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Book: 跟著 Docker 隊長，修練 22天就精通 - 搭配 20小時作者線上教學，無縫接軌 Microservices、Cloud-native、Serverless、DevOps 開發架構&lt;/a&gt;：我自己是有再額外看書，但這個看個人。如果有想要再深入了解可以考慮。&lt;/li&gt;
+&lt;li&gt;(optional) 研究 &lt;a class=&#34;link&#34; href=&#34;https://laravel.com/docs/10.x/sail&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laravel Sail&lt;/a&gt;: 正如其官網上所說，Laravel Sail 是一個 &amp;ldquo;light-weight command-line interface for interacting with Laravel&amp;rsquo;s default Docker development environment&amp;rdquo;，可以讓開發者在很短的時間內建立起一個 laravel 的開發環境。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -6,7 +6,352 @@
         <description>Recent content on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Thu, 18 May 2023 19:18:20 +0800</lastBuildDate><atom:link href="https://jyu1999.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 18 May 2023 23:52:05 +0800</lastBuildDate><atom:link href="https://jyu1999.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Docker Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/docker_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:52:05 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/docker_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/3c-iBn73dDE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Docker Tutorial for Beginners [FULL COURSE in 3 Hours]&lt;/a&gt;: 目前在 youtube 上觀看數量最多的 docker 影片，真滴不錯。&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/the-docker-tutorial&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laracast: The Docker Tutorial&lt;/a&gt;: 這系列影片會教你怎麼從無到有，建一個 Laravel 的 container 環境。完成之後，電腦裡面甚至不用裝 MNMP!&lt;/li&gt;
+&lt;li&gt;(optional) &lt;a class=&#34;link&#34; href=&#34;https://www.tenlong.com.tw/products/9789863126799?list_name=srh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Book: 跟著 Docker 隊長，修練 22天就精通 - 搭配 20小時作者線上教學，無縫接軌 Microservices、Cloud-native、Serverless、DevOps 開發架構&lt;/a&gt;：我自己是有再額外看書，但這個看個人。如果有想要再深入了解可以考慮。&lt;/li&gt;
+&lt;li&gt;(optional) 研究 &lt;a class=&#34;link&#34; href=&#34;https://laravel.com/docs/10.x/sail&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laravel Sail&lt;/a&gt;: 正如其官網上所說，Laravel Sail 是一個 &amp;ldquo;light-weight command-line interface for interacting with Laravel&amp;rsquo;s default Docker development environment&amp;rdquo;，可以讓開發者在很短的時間內建立起一個 laravel 的開發環境。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>API Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/api_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:51:56 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/api_learning_path/</guid>
+        <description>&lt;h2 id=&#34;basic&#34;&gt;Basic&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;可以先完成 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Deploy Learning Path&lt;/a&gt;再來看較佳，這樣可以直接用 server 的 API 來測&lt;/li&gt;
+&lt;li&gt;剛開始學 API，可以先以 RESTful API 為主&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/WXsD0ZgxjRw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;APIs for Beginners 2023 - How to use an API (Full Course / Tutorial)&lt;/a&gt;
+看這部影片，了解一些 API 的基礎&lt;/li&gt;
+&lt;li&gt;嘗試用 PHP 手刻一個具有 CRUD 的 API，以及初步嘗試 Postman：&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLillGF-RfqbZ3_Xr8do7Q2R752xYrDRAo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PHP REST API From Scratch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;用 Laravel 寫一個 API 看看：&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/bvvVX9Pny84&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Build REST API in Laravel 8&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;advanced&#34;&gt;Advanced&lt;/h2&gt;
+</description>
+        </item>
+        <item>
+        <title>Deploy Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/deploy_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:51:48 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/deploy_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;建議在第六點之前，完成&lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laravel Learning Path&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;先了解 hosting 是什麼，有哪些種類
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://progressbar.tw/posts/102&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;不是工程師 架站用VPS還是Web Hosting，中文翻譯都有「虛擬」到底差在哪？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://progressbar.tw/posts/131&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;學習VPS的重要性與各大Linux VPS 比較與推薦 (Linode, DigitalOcean, Vultr, AWS Lightsail)
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;想辦法開一個 VPS 或 Cloud Host，然後 ssh 進去
+在下面的步驟中，我使用的作業系統主要是 ubuntu，如果你心有餘力的話，最好是也把紅帽系列(CentOS, Rocky)的也部署看看。&lt;/li&gt;
+&lt;li&gt;安裝 LEMP
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-22-04&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cloudcone.com/docs/article/how-to-install-lemp-stack-on-ubuntu-22-04/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How To Install LEMP Stack On Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;安裝過程中，務必注意啟用 ufw 之後，要把 ssh 開起來，否則會出現 server 還活著，但就是 ssh 不進去的狀況。
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://linuxhint.com/ufw-firewall-allow-ssh/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ufw Firewall Allow SSH&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-22-04&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How To Install MariaDB on Ubuntu 22.04&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(optional) 在這邊最好把使用的 web server 摸透，反正遲早的事情。有了前面 Linux 的經驗，這個應該不算太難（吧）XD
+&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLmOn9nNkQxJFKkgL4kqBtbX3J2FHmq8Ib&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【尚硅谷】2022版Nginx教程（进阶高程架构师必备）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;serve複數個網站: 如果你想在一個 server 啟多個網站的話。也是可以跳過啦～
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cloudpanel.io/tutorial/how-to-host-multiple-websites-on-one-server/#steps-to-host-multiple-websites-on-one-server--nginx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Host Multiple Websites on One Server&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://webdock.io/en/docs/how-guides/shared-hosting-multiple-websites/how-configure-nginx-to-serve-multiple-websites-single-vps&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Configure Nginx to serve Multiple Websites on a Single VPS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Install and deploy Multiple Laravel Projects
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-laravel-with-lemp-on-ubuntu-18-04&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Install and Configure Laravel 8 with Nginx (LEMP) on Ubuntu 18.04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.iankumu.com/blog/how-to-deploy-a-laravel-app-on-lemp-stack/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;How to Deploy A Laravel App With Nginx on Ubuntu(LEMP)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(optional) 研究關於 Deploy 的其他內容，例如 cloud host 的服務（e.g. Laravel 怎麼上傳檔案到 AWS s3）、實務上架站的方式（https, DNS&amp;hellip;）、前後端分離&amp;hellip;之類的。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Linux Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/linux_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:51:40 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/linux_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/playlist?list=PLmOn9nNkQxJEEfgfPo0IMwu8ac5DIWYd3&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【尚硅谷】Linux+Shell教程 3天搞定Linux，1天搞定Shell&lt;/a&gt;: 網路上其實很多 Linux 的教學，但很多都是英文的。中文的我覺得這位老師講的還行～&lt;/li&gt;
+&lt;li&gt;(optional) &lt;a class=&#34;link&#34; href=&#34;https://www.books.com.tw/products/0010703090&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;鳥哥的Linux私房菜：基礎學習篇(附DVD一片)(第四版)&lt;/a&gt;：鳥哥的書寫的十分詳細，他的網站上也會有一些內容。建議可以當作工具書來看，或是邊看教學影片，邊對照著鳥哥的書學習。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Laravel Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/laravel_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:48:29 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/laravel_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;確認自己完成 Sec. 1 的所有內容，再進入這裡較好&lt;/li&gt;
+&lt;li&gt;(optional) 先自己用 PHP 寫一個簡單框架，再進入 Laravel：&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLLQuc_7jk__Uk_QnJMPndbdKECcTEwTA1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Build PHP MVC Framework&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;中文社群學 Laravel ，龍哥絕對是首選：&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLBd8JGCAcUAFtnWuuqd0tzMwYsVAN4es_&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;為你自己學 Laravel&lt;/a&gt;。但是龍哥有些東西沒有講清楚，自己看文件有霧煞煞&amp;hellip; 而且龍哥使用的版本較舊。&lt;/li&gt;
+&lt;li&gt;看 Laracast的&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/laravel-8-from-scratch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laravel 8 From Scratch&lt;/a&gt;。這個大概至少要看兩週，最好要有點心理準備&lt;/li&gt;
+&lt;li&gt;了解一下 Laravel 的改版，不用到特別熟悉，知道大概改了什麼就好
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/whats-new-in-laravel-9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What&amp;rsquo;s New in Laravel 9&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/whats-new-in-laravel-10&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What&amp;rsquo;s New in Laravel 10&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(optional) 針對自己想要的套件、功能去作學習。這部份不急，Laravel的套件很多。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Database Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/database_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:46:40 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/database_learning_path/</guid>
+        <description>&lt;h2 id=&#34;basic&#34;&gt;Basic&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;初學者會一些基本語法即可～&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/gvRXjsrpCHw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【Database】SQL 3 hours teaching for beginners&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;練習：嘗試去 Leetcode 或其他刷題網站，寫一些 SQL 的題目吧！練習的題數 30 - 50 即可～&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;advanced&#34;&gt;Advanced&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PLmOn9nNkQxJFi4x7rZ5wpUKts3u7cDx21&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【宋红康】MySQL数据库（入门到高级，菜鸟到大牛）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Eloquent (Laravel ORM)
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/eloquent-techniques&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laracast: Eloquent Techniques&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/eloquent-relationships&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laracast: Eloquent Relationships&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/eloquent-performance-patterns&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laracast: Eloquent Performance Patterns&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Git Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/git_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:45:23 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/git_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbook.tw/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;為你自己學 Git&lt;/a&gt;： Git 基本上就是把龍哥的這本看熟，就可以應付大部分情況了。但要記得，看完之後也要常用，不然會很快就忘記了。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>PHP Learning Path</title>
+        <link>https://jyu1999.com/backendlearningpath/php_learning_path/</link>
+        <pubDate>Thu, 18 May 2023 23:43:11 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/backendlearningpath/php_learning_path/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.w3schools.com/php/default.asp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;W3school: PHP Tutorial&lt;/a&gt; 全部看完&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtube.com/playlist?list=PL3VM-unCzF8ipG50KDjnzhugceoSG3RTC&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laracast: PHP for Beginners (2023 Edition)&lt;/a&gt;：熟悉基礎語法之後，我們來看看實作起來的感覺&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://laracasts.com/series/object-oriented-principles-in-php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laracast: Object-Oriented Principles in PHP&lt;/a&gt;：現代很多程式語言都有物件導向的概念。&lt;/li&gt;
+&lt;li&gt;建議在看 PDO  之前，先把 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Database Learning Path&lt;/a&gt; 看完&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://phpdelusions.net/pdo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;(The only proper) PDO tutorial&lt;/a&gt;: 參考就行，不需要全部翻完&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>JYu&#39;s Backend Learning Path</title>
+        <link>https://jyu1999.com/post/backend_learning_path_jyu/</link>
+        <pubDate>Thu, 18 May 2023 23:37:13 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/backend_learning_path_jyu/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;這是我自己學習後端的路程，和使用到的一些資源，以工具為主。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;語言/框架以 PHP/Laravel 為主，如果你是學其他語言的，自己代換即可。差異不大。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在某些檔案中，我會註明最好先學什麼，再繼續進行下去。但也&lt;strong&gt;沒有絕對的先後順序&lt;/strong&gt;，端看個人學習狀態。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每個 Section 後面我會標完全零經驗者大概要花多久完成該 Section。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;我提供的資源（網站/課程/影片/書籍），不一定適用於所有人。建議大家從我提供的資源中，找出一些關鍵字，去搜尋對自己最有幫助的資源。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;完成到 Sec. 4 可以嘗試求職，完成 Sec. 5 去找工作「可能」會比較穩，但還是依公司型態和個人背景而定，沒有絕對。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;sec-0-在開始之前-est-1-week&#34;&gt;Sec. 0 在開始之前 (Est. 1 Week)&lt;/h2&gt;
+&lt;h3 id=&#34;-環境設置&#34;&gt;😄 環境設置：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;OS: Linux or MacOS，不建議 Windows。你也可以開一台 Host，直接從純 CLI 介面開始。&lt;/li&gt;
+&lt;li&gt;Database: MySQL or Mariadb or PostgreSQL&lt;/li&gt;
+&lt;li&gt;Webserver: Nginx(推) or Apache&lt;/li&gt;
+&lt;li&gt;Language: PHP or others&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-工具安裝自己選擇要裝什麼&#34;&gt;😀 工具安裝（自己選擇要裝什麼）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;texteditor: vscode or Neovim or phpstorm&lt;/p&gt;
+&lt;p&gt;進框架前，用什麼都可以。進框架後建議用 phpStorm。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Git GUI: sourcetree&lt;/p&gt;
+&lt;p&gt;這個不一定要裝，看個人。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Database GUI: tableplus, datagrip&lt;/p&gt;
+&lt;p&gt;這個也不一定要裝，但裝了之後，看 table 會比較好看一點。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;sec-1-est-2535-month&#34;&gt;Sec. 1 (Est. 2.5~3.5 Month)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;初學者安裝完以上的東西應該已經心力交瘁，甚至重灌好幾次，但接下來才是挑戰的開始&amp;hellip;
+以下四個基本上是後端工程師的必備技能。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;-php-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterphp20learning20pathmd&#34;&gt;🤨 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/PHP%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PHP Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;用來寫後端的語言，沒什麼好說的&lt;/p&gt;
+&lt;h3 id=&#34;-git-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmastergit20learning20pathmd&#34;&gt;😗 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Git%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;用來版本控制，每個工程師都該會&lt;/p&gt;
+&lt;h3 id=&#34;-html--css-learning-path&#34;&gt;😶 HTML &amp;amp; CSS Learning Path&lt;/h3&gt;
+&lt;p&gt;後端基本上還是要會「看得懂」前端。
+網路上相關資源非常多，這裡就不列出資源。
+要特別注意的是，後端不用特別在意切版，只要對 HTML tag, attribute, flexbox, grid 等稍微有概念即可。
+如果有意想要找全端工作的話，這部份可能就要略為多花一些時間了。&lt;/p&gt;
+&lt;h3 id=&#34;-basic-database-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdatabase20learning20pathmd&#34;&gt;😯 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Database Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;跟資料庫互動也是一定要會的，不過這裡只單純指 sql 語法，還不用去優化效率和容量。&lt;/p&gt;
+&lt;h3 id=&#34;-stop-to-practice&#34;&gt;😲 Stop to Practice!&lt;/h3&gt;
+&lt;p&gt;看完以上幾個，可以先作一個小作品出來。像是留言板、TodoList 之類的
+並嘗試在此作品中用到以下概念：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Session/Cookie&lt;/li&gt;
+&lt;li&gt;MVC&lt;/li&gt;
+&lt;li&gt;CRUD&lt;/li&gt;
+&lt;li&gt;OOP&lt;/li&gt;
+&lt;li&gt;SQL/HTML Injection&lt;/li&gt;
+&lt;li&gt;Validation&lt;/li&gt;
+&lt;li&gt;約定式提交&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;sec-2-est-225-month&#34;&gt;Sec. 2 (Est. 2~2.5 Month)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;完成以上的路程，對後端也有一定的認識了。
+接著我們進到稍微複雜一點的地帶&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;-javascript-learning-path&#34;&gt;🫤 Javascript Learning Path&lt;/h3&gt;
+&lt;p&gt;主要集中在 DOM 的部分，這裡大概知道 DOM 會怎麼跟 HTML  做互動即可。沒空的話，詳細的 JS 概念（e.g. hoisting, callstack)可以不用了解。
+有空的話當然就去把 JS 概念補一補～&lt;/p&gt;
+&lt;h3 id=&#34;-laravel-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterlaravel20learning20pathmd&#34;&gt;😵‍💫 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Laravel%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Laravel Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;PHP 的框架，藉由 Convention 讓工程師的溝通協作更順暢，也不用擔心架構。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;sec-3-est-23-month&#34;&gt;Sec. 3 (Est. 2~3 Month)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;學完 Sec. 2，對於本地端開發應該已經熟悉了。
+不過後端要會怎麼把網站 Deploy 到 Server 上。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;-linux-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterlinux20learning20pathmd&#34;&gt;😨 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Linux%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linux Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;學完 Laravel  應該就具備基礎網頁製作的能力，接下來就是要把網頁上 Server。不過在上 Server 之前最好徹底熟悉一下 Linux，否則會不斷搞砸、不斷重啟、然後還不知道問題在哪&amp;hellip;
+而且 Linux 也跟系統安全性息息相關，千萬不要隨意略過。
+在學 Linux 的同時，也一併把 vim 學起來吧～&lt;/p&gt;
+&lt;h3 id=&#34;-deploy-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdeploy20learning20pathmd&#34;&gt;🥺 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Deploy%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Deploy Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;再來要先知道如何把辛苦做的網站部署到 Host 上，並熟悉其原理。當然可以只看著教學一步步做，不管背後發生了什麼。但缺點就是發生了問題，也很難 debug&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;-basic-api-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterapi20learning20pathmd&#34;&gt;😥 (Basic) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;API Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;基礎的 API 以 RESTful 為主，且先不用管安全性、認證之類的東西。&lt;/p&gt;
+&lt;h3 id=&#34;stop-to-practice&#34;&gt;Stop to Practice!&lt;/h3&gt;
+&lt;p&gt;到這邊可以嘗試去買一個網域，連接到自己的 cloud host，並在 cloud host 上部署專案，讓別人可以 call api 取得資料。
+你可能需要了解 Postman 使用、SSL、DNS、前後端分離等等概念。也需要了解一些常用的功能，包含但不限於上傳檔案、Validation、Cache 機制等等。&lt;/p&gt;
+&lt;h3 id=&#34;嘗試求職--想想未來方向&#34;&gt;嘗試求職 &amp;amp; 想想未來方向&lt;/h3&gt;
+&lt;p&gt;如果你的目標是放在 junior 後端工程師的話，可能要考慮一下是否要繼續往下學，還是要先找工作了。就我的求職經驗來說，下面的內容對於 junior 後端工程師來說，是較少遇到的。&lt;/p&gt;
+&lt;p&gt;如果要繼續學習的話，可能要思考一下自己想去的公司種類或職業別是什麼。如果公司以接案為主的話，你可能需要多熟悉網頁框架（Laravel, Django, RoR&amp;hellip;）。如果是產品公司的話，DevOps、架構師、後端工程師&amp;hellip;都是潛在的發展方向。&lt;/p&gt;
+&lt;p&gt;建議是花多一些時間在思考這個，不然之後學習會愈學愈迷惘。&lt;/p&gt;
+&lt;h2 id=&#34;sec-4&#34;&gt;Sec. 4&lt;/h2&gt;
+&lt;h3 id=&#34;docker-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdocker20learning20pathmd&#34;&gt;🥶&lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Docker%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Docker Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Docker 是一個可以幫助個人和團隊省下不少時間的工具，簡單來說就是將 application 和其所有的相依元件打包。
+不僅很多公司會要求應徵者有使用 docker 的經驗，在 &lt;a class=&#34;link&#34; href=&#34;https://survey.stackoverflow.co/2022/#technology-worked-with-vs-want-to-work-with&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Stack Overflow 2022 的問卷調查&lt;/a&gt;中，docker 和 npm 可以說是在 other tool 類別裡面稱霸了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;以下僅為草稿，期待後續我繼續往下走的時候更新。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;testing-learning-path&#34;&gt;Testing Learning Path&lt;/h3&gt;
+&lt;h3 id=&#34;cicd-learning-path&#34;&gt;CI/CD Learning Path&lt;/h3&gt;
+&lt;h2 id=&#34;sec-5-進階&#34;&gt;Sec. 5 進階&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;上面的路程基本上都是以「會使用」工具為主，到這邊開始會需要深入去探討安全性、效能相關的問題&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;algorithm-learning-path&#34;&gt;Algorithm Learning Path&lt;/h3&gt;
+&lt;h3 id=&#34;advanced-database-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterdatabase20learning20pathmd&#34;&gt;(Advanced) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/Database%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Database Learning Path&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;advanced-api-learning-pathhttpsgithubcomjyu1999backendlearningpathblobmasterapi20learning20pathmd&#34;&gt;(Advanced) &lt;a class=&#34;link&#34; href=&#34;https://github.com/JYu1999/BackendLearningPath/blob/master/API%20Learning%20Path.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;API Learning Path&lt;/a&gt;&lt;/h3&gt;
+</description>
+        </item>
+        <item>
         <title>好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？</title>
         <link>https://jyu1999.com/post/goodidea-mind-5/</link>
         <pubDate>Thu, 18 May 2023 19:18:20 +0800</pubDate>
@@ -533,10 +878,10 @@
         </item>
         <item>
         <title>About</title>
-        <link>https://jyu1999.com/post/about/</link>
+        <link>https://jyu1999.com/about/</link>
         <pubDate>Thu, 18 May 2023 16:31:17 +0800</pubDate>
         
-        <guid>https://jyu1999.com/post/about/</guid>
+        <guid>https://jyu1999.com/about/</guid>
         <description>&lt;h2 id=&#34;about-me&#34;&gt;About me&lt;/h2&gt;
 &lt;p&gt;Hi, 我是 結語JYu。目前在森淨科技擔任後端工程師，主要開發語言以 Ruby 為主。&lt;/p&gt;
 &lt;p&gt;同時，我也在好想工作室 Backend Camp 擔任小 mentor。&lt;/p&gt;
