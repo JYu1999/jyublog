@@ -3,6 +3,7 @@ languageCode = 'zh-tw'
 title = "Me are 結語JYu"
 theme = 'hugo-theme-stack'
 
+googleAnalytics = "G-Y2E5HHC8CW"
 #paginate = 2
 
 
@@ -53,6 +54,7 @@ rssFullContent = true
 description = "Hi, 我是 結語JYu。\n 在這裡我會分享一些我的想法和所學～"
 image = "image"
 favicon = "/favicon.ico"
+
 
 [params.footer]
 since = 2023
