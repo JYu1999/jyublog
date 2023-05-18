@@ -132,7 +132,7 @@ limit = 10
 card = "summary_large_image"
 
 [params.defaultImage.opengraph]
-enabled = false
+enabled = true
 local = false
 src = "img/avatar.png"
 
