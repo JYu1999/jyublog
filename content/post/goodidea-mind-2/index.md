@@ -1,5 +1,5 @@
 ---
-title: "好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛"
+title: "好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛"
 date: 2023-05-18T19:07:31+08:00
 draft: false
 tags:

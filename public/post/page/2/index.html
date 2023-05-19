@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://jyu1999.com/post/'>
 
-<link rel="stylesheet" href="/scss/style.min.720a97ad430befdda3f89f7814a97a693cd387017bdc6f6e332bf0722b59a949.css"><meta property='og:title' content='Posts'>
+<link rel="stylesheet" href="/scss/style.min.760263ba1b7dd34efd2f77e1fda7448aa75ccb0a9771268a5759cb7977f90afe.css"><meta property='og:title' content='Posts'>
 <meta property='og:description' content='Hi, 我是 結語JYu。我目前是一位後端工程師，同時也是好想工作室後端的小 mentor。在這個網站，我會分享各種科技新知、軟體工程、以及其他我學習到的技術。Hi, I am JYu. I am currently a backend developer. At the same time, I am associate mentor at GoodIdea Studio Backend Camp. In this site, I will share everything I learn, including system design, software engineer or other related to computer science.'>
 <meta property='og:url' content='https://jyu1999.com/post/'>
 <meta property='og:site_name' content='Me are 結語JYu'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2023-05-18T23:52:05&#43;08:00 '/><meta property='og:image' content='https://jyu1999.com/img/avatar.png' />
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2023-05-19T19:35:41&#43;08:00 '/><meta property='og:image' content='https://jyu1999.com/img/avatar.png' />
 <meta name="twitter:site" content="@IamJYu">
     <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="Posts">
 <meta name="twitter:description" content="Hi, 我是 結語JYu。我目前是一位後端工程師，同時也是好想工作室後端的小 mentor。在這個網站，我會分享各種科技新知、軟體工程、以及其他我學習到的技術。Hi, I am JYu. I am currently a backend developer. At the same time, I am associate mentor at GoodIdea Studio Backend Camp. In this site, I will share everything I learn, including system design, software engineer or other related to computer science."><meta name="twitter:card" content="summary_large_image">
@@ -190,7 +190,7 @@ if (!doNotTrack) {
         
         
         <li >
-            <a href='/post/about/' >
+            <a href='/about/' >
                 
                 
                 
@@ -204,6 +204,26 @@ if (!doNotTrack) {
 
                 
                 <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
             </a>
         </li>
         
@@ -255,12 +275,20 @@ if (!doNotTrack) {
 
     <div class="tagCloud-tags">
         
-            <a href="/categories/%E5%BE%8C%E7%AB%AF%E5%AD%B8%E7%BF%92%E8%B7%AF%E5%BE%91/" class="font_size_9">
+            <a href="/categories/backendlearningpath/" class="font_size_9">
                 後端學習路徑
             </a>
         
-            <a href="/categories/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4-%E5%BE%8C%E7%AB%AF-backend-camp%E5%9F%B9%E8%A8%93%E5%BF%83%E5%BE%97/" class="font_size_5">
+            <a href="/categories/goodidea-mind/" class="font_size_5">
                 好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_5">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_1">
+                無用的小知識
             </a>
         
     </div>
@@ -288,12 +316,16 @@ if (!doNotTrack) {
                 backend
             </a>
         
-            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_5">
-                好想工作室
+            <a href="/tags/laravel/" class="font_size_8">
+                Laravel
             </a>
         
-            <a href="/tags/laravel/" class="font_size_3">
-                Laravel
+            <a href="/tags/laravel-backpack/" class="font_size_5">
+                Laravel Backpack
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_5">
+                好想工作室
             </a>
         
             <a href="/tags/php/" class="font_size_2">
@@ -320,10 +352,6 @@ if (!doNotTrack) {
                 git
             </a>
         
-            <a href="/tags/github/" class="font_size_1">
-                github
-            </a>
-        
     </div>
 </section>
             
@@ -341,7 +369,7 @@ if (!doNotTrack) {
     </h3>
     <div class="section-card">
         <div class="section-details">
-            <h3 class="section-count">14 pages</h3>
+            <h3 class="section-count">12 pages</h3>
             <h1 class="section-term">Posts</h1>
             
         </div>
@@ -377,46 +405,30 @@ if (!doNotTrack) {
             articleList.innerHTML = "";
             if (a.innerHTML === "Title"){
                 articleList.innerHTML = "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/about\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eAbout\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:31:17\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
+                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-1\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:34:03\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-1\/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-1\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:34:03\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-1\/1_huaa350ea6dd52b4e70d1da18adc3880c4_3978_120x120_fill_q75_h2_box_smart1_2.webp\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
-                    "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-3\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:18:09\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
-                    "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-2\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:07:31\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-2\/1_hucc5e165d0d237c9aed99c8400e408cdf_990839_120x120_fill_q75_box_smart1.JPG\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
+                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-2\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:07:31\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-2\/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "";
             }
             else if(a.innerHTML === "Last Modified Date"){
                 articleList.innerHTML = "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/about\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eAbout\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:31:17\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
+                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-1\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:34:03\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-1\/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-1\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:34:03\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-1\/1_huaa350ea6dd52b4e70d1da18adc3880c4_3978_120x120_fill_q75_h2_box_smart1_2.webp\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
-                    "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-2\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:07:31\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-2\/1_hucc5e165d0d237c9aed99c8400e408cdf_990839_120x120_fill_q75_box_smart1.JPG\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
-                    "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-3\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:18:09\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
+                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-2\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:07:31\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-2\/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "";
             }
             else if(a.innerHTML === "Publish Date"){
                 articleList.innerHTML = "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/about\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eAbout\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:31:17\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
+                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-1\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:34:03\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-1\/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-1\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:34:03\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-1\/1_huaa350ea6dd52b4e70d1da18adc3880c4_3978_120x120_fill_q75_h2_box_smart1_2.webp\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
-                    "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-2\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:07:31\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-2\/1_hucc5e165d0d237c9aed99c8400e408cdf_990839_120x120_fill_q75_box_smart1.JPG\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
-                    "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-3\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:18:09\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
+                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-2\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:07:31\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-2\/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "";
             }
             else{
                 articleList.innerHTML = "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-3\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:18:09\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
+                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-2\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:07:31\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-2\/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-2\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T19:07:31\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-2\/1_hucc5e165d0d237c9aed99c8400e408cdf_990839_120x120_fill_q75_box_smart1.JPG\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
-                    "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-1\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:34:03\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-1\/1_huaa350ea6dd52b4e70d1da18adc3880c4_3978_120x120_fill_q75_h2_box_smart1_2.webp\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
-                    "" +
-                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/about\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003eAbout\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:31:17\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n    \u003c\/a\u003e\n\u003c\/article\u003e' +
+                    '\u003carticle\u003e\n    \u003ca href=\u0022\/post\/goodidea-mind-1\/\u0022\u003e\n        \u003cdiv class=\u0022article-details\u0022\u003e\n            \u003ch2 class=\u0022article-title\u0022\u003e好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介\u003c\/h2\u003e\n            \u003cfooter class=\u0022article-time\u0022\u003e\n                \u003ctime datetime=\u00272023-05-18T16:34:03\u0026#43;08:00\u0027\u003eMay 18, 2023\u003c\/time\u003e\n            \u003c\/footer\u003e\n        \u003c\/div\u003e\n            \u003cdiv class=\u0022article-image\u0022\u003e\n                \u003cimg src=\u0022\/post\/goodidea-mind-1\/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png\u0022 \n                        width=\u0022120\u0022\n                        height=\u0022120\u0022 \n                        alt=\u0022好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介\u0022\n                        loading=\u0022lazy\u0022\u003e\n                \n            \u003c\/div\u003e\n        \n    \u003c\/a\u003e\n\u003c\/article\u003e' +
                     "";
             }
         })
@@ -429,29 +441,18 @@ if (!doNotTrack) {
 <section class="article-list--compact">
     
     <article>
-    <a href="/post/goodidea-mind-3/">
-        <div class="article-details">
-            <h2 class="article-title">好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想</h2>
-            <footer class="article-time">
-                <time datetime='2023-05-18T19:18:09&#43;08:00'>May 18, 2023</time>
-            </footer>
-        </div>
-    </a>
-</article>
-    
-    <article>
     <a href="/post/goodidea-mind-2/">
         <div class="article-details">
-            <h2 class="article-title">好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛</h2>
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛</h2>
             <footer class="article-time">
                 <time datetime='2023-05-18T19:07:31&#43;08:00'>May 18, 2023</time>
             </footer>
         </div>
             <div class="article-image">
-                <img src="/post/goodidea-mind-2/1_hucc5e165d0d237c9aed99c8400e408cdf_990839_120x120_fill_q75_box_smart1.JPG" 
+                <img src="/post/goodidea-mind-2/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png" 
                         width="120"
                         height="120" 
-                        alt="好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛"
+                        alt="好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛"
                         loading="lazy">
                 
             </div>
@@ -462,31 +463,20 @@ if (!doNotTrack) {
     <article>
     <a href="/post/goodidea-mind-1/">
         <div class="article-details">
-            <h2 class="article-title">好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介</h2>
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介</h2>
             <footer class="article-time">
                 <time datetime='2023-05-18T16:34:03&#43;08:00'>May 18, 2023</time>
             </footer>
         </div>
             <div class="article-image">
-                <img src="/post/goodidea-mind-1/1_huaa350ea6dd52b4e70d1da18adc3880c4_3978_120x120_fill_q75_h2_box_smart1_2.webp" 
+                <img src="/post/goodidea-mind-1/4_hu4e44a9238dd9439c985217ad54ea95d7_57691_120x120_fill_box_smart1_3.png" 
                         width="120"
                         height="120" 
-                        alt="好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介"
+                        alt="好想工作室 — 後端 (Backend Camp) 培訓心得（一）：好想工作室簡介"
                         loading="lazy">
                 
             </div>
         
-    </a>
-</article>
-    
-    <article>
-    <a href="/post/about/">
-        <div class="article-details">
-            <h2 class="article-title">About</h2>
-            <footer class="article-time">
-                <time datetime='2023-05-18T16:31:17&#43;08:00'>May 18, 2023</time>
-            </footer>
-        </div>
     </a>
 </article>
     

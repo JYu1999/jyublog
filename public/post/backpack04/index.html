@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='來研究 UpdateOperation
+How it works 基本的用法在前幾篇已經看過了，這邊先來看官方的解說。
+CrudController 是一個 RESTful 的 controller，Update Operation 用了兩個 routes:
+GET to /entity-name/{id}/edit: 指到 edit() ，用來 render Edit Form(edit.blade.php) POST to /entity-name/{id}/edit: 指到 update()，使用 Eloquent 去 update database 的 entry edit() 會 render 所有被定義的 fields(using fields API), 接著在保存時，update() 會對資料作 validation，在 Eloquent Model 創建 entry。只有 field type 被加入，且為 $fiilable 的會被真正存入資料庫。
+Advanced Features and Techniques Validation backpack 提供三種方式，作為表單驗證的機制。
+Validating fields using FormRequests 在產生 CrudController 的時候，會順帶產生一個 Laravel FormRequest，這個 FormRequest 會在 setupUpdateOperation() 裡面被使用。如果是 Article 的話，就是 ArticleRequest::class 。'>
+<meta name="keywords" content="Laravel, Laravel Backpack, CMS, Admin"><title>Laravel Backpack 初學者之路-04</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/backpack04/'>
+
+<link rel="stylesheet" href="/scss/style.min.760263ba1b7dd34efd2f77e1fda7448aa75ccb0a9771268a5759cb7977f90afe.css"><meta property='og:title' content='Laravel Backpack 初學者之路-04'>
+<meta property='og:description' content='來研究 UpdateOperation
+How it works 基本的用法在前幾篇已經看過了，這邊先來看官方的解說。
+CrudController 是一個 RESTful 的 controller，Update Operation 用了兩個 routes:
+GET to /entity-name/{id}/edit: 指到 edit() ，用來 render Edit Form(edit.blade.php) POST to /entity-name/{id}/edit: 指到 update()，使用 Eloquent 去 update database 的 entry edit() 會 render 所有被定義的 fields(using fields API), 接著在保存時，update() 會對資料作 validation，在 Eloquent Model 創建 entry。只有 field type 被加入，且為 $fiilable 的會被真正存入資料庫。
+Advanced Features and Techniques Validation backpack 提供三種方式，作為表單驗證的機制。
+Validating fields using FormRequests 在產生 CrudController 的時候，會順帶產生一個 Laravel FormRequest，這個 FormRequest 會在 setupUpdateOperation() 裡面被使用。如果是 Article 的話，就是 ArticleRequest::class 。'>
+<meta property='og:url' content='https://jyu1999.com/post/backpack04/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Laravel' /><meta property='article:tag' content='Laravel Backpack' /><meta property='article:published_time' content='2023-05-19T19:35:41&#43;08:00'/><meta property='article:modified_time' content='2023-05-19T19:35:41&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/backpack04/0.png' />
+<meta name="twitter:site" content="@IamJYu">
+    <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="Laravel Backpack 初學者之路-04">
+<meta name="twitter:description" content="來研究 UpdateOperation
+How it works 基本的用法在前幾篇已經看過了，這邊先來看官方的解說。
+CrudController 是一個 RESTful 的 controller，Update Operation 用了兩個 routes:
+GET to /entity-name/{id}/edit: 指到 edit() ，用來 render Edit Form(edit.blade.php) POST to /entity-name/{id}/edit: 指到 update()，使用 Eloquent 去 update database 的 entry edit() 會 render 所有被定義的 fields(using fields API), 接著在保存時，update() 會對資料作 validation，在 Eloquent Model 創建 entry。只有 field type 被加入，且為 $fiilable 的會被真正存入資料庫。
+Advanced Features and Techniques Validation backpack 提供三種方式，作為表單驗證的機制。
+Validating fields using FormRequests 在產生 CrudController 的時候，會順帶產生一個 Laravel FormRequest，這個 FormRequest 會在 setupUpdateOperation() 裡面被使用。如果是 Article 的話，就是 ArticleRequest::class 。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/post/backpack04/0.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://jyu1999.notion.site/CHIEH-YU-CHAN-49db0f414780421aae1fb2288114586c'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#advanced-features-and-techniques">Advanced Features and Techniques</a>
+      <ul>
+        <li><a href="#validation">Validation</a></li>
+        <li><a href="#callbacks">Callbacks</a></li>
+        <li><a href="#delete-button-on-update-operation">Delete button on Update Operation</a></li>
+      </ul>
+    </li>
+    <li><a href="#trace-code---updateoperation">Trace Code - UpdateOperation</a>
+      <ul>
+        <li><a href="#setupupdateroutes">setupUpdateRoutes</a></li>
+        <li><a href="#setupupdatedefaults">setupUpdateDefaults</a></li>
+        <li><a href="#edit">edit</a></li>
+        <li><a href="#update">update</a></li>
+      </ul>
+    </li>
+    <li><a href="#結語">結語</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/backendlearningpath/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/goodidea-mind/" class="font_size_5">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_5">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_1">
+                無用的小知識
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_9">
+                backend
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_8">
+                Laravel
+            </a>
+        
+            <a href="/tags/laravel-backpack/" class="font_size_5">
+                Laravel Backpack
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_5">
+                好想工作室
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+            <a href="/tags/docker/" class="font_size_1">
+                docker
+            </a>
+        
+            <a href="/tags/git/" class="font_size_1">
+                git
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/backpack04/">
+                <img src="/post/backpack04/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_800x0_resize_box_3.png"
+                        srcset="/post/backpack04/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_800x0_resize_box_3.png 800w, /post/backpack04/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="800" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-04" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/laravel_backpack/" style="background-color: #2a9d8f; color: #fff;">
+                Laravel Backpack 初學者之路
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/backpack04/">Laravel Backpack 初學者之路-04</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 19, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>來研究 <code>UpdateOperation</code></p>
+<hr>
+<h2 id="how-it-works">How it works</h2>
+<p>基本的用法在前幾篇已經看過了，這邊先來看官方的解說。</p>
+<p>CrudController 是一個 RESTful 的 controller，<code>Update</code> Operation 用了兩個 routes:</p>
+<ul>
+<li>GET to <code>/entity-name/{id}/edit</code>: 指到 <code>edit()</code> ，用來 render Edit Form(<code>edit.blade.php</code>)</li>
+<li>POST to <code>/entity-name/{id}/edit</code>: 指到 <code>update()</code>，使用 Eloquent 去 update database 的 entry</li>
+</ul>
+<p><code>edit()</code> 會 render 所有被定義的 fields(using fields API), 接著在保存時，<code>update()</code> 會對資料作 validation，在 Eloquent Model 創建 entry。只有 field type 被加入，且為 <code>$fiilable</code> 的會被真正存入資料庫。</p>
+<hr>
+<h2 id="advanced-features-and-techniques">Advanced Features and Techniques</h2>
+<h3 id="validation">Validation</h3>
+<p>backpack 提供三種方式，作為表單驗證的機制。</p>
+<h4 id="validating-fields-using-formrequests">Validating fields using FormRequests</h4>
+<p>在產生 CrudController 的時候，會順帶產生一個 Laravel FormRequest，這個 FormRequest 會在 <code>setupUpdateOperation()</code> 裡面被使用。如果是 Article 的話，就是 <code>ArticleRequest::class</code> 。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setValidation</span>(<span style="color:#a6e22e">ArticleRequest</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);
+</span></span></code></pre></div><p>對於比較大的 model 來說，這個方式很好用，因為可以在 <code>FormRequest</code> 裡面寫很多 rules, messages and attributes，而且不會影響到 <code>CrudController</code> 的大小。</p>
+<p>如果今天 Create 和 Update 用來 validate 的方式不一樣，就要創建不同的 request file：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">App\Http\Requests\CreateTagRequest</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">StoreRequest</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">App\Http\Requests\UpdateTagRequest</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">UpdateRequest</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupCreateOperation</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setValidation</span>(<span style="color:#a6e22e">CreateRequest</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupUpdateOperation</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setValidation</span>(<span style="color:#a6e22e">UpdateRequest</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="validating-fields-using-a-rules-array">Validating fields using a rules array</h4>
+<p>如果是小型的 model，要用另一個檔案來管理也蠻麻煩的，此時可以把 rules 直接寫成 array 就好。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupUpdateOperation</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setValidation</span>([
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|min:2&#39;</span>,
+</span></span><span style="display:flex;"><span>    ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// or maybe
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $rules <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|min:2&#39;</span>];
+</span></span><span style="display:flex;"><span>    $messages <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name.required&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;You gotta give it a name, man.&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name.min&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;You came up short. Try more than 2 characters.&#39;</span>,
+</span></span><span style="display:flex;"><span>    ];
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setValidation</span>($rules, $messages);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="validating-fields-using-field-attributes">Validating fields using field attributes</h4>
+<p>另一個對於中小型 model 也不錯用的，是直接寫在 <code>addField()</code> 裡面：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupUpdateOperation</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addField</span>([
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;content&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;label&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Content&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ckeditor&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;placeholder&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Your textarea text here&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;validationRules&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|min:10&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;validationMessages&#39;</span> <span style="color:#f92672">=&gt;</span> [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;required&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;You gotta write smth man.&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;min&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;More than 10 characters, bro. Wtf... You can do this!&#39;</span>,
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>    ]);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// CAREFUL! This MUST be called AFTER the fields are defined, NEVER BEFORE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setValidation</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果使用這個方法的話，<strong>一定要在最後 call <code>setValidation()</code></strong>，不用輸入任何 parameter。 Backpack 會自己去這些 field 裡面找對應的 rules。</p>
+<h3 id="callbacks">Callbacks</h3>
+<p>根據 Backpack 文件的說法，在 entry 被更新之前/之後，我們可能想要最一些事情。</p>
+<p>但在 Laravel Backpack 是沒有 callback 可以用的，所以如果要達到這種效果，可以用以下幾種方式。</p>
+<h4 id="use-events-in-your-setup-method">Use Events in your <code>setup()</code> method</h4>
+<p>Laravel 已經有提供幾個 events：</p>
+<ul>
+<li><code>updating</code> and <code>updated</code>: triggered by the Update operation</li>
+<li><code>saving</code> and <code>saved</code>： triggered by both the Create and the Update Operations。</li>
+</ul>
+<p>舉例來說，如果想要在 <code>Product</code> entry 更新之前做一些事情，可以：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupUpdateOperation</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Product</span><span style="color:#f92672">::</span><span style="color:#a6e22e">updating</span>(<span style="color:#66d9ef">function</span>($entry) {
+</span></span><span style="display:flex;"><span>        $entry<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_edited_by</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">backpack_user</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>;
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>要注意的是，這些events 只有在 function 被 call 的時候才會 register，所以，如果把它定義在 <code>CrudController</code>：</p>
+<ul>
+<li>they will NOT run when an entry is changed outside that CrudController;</li>
+</ul>
+<ul>
+<li>if you want to expand the scope to cover both the <code>Create</code> and <code>Update</code> operations, you can easily do that, for example by using the <code>saving</code> and <code>saved</code> events, and moving the event-calling to your main <code>setup()</code> method;</li>
+</ul>
+<h4 id="use-events-in-your-field-definition">Use Events in your field definition</h4>
+<p>可以在創建 field 的時候，就告訴 field 在 entry 要存進 db 的時候應該要做些什麼：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// FLUENT syntax - use the convenience method &#34;on&#34; to define just ONE event
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;updating&#39;</span>, <span style="color:#66d9ef">function</span> ($entry) {
+</span></span><span style="display:flex;"><span>    $entry<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_edited_by</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">backpack_user</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>;
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// FLUENT SYNTAX - you can define multiple events in one go
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">events</span>([
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;updating&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">function</span> ($entry) {
+</span></span><span style="display:flex;"><span>        $entry<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_edited_by</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">backpack_user</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>;
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;saved&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">function</span> ($entry) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// TODO: upload some file
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    },
+</span></span><span style="display:flex;"><span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// using the ARRAY SYNTAX, define an array of events and closures
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">addField</span>([
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;name&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;events&#39;</span> <span style="color:#f92672">=&gt;</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;updating&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">function</span> ($entry) {
+</span></span><span style="display:flex;"><span>            $entry<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">author_id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">backpack_user</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>;
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>]);
+</span></span></code></pre></div><h4 id="override-the-update-method">Override the <code>update()</code> method</h4>
+<p>把 <code>update()</code>  複寫掉：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">App\Http\Controllers\Admin</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Backpack\CRUD\app\Http\Controllers\CrudController</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCrudController</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">CrudController</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">\Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation</span> { <span style="color:#a6e22e">update</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">traitUpdate</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">update</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// do something before validation, before save, before everything; for example:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// $this-&gt;crud-&gt;addField([&#39;type&#39; =&gt; &#39;hidden&#39;, &#39;name&#39; =&gt; &#39;author_id&#39;]);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// $this-&gt;crud-&gt;removeField(&#39;password_confirmation&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Note: By default Backpack ONLY saves the inputs that were added on page using Backpack fields.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// This is done by stripping the request of all inputs that do NOT match Backpack fields for this
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// particular operation. This is an added security layer, to protect your database from malicious
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// users who could theoretically add inputs using DeveloperTools or JavaScript. If you&#39;re not properly
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// using $guarded or $fillable on your model, malicious inputs could get you into trouble.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// However, if you know you have proper $guarded or $fillable on your model, and you want to manipulate 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// the request directly to add or remove request parameters, you can also do that.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// We have a config value you can set, either inside your operation in `config/backpack/crud.php` if
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// you want it to apply to all CRUDs, or inside a particular CrudController:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">// $this-&gt;crud-&gt;setOperationSetting(&#39;saveAllInputsExcept&#39;, [&#39;_token&#39;, &#39;_method&#39;, &#39;http_referrer&#39;, &#39;current_tab&#39;, &#39;save_action&#39;]);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// The above will make Backpack store all inputs EXCEPT for the ones it uses for various features.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// So you can manipulate the request and add any request variable you&#39;d like.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// $this-&gt;crud-&gt;getRequest()-&gt;request-&gt;add([&#39;author_id&#39;=&gt; backpack_user()-&gt;id]);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// $this-&gt;crud-&gt;getRequest()-&gt;request-&gt;remove(&#39;password_confirmation&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// $this-&gt;crud-&gt;getRequest()-&gt;request-&gt;add([&#39;author_id&#39;=&gt; backpack_user()-&gt;id]);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// $this-&gt;crud-&gt;getRequest()-&gt;request-&gt;remove(&#39;password_confirmation&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        $response <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">traitUpdate</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// do something after save
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> $response;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="delete-button-on-update-operation">Delete button on Update Operation</h3>
+<p><img src="/post/backpack04/1.png"
+	width="1209"
+	height="815"
+	srcset="/post/backpack04/1_hu44b998f24292d69eaa76c6eaf4bf0a35_137032_480x0_resize_box_3.png 480w, /post/backpack04/1_hu44b998f24292d69eaa76c6eaf4bf0a35_137032_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Delete Button"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="148"
+		data-flex-basis="356px"
+	
+></p>
+<p>如果想要在 Update operation 裡面顯示 Delete button，需要在 <code>setupUpdateOperation()</code>裡面加上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupUpdateOperation</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// your code...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setOperationSetting</span>(<span style="color:#e6db74">&#39;showDeleteButton&#39;</span>, <span style="color:#66d9ef">true</span>); <span style="color:#75715e">// &lt;--- add this!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// alternatively you can pass an URL to where user should be redirected after entry is deleted:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// $this-&gt;crud-&gt;setOperationSetting(&#39;showDeleteButton&#39;, &#39;https://someurl.com&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><p>這可以讓我們可以直接在 update 的畫面刪掉 entries。</p>
+<hr>
+<h2 id="trace-code---updateoperation">Trace Code - UpdateOperation</h2>
+<p>接著來看 <code>UpdateOperation</code> 這個 trait 裡面的一些 method：</p>
+<h3 id="setupupdateroutes">setupUpdateRoutes</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupUpdateRoutes</span>($segment, $routeName, $controller)  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Route</span><span style="color:#f92672">::</span><span style="color:#a6e22e">get</span>($segment<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;/{id}/edit&#39;</span>, [  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;as&#39;</span>        <span style="color:#f92672">=&gt;</span> $routeName<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;.edit&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;uses&#39;</span>      <span style="color:#f92672">=&gt;</span> $controller<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;@edit&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;operation&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;update&#39;</span>,  
+</span></span><span style="display:flex;"><span>    ]);  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Route</span><span style="color:#f92672">::</span><span style="color:#a6e22e">put</span>($segment<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;/{id}&#39;</span>, [  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;as&#39;</span>        <span style="color:#f92672">=&gt;</span> $routeName<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;.update&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;uses&#39;</span>      <span style="color:#f92672">=&gt;</span> $controller<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;@update&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;operation&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;update&#39;</span>,  
+</span></span><span style="display:flex;"><span>    ]);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>還蠻明顯這個 method 就是在創建兩個 route，一個是 <code>GET:admin/article/{id}/edit</code>，會導到編輯的那一頁。另一個是 <code>PUT: admin/article/{id}</code> ，就是編輯完按下 save 會導到的 route。</p>
+<p>不過我還蠻好奇這個 method 是在哪裡被 call 的，因為只要一創建 crudController，就會馬上有 route 可以用。</p>
+<p>後來發現一開始是在 <code>EntityCrudController</code> 所繼承的 <code>CrudController</code> 裡面的<code>__construct()</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ---------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// Create the CrudPanel object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// ---------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// Used by developers inside their ProductCrudControllers as
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// $this-&gt;crud or using the CRUD facade.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// It&#39;s done inside a middleware closure in order to have
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// the complete request inside the CrudPanel object.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">middleware</span>(<span style="color:#66d9ef">function</span> ($request, $next) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">app</span>(<span style="color:#e6db74">&#39;crud&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setRequest</span>($request);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setupDefaults</span>();
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setup</span>();
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setupConfigurationForCurrentOperation</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> $next($request);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>這個裡面會 call <code>setup()</code>，但目前這個 parent class 的 <code>setup()</code>沒有實作，所以要去看各 crudController 的 <code>setup()</code>，這裡用 article 為例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setup</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setModel</span>(<span style="color:#a6e22e">\App\Models\Article</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setRoute</span>(<span style="color:#a6e22e">config</span>(<span style="color:#e6db74">&#39;backpack.base.route_prefix&#39;</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;/article&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setEntityNameStrings</span>(<span style="color:#e6db74">&#39;article&#39;</span>, <span style="color:#e6db74">&#39;articles&#39;</span>);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>這裡會 call <code>setRoute()</code>，而 <code>setRoute()</code> 是在 parent class(CrudController) 所 implement 的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupRoutes</span>($segment, $routeName, $controller)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">preg_match_all</span>(<span style="color:#e6db74">&#39;/(?&lt;=^|;)setup([^;]+?)Routes(;|$)/&#39;</span>, <span style="color:#a6e22e">implode</span>(<span style="color:#e6db74">&#39;;&#39;</span>, <span style="color:#a6e22e">get_class_methods</span>($this)), $matches);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">count</span>($matches[<span style="color:#ae81ff">1</span>])) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> ($matches[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">as</span> $methodName) {
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span>{<span style="color:#e6db74">&#39;setup&#39;</span><span style="color:#f92672">.</span>$methodName<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;Routes&#39;</span>}($segment, $routeName, $controller);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>可以看到這裡就會 call <code>'setup'.$methodName.'Routes'</code> 並傳入需要的 parameters。</p>
+<h3 id="setupupdatedefaults">setupUpdateDefaults</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupUpdateDefaults</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">allowAccess</span>(<span style="color:#e6db74">&#39;update&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">operation</span>(<span style="color:#e6db74">&#39;update&#39;</span>, <span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">loadDefaultOperationSettingsFromConfig</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getModel</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">translationEnabled</span>()) {
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addField</span>([
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;_locale&#39;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;hidden&#39;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;value&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">request</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">input</span>(<span style="color:#e6db74">&#39;_locale&#39;</span>) <span style="color:#f92672">??</span> <span style="color:#a6e22e">app</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getLocale</span>(),
+</span></span><span style="display:flex;"><span>                ]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setupDefaultSaveActions</span>();
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">operation</span>([<span style="color:#e6db74">&#39;list&#39;</span>, <span style="color:#e6db74">&#39;show&#39;</span>], <span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addButton</span>(<span style="color:#e6db74">&#39;line&#39;</span>, <span style="color:#e6db74">&#39;update&#39;</span>, <span style="color:#e6db74">&#39;view&#39;</span>, <span style="color:#e6db74">&#39;crud::buttons.update&#39;</span>, <span style="color:#e6db74">&#39;end&#39;</span>);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>從名字來看大致可以知道，<code>setupUpdateDefaults</code> 負責設定更新操作所需的預設設定。</p>
+<p><code>allowAccess()</code> 允許 CRUDController 有權限可以使用 update。會把操作名稱（update）添加到允許訪問的列表中。在這邊是把 <code>update</code> 設置為允許訪問。</p>
+<p><code>operation()</code>是在定義名為 <code>update</code> 的操作，並用一個 closure 來設定 update 要作什麼事情。</p>
+<p><code>loadDefaultOperationSettingsFromConfig()</code> 就是在 load 配置文件，通常位於 <code>config/backpack/operations</code>，</p>
+<p>下面會看 model 有沒有啟用翻譯，如果有的話，會新增一個 hidden 的欄位。這個是用來儲存目前的語言設置（當前選擇的語言），以便在多語言網頁上正確更新相應的翻譯。</p>
+<p><code>setupDefaultSaveActions()</code>主要用於設置 default 的保存操作。包含 <code>save_and_back</code> 、<code>save_and_edit</code>、<code>save_and_new</code>。</p>
+<p>這個 <code>setupDefaultSaveActions()</code> 會在 Save and back 按鈕旁邊的小箭頭出現，如下圖：</p>
+<p><img src="/post/backpack04/2.png"
+	width="954"
+	height="584"
+	srcset="/post/backpack04/2_hu3aebca68c323a69ec591b963a45377df_59650_480x0_resize_box_3.png 480w, /post/backpack04/2_hu3aebca68c323a69ec591b963a45377df_59650_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="小箭頭"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="163"
+		data-flex-basis="392px"
+	
+></p>
+<p>最後，在 operation 是 list, show 的情況下，執行 addbutton，也就是 <em>Add a button to the CRUD table view.</em>。</p>
+<h3 id="edit">edit</h3>
+<blockquote>
+<p>Show the form for editing the specified resource.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">edit</span>($id)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">hasAccessOrFail</span>(<span style="color:#e6db74">&#39;update&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// get entry ID from Request (makes sure its the last ID for nested resources)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $id <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCurrentEntryId</span>() <span style="color:#f92672">??</span> $id;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// get the info for that entry
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span>[<span style="color:#e6db74">&#39;entry&#39;</span>] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEntryWithLocale</span>($id);
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setOperationSetting</span>(<span style="color:#e6db74">&#39;fields&#39;</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getUpdateFields</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span>[<span style="color:#e6db74">&#39;crud&#39;</span>] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span>;
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span>[<span style="color:#e6db74">&#39;saveAction&#39;</span>] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getSaveAction</span>();
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span>[<span style="color:#e6db74">&#39;title&#39;</span>] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getTitle</span>() <span style="color:#f92672">??</span> <span style="color:#a6e22e">trans</span>(<span style="color:#e6db74">&#39;backpack::crud.edit&#39;</span>)<span style="color:#f92672">.</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">entity_name</span>;
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span>[<span style="color:#e6db74">&#39;id&#39;</span>] <span style="color:#f92672">=</span> $id;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">view</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEditView</span>(), $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><code>edit()</code> 會寫在對應的 route 裡面：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">Route</span><span style="color:#f92672">::</span><span style="color:#a6e22e">get</span>($segment<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;/{id}/edit&#39;</span>, [  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;as&#39;</span>        <span style="color:#f92672">=&gt;</span> $routeName<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;.edit&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;uses&#39;</span>      <span style="color:#f92672">=&gt;</span> $controller<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;@edit&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;operation&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;update&#39;</span>,  
+</span></span><span style="display:flex;"><span>]);
+</span></span></code></pre></div><p>這邊其實就寫了當 user 輸入這個 url，會 call edit 這個 method。</p>
+<p>首先進入 edit，會檢查是否可以 access update（在 <code>setupUpdateDefaults()</code> 裡面會新增）。如果沒有就不能編輯。</p>
+<p>接著會取得 id，知道要編輯哪個 entry。</p>
+<p>接著，使用 <code>getEntryWithLocale()</code> 得到特定語言區域的資源。這個 method 會先看是否已經有 entry，還沒有的話會 call <code>getEntry()</code> 來拿到 entry。接著，會去看這個 entry 是否支援翻譯，然後從request 去找可用語言區域列表。如果有的話，會用 <code>setLocale($locale)</code>將語言區域設置為 request 指定的語言區域。</p>
+<p>下面的 <code>setOperationSetting()</code> 會把 operation 存成 key-value store，這樣之後可以方便查找。</p>
+<p>然後再下面的程式碼，主要就是把一些資訊存進 <code>data</code>，並在最後一起傳到 view 裡面。</p>
+<p>而 <code>getEditView()</code> 的實現如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getEditView</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;update.view&#39;</span>) <span style="color:#f92672">??</span> <span style="color:#e6db74">&#39;crud::edit&#39;</span>;  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>看起來就是先檢查使用者有沒有自定義 update view，如果沒有的話，就用 backpack 預設的。</p>
+<p><a class="link" href="https://backpackforlaravel.com/docs/5.x/crud-how-to#how-to-customize-views-for-each-crud-panel-1"  target="_blank" rel="noopener"
+    >官方文件</a> 上有寫一些方法，關於創建如何客製化自己的 view。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setShowView</span>(<span style="color:#e6db74">&#39;your-view&#39;</span>);
+</span></span><span style="display:flex;"><span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setEditView</span>(<span style="color:#e6db74">&#39;your-view&#39;</span>);
+</span></span><span style="display:flex;"><span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setCreateView</span>(<span style="color:#e6db74">&#39;your-view&#39;</span>);
+</span></span><span style="display:flex;"><span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setListView</span>(<span style="color:#e6db74">&#39;your-view&#39;</span>);
+</span></span><span style="display:flex;"><span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setReorderView</span>(<span style="color:#e6db74">&#39;your-view&#39;</span>);
+</span></span><span style="display:flex;"><span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setDetailsRowView</span>(<span style="color:#e6db74">&#39;your-view&#39;</span>);
+</span></span></code></pre></div><h3 id="update">update</h3>
+<blockquote>
+<p>Update the specified resource in the database.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">update</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">hasAccessOrFail</span>(<span style="color:#e6db74">&#39;update&#39;</span>);  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// execute the FormRequest authorization and validation, if one is required  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $request <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">validateRequest</span>();  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// register any Model Events defined on fields  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">registerFieldEvents</span>();  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// update the row in the db  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $item <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">update</span>(  
+</span></span><span style="display:flex;"><span>        $request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">model</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getKeyName</span>()),  
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStrippedSaveRequest</span>($request)  
+</span></span><span style="display:flex;"><span>    );  
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span>[<span style="color:#e6db74">&#39;entry&#39;</span>] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">entry</span> <span style="color:#f92672">=</span> $item;  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// show a success message  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">\Alert</span><span style="color:#f92672">::</span><span style="color:#a6e22e">success</span>(<span style="color:#a6e22e">trans</span>(<span style="color:#e6db74">&#39;backpack::crud.update_success&#39;</span>))<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flash</span>();  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// save the redirect choice for next time  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setSaveAction</span>();  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">performSaveAction</span>($item<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getKey</span>());  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>跟上面的 <code>edit()</code> 一樣，<code>update</code> 會先檢查有沒有 access。</p>
+<p>如果有的話，那就 call <code>validateRequest()</code> 來驗證輸入，這邊的驗證會同時看 FormRequst 和寫在裡面的 <code>rules</code>。</p>
+<p>驗證通過後，會 call <code>regusterFieldEvents()</code> ，看起來是會把在 field 裡面有定義的所有 Eloquent Model Events 註冊。在上面的 [[#^eb7633|Callback]] 有提到怎麼定義 Eloquent Model Events。</p>
+<p>接著會 call <code>update()</code> 把資料存進 db 裡面，<code>getStrippedSaveRequest()</code> 是會把 request 做一些處理。</p>
+<p>存進 db 後，會再把更新後的 entry 存到 <code>data[]</code>，方便後續的操作。</p>
+<p>最後就是顯示 flash message 並 redirect ㄌ。</p>
+<hr>
+<h2 id="結語">結語</h2>
+<ul>
+<li>程式碼蠻多的，但愈看愈有感覺，因為前面原本沒有很了解的東西，都會慢慢能了解實作。但也不知道要挖到多深就是ㄌ。</li>
+<li>好像可以去研究一下 <a class="link" href="https://laravel.com/docs/10.x/validation#form-request-validation"  target="_blank" rel="noopener"
+    >Laravel Form Request Validation</a> 和 <a class="link" href="https://laravel.com/docs/master/eloquent#events"  target="_blank" rel="noopener"
+    >Eloquent Events</a>。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/laravel/">Laravel</a>
+        
+            <a href="/tags/laravel-backpack/">Laravel Backpack</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/backpack05/">
+        
+        
+            <div class="article-image">
+                <img src="/post/backpack05/0.31a4642b37a0367837a5efaa0b1d3121_hu10d21063a2d5df6ebb9f3142db7576d3_8853_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-05"
+                        
+                        data-hash="md5-MaRkKzegNng3pe&#43;qCx0xIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Backpack 初學者之路-05</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/backpack03/">
+        
+        
+            <div class="article-image">
+                <img src="/post/backpack03/0.31a4642b37a0367837a5efaa0b1d3121_hu10d21063a2d5df6ebb9f3142db7576d3_8853_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-03"
+                        
+                        data-hash="md5-MaRkKzegNng3pe&#43;qCx0xIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Backpack 初學者之路-03</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/backpack02/">
+        
+        
+            <div class="article-image">
+                <img src="/post/backpack02/0.31a4642b37a0367837a5efaa0b1d3121_hu10d21063a2d5df6ebb9f3142db7576d3_8853_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-02"
+                        
+                        data-hash="md5-MaRkKzegNng3pe&#43;qCx0xIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Backpack 初學者之路-02</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/backpack01/">
+        
+        
+            <div class="article-image">
+                <img src="/post/backpack01/0.31a4642b37a0367837a5efaa0b1d3121_hu10d21063a2d5df6ebb9f3142db7576d3_8853_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-01"
+                        
+                        data-hash="md5-MaRkKzegNng3pe&#43;qCx0xIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Backpack 初學者之路-01</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/api_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">API Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
