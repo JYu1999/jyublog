@@ -6,7 +6,23 @@
         <description>Recent content in Tags on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Thu, 18 May 2023 23:52:05 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 19 May 2023 12:32:22 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Ruby</title>
+        <link>https://jyu1999.com/tags/ruby/</link>
+        <pubDate>Fri, 19 May 2023 12:32:22 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/tags/ruby/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>RubyMine</title>
+        <link>https://jyu1999.com/tags/rubymine/</link>
+        <pubDate>Fri, 19 May 2023 12:32:22 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/tags/rubymine/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>backend</title>
         <link>https://jyu1999.com/tags/backend/</link>
         <pubDate>Thu, 18 May 2023 23:52:05 +0800</pubDate>

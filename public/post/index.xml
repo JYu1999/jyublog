@@ -6,7 +6,82 @@
         <description>Recent content in Posts on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Thu, 18 May 2023 23:37:13 +0800</lastBuildDate><atom:link href="https://jyu1999.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 19 May 2023 12:32:22 +0800</lastBuildDate><atom:link href="https://jyu1999.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Rubymine 透過 SFTP 自動同步 Server 檔案</title>
+        <link>https://jyu1999.com/post/rubymine_sftp/</link>
+        <pubDate>Fri, 19 May 2023 12:32:22 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/rubymine_sftp/</guid>
+        <description>&lt;img src="https://jyu1999.com/post/rubymine_sftp/0.png" alt="Featured image of post Rubymine 透過 SFTP 自動同步 Server 檔案" /&gt;&lt;p&gt;到 Setting 的 Deployment 新增（+）一個 Server，Server 名字隨便取。&lt;/p&gt;
+&lt;p&gt;Type 選擇 SFTP，Root path 選擇要上傳檔案的位置。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jyu1999.com/post/rubymine_sftp/1.png&#34;
+	width=&#34;1680&#34;
+	height=&#34;1284&#34;
+	srcset=&#34;https://jyu1999.com/post/rubymine_sftp/1_hua50c4a5579cbc728565bd14d7432b6f4_228624_480x0_resize_box_3.png 480w, https://jyu1999.com/post/rubymine_sftp/1_hua50c4a5579cbc728565bd14d7432b6f4_228624_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Untitled&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;314px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;接著設定路徑，如果 Root Path 有設定好的話 Deployment path 就直接 / 即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jyu1999.com/post/rubymine_sftp/2.png&#34;
+	width=&#34;1680&#34;
+	height=&#34;1277&#34;
+	srcset=&#34;https://jyu1999.com/post/rubymine_sftp/2_huc922a4dfb4b64d47f1b9ef6f75c5451b_213260_480x0_resize_box_3.png 480w, https://jyu1999.com/post/rubymine_sftp/2_huc922a4dfb4b64d47f1b9ef6f75c5451b_213260_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Untitled&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;131&#34;
+		data-flex-basis=&#34;315px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在專案上點右鍵，選擇 Deployment &amp;gt; Upload to newB 即可上傳&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jyu1999.com/post/rubymine_sftp/3.png&#34;
+	width=&#34;1680&#34;
+	height=&#34;1054&#34;
+	srcset=&#34;https://jyu1999.com/post/rubymine_sftp/3_hu9ada012a5c28135e2efba9783f066cdb_299018_480x0_resize_box_3.png 480w, https://jyu1999.com/post/rubymine_sftp/3_hu9ada012a5c28135e2efba9783f066cdb_299018_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Untitled&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;159&#34;
+		data-flex-basis=&#34;382px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;若是初次上傳記得要下 bundle install、db:create、db:migrate。&lt;/p&gt;
+&lt;p&gt;如果要設定只上傳有修改過的檔案：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jyu1999.com/post/rubymine_sftp/4.png&#34;
+	width=&#34;1680&#34;
+	height=&#34;1285&#34;
+	srcset=&#34;https://jyu1999.com/post/rubymine_sftp/4_hu092a21fbb60e3d4d77ffbc6b0d733288_362611_480x0_resize_box_3.png 480w, https://jyu1999.com/post/rubymine_sftp/4_hu092a21fbb60e3d4d77ffbc6b0d733288_362611_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Untitled&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;313px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;這樣就會在存檔的時候自動上傳。&lt;/p&gt;
+&lt;p&gt;要啟 server 的話可以：（如果是已經部署好的專案就不用啟 Server ㄌ～）&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bin/rails server -b=0.0.0.0 -p=3000
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;就可以在指定 ip 的 3000 port 讀取到網站了～㈷&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;如果要搜尋更多設定，建議以 phpstorm 為關鍵字去搜，Rubymine 比較搜不到東西🫠
+&lt;/code&gt;&lt;/pre&gt;</description>
+        </item>
+        <item>
         <title>JYu&#39;s Backend Learning Path</title>
         <link>https://jyu1999.com/post/backend_learning_path_jyu/</link>
         <pubDate>Thu, 18 May 2023 23:37:13 +0800</pubDate>
