@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='What is Backpack? Backpack 是一個很多個 Laravel Packages 的集合，用來做客製化的 admin panels，可以讓 admin 登入並進行 CRUD 操作。 在前端的部分， Backpack 有著類似於 bootstrap 的設計（CoreUI theme），官方命名為 Backstrap。簡單來說，當我們在寫前端的時候，Backpack 裡面就有一些 HTML Blocks 可以直接套用。 在後端的部分，Backpack 也可以幫助使用者創建 CRUD Panels。
+Installation 開始來試用一下 Laravel Backpack 雖然 Backpack 的版本跟的算緊，但在撰寫當下(2023/4/10) 只支援 Laravel 9（後來發現有支援 Laravel 10），因為不想變動本機的環境，所以我使用 Laravel sail 來建一個 container:
+composer create-project laravel/laravel backpackTest1 9 cd backpackTest1/ composer require laravel/sail --dev php artisan sail:install sail artisan migrate sail up （如果對 Laravel sail 不熟悉，可以使用本地端的）
+建完專案之後，開始安裝 backpack:'>
+<meta name="keywords" content="Laravel, Laravel Backpack, CMS, Admin"><title>Laravel Backpack 初學者之路-01</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/backpack01/'>
+
+<link rel="stylesheet" href="/scss/style.min.720a97ad430befdda3f89f7814a97a693cd387017bdc6f6e332bf0722b59a949.css"><meta property='og:title' content='Laravel Backpack 初學者之路-01'>
+<meta property='og:description' content='What is Backpack? Backpack 是一個很多個 Laravel Packages 的集合，用來做客製化的 admin panels，可以讓 admin 登入並進行 CRUD 操作。 在前端的部分， Backpack 有著類似於 bootstrap 的設計（CoreUI theme），官方命名為 Backstrap。簡單來說，當我們在寫前端的時候，Backpack 裡面就有一些 HTML Blocks 可以直接套用。 在後端的部分，Backpack 也可以幫助使用者創建 CRUD Panels。
+Installation 開始來試用一下 Laravel Backpack 雖然 Backpack 的版本跟的算緊，但在撰寫當下(2023/4/10) 只支援 Laravel 9（後來發現有支援 Laravel 10），因為不想變動本機的環境，所以我使用 Laravel sail 來建一個 container:
+composer create-project laravel/laravel backpackTest1 9 cd backpackTest1/ composer require laravel/sail --dev php artisan sail:install sail artisan migrate sail up （如果對 Laravel sail 不熟悉，可以使用本地端的）
+建完專案之後，開始安裝 backpack:'>
+<meta property='og:url' content='https://jyu1999.com/post/backpack01/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Laravel' /><meta property='article:tag' content='Laravel Backpack' /><meta property='article:published_time' content='2023-05-19T13:34:41&#43;08:00'/><meta property='article:modified_time' content='2023-05-19T13:34:41&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/backpack01/0.png' />
+<meta name="twitter:site" content="@IamJYu">
+    <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="Laravel Backpack 初學者之路-01">
+<meta name="twitter:description" content="What is Backpack? Backpack 是一個很多個 Laravel Packages 的集合，用來做客製化的 admin panels，可以讓 admin 登入並進行 CRUD 操作。 在前端的部分， Backpack 有著類似於 bootstrap 的設計（CoreUI theme），官方命名為 Backstrap。簡單來說，當我們在寫前端的時候，Backpack 裡面就有一些 HTML Blocks 可以直接套用。 在後端的部分，Backpack 也可以幫助使用者創建 CRUD Panels。
+Installation 開始來試用一下 Laravel Backpack 雖然 Backpack 的版本跟的算緊，但在撰寫當下(2023/4/10) 只支援 Laravel 9（後來發現有支援 Laravel 10），因為不想變動本機的環境，所以我使用 Laravel sail 來建一個 container:
+composer create-project laravel/laravel backpackTest1 9 cd backpackTest1/ composer require laravel/sail --dev php artisan sail:install sail artisan migrate sail up （如果對 Laravel sail 不熟悉，可以使用本地端的）
+建完專案之後，開始安裝 backpack:"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/post/backpack01/0.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://jyu1999.notion.site/CHIEH-YU-CHAN-49db0f414780421aae1fb2288114586c'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-backpack">What is Backpack?</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#crud">CRUD</a>
+      <ul>
+        <li><a href="#eg-add-a-field-price">e.g. Add a field &ldquo;price&rdquo;</a></li>
+        <li><a href="#article-model">Article Model</a></li>
+        <li><a href="#columns">Columns</a></li>
+      </ul>
+    </li>
+    <li><a href="#結語">結語</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/backendlearningpath/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/goodidea-mind/" class="font_size_5">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_1">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_1">
+                無用的小知識
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_9">
+                backend
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_5">
+                好想工作室
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_4">
+                Laravel
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+            <a href="/tags/docker/" class="font_size_1">
+                docker
+            </a>
+        
+            <a href="/tags/git/" class="font_size_1">
+                git
+            </a>
+        
+            <a href="/tags/github/" class="font_size_1">
+                github
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/backpack01/">
+                <img src="/post/backpack01/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_800x0_resize_box_3.png"
+                        srcset="/post/backpack01/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_800x0_resize_box_3.png 800w, /post/backpack01/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="800" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-01" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/laravel_backpack/" style="background-color: #2a9d8f; color: #fff;">
+                Laravel Backpack 初學者之路
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/backpack01/">Laravel Backpack 初學者之路-01</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 19, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="what-is-backpack">What is Backpack?</h2>
+<p>Backpack 是一個很多個 Laravel Packages 的集合，用來做客製化的 admin panels，可以讓 admin 登入並進行 CRUD 操作。
+在前端的部分， Backpack 有著類似於 bootstrap 的設計（CoreUI theme），官方命名為 <strong>Backstrap</strong>。簡單來說，當我們在寫前端的時候，Backpack 裡面就有一些 HTML Blocks 可以直接套用。
+在後端的部分，Backpack 也可以幫助使用者創建 CRUD Panels。</p>
+<h2 id="installation">Installation</h2>
+<p>開始來試用一下 Laravel Backpack
+雖然 Backpack 的版本跟的算緊，但在<del>撰寫當下(2023/4/10) 只支援 Laravel 9</del>（後來發現有支援 Laravel 10），因為不想變動本機的環境，所以我使用 <a class="link" href="https://laravel.com/docs/10.x/sail#executing-artisan-commands"  target="_blank" rel="noopener"
+    >Laravel sail</a> 來建一個 container:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>composer create-project laravel/laravel backpackTest1 <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span>cd backpackTest1/
+</span></span><span style="display:flex;"><span>composer require laravel/sail --dev
+</span></span><span style="display:flex;"><span>php artisan sail:install
+</span></span><span style="display:flex;"><span>sail artisan migrate
+</span></span><span style="display:flex;"><span>sail up
+</span></span></code></pre></div><p>（如果對 Laravel sail 不熟悉，可以使用本地端的）</p>
+<p>建完專案之後，開始安裝 backpack:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sail composer require backpack/crud
+</span></span><span style="display:flex;"><span>sail artisan backpack:install
+</span></span></code></pre></div><p>裝的時候會問要不要建一個 admin 帳號，就先建一個起來吧～
+裝好之後，進到 <code>http://localhost/admin/</code> 就會看到以下畫面。
+<img src="/post/backpack01/1.png"
+	width="1418"
+	height="1396"
+	srcset="/post/backpack01/1_hu2df8c08fa9945eea14c4481d1cf13cee_89895_480x0_resize_box_3.png 480w, /post/backpack01/1_hu2df8c08fa9945eea14c4481d1cf13cee_89895_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="登入頁面"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="101"
+		data-flex-basis="243px"
+	
+>
+輸入剛剛創建好的 admin 帳號之後，就可以進到 dashboard 了～</p>
+<h2 id="crud">CRUD</h2>
+<p>接著來看官方的 Text Course。
+要用 CRUD 首先就要在資料庫建表，官方是推薦使用 <a class="link" href="https://github.com/laracasts/Laravel-5-Generators-Extended"  target="_blank" rel="noopener"
+    >laracasts/generators</a>，看了一下 github 頁面，似乎是一個可以在 CLI 介面生成 migration file 的一些資訊。
+但其實不裝應該也不會怎樣（吧）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># STEP 0. install a 3d party tool to generate migrations</span>
+</span></span><span style="display:flex;"><span>sail composer require --dev laracasts/generators 
+</span></span><span style="display:flex;"><span>sail composer require --dev backpack/generators
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># STEP 1. create a migration</span>
+</span></span><span style="display:flex;"><span>sail artisan make:migration:schema create_tags_table --model<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> --schema<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name:string:unique,slug:string:unique&#34;</span> 
+</span></span><span style="display:flex;"><span>sail artisan migrate
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># STEP 2. create a CRUD for it </span>
+</span></span><span style="display:flex;"><span>sail artisan backpack:crud tag <span style="color:#75715e">#use singular, not plural</span>
+</span></span></code></pre></div><p>用上面的指令之後，會產生：</p>
+<ul>
+<li>a <strong>migration</strong> file</li>
+<li>a <strong>model</strong> (<code>app\Models\Tag.php</code>)</li>
+<li>a <strong>request</strong> file, for form validation (<code>app\Http\Requests\TagCrudRequest.php</code>)</li>
+<li>a <strong>controller</strong> file, where you can customize how the CrudPanel looks and feels (<code>app\Http\Controllers\Admin\TagCrudController.php</code>)</li>
+<li>a <strong>route</strong>, as a line inside <code>routes/backpack/custom.php</code>
+此外，也會加入：</li>
+<li>a route inside <code>routes/backpack/custom.php</code>, pointing to that controller;</li>
+<li>a sidebar item inside <code>resources/views/vendor/backpack/base/inc/sidebar_content.blade.php</code>;</li>
+</ul>
+<p>在這裡不會有 view 產生，因為在大部分使用 Backpack 的情況下，是不需要 custom views 的。所有的 custom code 都在 controller, model 或 request 裡面。</p>
+<p>建完之後，這時候把 url 改成 <code>http://localhost/admin/tag</code> 就會神奇的出現頁面了！
+<img src="/post/backpack01/2.png"
+	width="1896"
+	height="1092"
+	srcset="/post/backpack01/2_hu18d6e16d06605da0a468eb4c1577016a_227846_480x0_resize_box_3.png 480w, /post/backpack01/2_hu18d6e16d06605da0a468eb4c1577016a_227846_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="amazing!"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="416px"
+	
+>
+稍微玩了一下，似乎是已經把 CRUD 都做好了。</p>
+<p>根據官方文件所說，我們暫時不用去管 <strong>migration</strong>, <strong>model</strong>, <strong>request</strong>，因為他們沒辦法客製化。唯一需要注意的是要看 model 有沒有正確的配置（e.g. db table, relationships, <code>$fillable</code> or <code>$guarded</code> ）。
+目前我們只需要專注在 <code>TagCrudController</code> 這個檔案即可，大部分的邏輯操作都會在裡面</p>
+<p>在 controller 裡面有兩個 method：<code>setupCreateOperation()</code> and <code>setupUpdateOperation()</code>，是用來定義我們要讓 admin 看到什麼 field。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupCreateOperation</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setValidation</span>(<span style="color:#a6e22e">TagRequest</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;name&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>像現在裡面只有 name 和 slug，如果沒有指定 type 的話預設是 text。
+在官方教學有提到，一點典型的 field 需要至少有三個要素：</p>
+<ul>
+<li><code>name</code> - the attribute (column in the database), which will also become the name of the input;</li>
+<li><code>type</code> - the kind of field we&rsquo;d like to use (text, number, select2, etc);</li>
+<li><code>label</code> - the human-readable label for the input (will be generated from <code>name</code> if not given);</li>
+</ul>
+<h3 id="eg-add-a-field-price">e.g. Add a field &ldquo;price&rdquo;</h3>
+<p>如果我們想要為每一個 tag 新增一個 price 要怎麼做呢？
+首先要在資料庫 tag table 裡面新增一個 column: price。
+然後修改<code>setupCreateOperation()</code> and <code>setupUpdateOperation()</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupListOperation</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;created_at&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;name&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;price&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;number&#39;</span>);  <span style="color:#75715e">// CRUD::addColumn([&#39;name&#39; =&gt; &#39;price&#39;, &#39;type&#39; =&gt; &#39;number&#39;]);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;updated_at&#39;</span>);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupCreateOperation</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setValidation</span>(<span style="color:#a6e22e">TagRequest</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;name&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;price&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;number&#39;</span>);  <span style="color:#75715e">// CRUD::addField([&#39;name&#39; =&gt; &#39;price&#39;, &#39;type&#39; =&gt; &#39;number&#39;]));
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>在 table 上和新增頁，就會出現 price 了～</p>
+<h3 id="article-model">Article Model</h3>
+<p>官網上有簡單提到建另一個 model <code>Article</code>，並和 tag 建立多對多關係。
+來試著實作看看。
+首先一樣來產生 article 相關的檔案：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e"># STEP 1. create a migration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sail</span> <span style="color:#a6e22e">artisan</span> <span style="color:#a6e22e">make</span><span style="color:#f92672">:</span><span style="color:#a6e22e">migration</span><span style="color:#f92672">:</span><span style="color:#a6e22e">schema</span> <span style="color:#a6e22e">create_articles_table</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">model</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">schema</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;topic:string:unique,slug:string:unique,content:text&#34;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sail</span> <span style="color:#a6e22e">artisan</span> <span style="color:#a6e22e">migrate</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># STEP 2. create a CRUD for it 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sail</span> <span style="color:#a6e22e">artisan</span> <span style="color:#a6e22e">backpack</span><span style="color:#f92672">:</span><span style="color:#a6e22e">crud</span> <span style="color:#a6e22e">article</span> <span style="color:#75715e">#use singular, not plural
+</span></span></span></code></pre></div><p>然後建一個 pivot 表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sail artisan make:migration create_articles_tags_table
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">up</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Schema</span><span style="color:#f92672">::</span><span style="color:#a6e22e">create</span>(<span style="color:#e6db74">&#39;articles_tags&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">Blueprint</span> $table) {  
+</span></span><span style="display:flex;"><span>        $table<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>();  
+</span></span><span style="display:flex;"><span>        $table<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">unsignedBiginteger</span>(<span style="color:#e6db74">&#39;article_id&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">unsigned</span>();  
+</span></span><span style="display:flex;"><span>        $table<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">unsignedBiginteger</span>(<span style="color:#e6db74">&#39;tag_id&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">unsigned</span>();  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>        $table<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">foreign</span>(<span style="color:#e6db74">&#39;article_id&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">references</span>(<span style="color:#e6db74">&#39;id&#39;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;articles&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onDelete</span>(<span style="color:#e6db74">&#39;cascade&#39;</span>);  
+</span></span><span style="display:flex;"><span>        $table<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">foreign</span>(<span style="color:#e6db74">&#39;tag_id&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">references</span>(<span style="color:#e6db74">&#39;id&#39;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;tags&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onDelete</span>(<span style="color:#e6db74">&#39;cascade&#39;</span>);  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>        $table<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">timestamps</span>();  
+</span></span><span style="display:flex;"><span>    });  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>然後依照剛剛對 tag 的步驟，對 article 做一樣的事情</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupListOperation</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;created_at&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;topic&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;updated_at&#39;</span>);  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>}  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupCreateOperation</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setValidation</span>(<span style="color:#a6e22e">ArticleRequest</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;topic&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;content&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在 <code>tagCrudController</code> 新增下拉式選單：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupCreateOperation</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setValidation</span>(<span style="color:#a6e22e">TagRequest</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;name&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;price&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;number&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">addField</span>([  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;select2_multiple&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;articles&#39;</span>, <span style="color:#75715e">// the relationship name in your Model  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#39;entity&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;articles&#39;</span>, <span style="color:#75715e">// the relationship name in your Model  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#39;attribute&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;topic&#39;</span>, <span style="color:#75715e">// attribute on Article that is shown to admin  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#39;pivot&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// on create&amp;update, do you need to add/delete pivot table entries?  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ]);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>接著在 <code>http://localhost/admin/article</code> 隨便新增幾個文章，最後會做出像這樣的效果：
+<img src="/post/backpack01/3.png"
+	width="1822"
+	height="1514"
+	srcset="/post/backpack01/3_huf30d9b124784c7c4bad3e3bdb4121be4_197021_480x0_resize_box_3.png 480w, /post/backpack01/3_huf30d9b124784c7c4bad3e3bdb4121be4_197021_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="relationship"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="120"
+		data-flex-basis="288px"
+	
+>
+有需要的話，也可以在 articleCrudController 裡面也加入 tags，我自己有做，但在這裡就不演示。</p>
+<h3 id="columns">Columns</h3>
+<p>在 backpack 裡面提供了很多 column，可以在<a class="link" href="https://backpackforlaravel.com/docs/5.x/crud-columns#default-column-types"  target="_blank" rel="noopener"
+    >官網</a>查詢
+我們也可以在 <code>setupListOperation()</code> 裡面，為某個 column 設定細節：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupListOperation</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;created_at&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;name&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;price&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;number&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;updated_at&#39;</span>);  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setColumnDetails</span>(<span style="color:#e6db74">&#39;price&#39;</span>,[  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;label&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;Tag Price&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;prefix&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;$&#39;</span>  
+</span></span><span style="display:flex;"><span>    ]);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如此，我的 price 欄位會有微妙的變化XD
+<img src="/post/backpack01/4.png"
+	width="1792"
+	height="670"
+	srcset="/post/backpack01/4_hud5140b1dc936665be851cf6ef1960ed6_114514_480x0_resize_box_3.png 480w, /post/backpack01/4_hud5140b1dc936665be851cf6ef1960ed6_114514_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="出現了 prefix!"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="267"
+		data-flex-basis="641px"
+	
+></p>
+<h2 id="結語">結語</h2>
+<p>今天稍微介紹了 Backpack 的基本，和最簡單的用法。
+之後會再介紹如何新增 filter 和 button 之類的東西。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/laravel/">Laravel</a>
+        
+            <a href="/tags/laravel-backpack/">Laravel Backpack</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/backendlearningpath/api_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">API Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/deploy_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Deploy Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/laravel_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

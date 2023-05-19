@@ -6,7 +6,23 @@
         <description>Recent content in Tags on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Fri, 19 May 2023 12:32:22 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 19 May 2023 13:34:41 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Laravel</title>
+        <link>https://jyu1999.com/tags/laravel/</link>
+        <pubDate>Fri, 19 May 2023 13:34:41 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/tags/laravel/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Laravel Backpack</title>
+        <link>https://jyu1999.com/tags/laravel-backpack/</link>
+        <pubDate>Fri, 19 May 2023 13:34:41 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/tags/laravel-backpack/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Ruby</title>
         <link>https://jyu1999.com/tags/ruby/</link>
         <pubDate>Fri, 19 May 2023 12:32:22 +0800</pubDate>
@@ -44,14 +60,6 @@
         <pubDate>Thu, 18 May 2023 23:51:56 +0800</pubDate>
         
         <guid>https://jyu1999.com/tags/api/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Laravel</title>
-        <link>https://jyu1999.com/tags/laravel/</link>
-        <pubDate>Thu, 18 May 2023 23:51:56 +0800</pubDate>
-        
-        <guid>https://jyu1999.com/tags/laravel/</guid>
         <description></description>
         </item>
         <item>
