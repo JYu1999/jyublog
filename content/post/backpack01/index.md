@@ -19,6 +19,9 @@ keywords:
 Backpack 是一個很多個 Laravel Packages 的集合，用來做客製化的 admin panels，可以讓 admin 登入並進行 CRUD 操作。
 在前端的部分， Backpack 有著類似於 bootstrap 的設計（CoreUI theme），官方命名為 __Backstrap__。簡單來說，當我們在寫前端的時候，Backpack 裡面就有一些 HTML Blocks 可以直接套用。
 在後端的部分，Backpack 也可以幫助使用者創建 CRUD Panels。
+
+---
+
 ## Installation
 開始來試用一下 Laravel Backpack
 雖然 Backpack 的版本跟的算緊，但在~~撰寫當下(2023/4/10) 只支援 Laravel 9~~（後來發現有支援 Laravel 10），因為不想變動本機的環境，所以我使用 [Laravel sail](https://laravel.com/docs/10.x/sail#executing-artisan-commands) 來建一個 container:
@@ -42,6 +45,8 @@ sail artisan backpack:install
 裝好之後，進到 `http://localhost/admin/` 就會看到以下畫面。
 ![登入頁面](1.png)
 輸入剛剛創建好的 admin 帳號之後，就可以進到 dashboard 了～
+
+---
 
 ## CRUD
 接著來看官方的 Text Course。
@@ -219,6 +224,8 @@ protected function setupListOperation()
 ```
 如此，我的 price 欄位會有微妙的變化XD
 ![出現了 prefix!](4.png)
+
+---
 
 ## 結語
 今天稍微介紹了 Backpack 的基本，和最簡單的用法。

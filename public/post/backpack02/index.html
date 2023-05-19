@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='第二天依然來看 backpack 的 text course: Advanced Features。 基本上是有蠻多 operations 和 features。 官方教學文檔有提到這些東西先看看就好，所以在這裡先以了解使用方式為主，不會深究具體的實現方式。
+Other Operations Show 這個 operation 是讓 admin 有一個網頁可以看一個 entry 裡面的詳細資料，比如說有些文章的 content 不會顯示在清單頁，但可以利用 show operation 做到檢視。 它會在 ListEntries View 新增一個 preview。
+如果是透過前一篇的指令 sail artisan backpack:crud tag 生成的 controller，內建就會包含 use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;。如果沒有的話要加上這行才可以用 show operation。 然後可以用 sail artisan route:list 看一下怎麼到 preview 網頁，基本上是用 admin/article/{id}/show。
+How to configure 預設是會列出所有在資料庫裡面的資訊，但如果不想要這麼多，可以客製化。 可以在 crudController 裡面放一個 setupShowOperation() 。 如果想要讓 preview 頁面顯示的東西、設定、順序都跟 ListEntries View 一樣，可以用以下指令：
+protected function setupShowOperation() { $this-&amp;gt;setupListOperation(); } 當然，如同 setupListOperation() 一樣，如果想要更動顯示順序、設定，也是可以自己再另外寫，詳見官網。'>
+<meta name="keywords" content="Laravel, Laravel Backpack, CMS, Admin"><title>Laravel Backpack 初學者之路-02</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/backpack02/'>
+
+<link rel="stylesheet" href="/scss/style.min.fb45b1ed6c345a2eb48eed5672e202106e9ff1a04f921c894cf4244f70d53264.css"><meta property='og:title' content='Laravel Backpack 初學者之路-02'>
+<meta property='og:description' content='第二天依然來看 backpack 的 text course: Advanced Features。 基本上是有蠻多 operations 和 features。 官方教學文檔有提到這些東西先看看就好，所以在這裡先以了解使用方式為主，不會深究具體的實現方式。
+Other Operations Show 這個 operation 是讓 admin 有一個網頁可以看一個 entry 裡面的詳細資料，比如說有些文章的 content 不會顯示在清單頁，但可以利用 show operation 做到檢視。 它會在 ListEntries View 新增一個 preview。
+如果是透過前一篇的指令 sail artisan backpack:crud tag 生成的 controller，內建就會包含 use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;。如果沒有的話要加上這行才可以用 show operation。 然後可以用 sail artisan route:list 看一下怎麼到 preview 網頁，基本上是用 admin/article/{id}/show。
+How to configure 預設是會列出所有在資料庫裡面的資訊，但如果不想要這麼多，可以客製化。 可以在 crudController 裡面放一個 setupShowOperation() 。 如果想要讓 preview 頁面顯示的東西、設定、順序都跟 ListEntries View 一樣，可以用以下指令：
+protected function setupShowOperation() { $this-&amp;gt;setupListOperation(); } 當然，如同 setupListOperation() 一樣，如果想要更動顯示順序、設定，也是可以自己再另外寫，詳見官網。'>
+<meta property='og:url' content='https://jyu1999.com/post/backpack02/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Laravel' /><meta property='article:tag' content='Laravel Backpack' /><meta property='article:published_time' content='2023-05-19T18:05:21&#43;08:00'/><meta property='article:modified_time' content='2023-05-19T18:05:21&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/backpack02/0.png' />
+<meta name="twitter:site" content="@IamJYu">
+    <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="Laravel Backpack 初學者之路-02">
+<meta name="twitter:description" content="第二天依然來看 backpack 的 text course: Advanced Features。 基本上是有蠻多 operations 和 features。 官方教學文檔有提到這些東西先看看就好，所以在這裡先以了解使用方式為主，不會深究具體的實現方式。
+Other Operations Show 這個 operation 是讓 admin 有一個網頁可以看一個 entry 裡面的詳細資料，比如說有些文章的 content 不會顯示在清單頁，但可以利用 show operation 做到檢視。 它會在 ListEntries View 新增一個 preview。
+如果是透過前一篇的指令 sail artisan backpack:crud tag 生成的 controller，內建就會包含 use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;。如果沒有的話要加上這行才可以用 show operation。 然後可以用 sail artisan route:list 看一下怎麼到 preview 網頁，基本上是用 admin/article/{id}/show。
+How to configure 預設是會列出所有在資料庫裡面的資訊，但如果不想要這麼多，可以客製化。 可以在 crudController 裡面放一個 setupShowOperation() 。 如果想要讓 preview 頁面顯示的東西、設定、順序都跟 ListEntries View 一樣，可以用以下指令：
+protected function setupShowOperation() { $this-&amp;gt;setupListOperation(); } 當然，如同 setupListOperation() 一樣，如果想要更動顯示順序、設定，也是可以自己再另外寫，詳見官網。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/post/backpack02/0.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://jyu1999.notion.site/CHIEH-YU-CHAN-49db0f414780421aae1fb2288114586c'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#other-operations">Other Operations</a>
+      <ul>
+        <li><a href="#show">Show</a></li>
+        <li><a href="#reorder">Reorder</a></li>
+        <li><a href="#revise">Revise</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/backendlearningpath/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/goodidea-mind/" class="font_size_5">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_3">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_1">
+                無用的小知識
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_9">
+                backend
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_6">
+                Laravel
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_5">
+                好想工作室
+            </a>
+        
+            <a href="/tags/laravel-backpack/" class="font_size_3">
+                Laravel Backpack
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+            <a href="/tags/docker/" class="font_size_1">
+                docker
+            </a>
+        
+            <a href="/tags/git/" class="font_size_1">
+                git
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/backpack02/">
+                <img src="/post/backpack02/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_800x0_resize_box_3.png"
+                        srcset="/post/backpack02/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_800x0_resize_box_3.png 800w, /post/backpack02/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="800" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-02" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/laravel_backpack/" style="background-color: #2a9d8f; color: #fff;">
+                Laravel Backpack 初學者之路
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/backpack02/">Laravel Backpack 初學者之路-02</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 19, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>第二天依然來看 backpack 的 text course: Advanced Features。
+基本上是有蠻多 operations 和 features。
+官方教學文檔有提到這些東西先看看就好，所以在這裡先以了解使用方式為主，不會深究具體的實現方式。</p>
+<hr>
+<h2 id="other-operations">Other Operations</h2>
+<h3 id="show">Show</h3>
+<p>這個 operation 是讓 admin 有一個網頁可以看一個 entry 裡面的詳細資料，比如說有些文章的 content 不會顯示在清單頁，但可以利用 show operation 做到檢視。
+它會在 ListEntries View 新增一個 preview。</p>
+<p>如果是透過前一篇的指令 <code>sail artisan backpack:crud tag</code> 生成的 controller，內建就會包含 <code>use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;</code>。如果沒有的話要加上這行才可以用 show operation。
+然後可以用 <code>sail artisan route:list</code> 看一下怎麼到 preview 網頁，基本上是用 <code>admin/article/{id}/show</code>。</p>
+<h4 id="how-to-configure">How to configure</h4>
+<p>預設是會列出所有在資料庫裡面的資訊，但如果不想要這麼多，可以客製化。
+可以在 crudController 裡面放一個 <code>setupShowOperation()</code> 。
+如果想要讓 preview 頁面顯示的東西、設定、順序都跟 ListEntries View 一樣，可以用以下指令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupShowOperation</span>() 
+</span></span><span style="display:flex;"><span>{ 
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setupListOperation</span>(); 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>當然，如同 <code>setupListOperation()</code> 一樣，如果想要更動顯示順序、設定，也是可以自己再另外寫，詳見<a class="link" href="https://backpackforlaravel.com/docs/5.x/crud-operation-show"  target="_blank" rel="noopener"
+    >官網</a>。</p>
+<h4 id="how-to-add-custom-sectionsaka-widgets">How to add custom sections(aka. Widgets)</h4>
+<p>在 show 的頁面上，可以加入一些 widgets，像是卡片、圖表之類的。
+可以使用預設的 widget type，也可以創建自己的 widgets。
+Backpack 預設提供兩個可以放 widgets 的 section:</p>
+<ul>
+<li>before_content</li>
+<li>after_content
+我們可以用以下官方提供的程式碼來試用看看 widget:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupShowOperation</span>()
+</span></span><span style="display:flex;"><span>{    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// dynamic data to render in the following widget
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $userCount <span style="color:#f92672">=</span> <span style="color:#a6e22e">\App\Models\User</span><span style="color:#f92672">::</span><span style="color:#a6e22e">count</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//add div row using &#39;div&#39; widget and make other widgets inside it to be in a row
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Widget</span><span style="color:#f92672">::</span><span style="color:#a6e22e">add</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">to</span>(<span style="color:#e6db74">&#39;before_content&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;div&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">class</span>(<span style="color:#e6db74">&#39;row&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">content</span>([
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//widget made using fluent syntax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">Widget</span><span style="color:#f92672">::</span><span style="color:#a6e22e">make</span>()
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;progress&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">class</span>(<span style="color:#e6db74">&#39;card border-0 text-white bg-primary&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">progressClass</span>(<span style="color:#e6db74">&#39;progress-bar&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">value</span>($userCount)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#39;Registered users.&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">progress</span>(<span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> (<span style="color:#a6e22e">int</span>)$userCount <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">hint</span>(<span style="color:#ae81ff">1000</span> <span style="color:#f92672">-</span> $userCount <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39; more until next milestone.&#39;</span>),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//widget made using the array definition 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">Widget</span><span style="color:#f92672">::</span><span style="color:#a6e22e">make</span>(
+</span></span><span style="display:flex;"><span>            [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;type&#39;</span>       <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;card&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;class&#39;</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;card bg-dark text-white&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;wrapper&#39;</span> <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;col-sm-3 col-md-3&#39;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;content&#39;</span>    <span style="color:#f92672">=&gt;</span> [
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;header&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Example Widget&#39;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;body&#39;</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Widget placed at &#34;before_content&#34; secion in same row&#39;</span>,
+</span></span><span style="display:flex;"><span>                ]
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>    ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//you can also add Script &amp; CSS to your page using &#39;script&#39; &amp; &#39;style&#39; widget
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Widget</span><span style="color:#f92672">::</span><span style="color:#a6e22e">add</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;script&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">stack</span>(<span style="color:#e6db74">&#39;after_scripts&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">content</span>(<span style="color:#e6db74">&#39;https://code.jquery.com/ui/1.12.0/jquery-ui.min.js&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Widget</span><span style="color:#f92672">::</span><span style="color:#a6e22e">add</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;style&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">stack</span>(<span style="color:#e6db74">&#39;after_styles&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">content</span>(<span style="color:#e6db74">&#39;https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.58/dist/themes/light.css&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在 <code>Widget::add()-&gt;to('before_content')</code> 可以看到這邊使用了 <code>before_content</code> ，所以理論上 widget 會顯示在預設要顯示的東西之上。
+<img src="/post/backpack02/1.png"
+	width="1920"
+	height="707"
+	srcset="/post/backpack02/1_hu8b4c8872735b674c1aeb06262e6f4c03_104388_480x0_resize_box_3.png 480w, /post/backpack02/1_hu8b4c8872735b674c1aeb06262e6f4c03_104388_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Widget 在上面"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="271"
+		data-flex-basis="651px"
+	
+>
+同理可知，如果用 <code>after_content</code>，widget 就會在下面：
+<img src="/post/backpack02/2.png"
+	width="1920"
+	height="706"
+	srcset="/post/backpack02/2_hu139c22cf1592b4fc8e5e53866ca7f0ee_101222_480x0_resize_box_3.png 480w, /post/backpack02/2_hu139c22cf1592b4fc8e5e53866ca7f0ee_101222_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Widget 在下面"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="271"
+		data-flex-basis="652px"
+	
+></p>
+<h4 id="how-to-overwrite">How to overwrite</h4>
+<p>雖然預設的頁面看起來不錯，但我們可能仍想要更動 show 的邏輯。
+目前頁面顯示的邏輯是寫在<code>ShowOperation.php</code>裡面，<code>show()</code>這個 method
+而 EntityCrudController 是繼承了 <code>ShowOperation</code> 這個 trait，所以我們可以在 EntityCrudOperation 裡面自己寫一個 <code>show()</code> 就可以為不同的 entity 客製化顯示邏輯喔。
+如官網範例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">\Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation</span> { <span style="color:#a6e22e">show</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">traitShow</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">show</span>($id)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// custom logic before
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $content <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">traitShow</span>($id);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// custom logic after
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> $content;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="reorder">Reorder</h3>
+<p>這個 operation 可以讓 admin 可以重新排列，或巢狀排列 entries。
+<img src="/post/backpack02/3.png"
+	width="1280"
+	height="1106"
+	srcset="/post/backpack02/3_hu615795c3a2ee1d48adc7897d0c6d7505_88533_480x0_resize_box_3.png 480w, /post/backpack02/3_hu615795c3a2ee1d48adc7897d0c6d7505_88533_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="巢狀排列"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="115"
+		data-flex-basis="277px"
+	
+></p>
+<h4 id="requirements">Requirements</h4>
+<p>為了要使用 reorder，model 需要有幾個 integer fields，並預設值為零:</p>
+<ul>
+<li>parent_id -&gt; 必須要是 nullable</li>
+<li>lft</li>
+<li>rgt</li>
+<li>depth</li>
+</ul>
+<h4 id="usage">Usage</h4>
+<p>首先必須要在資料庫加上上面提到的四個欄位。
+在 entryCrudController 加上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupReorderOperation</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;reorder.label&#39;</span>, <span style="color:#e6db74">&#39;name&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;reorder.max_level&#39;</span>, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>這兩行可以：</p>
+<ul>
+<li>讓使用者可以使用 reorder operation</li>
+<li>在 &ldquo;add entry &quot; 按鈕旁邊會出現一個 &ldquo;Reorder&rdquo; 按鈕</li>
+<li>開啟到 Reorder 的 router</li>
+</ul>
+<p>這時候看 route:list 會看到：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>GET|HEAD  admin/tag/reorder .................... tag.reorder › Admin<span style="color:#ae81ff">\T</span>agCrudController@reorder
+</span></span><span style="display:flex;"><span>POST      admin/tag/reorder ........... tag.save.reorder › Admin<span style="color:#ae81ff">\T</span>agCrudController@saveReorder
+</span></span></code></pre></div><p>所以輸入 url 就會到 reorder 的介面：
+<img src="/post/backpack02/4.png"
+	width="1124"
+	height="1394"
+	srcset="/post/backpack02/4_hu5064729caadc22335ff3b15d8a8313ce_106355_480x0_resize_box_3.png 480w, /post/backpack02/4_hu5064729caadc22335ff3b15d8a8313ce_106355_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="reorder 介面"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="80"
+		data-flex-basis="193px"
+	
+></p>
+<p>目前顯示在 reorder 介面的會是 entry 的 name。如果想要顯示其他東西可以把 <code>'name'</code> 改成自己想要顯示的 (e.g. <code>'slug'</code>)
+數字 2 代表最大可以接受的深度，如果沒有限制的話，可以設為 0。</p>
+<p>此時可以進到 reorder 的頁面玩玩看，但玩完按 save 回到主頁之後，會發現什麼都沒有變。
+原因是因為主頁還是用預設的排序方式，如果想要更改排序方式可以：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupListOperation</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;created_at&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;name&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;slug&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;price&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;number&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">column</span>(<span style="color:#e6db74">&#39;updated_at&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">setColumnDetails</span>(<span style="color:#e6db74">&#39;price&#39;</span>,[
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;label&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;Tag Price&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;prefix&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;$&#39;</span>
+</span></span><span style="display:flex;"><span>    ]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">orderBy</span>(<span style="color:#e6db74">&#39;lft&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>這樣就會按照 <code>lft</code> 排序～</p>
+<p>官方文件有提到，在 reorder 介面中同樣可以加入 widget，基本上是用和 <code>show</code> 一樣的方式。在這邊就不實作了。</p>
+<h4 id="補充lft-and-rgt">補充：lft and rgt</h4>
+<p>在實作的時候，我還蠻好奇 <code>lft</code> 和 <code>rgt</code> 到底是怎麼被算出來的。
+稍微查了一下，nest entries 實際上就是一個 tree，backpack 會對對 tree 進行 preorder traversal（不過是改編版的）。然後算出 <code>lft</code> and <code>rgt</code>。
+舉例來說，如果現在 nest entries 長這樣：
+![[Pasted image 20230411121316.png|500]]
+算出 lft and rgt 的步驟為：</p>
+<ol>
+<li>從 root(fourth tag) 開始，lft of fourth tag = 2（初始值為 2）</li>
+<li>到 fourth tag 的第一個 child (fifth tag)，lft of fifth tag = 3 (2+1)</li>
+<li>到 fifth tag 的第一個 child (third tag)，lft of third tag = 4</li>
+<li>third tag 沒有 child，所以 rgt of third tag = 5</li>
+<li>move back to the parent (fifth tag)</li>
+<li>fifth tag 的第二個 child (seventh tag)，lft of seventh tag = 6</li>
+<li>seventh tag 沒有 child，所以 rgt of seventh tag = 7</li>
+<li>move back to the parent (fifth tag)</li>
+<li>fifth tag 沒有其他 child 了，所以 rgt of seventh tag = 8</li>
+<li>move back to the parent (fourth tag)</li>
+<li>到 fourth tag 的第二個 child (first tag)，lft of first tag = 9</li>
+<li>&hellip;以此類推</li>
+</ol>
+<p>最後求完會如下表：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:left">id</th>
+<th style="text-align:left">name</th>
+<th style="text-align:left">slug</th>
+<th style="text-align:left">price</th>
+<th style="text-align:left">parent_id</th>
+<th style="text-align:left">lft</th>
+<th style="text-align:left">rgt</th>
+<th style="text-align:left">depth</th>
+<th style="text-align:left">created_at</th>
+<th style="text-align:left">updated_at</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">first tag</td>
+<td style="text-align:left">firsttag</td>
+<td style="text-align:left">30</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">2023-04-11 01:20:01</td>
+<td style="text-align:left">2023-04-11 04:03:55</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">second tag</td>
+<td style="text-align:left">secondtag</td>
+<td style="text-align:left">40</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">2023-04-11 01:20:13</td>
+<td style="text-align:left">2023-04-11 04:03:55</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">third tag</td>
+<td style="text-align:left">thirdtag</td>
+<td style="text-align:left">50</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">2023-04-11 01:20:41</td>
+<td style="text-align:left">2023-04-11 04:03:55</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">fourth tag</td>
+<td style="text-align:left">fourthtag</td>
+<td style="text-align:left">50</td>
+<td style="text-align:left">null</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">2023-04-11 03:51:11</td>
+<td style="text-align:left">2023-04-11 04:03:55</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">fifth tag</td>
+<td style="text-align:left">fifthtag</td>
+<td style="text-align:left">70</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">2023-04-11 03:51:24</td>
+<td style="text-align:left">2023-04-11 04:03:55</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left">sixth tag</td>
+<td style="text-align:left">sixthtag</td>
+<td style="text-align:left">90</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">2023-04-11 04:03:31</td>
+<td style="text-align:left">2023-04-11 04:03:55</td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left">seventh tag</td>
+<td style="text-align:left">seventhtag</td>
+<td style="text-align:left">90</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">2023-04-11 04:03:43</td>
+<td style="text-align:left">2023-04-11 04:03:55</td>
+</tr>
+</tbody>
+</table></div>
+<p>然後如果要 print 出來的話，就用 lft and rgt 來重建原本的 tree：</p>
+<ol>
+<li>選擇 lft 最小的 node 作為 root（在這個例子中是 fourth tag）。</li>
+<li>尋找 lft 值介於 root 的 lft 和 rgt 之間的 node，並且其 depth 比 root 多1。這些 node 將成為 root 的 child node（在這個例子中是 fifth tag 和 first tag）。</li>
+<li>對於每個 child node，重複步驟 2，直到所有 node 都被訪問。</li>
+</ol>
+<h3 id="revise">Revise</h3>
+<p>Revise 可以讓 admin 去儲存、查看、取消對於一個 entries 的修改。
+類似版本管理系統，admin 可以在頁面上看到所有的 change 和此次修改是誰做的。</p>
+<h4 id="usage-1">Usage</h4>
+<p>其實過程蠻簡單的，裝好、建好表就差不多了。
+要先安裝這個 package。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>composer require backpack/revise-operation
+</span></span></code></pre></div><p>然後建一個用來存修改的表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cp vendor/venturecraft/revisionable/src/migrations/2013_04_09_062329_create_revisions_table.php database/migrations/ <span style="color:#f92672">&amp;&amp;</span> php artisan migrate
+</span></span></code></pre></div><p>然後在 model 裡面，新增一個 <code>identifiableName()</code> method，讓 admin 可以分辨不同的 entries(e.g. name, title&hellip;)。
+如果又用到別的 bootable trait，要去 override 掉：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">App\Models</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Article</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Eloquent</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">\Backpack\CRUD\app\Models\Traits\CrudTrait</span>, <span style="color:#a6e22e">\Venturecraft\Revisionable\RevisionableTrait</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">identifiableName</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">name</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// If you are using another bootable trait
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// be sure to override the boot method in your model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">boot</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">parent</span><span style="color:#f92672">::</span><span style="color:#a6e22e">boot</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>最後，在 CrudController，使用 operation trait:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">App\Http\Controllers\Admin</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Backpack\CRUD\app\Http\Controllers\CrudController</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArticleCrudController</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">CrudController</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">\Backpack\ReviseOperation\ReviseOperation</span>;
+</span></span></code></pre></div><p>這樣就可以正常使用了！
+下表為 revision 表：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:left">id</th>
+<th style="text-align:left">revisionable_type</th>
+<th style="text-align:left">revisionable_id</th>
+<th style="text-align:left">user_id</th>
+<th style="text-align:left">key</th>
+<th style="text-align:left">old_value</th>
+<th style="text-align:left">new_value</th>
+<th style="text-align:left">created_at</th>
+<th style="text-align:left">updated_at</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">App\Models\Article</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">topic</td>
+<td style="text-align:left">My first article</td>
+<td style="text-align:left">My first article. haha</td>
+<td style="text-align:left">2023-04-11 05:03:18</td>
+<td style="text-align:left">2023-04-11 05:03:18</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">App\Models\Article</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">slug</td>
+<td style="text-align:left">1starticle</td>
+<td style="text-align:left">1starticle-haha</td>
+<td style="text-align:left">2023-04-11 05:03:18</td>
+<td style="text-align:left">2023-04-11 05:03:18</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">App\Models\Article</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">content</td>
+<td style="text-align:left">This is my first article.</td>
+<td style="text-align:left">This is my first article. and I want to do revision</td>
+<td style="text-align:left">2023-04-11 05:03:18</td>
+<td style="text-align:left">2023-04-11 05:03:18</td>
+</tr>
+</tbody>
+</table></div>
+<p>官方文件上還列出另外三個 operations:</p>
+<ul>
+<li>Clone</li>
+<li>BulkDelete</li>
+<li>BuldClone</li>
+</ul>
+<p>但稍微看了一下，好像都是介紹用法而已，就不特別研究ㄌ。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/laravel/">Laravel</a>
+        
+            <a href="/tags/laravel-backpack/">Laravel Backpack</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/backpack01/">
+        
+        
+            <div class="article-image">
+                <img src="/post/backpack01/0.31a4642b37a0367837a5efaa0b1d3121_hu10d21063a2d5df6ebb9f3142db7576d3_8853_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-01"
+                        
+                        data-hash="md5-MaRkKzegNng3pe&#43;qCx0xIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Backpack 初學者之路-01</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/api_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">API Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/deploy_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Deploy Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/laravel_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

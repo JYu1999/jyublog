@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='這篇主要是要來研究 Fields。
+Intro. 在前兩篇可以看到，fields types 定義了 admin 可以如何輸入資料，例如 text, datepicker, upload button&amp;hellip;等等。通常是給 Create or Update 使用。
+在 Backpack 裡面，有很多的預設的 field types，也可以創建自己的 field。如果只是要做一點點修改，也可以 overwrite 原本的 field type 就好。
+Fields API 在官網上列出了用於操作 fields 的一些方法。
+這些 method 會在 operation 裡面運作，所以一定要放在 setupCreateOperation() 、 setUpdatePeration() or setup() 裡面。
+（好像在 version 5 之後，也可以使用靜態的方式去 call，如 CRUD::addfield()。
+// add a field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array); // shorthand: add a text field $this-&amp;gt;crud-&amp;gt;addField(&amp;#39;db_column_name&amp;#39;); // add multiple fields $this-&amp;gt;crud-&amp;gt;addFields([$field_definition_array_1, $field_definition_array_2]); // change the attributes of a field $this-&amp;gt;crud-&amp;gt;modifyField($name, $modifs_array); // remove a field from both operations $this-&amp;gt;crud-&amp;gt;removeField(&amp;#39;name&amp;#39;); // remove multiple fields from both operations $this-&amp;gt;crud-&amp;gt;removeFields($array_of_names); // remove all fields from all operations $this-&amp;gt;crud-&amp;gt;removeAllFields(); // FIELD ORDER // add a field before a given field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array)-&amp;gt;beforeField(&amp;#39;name&amp;#39;); // add a field after a given field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array)-&amp;gt;afterField(&amp;#39;name&amp;#39;); // ------------------- // New in Backpack 4.'>
+<meta name="keywords" content="Laravel, Laravel Backpack, CMS, Admin"><title>Laravel Backpack 初學者之路-03</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/backpack03/'>
+
+<link rel="stylesheet" href="/scss/style.min.fb45b1ed6c345a2eb48eed5672e202106e9ff1a04f921c894cf4244f70d53264.css"><meta property='og:title' content='Laravel Backpack 初學者之路-03'>
+<meta property='og:description' content='這篇主要是要來研究 Fields。
+Intro. 在前兩篇可以看到，fields types 定義了 admin 可以如何輸入資料，例如 text, datepicker, upload button&amp;hellip;等等。通常是給 Create or Update 使用。
+在 Backpack 裡面，有很多的預設的 field types，也可以創建自己的 field。如果只是要做一點點修改，也可以 overwrite 原本的 field type 就好。
+Fields API 在官網上列出了用於操作 fields 的一些方法。
+這些 method 會在 operation 裡面運作，所以一定要放在 setupCreateOperation() 、 setUpdatePeration() or setup() 裡面。
+（好像在 version 5 之後，也可以使用靜態的方式去 call，如 CRUD::addfield()。
+// add a field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array); // shorthand: add a text field $this-&amp;gt;crud-&amp;gt;addField(&amp;#39;db_column_name&amp;#39;); // add multiple fields $this-&amp;gt;crud-&amp;gt;addFields([$field_definition_array_1, $field_definition_array_2]); // change the attributes of a field $this-&amp;gt;crud-&amp;gt;modifyField($name, $modifs_array); // remove a field from both operations $this-&amp;gt;crud-&amp;gt;removeField(&amp;#39;name&amp;#39;); // remove multiple fields from both operations $this-&amp;gt;crud-&amp;gt;removeFields($array_of_names); // remove all fields from all operations $this-&amp;gt;crud-&amp;gt;removeAllFields(); // FIELD ORDER // add a field before a given field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array)-&amp;gt;beforeField(&amp;#39;name&amp;#39;); // add a field after a given field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array)-&amp;gt;afterField(&amp;#39;name&amp;#39;); // ------------------- // New in Backpack 4.'>
+<meta property='og:url' content='https://jyu1999.com/post/backpack03/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Laravel' /><meta property='article:tag' content='Laravel Backpack' /><meta property='article:published_time' content='2023-05-19T18:11:57&#43;08:00'/><meta property='article:modified_time' content='2023-05-19T18:11:57&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/backpack03/0.png' />
+<meta name="twitter:site" content="@IamJYu">
+    <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="Laravel Backpack 初學者之路-03">
+<meta name="twitter:description" content="這篇主要是要來研究 Fields。
+Intro. 在前兩篇可以看到，fields types 定義了 admin 可以如何輸入資料，例如 text, datepicker, upload button&amp;hellip;等等。通常是給 Create or Update 使用。
+在 Backpack 裡面，有很多的預設的 field types，也可以創建自己的 field。如果只是要做一點點修改，也可以 overwrite 原本的 field type 就好。
+Fields API 在官網上列出了用於操作 fields 的一些方法。
+這些 method 會在 operation 裡面運作，所以一定要放在 setupCreateOperation() 、 setUpdatePeration() or setup() 裡面。
+（好像在 version 5 之後，也可以使用靜態的方式去 call，如 CRUD::addfield()。
+// add a field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array); // shorthand: add a text field $this-&amp;gt;crud-&amp;gt;addField(&amp;#39;db_column_name&amp;#39;); // add multiple fields $this-&amp;gt;crud-&amp;gt;addFields([$field_definition_array_1, $field_definition_array_2]); // change the attributes of a field $this-&amp;gt;crud-&amp;gt;modifyField($name, $modifs_array); // remove a field from both operations $this-&amp;gt;crud-&amp;gt;removeField(&amp;#39;name&amp;#39;); // remove multiple fields from both operations $this-&amp;gt;crud-&amp;gt;removeFields($array_of_names); // remove all fields from all operations $this-&amp;gt;crud-&amp;gt;removeAllFields(); // FIELD ORDER // add a field before a given field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array)-&amp;gt;beforeField(&amp;#39;name&amp;#39;); // add a field after a given field $this-&amp;gt;crud-&amp;gt;addField($field_definition_array)-&amp;gt;afterField(&amp;#39;name&amp;#39;); // ------------------- // New in Backpack 4."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/post/backpack03/0.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://jyu1999.notion.site/CHIEH-YU-CHAN-49db0f414780421aae1fb2288114586c'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#intro">Intro.</a></li>
+    <li><a href="#fields-api">Fields API</a></li>
+    <li><a href="#field-attributes">Field Attributes</a>
+      <ul>
+        <li><a href="#mandatory-field-attributes">Mandatory Field Attributes</a></li>
+        <li><a href="#recommended-field-attributes">Recommended Field Attributes</a></li>
+      </ul>
+    </li>
+    <li><a href="#很多個-field">很多個 field</a>
+      <ul>
+        <li><a href="#relationship">Relationship</a></li>
+        <li><a href="#repeatable">Repeatable</a></li>
+        <li><a href="#select2-系列">select2 系列</a></li>
+        <li><a href="#slug">Slug</a></li>
+        <li><a href="#table">Table</a></li>
+      </ul>
+    </li>
+    <li><a href="#overwriting-default-field-types">Overwriting Default Field Types</a></li>
+    <li><a href="#creating-a-custom-field-type">Creating a Custom Field Type</a></li>
+    <li><a href="#結語">結語</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/backendlearningpath/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/goodidea-mind/" class="font_size_5">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_3">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_1">
+                無用的小知識
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_9">
+                backend
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_6">
+                Laravel
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_5">
+                好想工作室
+            </a>
+        
+            <a href="/tags/laravel-backpack/" class="font_size_3">
+                Laravel Backpack
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+            <a href="/tags/docker/" class="font_size_1">
+                docker
+            </a>
+        
+            <a href="/tags/git/" class="font_size_1">
+                git
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/backpack03/">
+                <img src="/post/backpack03/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_800x0_resize_box_3.png"
+                        srcset="/post/backpack03/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_800x0_resize_box_3.png 800w, /post/backpack03/0_hu10d21063a2d5df6ebb9f3142db7576d3_8853_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="800" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-03" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/laravel_backpack/" style="background-color: #2a9d8f; color: #fff;">
+                Laravel Backpack 初學者之路
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/backpack03/">Laravel Backpack 初學者之路-03</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 19, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>這篇主要是要來研究 Fields。</p>
+<hr>
+<h2 id="intro">Intro.</h2>
+<p>在前兩篇可以看到，fields types 定義了 admin 可以如何輸入資料，例如 text, datepicker, upload button&hellip;等等。通常是給 Create or Update 使用。</p>
+<p>在 Backpack 裡面，有很多的預設的 field types，也可以創建自己的 field。如果只是要做一點點修改，也可以 overwrite 原本的 field type 就好。</p>
+<hr>
+<h2 id="fields-api">Fields API</h2>
+<p>在官網上列出了用於操作 fields 的一些方法。</p>
+<p>這些 method 會在 operation 裡面運作，所以一定要放在 <code>setupCreateOperation()</code> 、 <code>setUpdatePeration()</code>  or <code>setup()</code> 裡面。</p>
+<p>（好像在 version 5 之後，也可以使用靜態的方式去 call，如 <code>CRUD::addfield()</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// add a field 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addField</span>($field_definition_array);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// shorthand: add a text field 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addField</span>(<span style="color:#e6db74">&#39;db_column_name&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// add multiple fields
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addFields</span>([$field_definition_array_1, $field_definition_array_2]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// change the attributes of a field
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">modifyField</span>($name, $modifs_array);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// remove a field from both operations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">removeField</span>(<span style="color:#e6db74">&#39;name&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// remove multiple fields from both operations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">removeFields</span>($array_of_names);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// remove all fields from all operations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">removeAllFields</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// FIELD ORDER
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// add a field before a given field
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addField</span>($field_definition_array)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">beforeField</span>(<span style="color:#e6db74">&#39;name&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// add a field after a given field
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addField</span>($field_definition_array)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">afterField</span>(<span style="color:#e6db74">&#39;name&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// -------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// New in Backpack 4.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// -------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// add a field with this name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;price&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// change the type attribute on the &#39;price&#39; field
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;price&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;number&#39;</span>);
+</span></span></code></pre></div><hr>
+<h2 id="field-attributes">Field Attributes</h2>
+<h3 id="mandatory-field-attributes">Mandatory Field Attributes</h3>
+<p>只有一個 attributes 是強迫要有的： <code>name</code>。</p>
+<p>這個 <code>name</code> 會被怎麼使用？官網上提供了兩個：</p>
+<ul>
+<li>inside the inputs, as <code>&lt;input name='your_db_column' /&gt;</code>;</li>
+<li>to store the information in the database, so your <code>name</code> should correspond to a database column (if the field type doesn&rsquo;t have different instructions);</li>
+</ul>
+<h3 id="recommended-field-attributes">Recommended Field Attributes</h3>
+<p>一個 field 也最好有以下的 field:</p>
+<ul>
+<li>the <code>name</code> of the column in the database (ex: &ldquo;title&rdquo;)</li>
+<li>the human-readable <code>label</code> for the input (ex: &ldquo;Title&rdquo;)</li>
+<li>the <code>type</code> of the input (ex: &ldquo;text&rdquo;)
+如果 label 被省略的話， backpack 會嘗試從 <code>name</code> 猜一下 label。</li>
+</ul>
+<p>如果 <code>type</code> 被省略的話， backpack 會根據 column type 來猜，或是 Model 有一個名為 <code>name</code> 的 relationship。</p>
+<h4 id="field-attributes-for-presentation-purposes">Field Attributes for Presentation Purposes</h4>
+<p>有一些選擇性可用的 attributes 可以用在大部分的 default field types 上，可以讓人很簡單的達到一些效果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;prefix&#39;</span>     <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;suffix&#39;</span>     <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;default&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;some value&#39;</span>, <span style="color:#75715e">// set a default value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;hint&#39;</span>       <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Some hint text&#39;</span>, <span style="color:#75715e">// helpful text, shows up after the input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;attributes&#39;</span> <span style="color:#f92672">=&gt;</span> [
+</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;placeholder&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Some text when empty&#39;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;class&#39;</span>       <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;form-control some-class&#39;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;readonly&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;readonly&#39;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;disabled&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;disabled&#39;</span>,
+</span></span><span style="display:flex;"><span>     ], <span style="color:#75715e">// change the HTML attributes of your input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     <span style="color:#e6db74">&#39;wrapper&#39;</span>   <span style="color:#f92672">=&gt;</span> [ 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;class&#39;</span>      <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;form-group col-md-12&#39;</span>
+</span></span><span style="display:flex;"><span>     ], <span style="color:#75715e">// change the HTML attributes for the field wrapper - mostly for resizing fields 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>]
+</span></span></code></pre></div><p>看起來蠻有用的，之前有用過 <code>'prefix'</code>，可以加入前贅詞。</p>
+<h4 id="fake-field-attributes-stores-fake-attributes-as-json-in-the-database">Fake Field Attributes (stores fake attributes as JSON in the database)</h4>
+<p>如果今天要存的資料有多種，但資料庫裡只有一欄，此時就需要先把資料轉成 JSON 格式再存進資料庫。</p>
+<p>預設來說，會存在 <code>extras</code> 這個 column。</p>
+<p>要使用 fake field attributes，有以下步驟：</p>
+<ol>
+<li>在 field 裡面加入 fake attribute
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#39;name&#39;</span>     <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#75715e">// JSON variable name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     <span style="color:#e6db74">&#39;label&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;Tag Name&#34;</span>, <span style="color:#75715e">// human-readable label for the input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#39;fake&#39;</span>     <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// show the field, but don&#39;t store it in the database column above
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     <span style="color:#e6db74">&#39;store_in&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;extras&#39;</span> <span style="color:#75715e">// [optional] the database column name where you want the fake fields to ACTUALLY be stored as a JSON array 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> ],
+</span></span></code></pre></div></li>
+<li>在 model 裡面，要確認存 JSONs 的 db columns(default: extras) 有：
+<ul>
+<li>In the <code>$fillable</code> property;</li>
+<li>on a new <code>$fakeColumns</code> property(create it now)</li>
+<li>are cast as array in <code>$casts</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="tab-attribute-splits-forms-into-tabs">Tab Attribute Splits Forms into Tabs</h4>
+<p>可以把 create/edit input 放在不同的 tabs 裡面。
+<img src="/post/backpack03/1.png"
+	width="668"
+	height="526"
+	srcset="/post/backpack03/1_huf8ce6fcc025d7991fba346b9885a7467_45002_480x0_resize_box_3.png 480w, /post/backpack03/1_huf8ce6fcc025d7991fba346b9885a7467_45002_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="把 create/edit input 放在不同的 tabs 裡面"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="126"
+		data-flex-basis="304px"
+	
+>
+如果要使用這個功能，要在 field attribute 裡面加上 &rsquo;tab&rsquo;。
+舉例而言，如果我想要把 <code>price</code> 放在  <code>test</code> 這個 tab 裡面，然後把 <code>articles</code> 這個 select2_multiple 放在 <code>hello</code> 這個 tab 裡面，可以這樣寫：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">addField</span>([  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;price&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;type&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;number&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;tab&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;test&#39;</span>  
+</span></span><span style="display:flex;"><span>]);  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">addField</span>([  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;select2_multiple&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;articles&#39;</span>, <span style="color:#75715e">// the relationship name in your Model  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;entity&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;articles&#39;</span>, <span style="color:#75715e">// the relationship name in your Model  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;attribute&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;topic&#39;</span>, <span style="color:#75715e">// attribute on Article that is shown to admin  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;pivot&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// on create&amp;update, do you need to add/delete pivot table entries?  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;tab&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;hello&#39;</span>  
+</span></span><span style="display:flex;"><span>]);
+</span></span></code></pre></div><p>最後呈現出來的效果：</p>
+<p><img src="/post/backpack03/2.png"
+	width="1554"
+	height="1274"
+	srcset="/post/backpack03/2_hu2aa17d5cabe930aec90e93db9cfbb9ae_95905_480x0_resize_box_3.png 480w, /post/backpack03/2_hu2aa17d5cabe930aec90e93db9cfbb9ae_95905_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="放一個 test tab"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="121"
+		data-flex-basis="292px"
+	
+></p>
+<p>可以看到如果沒有指定 tab 的，會獨立是一個 component，放在所有 tabs 的上面。</p>
+<h4 id="attributes-for-fields-containing-related-entries">Attributes For Fields Containing Related Entries</h4>
+<p>這邊主要是在說，如果 field works with related entities( relationships like <code>BelongsTo</code> , <code>HasOne</code>, <code>HasMany</code>, <code>BelongsToMany</code>, etc)，有一些參數需要/可以設定。</p>
+<ul>
+<li><code>entity</code> - points to the method on the model that contains the relationship; having this defined, Backpack will try to guess from it all other field attributes; ex: <code>category</code> or <code>tags</code>;</li>
+<li><code>model</code> - the classname (including namespace) of the related model (ex: <code>App\Models\Category</code>); usually deduced from the relationship function in the model;</li>
+<li><code>attribute</code> - the attribute on the related model (aka foreign attribute) that will be show to the user; for example, you wouldn&rsquo;t want a dropdown of categories showing IDs - no, you&rsquo;d want to show the category names; in this case, the <code>attribute</code> will be <code>name</code>; usually deduced using the <a class="link" href="https://backpackforlaravel.com/docs/5.x/crud-fields#identifiable-attribute"  target="_blank" rel="noopener"
+    >identifiable attribute functionality explained below</a>;</li>
+<li><code>multiple</code> - boolean, allows the user to pick one or multiple items; usually deduced depending on whether it&rsquo;s a 1-to-n or n-n relationship;</li>
+<li><code>pivot</code> - boolean, instructs Backpack to store the information inside a pivot table; usually deduced depending on whether it&rsquo;s a 1-to-n or n-n relationship;</li>
+<li><code>relation_type</code> - text, deduced from <code>entity</code>; not a good idea to overwrite;</li>
+</ul>
+<p>其實看前幾天做的 <code>select2_multiple</code> 大概就可以知道怎麼用了。</p>
+<hr>
+<h2 id="很多個-field">很多個 field</h2>
+<p>文件後面就是各個不同的 field 介紹，這個就挑著記。</p>
+<h3 id="relationship">Relationship</h3>
+<p>會給 user 一個 <code>select2</code> input，讓使用者可以選擇一個或多個關聯的 Eloquent Model 的 entires。
+為了要正常運作，在 Model 裡面必須要正確定義 relationships。
+在官網上有列出有支持的 relationships。</p>
+<h4 id="load-entries-from-ajax-calls---using-the-fetch-operation">Load entries from AJAX calls - using the Fetch Operation</h4>
+<p>如果同時要 load 很多 entries，用 onpage Eloquent query 速度可能會很慢。
+在這種情況下，可以叫 <code>relationship</code> field 透過 AJAX calls 來拿到 entries。
+要達成這樣的效果，有以下步驟：</p>
+<ol>
+<li>Add <code>'ajax' =&gt; true</code> to your relationship field definition:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>[   <span style="color:#75715e">// relationship
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;relationship&#34;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;category&#39;</span>, <span style="color:#75715e">// the method on your model that defines the relationship
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#e6db74">&#39;ajax&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">// OPTIONALS:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;label&#39;       =&gt; &#34;Category&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;attribute&#39;   =&gt; &#34;name&#34;, // foreign key attribute that is shown to user (identifiable attribute)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;entity&#39;      =&gt; &#39;category&#39;, // the method that defines the relationship in your Model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;model&#39;       =&gt; &#34;App\Models\Category&#34;, // foreign key Eloquent model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;placeholder&#39; =&gt; &#34;Select a category&#34;, // placeholder for the select2 input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">// AJAX OPTIONALS:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;delay&#39;                   =&gt; 500, // the minimum amount of time between ajax requests when searching in the field
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;data_source&#39;             =&gt; url(&#34;fetch/category&#34;), // url to controller search function (with /{id} should return model)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;minimum_input_length&#39;    =&gt; 2, // minimum characters to type before querying results
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;dependencies&#39;            =&gt; [&#39;category&#39;], // when a dependency changes, this select2 is reset to null
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;method&#39;                  =&gt; &#39;POST&#39;, // optional - HTTP method to use for the AJAX call (GET, POST)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">// &#39;include_all_form_fields&#39; =&gt; false, // optional - only send the current field through AJAX (for a smaller payload if you&#39;re not using multiple chained select2s)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> ],
+</span></span></code></pre></div>主要應該是 <code>'ajax'=&gt;true</code> 這行。
+所以我嘗試在  <code>ArticleCrudController.php</code> 裡面把原本的 <code>select2</code> 改掉：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>    <span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">addField</span>([  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;label&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;Tags&#34;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;relationship&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;tags&#39;</span>, <span style="color:#75715e">// the method that defines the relationship in your Model  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#39;entity&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;tags&#39;</span>, <span style="color:#75715e">// the method that defines the relationship in your Model  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#39;attribute&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#75715e">// foreign key attribute that is shown to user  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#39;pivot&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// on create&amp;update, do you need to add/delete pivot table entries?  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#39;ajax&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#66d9ef">true</span>  
+</span></span><span style="display:flex;"><span>    ]);
+</span></span></code></pre></div><p>此時應該是會報錯，看起來是根本沒有 router：
+<img src="/post/backpack03/3.png"
+	width="1662"
+	height="1055"
+	srcset="/post/backpack03/3_hu56943392542909a6f3070483b28ff239_198289_480x0_resize_box_3.png 480w, /post/backpack03/3_hu56943392542909a6f3070483b28ff239_198289_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="404&hellip;"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="157"
+		data-flex-basis="378px"
+	
+></p>
+<ol start="2">
+<li>這時候就要到第二步驟，在<code>ArticleCrudController.php</code>加入以下程式碼：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span> <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">\Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fetchTags</span>()
+</span></span><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">\App\Models\Tag</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div>這段程式碼的用途就是要開一個對應到 AJAX Calls 的 route 和 method。
+會幫我們設定好 <code>/fetch/tag</code> route，會導到 <code>fetchTags()</code>，並 return 搜尋結果。
+感覺蠻有趣的，[官方文件](<a class="link" href="https://backpackforlaravel.com/docs/5.x/crud-operation-fetch"  target="_blank" rel="noopener"
+    >FetchOperation docs</a>)有說明更多關於怎麼 operation 怎麼運作的，不過先暫時跳過&hellip;</li>
+</ol>
+<h4 id="create-related-entries-in-a-modal---using-the-inlinecreate-operation">Create related entries in a modal - using the InlineCreate Operation</h4>
+<p>使用者去使用 AJAX 做搜尋，有可能根本沒有這個資料。</p>
+<p>所以可能會需要讓使用者在不用離開原本的頁面下，新增一個 related entry。(e.g. 在 create article 的頁面新增一個 tag)</p>
+<p>這個功能可以使用在 <code>BelongsTo</code>, <code>BelongsToMany</code>, <code>MorphToMany</code> relationships。</p>
+<p><img src="/post/backpack03/4.png"
+	width="1275"
+	height="652"
+	srcset="/post/backpack03/4_hu27784fd40f80395e4fbc23259028f37b_97458_480x0_resize_box_3.png 480w, /post/backpack03/4_hu27784fd40f80395e4fbc23259028f37b_97458_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="功能展示"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="195"
+		data-flex-basis="469px"
+	
+></p>
+<p>要使用這個功能，要先使用 Fetch operation 去拿到 entries。</p>
+<p>然後再照以下步驟：</p>
+<ol>
+<li>增加 <code>inline_create</code> 在 field definition</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>    <span style="color:#75715e">// for 1-n relationships (ex: category)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;type&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;relationship&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;name&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;category&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;ajax&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;inline_create&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// &lt;--- THIS
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>],
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// for n-n relationships (ex: tags)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;type&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;relationship&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;name&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;tags&#39;</span>, <span style="color:#75715e">// the method on your model that defines the relationship
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">&#39;ajax&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;inline_create&#39;</span> <span style="color:#f92672">=&gt;</span> [ <span style="color:#e6db74">&#39;entity&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;tag&#39;</span> ]  <span style="color:#75715e">// &lt;--- OR THIS
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>],
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// in this second example, the relation is called `tags` (plural),
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// but we need to define the entity as &#34;tag&#34; (singural)
+</span></span></span></code></pre></div><p>這時候應該會看到以下 bug，跟上面的 fetch 一樣，目前還沒有 route 可以處理這個請求。所以要進入第二步驟。
+<img src="/post/backpack03/5.png"
+	width="2338"
+	height="1156"
+	srcset="/post/backpack03/5_hua1fc53358b6b06be35d0b31a478061cd_328936_480x0_resize_box_3.png 480w, /post/backpack03/5_hua1fc53358b6b06be35d0b31a478061cd_328936_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Route not defined"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="202"
+		data-flex-basis="485px"
+	
+>
+2. 要在 secondary entity （在這個例子中是 TagCrudController）中 use InlineCreate operation</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TagCrudController</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">CrudController</span>
+</span></span><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">\Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> }
+</span></span></code></pre></div><p>加入之後看 <code>artisan route:list</code> 就會看到 backpack 幫我們生成一個 route 了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>     GET|HEAD  admin/tag/create ....................... tag.create › Admin<span style="color:#ae81ff">\T</span>agCrudController@create
+</span></span><span style="display:flex;"><span>   POST      admin/tag/inline/create tag-inline-create-save › Admin<span style="color:#ae81ff">\T</span>agCrudController@storeInlin…
+</span></span><span style="display:flex;"><span>   POST      admin/tag/inline/create/modal tag-inline-create › Admin<span style="color:#ae81ff">\T</span>agCrudController@getInline…
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">`</span>InlineCreateOperation<span style="color:#e6db74">`</span> 會讓 modal 顯示和 Create Operation 一樣的 field。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#### Save additional data to pivot table</span>
+</span></span><span style="display:flex;"><span>對於有 pivot table 的 relationship<span style="color:#f92672">(</span>n2n: <span style="color:#e6db74">`</span>BelongsToMany<span style="color:#e6db74">`</span>, <span style="color:#e6db74">`</span>MorphToMany<span style="color:#e6db74">`</span><span style="color:#f92672">)</span>，這個 pivot table 除了 foreign key 之外，還可能包含其他列。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">`</span>relationship<span style="color:#e6db74">`</span> field 提供了一個快速的方法，讓 admin 可以編輯這些 <span style="color:#e6db74">&#34;extra attributes&#34;</span> 。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>舉例而言，如果有以下 db tables:
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">```</span>php
+</span></span><span style="display:flex;"><span>// - companies: id, name
+</span></span><span style="display:flex;"><span>// - company_person: company_id, person_id, job_title, job_description
+</span></span><span style="display:flex;"><span>// - persons: id, first_name, last_name
+</span></span></code></pre></div><p>在 <code>company_person</code> 這個 pivot table 裡面，我們可能想要讓 admin 去編輯特定使用者的 <code>job_title</code> 或是 <code>job_description</code> 。如下圖：
+<img src="/post/backpack03/6.png"
+	width="645"
+	height="471"
+	srcset="/post/backpack03/6_hud91329df0e6bc4e5e5d6b8d4b649c043_33329_480x0_resize_box_3.png 480w, /post/backpack03/6_hud91329df0e6bc4e5e5d6b8d4b649c043_33329_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="讓 admin 去編輯特定使用者的 job_title "
+	
+	
+		class="gallery-image" 
+		data-flex-grow="136"
+		data-flex-basis="328px"
+	
+></p>
+<p>步驟如下（在這裡就不實作ㄌ）：</p>
+<ol>
+<li>在 model 裡面，確認 pivot 有被 define（使用 <code>withPivot()</code>）:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// inside the Company model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">people</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">belongsToMany</span>(<span style="color:#a6e22e">\App\Models\Person</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">withPivot</span>(<span style="color:#e6db74">&#39;job_title&#39;</span>, <span style="color:#e6db74">&#39;job_description&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// inside the Person model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">companies</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">belongsToMany</span>(<span style="color:#a6e22e">\App\Models\Company</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">withPivot</span>(<span style="color:#e6db74">&#39;job_title&#39;</span>, <span style="color:#e6db74">&#39;job_description&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="2">
+<li>在 <code>relationship</code> field defintion, 加入 <code>subfield</code></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// Inside PersonCrudController
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;companies&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;type&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;relationship&#34;</span>,
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// ..
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;subfields&#39;</span>   <span style="color:#f92672">=&gt;</span> [
+</span></span><span style="display:flex;"><span>        [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;job_title&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;text&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;wrapper&#39;</span> <span style="color:#f92672">=&gt;</span> [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;form-group col-md-3&#39;</span>,
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;job_description&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;text&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;wrapper&#39;</span> <span style="color:#f92672">=&gt;</span> [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;form-group col-md-9&#39;</span>,
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>],
+</span></span></code></pre></div><h4 id="manage-related-entries-in-the-same-form-create-update-delete">Manage related entries in the same form (create, update, delete)</h4>
+<p>有時候對於 <code>hasMany</code> 和 <code>morphMany</code> relationships，secondary entry 高度依賴 primary entry，所以我們可能不想要在一個額外的懸浮式視窗來編輯這個 secondary entry。</p>
+<h4 id="delete-related-entries-or-fall-back-to-default">Delete related entries or fall back to default</h4>
+<p>一般而言，當 admin 在 &ldquo;select&rdquo; 裡面移除了一個 relationship，只有 relationship 被移除，related entry 會保留。</p>
+<p>但對於 <code>hasMany</code> 和 <code>morphMany</code> 來說，有時候我們可能也會想要移除一整個 relationship。</p>
+<p>如下例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// Inside ArticleCrudController
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;type&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;relationship&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span>          <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;comments&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// when removed, use fallback_id
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;fallback_id&#39;</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">3</span>, <span style="color:#75715e">// will relate to the comment with ID &#34;3&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// when removed, delete the entry
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;force_delete&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// will delete that comment
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>],
+</span></span></code></pre></div><h3 id="repeatable">Repeatable</h3>
+<p>有時候我們可能想要給 admin 可以同時新增很多欄位。</p>
+<p>比如說，在「台灣國家公園入園入山申請」之中，可以按下「新增隊員」，就可以新增很多欄位 （for 這個隊員）。</p>
+<p>這個時候就可以用到 repeatable。</p>
+<p>從 backpack v5 版本開始，repeatable 會 return array，會需要在 model 裡面設定 cast 成 json，再存成資料庫。</p>
+<p><img src="/post/backpack03/7.png"
+	width="982"
+	height="539"
+	srcset="/post/backpack03/7_hu5fb499aa798a832b475b299e182b9081_29590_480x0_resize_box_3.png 480w, /post/backpack03/7_hu5fb499aa798a832b475b299e182b9081_29590_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="182"
+		data-flex-basis="437px"
+	
+></p>
+<p>可以按下 &ldquo;New item&rdquo; 按鈕，就會增加新的 subfields group（e.g. 一個新隊員）。</p>
+<p>大部分的 field type 都可以用在 field group 裡面，也可以使用 <code>wrapper</code> 更改每個 field 的寬度。</p>
+<p>但有以下事情是需要注意的：</p>
+<ul>
+<li>所有在 group 裡面的 subfields 都需要定義清楚，Backpack 不會幫忙猜 Label 之類的。</li>
+<li>有些 field type 是不可以在 subfield 使用的，例如 relationship field、upload、upload_multiple</li>
+<li>Validation: 可以透過 Laravel nested array validation 的方式來驗證 subfield 的資料。e.g. <code>testimonial.*.name =&gt; 'required'</code></li>
+<li>Filed usage and relationships: 不能在 repeatable field 裡面再塞一個 repeatable field。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>[   <span style="color:#75715e">// repeatable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;name&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;testimonials&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;label&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Testimonials&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;type&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;repeatable&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;subfields&#39;</span> <span style="color:#f92672">=&gt;</span> [ <span style="color:#75715e">// also works as: &#34;fields&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;name&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;name&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;type&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;text&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;label&#39;</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Name&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;wrapper&#39;</span> <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;form-group col-md-4&#39;</span>],
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;name&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;position&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;type&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;text&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;label&#39;</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Position&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;wrapper&#39;</span> <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;form-group col-md-4&#39;</span>],
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;name&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;company&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;type&#39;</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;text&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;label&#39;</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Company&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;wrapper&#39;</span> <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;form-group col-md-4&#39;</span>],
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;name&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;quote&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;type&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ckeditor&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;label&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Quote&#39;</span>,
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// optional
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;new_item_label&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Add Group&#39;</span>, <span style="color:#75715e">// customize the text of the button
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;init_rows&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">2</span>, <span style="color:#75715e">// number of empty rows to be initialized, by default 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;min_rows&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">2</span>, <span style="color:#75715e">// minimum rows allowed, when reached the &#34;delete&#34; buttons will be hidden
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;max_rows&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">2</span>, <span style="color:#75715e">// maximum rows allowed, when reached the &#34;new item&#34; button will be hidden
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// allow reordering?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;reorder&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">false</span>, <span style="color:#75715e">// hide up&amp;down arrows next to each row (no reordering)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;reorder&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// show up&amp;down arrows next to each row
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;reorder&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;order&#39;</span>, <span style="color:#75715e">// show arrows AND add a hidden subfield with that name (value gets updated when rows move)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;reorder&#39;</span> <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;order&#39;</span>, <span style="color:#e6db74">&#39;type&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;number&#39;</span>, <span style="color:#e6db74">&#39;attributes&#39;</span> <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;data-reorder-input&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>]], <span style="color:#75715e">// show arrows AND add a visible number subfield
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>],
+</span></span></code></pre></div><h3 id="select2-系列">select2 系列</h3>
+<p>如同官方的敘述：</p>
+<blockquote>
+<p>Works just like the SELECT field, but prettier.</p>
+</blockquote>
+<p>select 系列基本上會把全部選項列出來，如果要多選還要按著 shift。
+<img src="/post/backpack03/8.png"
+	width="943"
+	height="545"
+	srcset="/post/backpack03/8_hua64ea88273a1cfe2eed7588c57e54f57_31012_480x0_resize_box_3.png 480w, /post/backpack03/8_hua64ea88273a1cfe2eed7588c57e54f57_31012_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="select 列出全部選項"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="415px"
+	
+></p>
+<p>select2 系列看起來就比較美觀，是類似 dropdown 這樣：
+<img src="/post/backpack03/9.png"
+	width="921"
+	height="507"
+	srcset="/post/backpack03/9_hub055a9ffc727442f13f3dea89eee2ed1_32946_480x0_resize_box_3.png 480w, /post/backpack03/9_hub055a9ffc727442f13f3dea89eee2ed1_32946_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="select2 展示"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="181"
+		data-flex-basis="435px"
+	
+></p>
+<h3 id="slug">Slug</h3>
+<p>Slug 看起來也蠻特殊的，可以在網頁直接把文字動態轉為符合網址的格式。
+使用方式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;name&#39;</span>);  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">CRUD</span><span style="color:#f92672">::</span><span style="color:#a6e22e">addfield</span>([  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;slug&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;target&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;name&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;label&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;Slug&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;type&#39;</span><span style="color:#f92672">=&gt;</span><span style="color:#e6db74">&#39;slug&#39;</span>  
+</span></span><span style="display:flex;"><span>]);
+</span></span></code></pre></div><p>效果會如下（是動態的，但這裡用圖片示意）：
+<img src="/post/backpack03/10.png"
+	width="902"
+	height="452"
+	srcset="/post/backpack03/10_hu49396c2f870dbb871c18d5b4c8351118_29943_480x0_resize_box_3.png 480w, /post/backpack03/10_hu49396c2f870dbb871c18d5b4c8351118_29943_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="slug 效果"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="199"
+		data-flex-basis="478px"
+	
+></p>
+<p>如果不想要是動態的，也可以將他暫停掉：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupUpdateOperation</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setupCreateOperation</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// disable editing the slug when editing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">field</span>(<span style="color:#e6db74">&#39;slug&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">target</span>(<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">attributes</span>([<span style="color:#e6db74">&#39;readonly&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;readonly&#39;</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="table">Table</h3>
+<p>Table 感覺也是工作上會常常用的。
+使用 Table 的話，會允許 multiple input，並把這些 input value 存成 JSON。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>[   <span style="color:#75715e">// Table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;name&#39;</span>            <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;options&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;label&#39;</span>           <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Options&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;type&#39;</span>            <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;table&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;entity_singular&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;option&#39;</span>, <span style="color:#75715e">// used on the &#34;Add X&#34; button
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;columns&#39;</span>         <span style="color:#f92672">=&gt;</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Name&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;desc&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Description&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;price&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Price&#39;</span>
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;max&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">5</span>, <span style="color:#75715e">// maximum rows allowed in the table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;min&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">// minimum rows allowed in the table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>],
+</span></span></code></pre></div><p>做出來會如下圖：
+<img src="/post/backpack03/11.png"
+	width="666"
+	height="256"
+	srcset="/post/backpack03/11_hue4dc53f89d84733ea4c480287325b2d4_17873_480x0_resize_box_3.png 480w, /post/backpack03/11_hue4dc53f89d84733ea4c480287325b2d4_17873_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="table 成果"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="260"
+		data-flex-basis="624px"
+	
+></p>
+<blockquote>
+<p>[!note]
+記得要在 model 設定 casting。</p>
+</blockquote>
+<hr>
+<h2 id="overwriting-default-field-types">Overwriting Default Field Types</h2>
+<p>Backpack 的 field types 通常都存在 <code>resources/views/fields</code>。</p>
+<p>如果需要修改已經存在的 field，不用特別去改 package，只需要在 <code>/resources/views/vendor/backpack/crud/fields</code> 新增一個有同樣名字的 view。Backpack 會優先確認那裡有沒有檔案，如果沒有檔案才去 load package。</p>
+<p>可以使用 <code>php artisan backpack:field --from=field_name</code> 來新增一個 field blade file，backpack 會幫忙新增。可以對新增完的檔案進行修改：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>{{<span style="color:#f92672">--</span> <span style="color:#a6e22e">number</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">--</span>}}  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">@</span><span style="color:#66d9ef">include</span>(<span style="color:#e6db74">&#39;crud::fields.inc.wrapper_start&#39;</span>)  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">label</span><span style="color:#f92672">&gt;</span>{<span style="color:#f92672">!!</span> $field[<span style="color:#e6db74">&#39;label&#39;</span>] <span style="color:#f92672">!!</span>}<span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">label</span><span style="color:#f92672">&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">@</span><span style="color:#66d9ef">include</span>(<span style="color:#e6db74">&#39;crud::fields.inc.translatable_icon&#39;</span>)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">@</span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($field[<span style="color:#e6db74">&#39;prefix&#39;</span>]) <span style="color:#f92672">||</span> <span style="color:#a6e22e">isset</span>($field[<span style="color:#e6db74">&#39;suffix&#39;</span>])) <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-group&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">endif</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">@</span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($field[<span style="color:#e6db74">&#39;prefix&#39;</span>])) <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-group-prepend&#34;</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-group-text&#34;</span><span style="color:#f92672">&gt;</span>{<span style="color:#f92672">!!</span> $field[<span style="color:#e6db74">&#39;prefix&#39;</span>] <span style="color:#f92672">!!</span>}<span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">span</span><span style="color:#f92672">&gt;&lt;/</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">endif</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span>  
+</span></span><span style="display:flex;"><span>           <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;number&#34;</span>  
+</span></span><span style="display:flex;"><span>           <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ </span><span style="color:#e6db74">$field[&#39;name&#39;]</span><span style="color:#e6db74"> }}&#34;</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ old_empty_or_null(</span><span style="color:#e6db74">$field[&#39;name&#39;]</span><span style="color:#e6db74">, &#39;&#39;) ??  </span><span style="color:#e6db74">$field[&#39;value&#39;]</span><span style="color:#e6db74"> ?? </span><span style="color:#e6db74">$field[&#39;default&#39;]</span><span style="color:#e6db74"> ?? &#39;&#39; }}&#34;</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">@</span><span style="color:#66d9ef">include</span>(<span style="color:#e6db74">&#39;crud::fields.inc.attributes&#39;</span>)  
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">&gt;</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">@</span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($field[<span style="color:#e6db74">&#39;suffix&#39;</span>])) <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-group-append&#34;</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-group-text&#34;</span><span style="color:#f92672">&gt;</span>{<span style="color:#f92672">!!</span> $field[<span style="color:#e6db74">&#39;suffix&#39;</span>] <span style="color:#f92672">!!</span>}<span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">span</span><span style="color:#f92672">&gt;&lt;/</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">endif</span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">@</span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($field[<span style="color:#e6db74">&#39;prefix&#39;</span>]) <span style="color:#f92672">||</span> <span style="color:#a6e22e">isset</span>($field[<span style="color:#e6db74">&#39;suffix&#39;</span>])) <span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">endif</span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    {{<span style="color:#f92672">--</span> <span style="color:#a6e22e">HINT</span> <span style="color:#f92672">--</span>}}  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">@</span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isset</span>($field[<span style="color:#e6db74">&#39;hint&#39;</span>]))  
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;help-block&#34;</span><span style="color:#f92672">&gt;</span>{<span style="color:#f92672">!!</span> $field[<span style="color:#e6db74">&#39;hint&#39;</span>] <span style="color:#f92672">!!</span>}<span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">p</span><span style="color:#f92672">&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">@</span><span style="color:#66d9ef">endif</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Hello</span>  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">@</span><span style="color:#66d9ef">include</span>(<span style="color:#e6db74">&#39;crud::fields.inc.wrapper_end&#39;</span>)
+</span></span></code></pre></div><p>像我在 number field type 的最後面加了一個 <code>Hello</code>，雖然沒什麼意義，但可以看一下效果：
+<img src="/post/backpack03/12.png"
+	width="933"
+	height="324"
+	srcset="/post/backpack03/12_hu494de725ec0ef2337ee384bce42bf793_17058_480x0_resize_box_3.png 480w, /post/backpack03/12_hu494de725ec0ef2337ee384bce42bf793_17058_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="number field type 的最後面加了一個 Hello"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="287"
+		data-flex-basis="691px"
+	
+></p>
+<hr>
+<h2 id="creating-a-custom-field-type">Creating a Custom Field Type</h2>
+<p>也可以自己創建一個新的field type，可以用以下指令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>// to create one using Backpack<span style="color:#ae81ff">\G</span>enerators, run:
+</span></span><span style="display:flex;"><span>php artisan backpack:field new_field_name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// alternatively, to create a new field similar an existing field, run: 
+</span></span><span style="display:flex;"><span>php artisan backpack:field new_field_name --from<span style="color:#f92672">=</span>old_field_name
+</span></span></code></pre></div><p>Field Defintion 可能會像：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>[   <span style="color:#75715e">// Custom Field
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;name&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;address&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;label&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Home address&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;type&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;address&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &#39;view_namespace&#39; =&gt; &#39;yourpackage&#39; // use a custom namespace of your package to load views within a custom view folder.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>],
+</span></span></code></pre></div><p>當然，我們也可以自己編輯 blade file。在這個 custom field type，可以用幾個變數：</p>
+<ul>
+<li><code>$crud</code> - all the CRUD Panel settings, options and variables;</li>
+<li><code>$entry</code> - in the Update operation, the current entry being modified (the actual values);</li>
+<li><code>$field</code> - all attributes that have been passed for this field;</li>
+</ul>
+<hr>
+<h2 id="結語">結語</h2>
+<p>這篇文件蠻詳盡的介紹了 fields，從一開始介紹 attributes，到中間列出幾乎所有的 fields，最後介紹客製化。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/laravel/">Laravel</a>
+        
+            <a href="/tags/laravel-backpack/">Laravel Backpack</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/backpack02/">
+        
+        
+            <div class="article-image">
+                <img src="/post/backpack02/0.31a4642b37a0367837a5efaa0b1d3121_hu10d21063a2d5df6ebb9f3142db7576d3_8853_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-02"
+                        
+                        data-hash="md5-MaRkKzegNng3pe&#43;qCx0xIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Backpack 初學者之路-02</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/backpack01/">
+        
+        
+            <div class="article-image">
+                <img src="/post/backpack01/0.31a4642b37a0367837a5efaa0b1d3121_hu10d21063a2d5df6ebb9f3142db7576d3_8853_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-01"
+                        
+                        data-hash="md5-MaRkKzegNng3pe&#43;qCx0xIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Backpack 初學者之路-01</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/api_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">API Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/deploy_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Deploy Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/backendlearningpath/laravel_learning_path/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Learning Path</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

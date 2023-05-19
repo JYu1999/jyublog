@@ -6,7 +6,1057 @@
         <description>Recent content in Laravel Backpack on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Fri, 19 May 2023 13:34:41 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/laravel-backpack/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 19 May 2023 18:11:57 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/laravel-backpack/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Laravel Backpack 初學者之路-03</title>
+        <link>https://jyu1999.com/post/backpack03/</link>
+        <pubDate>Fri, 19 May 2023 18:11:57 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/backpack03/</guid>
+        <description>&lt;img src="https://jyu1999.com/post/backpack03/0.png" alt="Featured image of post Laravel Backpack 初學者之路-03" /&gt;&lt;p&gt;這篇主要是要來研究 Fields。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;intro&#34;&gt;Intro.&lt;/h2&gt;
+&lt;p&gt;在前兩篇可以看到，fields types 定義了 admin 可以如何輸入資料，例如 text, datepicker, upload button&amp;hellip;等等。通常是給 Create or Update 使用。&lt;/p&gt;
+&lt;p&gt;在 Backpack 裡面，有很多的預設的 field types，也可以創建自己的 field。如果只是要做一點點修改，也可以 overwrite 原本的 field type 就好。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;fields-api&#34;&gt;Fields API&lt;/h2&gt;
+&lt;p&gt;在官網上列出了用於操作 fields 的一些方法。&lt;/p&gt;
+&lt;p&gt;這些 method 會在 operation 裡面運作，所以一定要放在 &lt;code&gt;setupCreateOperation()&lt;/code&gt; 、 &lt;code&gt;setUpdatePeration()&lt;/code&gt;  or &lt;code&gt;setup()&lt;/code&gt; 裡面。&lt;/p&gt;
+&lt;p&gt;（好像在 version 5 之後，也可以使用靜態的方式去 call，如 &lt;code&gt;CRUD::addfield()&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// add a field 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addField&lt;/span&gt;($field_definition_array);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// shorthand: add a text field 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addField&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;db_column_name&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// add multiple fields
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addFields&lt;/span&gt;([$field_definition_array_1, $field_definition_array_2]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// change the attributes of a field
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;modifyField&lt;/span&gt;($name, $modifs_array);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// remove a field from both operations
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;removeField&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// remove multiple fields from both operations
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;removeFields&lt;/span&gt;($array_of_names);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// remove all fields from all operations
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;removeAllFields&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// FIELD ORDER
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// add a field before a given field
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addField&lt;/span&gt;($field_definition_array)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;beforeField&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// add a field after a given field
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addField&lt;/span&gt;($field_definition_array)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;afterField&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// -------------------
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// New in Backpack 4.1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// -------------------
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// add a field with this name
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;field&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;price&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// change the type attribute on the &amp;#39;price&amp;#39; field
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;$this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;field&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;price&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;number&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;field-attributes&#34;&gt;Field Attributes&lt;/h2&gt;
+&lt;h3 id=&#34;mandatory-field-attributes&#34;&gt;Mandatory Field Attributes&lt;/h3&gt;
+&lt;p&gt;只有一個 attributes 是強迫要有的： &lt;code&gt;name&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;這個 &lt;code&gt;name&lt;/code&gt; 會被怎麼使用？官網上提供了兩個：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;inside the inputs, as &lt;code&gt;&amp;lt;input name=&#39;your_db_column&#39; /&amp;gt;&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;to store the information in the database, so your &lt;code&gt;name&lt;/code&gt; should correspond to a database column (if the field type doesn&amp;rsquo;t have different instructions);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;recommended-field-attributes&#34;&gt;Recommended Field Attributes&lt;/h3&gt;
+&lt;p&gt;一個 field 也最好有以下的 field:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;code&gt;name&lt;/code&gt; of the column in the database (ex: &amp;ldquo;title&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;the human-readable &lt;code&gt;label&lt;/code&gt; for the input (ex: &amp;ldquo;Title&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;the &lt;code&gt;type&lt;/code&gt; of the input (ex: &amp;ldquo;text&amp;rdquo;)
+如果 label 被省略的話， backpack 會嘗試從 &lt;code&gt;name&lt;/code&gt; 猜一下 label。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果 &lt;code&gt;type&lt;/code&gt; 被省略的話， backpack 會根據 column type 來猜，或是 Model 有一個名為 &lt;code&gt;name&lt;/code&gt; 的 relationship。&lt;/p&gt;
+&lt;h4 id=&#34;field-attributes-for-presentation-purposes&#34;&gt;Field Attributes for Presentation Purposes&lt;/h4&gt;
+&lt;p&gt;有一些選擇性可用的 attributes 可以用在大部分的 default field types 上，可以讓人很簡單的達到一些效果：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;prefix&amp;#39;&lt;/span&gt;     &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suffix&amp;#39;&lt;/span&gt;     &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;default&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;some value&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// set a default value
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hint&amp;#39;&lt;/span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Some hint text&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// helpful text, shows up after the input
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;placeholder&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Some text when empty&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;form-control some-class&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;readonly&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;readonly&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;disabled&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;disabled&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ], &lt;span style=&#34;color:#75715e&#34;&gt;// change the HTML attributes of your input
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wrapper&amp;#39;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [ 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;form-group col-md-12&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     ], &lt;span style=&#34;color:#75715e&#34;&gt;// change the HTML attributes for the field wrapper - mostly for resizing fields 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看起來蠻有用的，之前有用過 &lt;code&gt;&#39;prefix&#39;&lt;/code&gt;，可以加入前贅詞。&lt;/p&gt;
+&lt;h4 id=&#34;fake-field-attributes-stores-fake-attributes-as-json-in-the-database&#34;&gt;Fake Field Attributes (stores fake attributes as JSON in the database)&lt;/h4&gt;
+&lt;p&gt;如果今天要存的資料有多種，但資料庫裡只有一欄，此時就需要先把資料轉成 JSON 格式再存進資料庫。&lt;/p&gt;
+&lt;p&gt;預設來說，會存在 &lt;code&gt;extras&lt;/code&gt; 這個 column。&lt;/p&gt;
+&lt;p&gt;要使用 fake field attributes，有以下步驟：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在 field 裡面加入 fake attribute
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;     &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// JSON variable name
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Tag Name&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// human-readable label for the input
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fake&amp;#39;&lt;/span&gt;     &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// show the field, but don&amp;#39;t store it in the database column above
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;store_in&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;extras&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// [optional] the database column name where you want the fake fields to ACTUALLY be stored as a JSON array 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; ],
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;在 model 裡面，要確認存 JSONs 的 db columns(default: extras) 有：
+&lt;ul&gt;
+&lt;li&gt;In the &lt;code&gt;$fillable&lt;/code&gt; property;&lt;/li&gt;
+&lt;li&gt;on a new &lt;code&gt;$fakeColumns&lt;/code&gt; property(create it now)&lt;/li&gt;
+&lt;li&gt;are cast as array in &lt;code&gt;$casts&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;tab-attribute-splits-forms-into-tabs&#34;&gt;Tab Attribute Splits Forms into Tabs&lt;/h4&gt;
+&lt;p&gt;可以把 create/edit input 放在不同的 tabs 裡面。
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/1.png&#34;
+	width=&#34;668&#34;
+	height=&#34;526&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/1_huf8ce6fcc025d7991fba346b9885a7467_45002_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/1_huf8ce6fcc025d7991fba346b9885a7467_45002_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;把 create/edit input 放在不同的 tabs 裡面&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;126&#34;
+		data-flex-basis=&#34;304px&#34;
+	
+&gt;
+如果要使用這個功能，要在 field attribute 裡面加上 &amp;rsquo;tab&amp;rsquo;。
+舉例而言，如果我想要把 &lt;code&gt;price&lt;/code&gt; 放在  &lt;code&gt;test&lt;/code&gt; 這個 tab 裡面，然後把 &lt;code&gt;articles&lt;/code&gt; 這個 select2_multiple 放在 &lt;code&gt;hello&lt;/code&gt; 這個 tab 裡面，可以這樣寫：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addField&lt;/span&gt;([  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;price&amp;#39;&lt;/span&gt;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;number&amp;#39;&lt;/span&gt;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;tab&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;]);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addField&lt;/span&gt;([  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;select2_multiple&amp;#39;&lt;/span&gt;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;articles&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// the relationship name in your Model  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;entity&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;articles&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// the relationship name in your Model  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;topic&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// attribute on Article that is shown to admin  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;pivot&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// on create&amp;amp;update, do you need to add/delete pivot table entries?  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;tab&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;]);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最後呈現出來的效果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jyu1999.com/post/backpack03/2.png&#34;
+	width=&#34;1554&#34;
+	height=&#34;1274&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/2_hu2aa17d5cabe930aec90e93db9cfbb9ae_95905_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/2_hu2aa17d5cabe930aec90e93db9cfbb9ae_95905_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;放一個 test tab&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;121&#34;
+		data-flex-basis=&#34;292px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到如果沒有指定 tab 的，會獨立是一個 component，放在所有 tabs 的上面。&lt;/p&gt;
+&lt;h4 id=&#34;attributes-for-fields-containing-related-entries&#34;&gt;Attributes For Fields Containing Related Entries&lt;/h4&gt;
+&lt;p&gt;這邊主要是在說，如果 field works with related entities( relationships like &lt;code&gt;BelongsTo&lt;/code&gt; , &lt;code&gt;HasOne&lt;/code&gt;, &lt;code&gt;HasMany&lt;/code&gt;, &lt;code&gt;BelongsToMany&lt;/code&gt;, etc)，有一些參數需要/可以設定。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;entity&lt;/code&gt; - points to the method on the model that contains the relationship; having this defined, Backpack will try to guess from it all other field attributes; ex: &lt;code&gt;category&lt;/code&gt; or &lt;code&gt;tags&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;model&lt;/code&gt; - the classname (including namespace) of the related model (ex: &lt;code&gt;App\Models\Category&lt;/code&gt;); usually deduced from the relationship function in the model;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;attribute&lt;/code&gt; - the attribute on the related model (aka foreign attribute) that will be show to the user; for example, you wouldn&amp;rsquo;t want a dropdown of categories showing IDs - no, you&amp;rsquo;d want to show the category names; in this case, the &lt;code&gt;attribute&lt;/code&gt; will be &lt;code&gt;name&lt;/code&gt;; usually deduced using the &lt;a class=&#34;link&#34; href=&#34;https://backpackforlaravel.com/docs/5.x/crud-fields#identifiable-attribute&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;identifiable attribute functionality explained below&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;multiple&lt;/code&gt; - boolean, allows the user to pick one or multiple items; usually deduced depending on whether it&amp;rsquo;s a 1-to-n or n-n relationship;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pivot&lt;/code&gt; - boolean, instructs Backpack to store the information inside a pivot table; usually deduced depending on whether it&amp;rsquo;s a 1-to-n or n-n relationship;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;relation_type&lt;/code&gt; - text, deduced from &lt;code&gt;entity&lt;/code&gt;; not a good idea to overwrite;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其實看前幾天做的 &lt;code&gt;select2_multiple&lt;/code&gt; 大概就可以知道怎麼用了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;很多個-field&#34;&gt;很多個 field&lt;/h2&gt;
+&lt;p&gt;文件後面就是各個不同的 field 介紹，這個就挑著記。&lt;/p&gt;
+&lt;h3 id=&#34;relationship&#34;&gt;Relationship&lt;/h3&gt;
+&lt;p&gt;會給 user 一個 &lt;code&gt;select2&lt;/code&gt; input，讓使用者可以選擇一個或多個關聯的 Eloquent Model 的 entires。
+為了要正常運作，在 Model 裡面必須要正確定義 relationships。
+在官網上有列出有支持的 relationships。&lt;/p&gt;
+&lt;h4 id=&#34;load-entries-from-ajax-calls---using-the-fetch-operation&#34;&gt;Load entries from AJAX calls - using the Fetch Operation&lt;/h4&gt;
+&lt;p&gt;如果同時要 load 很多 entries，用 onpage Eloquent query 速度可能會很慢。
+在這種情況下，可以叫 &lt;code&gt;relationship&lt;/code&gt; field 透過 AJAX calls 來拿到 entries。
+要達成這樣的效果，有以下步驟：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Add &lt;code&gt;&#39;ajax&#39; =&amp;gt; true&lt;/code&gt; to your relationship field definition:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[   &lt;span style=&#34;color:#75715e&#34;&gt;// relationship
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;relationship&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;category&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// the method on your model that defines the relationship
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// OPTIONALS:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;label&amp;#39;       =&amp;gt; &amp;#34;Category&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;attribute&amp;#39;   =&amp;gt; &amp;#34;name&amp;#34;, // foreign key attribute that is shown to user (identifiable attribute)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;entity&amp;#39;      =&amp;gt; &amp;#39;category&amp;#39;, // the method that defines the relationship in your Model
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;model&amp;#39;       =&amp;gt; &amp;#34;App\Models\Category&amp;#34;, // foreign key Eloquent model
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;placeholder&amp;#39; =&amp;gt; &amp;#34;Select a category&amp;#34;, // placeholder for the select2 input
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// AJAX OPTIONALS:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;delay&amp;#39;                   =&amp;gt; 500, // the minimum amount of time between ajax requests when searching in the field
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;data_source&amp;#39;             =&amp;gt; url(&amp;#34;fetch/category&amp;#34;), // url to controller search function (with /{id} should return model)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;minimum_input_length&amp;#39;    =&amp;gt; 2, // minimum characters to type before querying results
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;dependencies&amp;#39;            =&amp;gt; [&amp;#39;category&amp;#39;], // when a dependency changes, this select2 is reset to null
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;method&amp;#39;                  =&amp;gt; &amp;#39;POST&amp;#39;, // optional - HTTP method to use for the AJAX call (GET, POST)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;include_all_form_fields&amp;#39; =&amp;gt; false, // optional - only send the current field through AJAX (for a smaller payload if you&amp;#39;re not using multiple chained select2s)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; ],
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;主要應該是 &lt;code&gt;&#39;ajax&#39;=&amp;gt;true&lt;/code&gt; 這行。
+所以我嘗試在  &lt;code&gt;ArticleCrudController.php&lt;/code&gt; 裡面把原本的 &lt;code&gt;select2&lt;/code&gt; 改掉：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addField&lt;/span&gt;([  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Tags&amp;#34;&lt;/span&gt;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;relationship&amp;#39;&lt;/span&gt;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;tags&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// the method that defines the relationship in your Model  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;entity&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;tags&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// the method that defines the relationship in your Model  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// foreign key attribute that is shown to user  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;pivot&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// on create&amp;amp;update, do you need to add/delete pivot table entries?  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此時應該是會報錯，看起來是根本沒有 router：
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/3.png&#34;
+	width=&#34;1662&#34;
+	height=&#34;1055&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/3_hu56943392542909a6f3070483b28ff239_198289_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/3_hu56943392542909a6f3070483b28ff239_198289_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;404&amp;hellip;&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;157&#34;
+		data-flex-basis=&#34;378px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;這時候就要到第二步驟，在&lt;code&gt;ArticleCrudController.php&lt;/code&gt;加入以下程式碼：
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fetchTags&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fetch&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;\App\Models\Tag&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;這段程式碼的用途就是要開一個對應到 AJAX Calls 的 route 和 method。
+會幫我們設定好 &lt;code&gt;/fetch/tag&lt;/code&gt; route，會導到 &lt;code&gt;fetchTags()&lt;/code&gt;，並 return 搜尋結果。
+感覺蠻有趣的，[官方文件](&lt;a class=&#34;link&#34; href=&#34;https://backpackforlaravel.com/docs/5.x/crud-operation-fetch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FetchOperation docs&lt;/a&gt;)有說明更多關於怎麼 operation 怎麼運作的，不過先暫時跳過&amp;hellip;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;create-related-entries-in-a-modal---using-the-inlinecreate-operation&#34;&gt;Create related entries in a modal - using the InlineCreate Operation&lt;/h4&gt;
+&lt;p&gt;使用者去使用 AJAX 做搜尋，有可能根本沒有這個資料。&lt;/p&gt;
+&lt;p&gt;所以可能會需要讓使用者在不用離開原本的頁面下，新增一個 related entry。(e.g. 在 create article 的頁面新增一個 tag)&lt;/p&gt;
+&lt;p&gt;這個功能可以使用在 &lt;code&gt;BelongsTo&lt;/code&gt;, &lt;code&gt;BelongsToMany&lt;/code&gt;, &lt;code&gt;MorphToMany&lt;/code&gt; relationships。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jyu1999.com/post/backpack03/4.png&#34;
+	width=&#34;1275&#34;
+	height=&#34;652&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/4_hu27784fd40f80395e4fbc23259028f37b_97458_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/4_hu27784fd40f80395e4fbc23259028f37b_97458_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;功能展示&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;195&#34;
+		data-flex-basis=&#34;469px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;要使用這個功能，要先使用 Fetch operation 去拿到 entries。&lt;/p&gt;
+&lt;p&gt;然後再照以下步驟：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;增加 &lt;code&gt;inline_create&lt;/code&gt; 在 field definition&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// for 1-n relationships (ex: category)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;[
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;relationship&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;category&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;inline_create&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;lt;--- THIS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// for n-n relationships (ex: tags)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;[
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;relationship&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;tags&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// the method on your model that defines the relationship
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;inline_create&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;entity&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;tag&amp;#39;&lt;/span&gt; ]  &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;lt;--- OR THIS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// in this second example, the relation is called `tags` (plural),
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// but we need to define the entity as &amp;#34;tag&amp;#34; (singural)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這時候應該會看到以下 bug，跟上面的 fetch 一樣，目前還沒有 route 可以處理這個請求。所以要進入第二步驟。
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/5.png&#34;
+	width=&#34;2338&#34;
+	height=&#34;1156&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/5_hua1fc53358b6b06be35d0b31a478061cd_328936_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/5_hua1fc53358b6b06be35d0b31a478061cd_328936_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Route not defined&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;485px&#34;
+	
+&gt;
+2. 要在 secondary entity （在這個例子中是 TagCrudController）中 use InlineCreate operation&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TagCrudController&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CrudController&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// ...
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加入之後看 &lt;code&gt;artisan route:list&lt;/code&gt; 就會看到 backpack 幫我們生成一個 route 了：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     GET|HEAD  admin/tag/create ....................... tag.create › Admin&lt;span style=&#34;color:#ae81ff&#34;&gt;\T&lt;/span&gt;agCrudController@create
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   POST      admin/tag/inline/create tag-inline-create-save › Admin&lt;span style=&#34;color:#ae81ff&#34;&gt;\T&lt;/span&gt;agCrudController@storeInlin…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   POST      admin/tag/inline/create/modal tag-inline-create › Admin&lt;span style=&#34;color:#ae81ff&#34;&gt;\T&lt;/span&gt;agCrudController@getInline…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;```&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;InlineCreateOperation&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; 會讓 modal 顯示和 Create Operation 一樣的 field。
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#### Save additional data to pivot table&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;對於有 pivot table 的 relationship&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;n2n: &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;BelongsToMany&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;MorphToMany&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;，這個 pivot table 除了 foreign key 之外，還可能包含其他列。
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;relationship&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; field 提供了一個快速的方法，讓 admin 可以編輯這些 &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;extra attributes&amp;#34;&lt;/span&gt; 。
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;舉例而言，如果有以下 db tables:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;```&lt;/span&gt;php
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// - companies: id, name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// - company_person: company_id, person_id, job_title, job_description
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// - persons: id, first_name, last_name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;company_person&lt;/code&gt; 這個 pivot table 裡面，我們可能想要讓 admin 去編輯特定使用者的 &lt;code&gt;job_title&lt;/code&gt; 或是 &lt;code&gt;job_description&lt;/code&gt; 。如下圖：
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/6.png&#34;
+	width=&#34;645&#34;
+	height=&#34;471&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/6_hud91329df0e6bc4e5e5d6b8d4b649c043_33329_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/6_hud91329df0e6bc4e5e5d6b8d4b649c043_33329_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;讓 admin 去編輯特定使用者的 job_title &#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;136&#34;
+		data-flex-basis=&#34;328px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;步驟如下（在這裡就不實作ㄌ）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在 model 裡面，確認 pivot 有被 define（使用 &lt;code&gt;withPivot()&lt;/code&gt;）:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// inside the Company model
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;people&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;belongsToMany&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;\App\Models\Person&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;withPivot&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;job_title&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;job_description&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// inside the Person model
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;companies&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;belongsToMany&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;\App\Models\Company&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;withPivot&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;job_title&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;job_description&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在 &lt;code&gt;relationship&lt;/code&gt; field defintion, 加入 &lt;code&gt;subfield&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Inside PersonCrudController
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;[
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;companies&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;relationship&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#75715e&#34;&gt;// ..
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;subfields&amp;#39;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;job_title&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wrapper&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;form-group col-md-3&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;job_description&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wrapper&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;form-group col-md-9&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;manage-related-entries-in-the-same-form-create-update-delete&#34;&gt;Manage related entries in the same form (create, update, delete)&lt;/h4&gt;
+&lt;p&gt;有時候對於 &lt;code&gt;hasMany&lt;/code&gt; 和 &lt;code&gt;morphMany&lt;/code&gt; relationships，secondary entry 高度依賴 primary entry，所以我們可能不想要在一個額外的懸浮式視窗來編輯這個 secondary entry。&lt;/p&gt;
+&lt;h4 id=&#34;delete-related-entries-or-fall-back-to-default&#34;&gt;Delete related entries or fall back to default&lt;/h4&gt;
+&lt;p&gt;一般而言，當 admin 在 &amp;ldquo;select&amp;rdquo; 裡面移除了一個 relationship，只有 relationship 被移除，related entry 會保留。&lt;/p&gt;
+&lt;p&gt;但對於 &lt;code&gt;hasMany&lt;/code&gt; 和 &lt;code&gt;morphMany&lt;/code&gt; 來說，有時候我們可能也會想要移除一整個 relationship。&lt;/p&gt;
+&lt;p&gt;如下例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Inside ArticleCrudController
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;[
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;relationship&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;comments&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// when removed, use fallback_id
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fallback_id&amp;#39;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// will relate to the comment with ID &amp;#34;3&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// when removed, delete the entry
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;force_delete&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// will delete that comment
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;repeatable&#34;&gt;Repeatable&lt;/h3&gt;
+&lt;p&gt;有時候我們可能想要給 admin 可以同時新增很多欄位。&lt;/p&gt;
+&lt;p&gt;比如說，在「台灣國家公園入園入山申請」之中，可以按下「新增隊員」，就可以新增很多欄位 （for 這個隊員）。&lt;/p&gt;
+&lt;p&gt;這個時候就可以用到 repeatable。&lt;/p&gt;
+&lt;p&gt;從 backpack v5 版本開始，repeatable 會 return array，會需要在 model 裡面設定 cast 成 json，再存成資料庫。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jyu1999.com/post/backpack03/7.png&#34;
+	width=&#34;982&#34;
+	height=&#34;539&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/7_hu5fb499aa798a832b475b299e182b9081_29590_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/7_hu5fb499aa798a832b475b299e182b9081_29590_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;182&#34;
+		data-flex-basis=&#34;437px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以按下 &amp;ldquo;New item&amp;rdquo; 按鈕，就會增加新的 subfields group（e.g. 一個新隊員）。&lt;/p&gt;
+&lt;p&gt;大部分的 field type 都可以用在 field group 裡面，也可以使用 &lt;code&gt;wrapper&lt;/code&gt; 更改每個 field 的寬度。&lt;/p&gt;
+&lt;p&gt;但有以下事情是需要注意的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;所有在 group 裡面的 subfields 都需要定義清楚，Backpack 不會幫忙猜 Label 之類的。&lt;/li&gt;
+&lt;li&gt;有些 field type 是不可以在 subfield 使用的，例如 relationship field、upload、upload_multiple&lt;/li&gt;
+&lt;li&gt;Validation: 可以透過 Laravel nested array validation 的方式來驗證 subfield 的資料。e.g. &lt;code&gt;testimonial.*.name =&amp;gt; &#39;required&#39;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Filed usage and relationships: 不能在 repeatable field 裡面再塞一個 repeatable field。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[   &lt;span style=&#34;color:#75715e&#34;&gt;// repeatable
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;testimonials&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Testimonials&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;repeatable&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;subfields&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [ &lt;span style=&#34;color:#75715e&#34;&gt;// also works as: &amp;#34;fields&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Name&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wrapper&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;form-group col-md-4&amp;#39;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Position&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wrapper&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;form-group col-md-4&amp;#39;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;company&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Company&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wrapper&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;form-group col-md-4&amp;#39;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;quote&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ckeditor&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Quote&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// optional
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;new_item_label&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Add Group&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// customize the text of the button
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;init_rows&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// number of empty rows to be initialized, by default 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;min_rows&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// minimum rows allowed, when reached the &amp;#34;delete&amp;#34; buttons will be hidden
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;max_rows&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// maximum rows allowed, when reached the &amp;#34;new item&amp;#34; button will be hidden
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// allow reordering?
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;reorder&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// hide up&amp;amp;down arrows next to each row (no reordering)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;reorder&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// show up&amp;amp;down arrows next to each row
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;reorder&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;order&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// show arrows AND add a hidden subfield with that name (value gets updated when rows move)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;reorder&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;order&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;number&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data-reorder-input&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;]], &lt;span style=&#34;color:#75715e&#34;&gt;// show arrows AND add a visible number subfield
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;select2-系列&#34;&gt;select2 系列&lt;/h3&gt;
+&lt;p&gt;如同官方的敘述：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Works just like the SELECT field, but prettier.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;select 系列基本上會把全部選項列出來，如果要多選還要按著 shift。
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/8.png&#34;
+	width=&#34;943&#34;
+	height=&#34;545&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/8_hua64ea88273a1cfe2eed7588c57e54f57_31012_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/8_hua64ea88273a1cfe2eed7588c57e54f57_31012_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;select 列出全部選項&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;173&#34;
+		data-flex-basis=&#34;415px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;select2 系列看起來就比較美觀，是類似 dropdown 這樣：
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/9.png&#34;
+	width=&#34;921&#34;
+	height=&#34;507&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/9_hub055a9ffc727442f13f3dea89eee2ed1_32946_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/9_hub055a9ffc727442f13f3dea89eee2ed1_32946_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;select2 展示&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;181&#34;
+		data-flex-basis=&#34;435px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;slug&#34;&gt;Slug&lt;/h3&gt;
+&lt;p&gt;Slug 看起來也蠻特殊的，可以在網頁直接把文字動態轉為符合網址的格式。
+使用方式如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;field&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;addfield&lt;/span&gt;([  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;slug&amp;#39;&lt;/span&gt;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;target&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Slug&amp;#39;&lt;/span&gt;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;slug&amp;#39;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;]);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;效果會如下（是動態的，但這裡用圖片示意）：
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/10.png&#34;
+	width=&#34;902&#34;
+	height=&#34;452&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/10_hu49396c2f870dbb871c18d5b4c8351118_29943_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/10_hu49396c2f870dbb871c18d5b4c8351118_29943_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;slug 效果&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;199&#34;
+		data-flex-basis=&#34;478px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;如果不想要是動態的，也可以將他暫停掉：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;setupUpdateOperation&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;setupCreateOperation&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// disable editing the slug when editing
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;field&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;slug&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;target&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;attributes&lt;/span&gt;([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;readonly&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;readonly&amp;#39;&lt;/span&gt;]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;table&#34;&gt;Table&lt;/h3&gt;
+&lt;p&gt;Table 感覺也是工作上會常常用的。
+使用 Table 的話，會允許 multiple input，並把這些 input value 存成 JSON。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[   &lt;span style=&#34;color:#75715e&#34;&gt;// Table
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Options&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;table&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;entity_singular&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;option&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// used on the &amp;#34;Add X&amp;#34; button
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt;         &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Name&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;desc&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Description&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;price&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Price&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;max&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// maximum rows allowed in the table
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;min&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;// minimum rows allowed in the table
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;做出來會如下圖：
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/11.png&#34;
+	width=&#34;666&#34;
+	height=&#34;256&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/11_hue4dc53f89d84733ea4c480287325b2d4_17873_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/11_hue4dc53f89d84733ea4c480287325b2d4_17873_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;table 成果&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;260&#34;
+		data-flex-basis=&#34;624px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!note]
+記得要在 model 設定 casting。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;overwriting-default-field-types&#34;&gt;Overwriting Default Field Types&lt;/h2&gt;
+&lt;p&gt;Backpack 的 field types 通常都存在 &lt;code&gt;resources/views/fields&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果需要修改已經存在的 field，不用特別去改 package，只需要在 &lt;code&gt;/resources/views/vendor/backpack/crud/fields&lt;/code&gt; 新增一個有同樣名字的 view。Backpack 會優先確認那裡有沒有檔案，如果沒有檔案才去 load package。&lt;/p&gt;
+&lt;p&gt;可以使用 &lt;code&gt;php artisan backpack:field --from=field_name&lt;/code&gt; 來新增一個 field blade file，backpack 會幫忙新增。可以對新增完的檔案進行修改：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{{&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;input&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;}}  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;include&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;crud::fields.inc.wrapper_start&amp;#39;&lt;/span&gt;)  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;label&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;{&lt;span style=&#34;color:#f92672&#34;&gt;!!&lt;/span&gt; $field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!!&lt;/span&gt;}&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;label&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;include&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;crud::fields.inc.translatable_icon&amp;#39;&lt;/span&gt;)  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;prefix&amp;#39;&lt;/span&gt;]) &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suffix&amp;#39;&lt;/span&gt;])) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input-group&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;endif&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;prefix&amp;#39;&lt;/span&gt;])) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input-group-prepend&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;span&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input-group-text&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;{&lt;span style=&#34;color:#f92672&#34;&gt;!!&lt;/span&gt; $field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;prefix&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!!&lt;/span&gt;}&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;span&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;div&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;endif&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;input&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;number&amp;#34;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$field[&amp;#39;name&amp;#39;]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; }}&amp;#34;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#a6e22e&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ old_empty_or_null(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$field[&amp;#39;name&amp;#39;]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, &amp;#39;&amp;#39;) ??  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$field[&amp;#39;value&amp;#39;]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; ?? &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$field[&amp;#39;default&amp;#39;]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; ?? &amp;#39;&amp;#39; }}&amp;#34;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;include&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;crud::fields.inc.attributes&amp;#39;&lt;/span&gt;)  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suffix&amp;#39;&lt;/span&gt;])) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input-group-append&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;span&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input-group-text&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;{&lt;span style=&#34;color:#f92672&#34;&gt;!!&lt;/span&gt; $field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suffix&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!!&lt;/span&gt;}&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;span&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;div&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;endif&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;prefix&amp;#39;&lt;/span&gt;]) &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suffix&amp;#39;&lt;/span&gt;])) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;div&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;endif&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {{&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;HINT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;}}  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hint&amp;#39;&lt;/span&gt;]))  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;help-block&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;{&lt;span style=&#34;color:#f92672&#34;&gt;!!&lt;/span&gt; $field[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hint&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!!&lt;/span&gt;}&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;endif&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;Hello&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;include&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;crud::fields.inc.wrapper_end&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;像我在 number field type 的最後面加了一個 &lt;code&gt;Hello&lt;/code&gt;，雖然沒什麼意義，但可以看一下效果：
+&lt;img src=&#34;https://jyu1999.com/post/backpack03/12.png&#34;
+	width=&#34;933&#34;
+	height=&#34;324&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack03/12_hu494de725ec0ef2337ee384bce42bf793_17058_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack03/12_hu494de725ec0ef2337ee384bce42bf793_17058_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;number field type 的最後面加了一個 Hello&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;287&#34;
+		data-flex-basis=&#34;691px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;creating-a-custom-field-type&#34;&gt;Creating a Custom Field Type&lt;/h2&gt;
+&lt;p&gt;也可以自己創建一個新的field type，可以用以下指令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// to create one using Backpack&lt;span style=&#34;color:#ae81ff&#34;&gt;\G&lt;/span&gt;enerators, run:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;php artisan backpack:field new_field_name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// alternatively, to create a new field similar an existing field, run: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;php artisan backpack:field new_field_name --from&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;old_field_name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Field Defintion 可能會像：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[   &lt;span style=&#34;color:#75715e&#34;&gt;// Custom Field
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;address&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Home address&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;address&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;/// &amp;#39;view_namespace&amp;#39; =&amp;gt; &amp;#39;yourpackage&amp;#39; // use a custom namespace of your package to load views within a custom view folder.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;當然，我們也可以自己編輯 blade file。在這個 custom field type，可以用幾個變數：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;$crud&lt;/code&gt; - all the CRUD Panel settings, options and variables;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$entry&lt;/code&gt; - in the Update operation, the current entry being modified (the actual values);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$field&lt;/code&gt; - all attributes that have been passed for this field;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;結語&#34;&gt;結語&lt;/h2&gt;
+&lt;p&gt;這篇文件蠻詳盡的介紹了 fields，從一開始介紹 attributes，到中間列出幾乎所有的 fields，最後介紹客製化。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Laravel Backpack 初學者之路-02</title>
+        <link>https://jyu1999.com/post/backpack02/</link>
+        <pubDate>Fri, 19 May 2023 18:05:21 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/backpack02/</guid>
+        <description>&lt;img src="https://jyu1999.com/post/backpack02/0.png" alt="Featured image of post Laravel Backpack 初學者之路-02" /&gt;&lt;p&gt;第二天依然來看 backpack 的 text course: Advanced Features。
+基本上是有蠻多 operations 和 features。
+官方教學文檔有提到這些東西先看看就好，所以在這裡先以了解使用方式為主，不會深究具體的實現方式。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;other-operations&#34;&gt;Other Operations&lt;/h2&gt;
+&lt;h3 id=&#34;show&#34;&gt;Show&lt;/h3&gt;
+&lt;p&gt;這個 operation 是讓 admin 有一個網頁可以看一個 entry 裡面的詳細資料，比如說有些文章的 content 不會顯示在清單頁，但可以利用 show operation 做到檢視。
+它會在 ListEntries View 新增一個 preview。&lt;/p&gt;
+&lt;p&gt;如果是透過前一篇的指令 &lt;code&gt;sail artisan backpack:crud tag&lt;/code&gt; 生成的 controller，內建就會包含 &lt;code&gt;use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;&lt;/code&gt;。如果沒有的話要加上這行才可以用 show operation。
+然後可以用 &lt;code&gt;sail artisan route:list&lt;/code&gt; 看一下怎麼到 preview 網頁，基本上是用 &lt;code&gt;admin/article/{id}/show&lt;/code&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;how-to-configure&#34;&gt;How to configure&lt;/h4&gt;
+&lt;p&gt;預設是會列出所有在資料庫裡面的資訊，但如果不想要這麼多，可以客製化。
+可以在 crudController 裡面放一個 &lt;code&gt;setupShowOperation()&lt;/code&gt; 。
+如果想要讓 preview 頁面顯示的東西、設定、順序都跟 ListEntries View 一樣，可以用以下指令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;setupShowOperation&lt;/span&gt;() 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{ 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;setupListOperation&lt;/span&gt;(); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;當然，如同 &lt;code&gt;setupListOperation()&lt;/code&gt; 一樣，如果想要更動顯示順序、設定，也是可以自己再另外寫，詳見&lt;a class=&#34;link&#34; href=&#34;https://backpackforlaravel.com/docs/5.x/crud-operation-show&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;官網&lt;/a&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;how-to-add-custom-sectionsaka-widgets&#34;&gt;How to add custom sections(aka. Widgets)&lt;/h4&gt;
+&lt;p&gt;在 show 的頁面上，可以加入一些 widgets，像是卡片、圖表之類的。
+可以使用預設的 widget type，也可以創建自己的 widgets。
+Backpack 預設提供兩個可以放 widgets 的 section:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;before_content&lt;/li&gt;
+&lt;li&gt;after_content
+我們可以用以下官方提供的程式碼來試用看看 widget:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;setupShowOperation&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// dynamic data to render in the following widget
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $userCount &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\App\Models\User&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;//add div row using &amp;#39;div&amp;#39; widget and make other widgets inside it to be in a row
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;Widget&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;before_content&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;div&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;row&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;content&lt;/span&gt;([
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;//widget made using fluent syntax
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#a6e22e&#34;&gt;Widget&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;make&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;progress&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;card border-0 text-white bg-primary&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;progressClass&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;progress-bar&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;value&lt;/span&gt;($userCount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;description&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Registered users.&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;progress&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt;)$userCount &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;hint&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; $userCount &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; more until next milestone.&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;//widget made using the array definition 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#a6e22e&#34;&gt;Widget&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;make&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;card&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;card bg-dark text-white&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wrapper&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;col-sm-3 col-md-3&amp;#39;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;content&amp;#39;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;header&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Example Widget&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Widget placed at &amp;#34;before_content&amp;#34; secion in same row&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;//you can also add Script &amp;amp; CSS to your page using &amp;#39;script&amp;#39; &amp;amp; &amp;#39;style&amp;#39; widget
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;Widget&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;script&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;stack&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;after_scripts&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;content&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://code.jquery.com/ui/1.12.0/jquery-ui.min.js&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;Widget&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;style&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;stack&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;after_styles&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;content&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.58/dist/themes/light.css&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;Widget::add()-&amp;gt;to(&#39;before_content&#39;)&lt;/code&gt; 可以看到這邊使用了 &lt;code&gt;before_content&lt;/code&gt; ，所以理論上 widget 會顯示在預設要顯示的東西之上。
+&lt;img src=&#34;https://jyu1999.com/post/backpack02/1.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;707&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack02/1_hu8b4c8872735b674c1aeb06262e6f4c03_104388_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack02/1_hu8b4c8872735b674c1aeb06262e6f4c03_104388_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Widget 在上面&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;271&#34;
+		data-flex-basis=&#34;651px&#34;
+	
+&gt;
+同理可知，如果用 &lt;code&gt;after_content&lt;/code&gt;，widget 就會在下面：
+&lt;img src=&#34;https://jyu1999.com/post/backpack02/2.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;706&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack02/2_hu139c22cf1592b4fc8e5e53866ca7f0ee_101222_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack02/2_hu139c22cf1592b4fc8e5e53866ca7f0ee_101222_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Widget 在下面&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;271&#34;
+		data-flex-basis=&#34;652px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;how-to-overwrite&#34;&gt;How to overwrite&lt;/h4&gt;
+&lt;p&gt;雖然預設的頁面看起來不錯，但我們可能仍想要更動 show 的邏輯。
+目前頁面顯示的邏輯是寫在&lt;code&gt;ShowOperation.php&lt;/code&gt;裡面，&lt;code&gt;show()&lt;/code&gt;這個 method
+而 EntityCrudController 是繼承了 &lt;code&gt;ShowOperation&lt;/code&gt; 這個 trait，所以我們可以在 EntityCrudOperation 裡面自己寫一個 &lt;code&gt;show()&lt;/code&gt; 就可以為不同的 entity 客製化顯示邏輯喔。
+如官網範例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation&lt;/span&gt; { &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;traitShow&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;($id)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// custom logic before
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $content &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;traitShow&lt;/span&gt;($id);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// custom logic after
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $content;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;reorder&#34;&gt;Reorder&lt;/h3&gt;
+&lt;p&gt;這個 operation 可以讓 admin 可以重新排列，或巢狀排列 entries。
+&lt;img src=&#34;https://jyu1999.com/post/backpack02/3.png&#34;
+	width=&#34;1280&#34;
+	height=&#34;1106&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack02/3_hu615795c3a2ee1d48adc7897d0c6d7505_88533_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack02/3_hu615795c3a2ee1d48adc7897d0c6d7505_88533_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;巢狀排列&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;115&#34;
+		data-flex-basis=&#34;277px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;requirements&#34;&gt;Requirements&lt;/h4&gt;
+&lt;p&gt;為了要使用 reorder，model 需要有幾個 integer fields，並預設值為零:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;parent_id -&amp;gt; 必須要是 nullable&lt;/li&gt;
+&lt;li&gt;lft&lt;/li&gt;
+&lt;li&gt;rgt&lt;/li&gt;
+&lt;li&gt;depth&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;usage&#34;&gt;Usage&lt;/h4&gt;
+&lt;p&gt;首先必須要在資料庫加上上面提到的四個欄位。
+在 entryCrudController 加上：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;setupReorderOperation&lt;/span&gt;(){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;set&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;reorder.label&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;set&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;reorder.max_level&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這兩行可以：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;讓使用者可以使用 reorder operation&lt;/li&gt;
+&lt;li&gt;在 &amp;ldquo;add entry &amp;quot; 按鈕旁邊會出現一個 &amp;ldquo;Reorder&amp;rdquo; 按鈕&lt;/li&gt;
+&lt;li&gt;開啟到 Reorder 的 router&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;這時候看 route:list 會看到：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GET|HEAD  admin/tag/reorder .................... tag.reorder › Admin&lt;span style=&#34;color:#ae81ff&#34;&gt;\T&lt;/span&gt;agCrudController@reorder
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;POST      admin/tag/reorder ........... tag.save.reorder › Admin&lt;span style=&#34;color:#ae81ff&#34;&gt;\T&lt;/span&gt;agCrudController@saveReorder
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以輸入 url 就會到 reorder 的介面：
+&lt;img src=&#34;https://jyu1999.com/post/backpack02/4.png&#34;
+	width=&#34;1124&#34;
+	height=&#34;1394&#34;
+	srcset=&#34;https://jyu1999.com/post/backpack02/4_hu5064729caadc22335ff3b15d8a8313ce_106355_480x0_resize_box_3.png 480w, https://jyu1999.com/post/backpack02/4_hu5064729caadc22335ff3b15d8a8313ce_106355_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;reorder 介面&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;80&#34;
+		data-flex-basis=&#34;193px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;目前顯示在 reorder 介面的會是 entry 的 name。如果想要顯示其他東西可以把 &lt;code&gt;&#39;name&#39;&lt;/code&gt; 改成自己想要顯示的 (e.g. &lt;code&gt;&#39;slug&#39;&lt;/code&gt;)
+數字 2 代表最大可以接受的深度，如果沒有限制的話，可以設為 0。&lt;/p&gt;
+&lt;p&gt;此時可以進到 reorder 的頁面玩玩看，但玩完按 save 回到主頁之後，會發現什麼都沒有變。
+原因是因為主頁還是用預設的排序方式，如果想要更改排序方式可以：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;setupListOperation&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;column&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;created_at&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;column&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;column&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;slug&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;column&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;price&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;number&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;column&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;updated_at&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;setColumnDetails&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;price&amp;#39;&lt;/span&gt;,[
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Tag Price&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;prefix&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;$&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CRUD&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;orderBy&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;lft&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這樣就會按照 &lt;code&gt;lft&lt;/code&gt; 排序～&lt;/p&gt;
+&lt;p&gt;官方文件有提到，在 reorder 介面中同樣可以加入 widget，基本上是用和 &lt;code&gt;show&lt;/code&gt; 一樣的方式。在這邊就不實作了。&lt;/p&gt;
+&lt;h4 id=&#34;補充lft-and-rgt&#34;&gt;補充：lft and rgt&lt;/h4&gt;
+&lt;p&gt;在實作的時候，我還蠻好奇 &lt;code&gt;lft&lt;/code&gt; 和 &lt;code&gt;rgt&lt;/code&gt; 到底是怎麼被算出來的。
+稍微查了一下，nest entries 實際上就是一個 tree，backpack 會對對 tree 進行 preorder traversal（不過是改編版的）。然後算出 &lt;code&gt;lft&lt;/code&gt; and &lt;code&gt;rgt&lt;/code&gt;。
+舉例來說，如果現在 nest entries 長這樣：
+![[Pasted image 20230411121316.png|500]]
+算出 lft and rgt 的步驟為：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;從 root(fourth tag) 開始，lft of fourth tag = 2（初始值為 2）&lt;/li&gt;
+&lt;li&gt;到 fourth tag 的第一個 child (fifth tag)，lft of fifth tag = 3 (2+1)&lt;/li&gt;
+&lt;li&gt;到 fifth tag 的第一個 child (third tag)，lft of third tag = 4&lt;/li&gt;
+&lt;li&gt;third tag 沒有 child，所以 rgt of third tag = 5&lt;/li&gt;
+&lt;li&gt;move back to the parent (fifth tag)&lt;/li&gt;
+&lt;li&gt;fifth tag 的第二個 child (seventh tag)，lft of seventh tag = 6&lt;/li&gt;
+&lt;li&gt;seventh tag 沒有 child，所以 rgt of seventh tag = 7&lt;/li&gt;
+&lt;li&gt;move back to the parent (fifth tag)&lt;/li&gt;
+&lt;li&gt;fifth tag 沒有其他 child 了，所以 rgt of seventh tag = 8&lt;/li&gt;
+&lt;li&gt;move back to the parent (fourth tag)&lt;/li&gt;
+&lt;li&gt;到 fourth tag 的第二個 child (first tag)，lft of first tag = 9&lt;/li&gt;
+&lt;li&gt;&amp;hellip;以此類推&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最後求完會如下表：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;id&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;name&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;slug&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;price&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;parent_id&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;lft&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;rgt&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;depth&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;created_at&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;updated_at&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;first tag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;firsttag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;30&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;9&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;14&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 01:20:01&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:55&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;second tag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;secondtag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;40&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;10&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;11&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 01:20:13&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:55&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;third tag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;thirdtag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;50&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 01:20:41&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:55&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;fourth tag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;fourthtag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;50&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;null&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;15&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 03:51:11&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:55&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;fifth tag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;fifthtag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;70&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;8&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 03:51:24&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:55&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;6&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;sixth tag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;sixthtag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;90&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;12&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;13&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:31&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:55&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;seventh tag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;seventhtag&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;90&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;6&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:43&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 04:03:55&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;然後如果要 print 出來的話，就用 lft and rgt 來重建原本的 tree：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;選擇 lft 最小的 node 作為 root（在這個例子中是 fourth tag）。&lt;/li&gt;
+&lt;li&gt;尋找 lft 值介於 root 的 lft 和 rgt 之間的 node，並且其 depth 比 root 多1。這些 node 將成為 root 的 child node（在這個例子中是 fifth tag 和 first tag）。&lt;/li&gt;
+&lt;li&gt;對於每個 child node，重複步驟 2，直到所有 node 都被訪問。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;revise&#34;&gt;Revise&lt;/h3&gt;
+&lt;p&gt;Revise 可以讓 admin 去儲存、查看、取消對於一個 entries 的修改。
+類似版本管理系統，admin 可以在頁面上看到所有的 change 和此次修改是誰做的。&lt;/p&gt;
+&lt;h4 id=&#34;usage-1&#34;&gt;Usage&lt;/h4&gt;
+&lt;p&gt;其實過程蠻簡單的，裝好、建好表就差不多了。
+要先安裝這個 package。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;composer require backpack/revise-operation
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然後建一個用來存修改的表：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp vendor/venturecraft/revisionable/src/migrations/2013_04_09_062329_create_revisions_table.php database/migrations/ &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; php artisan migrate
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然後在 model 裡面，新增一個 &lt;code&gt;identifiableName()&lt;/code&gt; method，讓 admin 可以分辨不同的 entries(e.g. name, title&amp;hellip;)。
+如果又用到別的 bootable trait，要去 override 掉：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;App\Models&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Article&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Eloquent&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\Backpack\CRUD\app\Models\Traits\CrudTrait&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;\Venturecraft\Revisionable\RevisionableTrait&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;identifiableName&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// If you are using another bootable trait
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// be sure to override the boot method in your model
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;boot&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;parent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;boot&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最後，在 CrudController，使用 operation trait:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;App\Http\Controllers\Admin&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Backpack\CRUD\app\Http\Controllers\CrudController&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ArticleCrudController&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CrudController&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\Backpack\ReviseOperation\ReviseOperation&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這樣就可以正常使用了！
+下表為 revision 表：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;id&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;revisionable_type&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;revisionable_id&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;user_id&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;key&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;old_value&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;new_value&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;created_at&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;updated_at&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;App\Models\Article&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;topic&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;My first article&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;My first article. haha&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 05:03:18&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 05:03:18&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;App\Models\Article&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;slug&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1starticle&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1starticle-haha&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 05:03:18&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 05:03:18&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;App\Models\Article&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;content&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;This is my first article.&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;This is my first article. and I want to do revision&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 05:03:18&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;2023-04-11 05:03:18&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;官方文件上還列出另外三個 operations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Clone&lt;/li&gt;
+&lt;li&gt;BulkDelete&lt;/li&gt;
+&lt;li&gt;BuldClone&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但稍微看了一下，好像都是介紹用法而已，就不特別研究ㄌ。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Laravel Backpack 初學者之路-01</title>
         <link>https://jyu1999.com/post/backpack01/</link>
         <pubDate>Fri, 19 May 2023 13:34:41 +0800</pubDate>
@@ -16,6 +1066,7 @@
 &lt;p&gt;Backpack 是一個很多個 Laravel Packages 的集合，用來做客製化的 admin panels，可以讓 admin 登入並進行 CRUD 操作。
 在前端的部分， Backpack 有著類似於 bootstrap 的設計（CoreUI theme），官方命名為 &lt;strong&gt;Backstrap&lt;/strong&gt;。簡單來說，當我們在寫前端的時候，Backpack 裡面就有一些 HTML Blocks 可以直接套用。
 在後端的部分，Backpack 也可以幫助使用者創建 CRUD Panels。&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;開始來試用一下 Laravel Backpack
 雖然 Backpack 的版本跟的算緊，但在&lt;del&gt;撰寫當下(2023/4/10) 只支援 Laravel 9&lt;/del&gt;（後來發現有支援 Laravel 10），因為不想變動本機的環境，所以我使用 &lt;a class=&#34;link&#34; href=&#34;https://laravel.com/docs/10.x/sail#executing-artisan-commands&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -47,6 +1098,7 @@
 	
 &gt;
 輸入剛剛創建好的 admin 帳號之後，就可以進到 dashboard 了～&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&#34;crud&#34;&gt;CRUD&lt;/h2&gt;
 &lt;p&gt;接著來看官方的 Text Course。
 要用 CRUD 首先就要在資料庫建表，官方是推薦使用 &lt;a class=&#34;link&#34; href=&#34;https://github.com/laracasts/Laravel-5-Generators-Extended&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -237,6 +1289,7 @@
 		data-flex-basis=&#34;641px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&#34;結語&#34;&gt;結語&lt;/h2&gt;
 &lt;p&gt;今天稍微介紹了 Backpack 的基本，和最簡單的用法。
 之後會再介紹如何新增 filter 和 button 之類的東西。&lt;/p&gt;
