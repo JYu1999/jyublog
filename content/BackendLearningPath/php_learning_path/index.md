@@ -6,7 +6,7 @@ tags:
   - backend
   - PHP
 categories:
-  - 後端學習路徑
+  - backendLearningPath
 ---
 
 1. [W3school: PHP Tutorial](https://www.w3schools.com/php/default.asp) 全部看完

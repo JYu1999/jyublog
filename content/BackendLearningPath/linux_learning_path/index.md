@@ -6,7 +6,7 @@ tags:
   - backend
   - linux
 categories:
-  - 後端學習路徑
+  - backendLearningPath
 ---
 
 1. [【尚硅谷】Linux+Shell教程 3天搞定Linux，1天搞定Shell](https://www.youtube.com/playlist?list=PLmOn9nNkQxJEEfgfPo0IMwu8ac5DIWYd3): 網路上其實很多 Linux 的教學，但很多都是英文的。中文的我覺得這位老師講的還行～

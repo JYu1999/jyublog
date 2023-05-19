@@ -6,7 +6,7 @@ tags:
   - backend
   - docker 
 categories:
-  - 後端學習路徑
+  - backendLearningPath
 ---
 
 1. [Docker Tutorial for Beginners [FULL COURSE in 3 Hours]](https://youtu.be/3c-iBn73dDE): 目前在 youtube 上觀看數量最多的 docker 影片，真滴不錯。

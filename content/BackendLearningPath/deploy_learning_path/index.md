@@ -7,7 +7,7 @@ tags:
   - deploy
   - Laravel
 categories:
-  - 後端學習路徑
+  - backendLearningPath
 ---
 
 1. 建議在第六點之前，完成[Laravel Learning Path](https://jyu1999.com/backendlearningpath/laravel_learning_path/)

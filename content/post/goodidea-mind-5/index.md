@@ -5,7 +5,7 @@ draft: false
 tags:
   - 好想工作室
 categories:
-  - 好想工作室 — 後端 (backend Camp)培訓心得
+  - goodidea-mind
 image: "4.png"
 keywords:
   - 結語

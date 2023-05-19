@@ -8,7 +8,7 @@ tags:
   - Laravel
   - MVC
 categories:
-  - 後端學習路徑
+  - backendLearningPath
 ---
 
 1. 確認自己完成 Sec. 1 的所有內容，再進入這裡較好

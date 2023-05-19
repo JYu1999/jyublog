@@ -7,7 +7,7 @@ tags:
   - SQL
   - Database
 categories:
-  - 後端學習路徑
+  - backendLearningPath
 ---
 
 ## Basic
