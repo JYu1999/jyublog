@@ -7,12 +7,12 @@ public function update() { $this-&amp;gt;crud-&amp;gt;hasAccessOrFail(&amp;#39;u
 
 <link rel='canonical' href='https://jyu1999.com/post/backpack05/'>
 
-<link rel="stylesheet" href="/scss/style.min.760263ba1b7dd34efd2f77e1fda7448aa75ccb0a9771268a5759cb7977f90afe.css"><meta property='og:title' content='Laravel Backpack 初學者之路-05'>
+<link rel="stylesheet" href="/scss/style.min.d57cd2b3c67d021015ca3cb8c88471325a1264b874a225677048434b727cd0f6.css"><meta property='og:title' content='Laravel Backpack 初學者之路-05'>
 <meta property='og:description' content='上一篇在 UpdateOperation 中，有一個 update() 的 method，這個 method 又去 call 了一個叫做 update()的 method：
 public function update() { $this-&amp;gt;crud-&amp;gt;hasAccessOrFail(&amp;#39;update&amp;#39;); // execute the FormRequest authorization and validation, if one is required $request = $this-&amp;gt;crud-&amp;gt;validateRequest(); // register any Model Events defined on fields $this-&amp;gt;crud-&amp;gt;registerFieldEvents(); // update the row in the db $item = $this-&amp;gt;crud-&amp;gt;update( $request-&amp;gt;get($this-&amp;gt;crud-&amp;gt;model-&amp;gt;getKeyName()), $this-&amp;gt;crud-&amp;gt;getStrippedSaveRequest($request) ); $this-&amp;gt;data[&amp;#39;entry&amp;#39;] = $this-&amp;gt;crud-&amp;gt;entry = $item; // show a success message \Alert::success(trans(&amp;#39;backpack::crud.update_success&amp;#39;))-&amp;gt;flash(); // save the redirect choice for next time $this-&amp;gt;crud-&amp;gt;setSaveAction(); return $this-&amp;gt;crud-&amp;gt;performSaveAction($item-&amp;gt;getKey()); } 這一篇主要就是要探討後面這個 update()。'>
 <meta property='og:url' content='https://jyu1999.com/post/backpack05/'>
 <meta property='og:site_name' content='Me are 結語JYu'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Laravel' /><meta property='article:tag' content='Laravel Backpack' /><meta property='article:published_time' content='2023-05-19T19:18:26&#43;08:00'/><meta property='article:modified_time' content='2023-05-19T19:18:26&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/backpack05/0.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Laravel' /><meta property='article:tag' content='Laravel Backpack' /><meta property='article:published_time' content='2023-05-19T19:36:26&#43;08:00'/><meta property='article:modified_time' content='2023-05-19T19:36:26&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/backpack05/0.png' />
 <meta name="twitter:site" content="@IamJYu">
     <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="Laravel Backpack 初學者之路-05">
 <meta name="twitter:description" content="上一篇在 UpdateOperation 中，有一個 update() 的 method，這個 method 又去 call 了一個叫做 update()的 method：
@@ -740,6 +740,30 @@ if (!doNotTrack) {
             
                 
 <article class="has-image">
+    <a href="/post/backpack04/">
+        
+        
+            <div class="article-image">
+                <img src="/post/backpack04/0.31a4642b37a0367837a5efaa0b1d3121_hu10d21063a2d5df6ebb9f3142db7576d3_8853_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Laravel Backpack 初學者之路-04"
+                        
+                        data-hash="md5-MaRkKzegNng3pe&#43;qCx0xIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Laravel Backpack 初學者之路-04</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/post/backpack03/">
         
         
@@ -818,19 +842,6 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">API Learning Path</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/backendlearningpath/deploy_learning_path/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Deploy Learning Path</h2>
         </div>
     </a>
 </article>

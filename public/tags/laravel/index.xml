@@ -6,7 +6,258 @@
         <description>Recent content in Laravel on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Fri, 19 May 2023 19:35:41 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/laravel/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 19 May 2023 19:36:26 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/laravel/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Laravel Backpack 初學者之路-05</title>
+        <link>https://jyu1999.com/post/backpack05/</link>
+        <pubDate>Fri, 19 May 2023 19:36:26 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/backpack05/</guid>
+        <description>&lt;img src="https://jyu1999.com/post/backpack05/0.png" alt="Featured image of post Laravel Backpack 初學者之路-05" /&gt;&lt;p&gt;上一篇在 UpdateOperation 中，有一個 &lt;code&gt;update()&lt;/code&gt; 的 method，這個 method 又去 call 了一個叫做 &lt;code&gt;update()&lt;/code&gt;的 method：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;()  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;hasAccessOrFail&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;update&amp;#39;&lt;/span&gt;);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// execute the FormRequest authorization and validation, if one is required  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $request &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;validateRequest&lt;/span&gt;();  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// register any Model Events defined on fields  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;registerFieldEvents&lt;/span&gt;();  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// update the row in the db  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;(  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $request&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;($this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;model&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKeyName&lt;/span&gt;()),  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getStrippedSaveRequest&lt;/span&gt;($request)  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    );  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;data&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;entry&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;entry&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// show a success message  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;\Alert&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;success&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;trans&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;backpack::crud.update_success&amp;#39;&lt;/span&gt;))&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;flash&lt;/span&gt;();  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// save the redirect choice for next time  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;setSaveAction&lt;/span&gt;();  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;performSaveAction&lt;/span&gt;($item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKey&lt;/span&gt;());  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這一篇主要就是要探討後面這個 &lt;code&gt;update()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;這邊來仔細看一下 &lt;code&gt;$this-&amp;gt;crud-&amp;gt;update()&lt;/code&gt; 做了些什麼事情。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;update()&lt;/code&gt; 的具體實現如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;($id, $input)  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;model&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;findOrFail&lt;/span&gt;($id);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [$directInputs, $relationInputs] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;splitInputIntoDirectAndRelations&lt;/span&gt;($input);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $updated &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;($directInputs);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;createRelationsForItem&lt;/span&gt;($item, $relationInputs);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $item;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;findOrFail()&lt;/code&gt; 很明顯就是要給定 id，找這個 id 的相關 data。&lt;/p&gt;
+&lt;p&gt;而 &lt;code&gt;splitInputIntoDirectAndRelations($input)&lt;/code&gt; 是要把 input 分為 &lt;code&gt;DirectInputs&lt;/code&gt; 和 &lt;code&gt;RelationDetails&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;然後下面會把分出來的 &lt;code&gt;$directInputs&lt;/code&gt; 存進資料庫裡面，&lt;/p&gt;
+&lt;p&gt;最後會用 &lt;code&gt;createRelationsForItem() &lt;/code&gt;幫 &lt;code&gt;$item&lt;/code&gt; 和所提供的 model 建立關聯。&lt;/p&gt;
+&lt;p&gt;處理關聯的主要是 &lt;code&gt;createRelationsForItem()&lt;/code&gt; ，所以這裡繼續來 trace。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;createrelationsforitem&#34;&gt;createRelationsForItem()&lt;/h2&gt;
+&lt;p&gt;這個 method 需要兩個輸入：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;$item&lt;/code&gt;：要創建或更新 relationship 的 model instance&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$formattedRelations&lt;/code&gt;: 包含關聯資訊的 array，是在上面用 &lt;code&gt;getRelationDetailsFromInput()&lt;/code&gt; 拿到的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;這個 method 會先檢查  &lt;code&gt;formmattedRelations&lt;/code&gt; 是否為空，為空就不用創建 relationships。否則會遍歷 &lt;code&gt;$formattedRelations[]&lt;/code&gt;，根據不同的關聯類型來創建或更新相應的 relationships。&lt;/p&gt;
+&lt;p&gt;主要有三種 relationship 類型：&lt;/p&gt;
+&lt;h3 id=&#34;hasone-或-morphone&#34;&gt;HasOne 或 MorphOne&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code&gt;createUpdateOrDeleteOneToOneRelation()&lt;/code&gt; 方法創建或更新一對一關聯。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createUpdateOrDeleteOneToOneRelation&lt;/span&gt;($relation, $relationMethod, $relationDetails)  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{   
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relationMethodValue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;][$relationMethod];  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;is_null&lt;/span&gt;($relationMethodValue) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;entity&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; $relationMethod) {  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;delete&lt;/span&gt;();  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;gettype&lt;/span&gt;($relationMethodValue) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;array&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_multidimensional_array&lt;/span&gt;($relationMethodValue)) {  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $relationMethodValue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationMethodValue[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;];  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// saving process  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $input &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationMethodValue &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;];  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [$directInputs, $relationInputs] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;splitInputIntoDirectAndRelations&lt;/span&gt;($input, $relationDetails, $relationMethod);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;updateOrCreate&lt;/span&gt;([], $directInputs);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;createRelationsForItem&lt;/span&gt;($item, $relationInputs);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $item;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;根據官方的說法，這個 method 會根據 values 不同，而有不同的處理方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(A) &lt;code&gt;[&#39;number&#39; =&amp;gt; 1315, &#39;name&#39; =&amp;gt; &#39;Something&#39;]&lt;/code&gt; ：如果使用 text, number, etc&amp;hellip; field&lt;/li&gt;
+&lt;li&gt;(B) &lt;code&gt;[&#39;slug&#39; =&amp;gt; null]&lt;/code&gt; ：如果需要清除 &lt;code&gt;slug&lt;/code&gt; 和其相關的 entry。&lt;/li&gt;
+&lt;li&gt;(C) &lt;code&gt;[&#39;passport&#39; =&amp;gt; [[&#39;number&#39; =&amp;gt; 1314, &#39;name&#39; =&amp;gt; &#39;Something&#39;]]]&lt;/code&gt; ：如果值是透過 repeatable field 傳遞&lt;/li&gt;
+&lt;li&gt;(D) &lt;code&gt;[&#39;passport&#39; =&amp;gt; null]&lt;/code&gt;：如果值被從 repeatable field 中刪除。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;首先，&lt;code&gt;array_key_exists($relationMethod, $relationDetails[&#39;values&#39;])&lt;/code&gt; 會檢查是不是 (C) or (D)。如果是 (D) 的話，會把 relation 刪掉並回傳 null。&lt;/p&gt;
+&lt;p&gt;我還蠻疑惑檢查機制的，於是把 &lt;code&gt;values[]&lt;/code&gt; 印出來（雖然這個是多對多）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;values&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; [&lt;span style=&#34;color:#a6e22e&#34;&gt;▼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;articles&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; [&lt;span style=&#34;color:#a6e22e&#34;&gt;▼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把檢查機制印出來就一目了然，上面的檢查是在看 &lt;code&gt;model&lt;/code&gt; 裡面的 relationship method 是不是 array 的其中一個 key。&lt;/p&gt;
+&lt;p&gt;最後，會把這次更新做保存。&lt;code&gt;$directInputs&lt;/code&gt; 會 call &lt;code&gt;updateOrCreate()&lt;/code&gt; 存進資料庫。然後會把 relation input 傳進 &lt;code&gt;createRelationsForItem()&lt;/code&gt; 檢查看還有沒有 relation 需要處理。&lt;/p&gt;
+&lt;h3 id=&#34;hasmany-或-morphmany&#34;&gt;HasMany 或 MorphMany&lt;/h3&gt;
+&lt;p&gt;根據 &lt;code&gt;$relationValues&lt;/code&gt; 的結構，使用 &lt;code&gt;attachManyRelation()&lt;/code&gt; 建立已存在的 model instance 之間的 relation，或者使用 &lt;code&gt;createManyEntries()&lt;/code&gt; 方法創建新的 model instance 並建立 relation。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$relationValues &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;][$relationMethod];  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($relationValues &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_multidimensional_array&lt;/span&gt;($relationValues)) {  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;attachManyRelation&lt;/span&gt;($item, $relation, $relationDetails, $relationValues);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;createManyEntries&lt;/span&gt;($item, $relation, $relationMethod, $relationDetails);  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;attachmanyrelation&#34;&gt;attachManyRelation()&lt;/h4&gt;
+&lt;p&gt;首先先來看 &lt;code&gt;attachManyRelation()&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;attachManyRelation&lt;/span&gt;($item, $relation, $relationDetails, $relationValues)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $modelInstance &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getRelated&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relationForeignKey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getForeignKeyName&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relationLocalKey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getLocalKeyName&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;empty&lt;/span&gt;($relationValues)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;handleManyRelationItemRemoval&lt;/span&gt;($modelInstance, $relation, $relationDetails, $relationForeignKey);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $toUpdate[$relationForeignKey] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationLocalKey};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;relation_type&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MorphMany&amp;#39;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $toUpdate[$relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getQualifiedMorphType&lt;/span&gt;()] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getMorphClass&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;whereIn&lt;/span&gt;($modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKeyName&lt;/span&gt;(), $relationValues)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;($toUpdate);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $removedEntries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;whereNotIn&lt;/span&gt;($modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKeyName&lt;/span&gt;(), $relationValues)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;($relationForeignKey, $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationLocalKey});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;relation_type&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MorphMany&amp;#39;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;($relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getQualifiedMorphType&lt;/span&gt;(), $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getMorphClass&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;handleManyRelationItemRemoval&lt;/span&gt;($modelInstance, $removedEntries, $relationDetails, $relationForeignKey);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 hasmany/morphmany 中，並沒有 「同步(sync)」這個 method 可以用。但當我們在使用 selectable elments 我們需要同步的功能，所以需要寫一些程式去模擬同步，讓使用者可以去新增/刪除那些沒有在 list 裡面的 entries。&lt;/p&gt;
+&lt;p&gt;這個 method 會先檢查 &lt;code&gt;relationValues&lt;/code&gt; 是否為空，如果為空代表 selection 被清除掉了，所以程式要清除 all related values。會利用 &lt;code&gt;handleManyRelationItemRemoval()&lt;/code&gt; 這個 method 來做這件事情，至於這個 method 的實作在下方討論。&lt;/p&gt;
+&lt;p&gt;在下面需要把新的 value 加進 relation 裡面，如果是 HasMany 的話，那只需要 update foreign key；如果是 MorphMany 的話，就需要 update foreign key &amp;amp; morphs key。&lt;/p&gt;
+&lt;p&gt;下面會從 model instance 找所有不在 &lt;code&gt;$relationValues&lt;/code&gt; 的紀錄，也就是在當前 relation 中已經被刪除的紀錄。&lt;/p&gt;
+&lt;p&gt;如果 relation type 是 morphmany，還要確保有 match 到 morph type。&lt;/p&gt;
+&lt;p&gt;最後，會把已刪除的 entry(&lt;code&gt;$removedEntries&lt;/code&gt;) 透過 &lt;code&gt;handleManyRelationItemRemoval()&lt;/code&gt; 刪除。&lt;/p&gt;
+&lt;h4 id=&#34;handlemanyrelationitemremoval&#34;&gt;handleManyRelationItemRemoval()&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handleManyRelationItemRemoval&lt;/span&gt;($modelInstance, $removedEntries, $relationDetails, $relationForeignKey)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relationColumnIsNullable &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;isColumnNullable&lt;/span&gt;($relationForeignKey);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $forceDelete &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;force_delete&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $fallbackId &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fallback_id&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($fallbackId) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;([$relationForeignKey &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; $fallbackId]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($forceDelete) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lazy&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;each&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;delete&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $dbColumnDefault &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getDbColumnDefault&lt;/span&gt;($relationForeignKey);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt; $relationColumnIsNullable &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $dbColumnDefault &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lazy&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;each&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;delete&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;([$relationForeignKey &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; $dbColumnDefault]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這個 method 主要處理 remove 和特定 relation 相關的 entry。&lt;/p&gt;
+&lt;p&gt;一開始會先看有沒有指定 &lt;code&gt;$fallbackId&lt;/code&gt;，如果有的話只需要改一下 foreignkey 即可。&lt;/p&gt;
+&lt;p&gt;或是如果有設定 &lt;code&gt;force_delete&lt;/code&gt; 是 true 的話，就不考慮 foreign key 是否是 nullable，直接刪除所有被移除的 entries。&lt;/p&gt;
+&lt;p&gt;如果沒有設定設定 &lt;code&gt;force_delete&lt;/code&gt; 的話，則會檢查 foreign key 是否可為空，以及 database 的設定：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;if column 可為空：就設為 default value 就好（沒有的話就設 null）&lt;/li&gt;
+&lt;li&gt;if column 不可為空：會把 entry 從資料庫刪掉，避免資料庫報錯。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;createmanyentries&#34;&gt;createManyEntries()&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createManyEntries&lt;/span&gt;($entry, $relation, $relationMethod, $relationDetails)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $items &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;][$relationMethod];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relatedModelLocalKey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getRelated&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKeyName&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relatedItemsSent &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;foreach&lt;/span&gt; ($items &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; $item) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            [$directInputs, $relationInputs] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;splitInputIntoDirectAndRelations&lt;/span&gt;($item, $relationDetails, $relationMethod);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $relatedModelLocalKeyValue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item[$relatedModelLocalKey] &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $entry&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationMethod}()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;updateOrCreate&lt;/span&gt;([$relatedModelLocalKey &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; $relatedModelLocalKeyValue], $directInputs);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $relatedItemsSent[] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relatedModelLocalKey};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;createRelationsForItem&lt;/span&gt;($item, $relationInputs);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;empty&lt;/span&gt;($relatedItemsSent)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $entry&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationMethod}()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;whereNotIn&lt;/span&gt;($relatedModelLocalKey, $relatedItemsSent)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lazy&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;each&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;delete&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;首先，會先從 &lt;code&gt;$relationDetails&lt;/code&gt; 中獲取和 &lt;code&gt;$relationMethod&lt;/code&gt;相關的所有 entries。&lt;/p&gt;
+&lt;p&gt;這裡會拿到 model 的 key 之後，宣告一個空陣列 &lt;code&gt;$relatedItemsSent[]&lt;/code&gt;，但這邊還看不出來這個是要幹嘛。&lt;/p&gt;
+&lt;p&gt;接著，會對所有拿出來的 &lt;code&gt;$items&lt;/code&gt;作遍歷，在遍歷的過程中，一樣會先把 direct input 和 relation input 分開，並或去 related model 的 local key value。&lt;/p&gt;
+&lt;p&gt;接著，使用model 的 instance，找到匹配的 entry，根據 local key 更新輸入值或創建新的 entry。
+已經存進去的會放到 &lt;code&gt;relatedItemSent[]　&lt;/code&gt;， 避免重複發送。最後會幫 entry 創建 relation。&lt;/p&gt;
+&lt;p&gt;在這個 method 的最後，會去檢查 &lt;code&gt;$relatedItemsSent&lt;/code&gt;是否為空。如果是不是空的話，會使用已經發送的 items 和  database 的 local key 作匹配，並刪除沒有在兩者交集裡面的值。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;belongstomany-或-morphtomany&#34;&gt;BelongsToMany 或 MorphToMany&lt;/h3&gt;
+&lt;p&gt;獲取關聯值並確保它們不為空，然後根據值的結構創建或同步多對多關聯。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;BelongsToMany&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MorphToMany&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $values &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;][$relationMethod] &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; [];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $values &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_string&lt;/span&gt;($values) &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;json_decode&lt;/span&gt;($values, &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $values;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $values &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $values &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; [];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $relationValues &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;is_array&lt;/span&gt;($values) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_multidimensional_array&lt;/span&gt;($values)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        &lt;span style=&#34;color:#66d9ef&#34;&gt;foreach&lt;/span&gt; ($values &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; $value) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($value[$relationMethod])) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                $relationValues[$value[$relationMethod]] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Arr&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;except&lt;/span&gt;($value, $relationMethod);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;empty&lt;/span&gt;($relationValues)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        $relationValues &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;array_values&lt;/span&gt;($values);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationMethod}()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;sync&lt;/span&gt;($relationValues);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;首先，會從 &lt;code&gt;$relationDetails&lt;/code&gt; 中獲取該 relation 的 value，並確保其為 array。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;json_decode()&lt;/code&gt; 可能會回傳 null，因此要確保 &lt;code&gt;$values&lt;/code&gt; 不為 null。&lt;/p&gt;
+&lt;p&gt;在下面 initialize 一個新的 empty array &lt;code&gt;$relationValues&lt;/code&gt;。接著，如果 &lt;code&gt;$values&lt;/code&gt; 是 multidimensional_array 的話，就會遍歷 &lt;code&gt;$values&lt;/code&gt;，並獲取每個值中的 &lt;code&gt;$relationMethod&lt;/code&gt; 作為 key，其餘的值作為 &lt;code&gt;$relationValues&lt;/code&gt; 。在這裡是使用 &lt;code&gt;Arr::except($value, $relationMethod)&lt;/code&gt; ，代表是要從 &lt;code&gt;$value[]&lt;/code&gt; 中移除 &lt;code&gt;$relationMethod&lt;/code&gt; 這個 key 及其對應的值。&lt;/p&gt;
+&lt;p&gt;如果沒有 relation data，且 &lt;code&gt;values&lt;/code&gt; 是一個單維陣列，則為把 &lt;code&gt;$values&lt;/code&gt; 的值作為 &lt;code&gt;$relationValues&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;最後，使用&lt;code&gt;$item-&amp;gt;{$relationMethod}()-&amp;gt;sync($relationValues);&lt;/code&gt; 同步 relation value。&lt;code&gt;sync()&lt;/code&gt; 會把多對多關聯表的現有 relation，更新為這裡所提供的 &lt;code&gt;$relationValues&lt;/code&gt;，並在需要時創建新的 relation or 刪除不再存在的 relation。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Laravel Backpack 初學者之路-04</title>
         <link>https://jyu1999.com/post/backpack04/</link>
         <pubDate>Fri, 19 May 2023 19:35:41 +0800</pubDate>
@@ -403,257 +654,6 @@
     &gt;Laravel Form Request Validation&lt;/a&gt; 和 &lt;a class=&#34;link&#34; href=&#34;https://laravel.com/docs/master/eloquent#events&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Eloquent Events&lt;/a&gt;。&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>Laravel Backpack 初學者之路-05</title>
-        <link>https://jyu1999.com/post/backpack05/</link>
-        <pubDate>Fri, 19 May 2023 19:18:26 +0800</pubDate>
-        
-        <guid>https://jyu1999.com/post/backpack05/</guid>
-        <description>&lt;img src="https://jyu1999.com/post/backpack05/0.png" alt="Featured image of post Laravel Backpack 初學者之路-05" /&gt;&lt;p&gt;上一篇在 UpdateOperation 中，有一個 &lt;code&gt;update()&lt;/code&gt; 的 method，這個 method 又去 call 了一個叫做 &lt;code&gt;update()&lt;/code&gt;的 method：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;()  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;hasAccessOrFail&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;update&amp;#39;&lt;/span&gt;);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// execute the FormRequest authorization and validation, if one is required  
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $request &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;validateRequest&lt;/span&gt;();  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// register any Model Events defined on fields  
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;registerFieldEvents&lt;/span&gt;();  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// update the row in the db  
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;(  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $request&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;($this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;model&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKeyName&lt;/span&gt;()),  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getStrippedSaveRequest&lt;/span&gt;($request)  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    );  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;data&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;entry&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;entry&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// show a success message  
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;\Alert&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;success&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;trans&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;backpack::crud.update_success&amp;#39;&lt;/span&gt;))&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;flash&lt;/span&gt;();  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// save the redirect choice for next time  
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;setSaveAction&lt;/span&gt;();  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;crud&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;performSaveAction&lt;/span&gt;($item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKey&lt;/span&gt;());  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這一篇主要就是要探討後面這個 &lt;code&gt;update()&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;這邊來仔細看一下 &lt;code&gt;$this-&amp;gt;crud-&amp;gt;update()&lt;/code&gt; 做了些什麼事情。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;update()&lt;/code&gt; 的具體實現如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;($id, $input)  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;model&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;findOrFail&lt;/span&gt;($id);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [$directInputs, $relationInputs] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;splitInputIntoDirectAndRelations&lt;/span&gt;($input);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $updated &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;($directInputs);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;createRelationsForItem&lt;/span&gt;($item, $relationInputs);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $item;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;findOrFail()&lt;/code&gt; 很明顯就是要給定 id，找這個 id 的相關 data。&lt;/p&gt;
-&lt;p&gt;而 &lt;code&gt;splitInputIntoDirectAndRelations($input)&lt;/code&gt; 是要把 input 分為 &lt;code&gt;DirectInputs&lt;/code&gt; 和 &lt;code&gt;RelationDetails&lt;/code&gt; 。&lt;/p&gt;
-&lt;p&gt;然後下面會把分出來的 &lt;code&gt;$directInputs&lt;/code&gt; 存進資料庫裡面，&lt;/p&gt;
-&lt;p&gt;最後會用 &lt;code&gt;createRelationsForItem() &lt;/code&gt;幫 &lt;code&gt;$item&lt;/code&gt; 和所提供的 model 建立關聯。&lt;/p&gt;
-&lt;p&gt;處理關聯的主要是 &lt;code&gt;createRelationsForItem()&lt;/code&gt; ，所以這裡繼續來 trace。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;createrelationsforitem&#34;&gt;createRelationsForItem()&lt;/h2&gt;
-&lt;p&gt;這個 method 需要兩個輸入：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$item&lt;/code&gt;：要創建或更新 relationship 的 model instance&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$formattedRelations&lt;/code&gt;: 包含關聯資訊的 array，是在上面用 &lt;code&gt;getRelationDetailsFromInput()&lt;/code&gt; 拿到的。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;這個 method 會先檢查  &lt;code&gt;formmattedRelations&lt;/code&gt; 是否為空，為空就不用創建 relationships。否則會遍歷 &lt;code&gt;$formattedRelations[]&lt;/code&gt;，根據不同的關聯類型來創建或更新相應的 relationships。&lt;/p&gt;
-&lt;p&gt;主要有三種 relationship 類型：&lt;/p&gt;
-&lt;h3 id=&#34;hasone-或-morphone&#34;&gt;HasOne 或 MorphOne&lt;/h3&gt;
-&lt;p&gt;使用 &lt;code&gt;createUpdateOrDeleteOneToOneRelation()&lt;/code&gt; 方法創建或更新一對一關聯。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createUpdateOrDeleteOneToOneRelation&lt;/span&gt;($relation, $relationMethod, $relationDetails)  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{   
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relationMethodValue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;][$relationMethod];  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;is_null&lt;/span&gt;($relationMethodValue) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;entity&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; $relationMethod) {  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;delete&lt;/span&gt;();  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;gettype&lt;/span&gt;($relationMethodValue) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;array&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_multidimensional_array&lt;/span&gt;($relationMethodValue)) {  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $relationMethodValue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationMethodValue[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;];  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// saving process  
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    $input &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationMethodValue &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;];  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [$directInputs, $relationInputs] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;splitInputIntoDirectAndRelations&lt;/span&gt;($input, $relationDetails, $relationMethod);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;updateOrCreate&lt;/span&gt;([], $directInputs);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;createRelationsForItem&lt;/span&gt;($item, $relationInputs);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $item;  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;根據官方的說法，這個 method 會根據 values 不同，而有不同的處理方式：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(A) &lt;code&gt;[&#39;number&#39; =&amp;gt; 1315, &#39;name&#39; =&amp;gt; &#39;Something&#39;]&lt;/code&gt; ：如果使用 text, number, etc&amp;hellip; field&lt;/li&gt;
-&lt;li&gt;(B) &lt;code&gt;[&#39;slug&#39; =&amp;gt; null]&lt;/code&gt; ：如果需要清除 &lt;code&gt;slug&lt;/code&gt; 和其相關的 entry。&lt;/li&gt;
-&lt;li&gt;(C) &lt;code&gt;[&#39;passport&#39; =&amp;gt; [[&#39;number&#39; =&amp;gt; 1314, &#39;name&#39; =&amp;gt; &#39;Something&#39;]]]&lt;/code&gt; ：如果值是透過 repeatable field 傳遞&lt;/li&gt;
-&lt;li&gt;(D) &lt;code&gt;[&#39;passport&#39; =&amp;gt; null]&lt;/code&gt;：如果值被從 repeatable field 中刪除。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;首先，&lt;code&gt;array_key_exists($relationMethod, $relationDetails[&#39;values&#39;])&lt;/code&gt; 會檢查是不是 (C) or (D)。如果是 (D) 的話，會把 relation 刪掉並回傳 null。&lt;/p&gt;
-&lt;p&gt;我還蠻疑惑檢查機制的，於是把 &lt;code&gt;values[]&lt;/code&gt; 印出來（雖然這個是多對多）：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;values&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; [&lt;span style=&#34;color:#a6e22e&#34;&gt;▼&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;articles&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; [&lt;span style=&#34;color:#a6e22e&#34;&gt;▼&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把檢查機制印出來就一目了然，上面的檢查是在看 &lt;code&gt;model&lt;/code&gt; 裡面的 relationship method 是不是 array 的其中一個 key。&lt;/p&gt;
-&lt;p&gt;最後，會把這次更新做保存。&lt;code&gt;$directInputs&lt;/code&gt; 會 call &lt;code&gt;updateOrCreate()&lt;/code&gt; 存進資料庫。然後會把 relation input 傳進 &lt;code&gt;createRelationsForItem()&lt;/code&gt; 檢查看還有沒有 relation 需要處理。&lt;/p&gt;
-&lt;h3 id=&#34;hasmany-或-morphmany&#34;&gt;HasMany 或 MorphMany&lt;/h3&gt;
-&lt;p&gt;根據 &lt;code&gt;$relationValues&lt;/code&gt; 的結構，使用 &lt;code&gt;attachManyRelation()&lt;/code&gt; 建立已存在的 model instance 之間的 relation，或者使用 &lt;code&gt;createManyEntries()&lt;/code&gt; 方法創建新的 model instance 並建立 relation。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$relationValues &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;][$relationMethod];  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($relationValues &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_multidimensional_array&lt;/span&gt;($relationValues)) {  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;attachManyRelation&lt;/span&gt;($item, $relation, $relationDetails, $relationValues);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;createManyEntries&lt;/span&gt;($item, $relation, $relationMethod, $relationDetails);  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;attachmanyrelation&#34;&gt;attachManyRelation()&lt;/h4&gt;
-&lt;p&gt;首先先來看 &lt;code&gt;attachManyRelation()&lt;/code&gt;：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;attachManyRelation&lt;/span&gt;($item, $relation, $relationDetails, $relationValues)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $modelInstance &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getRelated&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relationForeignKey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getForeignKeyName&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relationLocalKey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getLocalKeyName&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;empty&lt;/span&gt;($relationValues)) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;handleManyRelationItemRemoval&lt;/span&gt;($modelInstance, $relation, $relationDetails, $relationForeignKey);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $toUpdate[$relationForeignKey] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationLocalKey};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;relation_type&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MorphMany&amp;#39;&lt;/span&gt;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $toUpdate[$relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getQualifiedMorphType&lt;/span&gt;()] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getMorphClass&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;whereIn&lt;/span&gt;($modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKeyName&lt;/span&gt;(), $relationValues)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;($toUpdate);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $removedEntries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;whereNotIn&lt;/span&gt;($modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKeyName&lt;/span&gt;(), $relationValues)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;($relationForeignKey, $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationLocalKey});
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;relation_type&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MorphMany&amp;#39;&lt;/span&gt;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;($relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getQualifiedMorphType&lt;/span&gt;(), $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getMorphClass&lt;/span&gt;());
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;handleManyRelationItemRemoval&lt;/span&gt;($modelInstance, $removedEntries, $relationDetails, $relationForeignKey);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 hasmany/morphmany 中，並沒有 「同步(sync)」這個 method 可以用。但當我們在使用 selectable elments 我們需要同步的功能，所以需要寫一些程式去模擬同步，讓使用者可以去新增/刪除那些沒有在 list 裡面的 entries。&lt;/p&gt;
-&lt;p&gt;這個 method 會先檢查 &lt;code&gt;relationValues&lt;/code&gt; 是否為空，如果為空代表 selection 被清除掉了，所以程式要清除 all related values。會利用 &lt;code&gt;handleManyRelationItemRemoval()&lt;/code&gt; 這個 method 來做這件事情，至於這個 method 的實作在下方討論。&lt;/p&gt;
-&lt;p&gt;在下面需要把新的 value 加進 relation 裡面，如果是 HasMany 的話，那只需要 update foreign key；如果是 MorphMany 的話，就需要 update foreign key &amp;amp; morphs key。&lt;/p&gt;
-&lt;p&gt;下面會從 model instance 找所有不在 &lt;code&gt;$relationValues&lt;/code&gt; 的紀錄，也就是在當前 relation 中已經被刪除的紀錄。&lt;/p&gt;
-&lt;p&gt;如果 relation type 是 morphmany，還要確保有 match 到 morph type。&lt;/p&gt;
-&lt;p&gt;最後，會把已刪除的 entry(&lt;code&gt;$removedEntries&lt;/code&gt;) 透過 &lt;code&gt;handleManyRelationItemRemoval()&lt;/code&gt; 刪除。&lt;/p&gt;
-&lt;h4 id=&#34;handlemanyrelationitemremoval&#34;&gt;handleManyRelationItemRemoval()&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handleManyRelationItemRemoval&lt;/span&gt;($modelInstance, $removedEntries, $relationDetails, $relationForeignKey)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relationColumnIsNullable &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;isColumnNullable&lt;/span&gt;($relationForeignKey);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $forceDelete &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;force_delete&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $fallbackId &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fallback_id&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($fallbackId) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;([$relationForeignKey &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; $fallbackId]);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($forceDelete) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lazy&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;each&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;delete&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $dbColumnDefault &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $modelInstance&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getDbColumnDefault&lt;/span&gt;($relationForeignKey);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt; $relationColumnIsNullable &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $dbColumnDefault &lt;span style=&#34;color:#f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lazy&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;each&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;delete&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $removedEntries&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;([$relationForeignKey &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; $dbColumnDefault]);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這個 method 主要處理 remove 和特定 relation 相關的 entry。&lt;/p&gt;
-&lt;p&gt;一開始會先看有沒有指定 &lt;code&gt;$fallbackId&lt;/code&gt;，如果有的話只需要改一下 foreignkey 即可。&lt;/p&gt;
-&lt;p&gt;或是如果有設定 &lt;code&gt;force_delete&lt;/code&gt; 是 true 的話，就不考慮 foreign key 是否是 nullable，直接刪除所有被移除的 entries。&lt;/p&gt;
-&lt;p&gt;如果沒有設定設定 &lt;code&gt;force_delete&lt;/code&gt; 的話，則會檢查 foreign key 是否可為空，以及 database 的設定：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;if column 可為空：就設為 default value 就好（沒有的話就設 null）&lt;/li&gt;
-&lt;li&gt;if column 不可為空：會把 entry 從資料庫刪掉，避免資料庫報錯。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;createmanyentries&#34;&gt;createManyEntries()&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createManyEntries&lt;/span&gt;($entry, $relation, $relationMethod, $relationDetails)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $items &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;][$relationMethod];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relatedModelLocalKey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relation&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getRelated&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getKeyName&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $relatedItemsSent &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;foreach&lt;/span&gt; ($items &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; $item) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            [$directInputs, $relationInputs] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;splitInputIntoDirectAndRelations&lt;/span&gt;($item, $relationDetails, $relationMethod);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $relatedModelLocalKeyValue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item[$relatedModelLocalKey] &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $item &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $entry&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationMethod}()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;updateOrCreate&lt;/span&gt;([$relatedModelLocalKey &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; $relatedModelLocalKeyValue], $directInputs);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $relatedItemsSent[] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relatedModelLocalKey};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $this&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;createRelationsForItem&lt;/span&gt;($item, $relationInputs);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;empty&lt;/span&gt;($relatedItemsSent)) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            $entry&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationMethod}()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;whereNotIn&lt;/span&gt;($relatedModelLocalKey, $relatedItemsSent)&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lazy&lt;/span&gt;()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;each&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;delete&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;首先，會先從 &lt;code&gt;$relationDetails&lt;/code&gt; 中獲取和 &lt;code&gt;$relationMethod&lt;/code&gt;相關的所有 entries。&lt;/p&gt;
-&lt;p&gt;這裡會拿到 model 的 key 之後，宣告一個空陣列 &lt;code&gt;$relatedItemsSent[]&lt;/code&gt;，但這邊還看不出來這個是要幹嘛。&lt;/p&gt;
-&lt;p&gt;接著，會對所有拿出來的 &lt;code&gt;$items&lt;/code&gt;作遍歷，在遍歷的過程中，一樣會先把 direct input 和 relation input 分開，並或去 related model 的 local key value。&lt;/p&gt;
-&lt;p&gt;接著，使用model 的 instance，找到匹配的 entry，根據 local key 更新輸入值或創建新的 entry。
-已經存進去的會放到 &lt;code&gt;relatedItemSent[]　&lt;/code&gt;， 避免重複發送。最後會幫 entry 創建 relation。&lt;/p&gt;
-&lt;p&gt;在這個 method 的最後，會去檢查 &lt;code&gt;$relatedItemsSent&lt;/code&gt;是否為空。如果是不是空的話，會使用已經發送的 items 和  database 的 local key 作匹配，並刪除沒有在兩者交集裡面的值。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;belongstomany-或-morphtomany&#34;&gt;BelongsToMany 或 MorphToMany&lt;/h3&gt;
-&lt;p&gt;獲取關聯值並確保它們不為空，然後根據值的結構創建或同步多對多關聯。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;BelongsToMany&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MorphToMany&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $values &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $relationDetails[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values&amp;#39;&lt;/span&gt;][$relationMethod] &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; [];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $values &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_string&lt;/span&gt;($values) &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;json_decode&lt;/span&gt;($values, &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $values;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $values &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $values &lt;span style=&#34;color:#f92672&#34;&gt;??&lt;/span&gt; [];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $relationValues &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;is_array&lt;/span&gt;($values) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_multidimensional_array&lt;/span&gt;($values)) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        &lt;span style=&#34;color:#66d9ef&#34;&gt;foreach&lt;/span&gt; ($values &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; $value) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;isset&lt;/span&gt;($value[$relationMethod])) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                $relationValues[$value[$relationMethod]] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Arr&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;except&lt;/span&gt;($value, $relationMethod);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;empty&lt;/span&gt;($relationValues)) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        $relationValues &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;array_values&lt;/span&gt;($values);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    $item&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;{$relationMethod}()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;sync&lt;/span&gt;($relationValues);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;首先，會從 &lt;code&gt;$relationDetails&lt;/code&gt; 中獲取該 relation 的 value，並確保其為 array。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;json_decode()&lt;/code&gt; 可能會回傳 null，因此要確保 &lt;code&gt;$values&lt;/code&gt; 不為 null。&lt;/p&gt;
-&lt;p&gt;在下面 initialize 一個新的 empty array &lt;code&gt;$relationValues&lt;/code&gt;。接著，如果 &lt;code&gt;$values&lt;/code&gt; 是 multidimensional_array 的話，就會遍歷 &lt;code&gt;$values&lt;/code&gt;，並獲取每個值中的 &lt;code&gt;$relationMethod&lt;/code&gt; 作為 key，其餘的值作為 &lt;code&gt;$relationValues&lt;/code&gt; 。在這裡是使用 &lt;code&gt;Arr::except($value, $relationMethod)&lt;/code&gt; ，代表是要從 &lt;code&gt;$value[]&lt;/code&gt; 中移除 &lt;code&gt;$relationMethod&lt;/code&gt; 這個 key 及其對應的值。&lt;/p&gt;
-&lt;p&gt;如果沒有 relation data，且 &lt;code&gt;values&lt;/code&gt; 是一個單維陣列，則為把 &lt;code&gt;$values&lt;/code&gt; 的值作為 &lt;code&gt;$relationValues&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;最後，使用&lt;code&gt;$item-&amp;gt;{$relationMethod}()-&amp;gt;sync($relationValues);&lt;/code&gt; 同步 relation value。&lt;code&gt;sync()&lt;/code&gt; 會把多對多關聯表的現有 relation，更新為這裡所提供的 &lt;code&gt;$relationValues&lt;/code&gt;，並在需要時創建新的 relation or 刪除不再存在的 relation。&lt;/p&gt;
 </description>
         </item>
         <item>

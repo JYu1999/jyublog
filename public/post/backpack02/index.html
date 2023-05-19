@@ -10,7 +10,7 @@ protected function setupShowOperation() { $this-&amp;gt;setupListOperation(); } 
 
 <link rel='canonical' href='https://jyu1999.com/post/backpack02/'>
 
-<link rel="stylesheet" href="/scss/style.min.760263ba1b7dd34efd2f77e1fda7448aa75ccb0a9771268a5759cb7977f90afe.css"><meta property='og:title' content='Laravel Backpack 初學者之路-02'>
+<link rel="stylesheet" href="/scss/style.min.d57cd2b3c67d021015ca3cb8c88471325a1264b874a225677048434b727cd0f6.css"><meta property='og:title' content='Laravel Backpack 初學者之路-02'>
 <meta property='og:description' content='第二天依然來看 backpack 的 text course: Advanced Features。 基本上是有蠻多 operations 和 features。 官方教學文檔有提到這些東西先看看就好，所以在這裡先以了解使用方式為主，不會深究具體的實現方式。
 Other Operations Show 這個 operation 是讓 admin 有一個網頁可以看一個 entry 裡面的詳細資料，比如說有些文章的 content 不會顯示在清單頁，但可以利用 show operation 做到檢視。 它會在 ListEntries View 新增一個 preview。
 如果是透過前一篇的指令 sail artisan backpack:crud tag 生成的 controller，內建就會包含 use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;。如果沒有的話要加上這行才可以用 show operation。 然後可以用 sail artisan route:list 看一下怎麼到 preview 網頁，基本上是用 admin/article/{id}/show。
