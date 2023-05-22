@@ -51,23 +51,34 @@ Hi, 我是 結語JYu。目前在森淨科技擔任後端工程師，主要開發
 
 ### About This Theme
 
-這個 Theme 是 hugo stack
+這個 Theme 是 hugo stack，當初瀏覽 hugo 的 theme，發現這個有 Categories 和 Tags 的功能，所以選擇這個當作我的基底。
+
+不過現在正在想辦法美化當中，不然每個人的網站都長得一樣 XD
 
 ### Todo
 這個網站仍有許多可以實現的功能 or 優化的地方，以下將其列出，期待有一天我慢慢實現XD
-- [X] 文章排序功能
-- [ ] 文章按讚功能
-- [ ] 文章留言功能
-- [ ] 首頁動畫
-- [ ] 字體、背景修改
-- [ ] 中文字數計算
+
+- [ ] 整合後端
+  - [ ] 文章按讚功能
+  - [ ] 文章留言功能
+> 後端的部分目前是考慮用 Strapi 等 Headless 的 CMS 工具來做，不太想自己手刻後端。
+- [ ] 外觀
+  - [ ] 首頁動畫
+  - [ ] 字體、背景修改
+- [ ] Article View 優化
+  - [ ] 中文字數計算
+  - [ ] 可以預估 Reading Time
 - [ ] 支援中英文切換
   - [ ] 若無英文版則自動翻譯
-- [ ] 文章的 Last Modified Date 自動生成
-- [ ] 置頂文章
-- [ ] Content Graph View
-- [ ] 整合我自己的知識管理系統
-
+- [ ] List View 優化
+  - [ ] 置頂文章
+  - [ ] 文章排序功能且支援 Pagination
+- [ ] 整合 Obsidian
+  - [ ] Content Graph View 
+  - [ ] 文章的 Last Modified Date 自動生成
+- [ ] 整合 GA 數據
+  - [ ] 首頁顯示觀看人數
+  - [ ] 每篇文章顯示觀看人數
 ---
 
 ## 感謝

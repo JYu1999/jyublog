@@ -3,12 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://jyu1999.com/</loc>
-    <lastmod>2023-05-19T19:36:26+08:00</lastmod>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url><url>
     <loc>https://jyu1999.com/categories/</loc>
-    <lastmod>2023-05-19T19:36:26+08:00</lastmod>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/tags/jetbrains/</loc>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/post/jetbrains_shortcut/</loc>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/tags/phpstorm/</loc>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/post/</loc>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/tags/rubymine/</loc>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/tags/shortcut/</loc>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/tags/</loc>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/categories/useless_knowledge/</loc>
+    <lastmod>2023-05-22T10:47:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url><url>
@@ -28,16 +68,6 @@
     <priority>0.7</priority>
   </url><url>
     <loc>https://jyu1999.com/post/backpack05/</loc>
-    <lastmod>2023-05-19T19:36:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url><url>
-    <loc>https://jyu1999.com/post/</loc>
-    <lastmod>2023-05-19T19:36:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url><url>
-    <loc>https://jyu1999.com/tags/</loc>
     <lastmod>2023-05-19T19:36:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -67,17 +97,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url><url>
-    <loc>https://jyu1999.com/tags/rubymine/</loc>
-    <lastmod>2023-05-19T12:32:22+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url><url>
     <loc>https://jyu1999.com/post/rubymine_sftp/</loc>
-    <lastmod>2023-05-19T12:32:22+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url><url>
-    <loc>https://jyu1999.com/categories/useless_knowledge/</loc>
     <lastmod>2023-05-19T12:32:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

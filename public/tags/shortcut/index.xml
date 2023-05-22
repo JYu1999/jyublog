@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Shortcut on Me are 結語JYu</title>
+        <link>https://jyu1999.com/tags/shortcut/</link>
+        <description>Recent content in Shortcut on Me are 結語JYu</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Mon, 22 May 2023 10:47:46 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/shortcut/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Jetbrains 系列 IDE 的一些快捷鍵（PHPStorm &amp; RubyMine）</title>
+        <link>https://jyu1999.com/post/jetbrains_shortcut/</link>
+        <pubDate>Mon, 22 May 2023 10:47:46 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/jetbrains_shortcut/</guid>
+        <description>&lt;img src="https://jyu1999.com/post/jetbrains_shortcut/0.png" alt="Featured image of post Jetbrains 系列 IDE 的一些快捷鍵（PHPStorm &amp; RubyMine）" /&gt;&lt;p&gt;以下是我在 PHPStorm / RubyMine 裡面常用到的快捷鍵。
+指令以 Mac 為主，windows 自己換成 &lt;!-- raw HTML omitted --&gt;Ctrl&lt;!-- raw HTML omitted --&gt; 即可。&lt;/p&gt;
+&lt;h2 id=&#34;search&#34;&gt;Search&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt; : Search EveryWhere&lt;/p&gt;
+&lt;p&gt;可以搜尋全部的檔案。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;F&lt;!-- raw HTML omitted --&gt; : Find in path(Full-text Search)&lt;/p&gt;
+&lt;p&gt;整個專案的全文檢索。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;view&#34;&gt;View&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;F12&lt;!-- raw HTML omitted --&gt; : Toggle Maximize Editor&lt;/p&gt;
+&lt;p&gt;把全部除了 Editor 的視窗關閉/打開&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;option&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;F12&lt;!-- raw HTML omitted --&gt; : Toggle Terminal&lt;/p&gt;
+&lt;p&gt;開/關 terminal&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt; : Project View&lt;/p&gt;
+&lt;p&gt;開/關 Project 檔案列表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;2&lt;!-- raw HTML omitted --&gt; : Database View (這個不是預設的，是我另外設定的)&lt;/p&gt;
+&lt;p&gt;開/關 Database View&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;navigation&#34;&gt;Navigation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;E&lt;!-- raw HTML omitted --&gt; : Recent File&lt;/p&gt;
+&lt;p&gt;最近存取或編輯的檔案&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;B&lt;!-- raw HTML omitted --&gt; / &lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + Click : Go to declaration&lt;/p&gt;
+&lt;p&gt;去這個 method 宣告的地方&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;option&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;←&lt;!-- raw HTML omitted --&gt; / &lt;!-- raw HTML omitted --&gt;→&lt;!-- raw HTML omitted --&gt; : Navigate back/forward&lt;/p&gt;
+&lt;p&gt;返回上一個 Navigation or 去下一個 Navigation（如果有）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;files&#34;&gt;Files&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;↑&lt;!-- raw HTML omitted --&gt; : 選擇檔案&lt;/li&gt;
+&lt;li&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;N&lt;!-- raw HTML omitted --&gt; : 新增檔案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;實際 Trace Code 可參考以下影片：
+{{ &amp;lt; youtube nvAlBpbFNNs &amp;gt; }}&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -6,7 +6,73 @@
         <description>Recent content on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Fri, 19 May 2023 19:36:26 +0800</lastBuildDate><atom:link href="https://jyu1999.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 22 May 2023 10:47:46 +0800</lastBuildDate><atom:link href="https://jyu1999.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Jetbrains 系列 IDE 的一些快捷鍵（PHPStorm &amp; RubyMine）</title>
+        <link>https://jyu1999.com/post/jetbrains_shortcut/</link>
+        <pubDate>Mon, 22 May 2023 10:47:46 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/jetbrains_shortcut/</guid>
+        <description>&lt;img src="https://jyu1999.com/post/jetbrains_shortcut/0.png" alt="Featured image of post Jetbrains 系列 IDE 的一些快捷鍵（PHPStorm &amp; RubyMine）" /&gt;&lt;p&gt;以下是我在 PHPStorm / RubyMine 裡面常用到的快捷鍵。
+指令以 Mac 為主，windows 自己換成 &lt;!-- raw HTML omitted --&gt;Ctrl&lt;!-- raw HTML omitted --&gt; 即可。&lt;/p&gt;
+&lt;h2 id=&#34;search&#34;&gt;Search&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt; : Search EveryWhere&lt;/p&gt;
+&lt;p&gt;可以搜尋全部的檔案。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;F&lt;!-- raw HTML omitted --&gt; : Find in path(Full-text Search)&lt;/p&gt;
+&lt;p&gt;整個專案的全文檢索。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;view&#34;&gt;View&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;F12&lt;!-- raw HTML omitted --&gt; : Toggle Maximize Editor&lt;/p&gt;
+&lt;p&gt;把全部除了 Editor 的視窗關閉/打開&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;option&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;F12&lt;!-- raw HTML omitted --&gt; : Toggle Terminal&lt;/p&gt;
+&lt;p&gt;開/關 terminal&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt; : Project View&lt;/p&gt;
+&lt;p&gt;開/關 Project 檔案列表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;2&lt;!-- raw HTML omitted --&gt; : Database View (這個不是預設的，是我另外設定的)&lt;/p&gt;
+&lt;p&gt;開/關 Database View&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;navigation&#34;&gt;Navigation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;E&lt;!-- raw HTML omitted --&gt; : Recent File&lt;/p&gt;
+&lt;p&gt;最近存取或編輯的檔案&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;B&lt;!-- raw HTML omitted --&gt; / &lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + Click : Go to declaration&lt;/p&gt;
+&lt;p&gt;去這個 method 宣告的地方&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;option&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;←&lt;!-- raw HTML omitted --&gt; / &lt;!-- raw HTML omitted --&gt;→&lt;!-- raw HTML omitted --&gt; : Navigate back/forward&lt;/p&gt;
+&lt;p&gt;返回上一個 Navigation or 去下一個 Navigation（如果有）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;files&#34;&gt;Files&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;↑&lt;!-- raw HTML omitted --&gt; : 選擇檔案&lt;/li&gt;
+&lt;li&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;N&lt;!-- raw HTML omitted --&gt; : 新增檔案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;實際 Trace Code 可參考以下影片：
+{{ &amp;lt; youtube nvAlBpbFNNs &amp;gt; }}&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Laravel Backpack 初學者之路-05</title>
         <link>https://jyu1999.com/post/backpack05/</link>
         <pubDate>Fri, 19 May 2023 19:36:26 +0800</pubDate>
@@ -2945,25 +3011,57 @@ Backpack 預設提供兩個可以放 widgets 的 section:&lt;/p&gt;
 &lt;p&gt;於是這個網站就這樣誕生了。&lt;/p&gt;
 &lt;p&gt;不知道正在看這篇文章的你，覺得這個網站如何呢？有任何覺得可以更好的地方，或是有任何疑問，歡迎來信 &lt;a class=&#34;link&#34; href=&#34;mailto:jk29666338@gmail.com&#34; &gt;jk29666338@gmail.com&lt;/a&gt; 來討論交流～&lt;/p&gt;
 &lt;h3 id=&#34;about-this-theme&#34;&gt;About This Theme&lt;/h3&gt;
-&lt;p&gt;這個 Theme 是 hugo stack&lt;/p&gt;
+&lt;p&gt;這個 Theme 是 hugo stack，當初瀏覽 hugo 的 theme，發現這個有 Categories 和 Tags 的功能，所以選擇這個當作我的基底。&lt;/p&gt;
+&lt;p&gt;不過現在正在想辦法美化當中，不然每個人的網站都長得一樣 XD&lt;/p&gt;
 &lt;h3 id=&#34;todo&#34;&gt;Todo&lt;/h3&gt;
 &lt;p&gt;這個網站仍有許多可以實現的功能 or 優化的地方，以下將其列出，期待有一天我慢慢實現XD&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 文章排序功能&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 整合後端
+&lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 文章按讚功能&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 文章留言功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;後端的部分目前是考慮用 Strapi 等 Headless 的 CMS 工具來做，不太想自己手刻後端。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 外觀
+&lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 首頁動畫&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 字體、背景修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Article View 優化
+&lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 中文字數計算&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 可以預估 Reading Time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 支援中英文切換
 &lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 若無英文版則自動翻譯&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 文章的 Last Modified Date 自動生成&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; List View 優化
+&lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 置頂文章&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 文章排序功能且支援 Pagination&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 整合 Obsidian
+&lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Content Graph View&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 整合我自己的知識管理系統&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 文章的 Last Modified Date 自動生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 整合 GA 數據
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 首頁顯示觀看人數&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 每篇文章顯示觀看人數&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;感謝&#34;&gt;感謝&lt;/h2&gt;
