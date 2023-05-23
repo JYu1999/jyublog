@@ -38,7 +38,7 @@ newTab = true
 [[menu.social]]
 identifier = "cv"
 name = "cv"
-url = "jyu1999.com/files/jyu_resume.pdf"
+url = "/files/jyu_resume.pdf"
 weight = -10
 [menu.social.params]
 icon = "file-text"
