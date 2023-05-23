@@ -38,7 +38,7 @@ newTab = true
 [[menu.social]]
 identifier = "cv"
 name = "cv"
-url = "https://jyu1999.notion.site/CHIEH-YU-CHAN-49db0f414780421aae1fb2288114586c"
+url = "jyu1999.com/files/jyu_resume.pdf"
 weight = -10
 [menu.social.params]
 icon = "file-text"
