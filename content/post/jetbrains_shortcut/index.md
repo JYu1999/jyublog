@@ -69,4 +69,4 @@ keywords:
 ---
 
 實際 Trace Code 可參考以下影片：
-{{ < youtube nvAlBpbFNNs > }}
+{{< youtube nvAlBpbFNNs >}}

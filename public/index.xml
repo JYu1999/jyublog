@@ -192,7 +192,15 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;實際 Trace Code 可參考以下影片：
-{{ &amp;lt; youtube nvAlBpbFNNs &amp;gt; }}&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/nvAlBpbFNNs&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 </description>
         </item>
         <item>
