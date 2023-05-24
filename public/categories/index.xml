@@ -6,7 +6,15 @@
         <description>Recent content in Categories on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Mon, 22 May 2023 10:47:46 +0800</lastBuildDate><atom:link href="https://jyu1999.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 24 May 2023 13:34:44 +0800</lastBuildDate><atom:link href="https://jyu1999.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Ruby on Rails</title>
+        <link>https://jyu1999.com/categories/ruby_on_rails/</link>
+        <pubDate>Wed, 24 May 2023 13:34:44 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/categories/ruby_on_rails/</guid>
+        <description>&lt;img src="https://jyu1999.com/categories/ruby_on_rails/0.png" alt="Featured image of post Ruby on Rails" /&gt;</description>
+        </item>
+        <item>
         <title>無用的小知識</title>
         <link>https://jyu1999.com/categories/useless_knowledge/</link>
         <pubDate>Mon, 22 May 2023 10:47:46 +0800</pubDate>

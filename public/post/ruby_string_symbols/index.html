@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='在寫 Rails 的時候，常常會看到使用 Symbol 的狀況：
+class User &amp;lt; ApplicationRecord belongs_to :permission belongs_to :department has_secure_password validates :email, presence: true, format: { with: /\A([^@\s]&#43;)@((?:[-a-z0-9]&#43;\.)&#43;[a-z]{2,})\z/i, message: &amp;#34;must be a valid email address&amp;#34;} end 看了很久還是沒有很習慣這種寫法，所以來寫一篇文章整理一下自己的思緒。
+String Ruby 的 string 後面是預設可以加上一些 method 的，例如：
+name = JYu puts name.size # =&amp;gt; 3 puts name.reverse # =&amp;gt; uYJ puts name.upcase # =&amp;gt; JYU 這跟其他語言其實蠻不一樣的，比如說在 PHP 裡面要知道 String 長度的話，可能會用以下寫法：
+echo strlen(&amp;#34;Hello&amp;#34;); 這是因為 Ruby 是完全物件導向的，在 Ruby 中每樣東西都是物件，包括字串和數字。所有的方法都是對物件呼叫，不會看到全域函式1。
+String 還有很多好用的 method 可以用，但這篇文章最主要是要了解 Symbol，所以不列出太多～'>
+<meta name="keywords" content="後端, Backend, Ruby, Ruby on Rails, RoR, Rubymine, Server"><title>String and Symbol in Ruby</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/ruby_string_symbols/'>
+
+<link rel="stylesheet" href="/scss/style.min.2b64b87be9127a563f4c30266866588cb6bddbfe9eca6a1e4b9cc10923181833.css"><meta property='og:title' content='String and Symbol in Ruby'>
+<meta property='og:description' content='在寫 Rails 的時候，常常會看到使用 Symbol 的狀況：
+class User &amp;lt; ApplicationRecord belongs_to :permission belongs_to :department has_secure_password validates :email, presence: true, format: { with: /\A([^@\s]&#43;)@((?:[-a-z0-9]&#43;\.)&#43;[a-z]{2,})\z/i, message: &amp;#34;must be a valid email address&amp;#34;} end 看了很久還是沒有很習慣這種寫法，所以來寫一篇文章整理一下自己的思緒。
+String Ruby 的 string 後面是預設可以加上一些 method 的，例如：
+name = JYu puts name.size # =&amp;gt; 3 puts name.reverse # =&amp;gt; uYJ puts name.upcase # =&amp;gt; JYU 這跟其他語言其實蠻不一樣的，比如說在 PHP 裡面要知道 String 長度的話，可能會用以下寫法：
+echo strlen(&amp;#34;Hello&amp;#34;); 這是因為 Ruby 是完全物件導向的，在 Ruby 中每樣東西都是物件，包括字串和數字。所有的方法都是對物件呼叫，不會看到全域函式1。
+String 還有很多好用的 method 可以用，但這篇文章最主要是要了解 Symbol，所以不列出太多～'>
+<meta property='og:url' content='https://jyu1999.com/post/ruby_string_symbols/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Ruby' /><meta property='article:tag' content='RubyMine' /><meta property='article:published_time' content='2023-05-24T13:34:44&#43;08:00'/><meta property='article:modified_time' content='2023-05-24T13:34:44&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/ruby_string_symbols/1.png' />
+<meta name="twitter:site" content="@IamJYu">
+    <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="String and Symbol in Ruby">
+<meta name="twitter:description" content="在寫 Rails 的時候，常常會看到使用 Symbol 的狀況：
+class User &amp;lt; ApplicationRecord belongs_to :permission belongs_to :department has_secure_password validates :email, presence: true, format: { with: /\A([^@\s]&#43;)@((?:[-a-z0-9]&#43;\.)&#43;[a-z]{2,})\z/i, message: &amp;#34;must be a valid email address&amp;#34;} end 看了很久還是沒有很習慣這種寫法，所以來寫一篇文章整理一下自己的思緒。
+String Ruby 的 string 後面是預設可以加上一些 method 的，例如：
+name = JYu puts name.size # =&amp;gt; 3 puts name.reverse # =&amp;gt; uYJ puts name.upcase # =&amp;gt; JYU 這跟其他語言其實蠻不一樣的，比如說在 PHP 裡面要知道 String 長度的話，可能會用以下寫法：
+echo strlen(&amp;#34;Hello&amp;#34;); 這是因為 Ruby 是完全物件導向的，在 Ruby 中每樣東西都是物件，包括字串和數字。所有的方法都是對物件呼叫，不會看到全域函式1。
+String 還有很多好用的 method 可以用，但這篇文章最主要是要了解 Symbol，所以不列出太多～"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/post/ruby_string_symbols/1.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+            <span class="emoji">🍌</span>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='/files/jyu_resume.pdf'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#string">String</a></li>
+    <li><a href="#symbol">Symbol</a>
+      <ul>
+        <li><a href="#所以-symbol-和-string-的不同">所以 Symbol 和 String 的不同？</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用時機">使用時機</a>
+      <ul>
+        <li><a href="#symbol-適合當-hash-裡的-key">Symbol 適合當 Hash 裡的 Key</a></li>
+        <li><a href="#字串的-method-比較多">字串的 method 比較多</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/backendlearningpath/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/goodidea-mind/" class="font_size_5">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_5">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_2">
+                無用的小知識
+            </a>
+        
+            <a href="/categories/ruby_on_rails/" class="font_size_1">
+                Ruby on Rails
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_9">
+                backend
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_8">
+                Laravel
+            </a>
+        
+            <a href="/tags/laravel-backpack/" class="font_size_5">
+                Laravel Backpack
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_5">
+                好想工作室
+            </a>
+        
+            <a href="/tags/rubymine/" class="font_size_3">
+                RubyMine
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/ruby/" class="font_size_2">
+                Ruby
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/ruby_string_symbols/">
+                <img src="/post/ruby_string_symbols/1_hu91bb438bb8c442ebbc53e00cb0467e9c_142982_800x0_resize_box_3.png"
+                        srcset="/post/ruby_string_symbols/1_hu91bb438bb8c442ebbc53e00cb0467e9c_142982_800x0_resize_box_3.png 800w, /post/ruby_string_symbols/1_hu91bb438bb8c442ebbc53e00cb0467e9c_142982_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="800" 
+                        loading="lazy"
+                        alt="Featured image of post String and Symbol in Ruby" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ruby_on_rails/" style="background-color: #2a9d8f; color: #fff;">
+                Ruby on Rails
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/ruby_string_symbols/">String and Symbol in Ruby</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 24, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>在寫 Rails 的時候，常常會看到使用 Symbol 的狀況：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Ruby" data-lang="Ruby"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationRecord</span>
+</span></span><span style="display:flex;"><span>  belongs_to <span style="color:#e6db74">:permission</span>
+</span></span><span style="display:flex;"><span>  belongs_to <span style="color:#e6db74">:department</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  has_secure_password
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  validates <span style="color:#e6db74">:email</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>, format: { <span style="color:#e6db74">with</span>: <span style="color:#e6db74">/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i</span>, <span style="color:#e6db74">message</span>: <span style="color:#e6db74">&#34;must be a valid email address&#34;</span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><p>看了很久還是沒有很習慣這種寫法，所以來寫一篇文章整理一下自己的思緒。</p>
+<hr>
+<h2 id="string">String</h2>
+<p>Ruby 的 string 後面是預設可以加上一些 method 的，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Ruby" data-lang="Ruby"><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#66d9ef">JYu</span>
+</span></span><span style="display:flex;"><span>puts name<span style="color:#f92672">.</span>size  <span style="color:#75715e"># =&gt; 3</span>
+</span></span><span style="display:flex;"><span>puts name<span style="color:#f92672">.</span>reverse <span style="color:#75715e"># =&gt; uYJ</span>
+</span></span><span style="display:flex;"><span>puts name<span style="color:#f92672">.</span>upcase <span style="color:#75715e"># =&gt; JYU</span>
+</span></span></code></pre></div><p>這跟其他語言其實蠻不一樣的，比如說在 PHP 裡面要知道 String 長度的話，可能會用以下寫法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#66d9ef">echo</span> <span style="color:#a6e22e">strlen</span>(<span style="color:#e6db74">&#34;Hello&#34;</span>);
+</span></span></code></pre></div><p>這是因為 Ruby 是完全物件導向的，在 Ruby 中每樣東西都是物件，包括字串和數字。所有的方法都是對物件呼叫，不會看到全域函式<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<blockquote>
+<p>String 還有很多好用的 method 可以用，但這篇文章最主要是要了解 Symbol，所以不列出太多～</p>
+</blockquote>
+<hr>
+<h2 id="symbol">Symbol</h2>
+<p>Symbol 的寫法是在字前面加個冒號，如 <code>:name</code> 或 <code>:title</code>，不是英文也可以，如 <code>:性別</code>。但通常還是以英文為主。</p>
+<p>Symbol 是一個 <code>Symbol</code> 類別的實體，可以用來表示某個狀態，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Ruby" data-lang="Ruby"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Order</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">attr_reader</span> <span style="color:#e6db74">:status</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>(items, status <span style="color:#f92672">=</span> <span style="color:#e6db74">:pending</span>)
+</span></span><span style="display:flex;"><span>    @items <span style="color:#f92672">=</span> items
+</span></span><span style="display:flex;"><span>    @status <span style="color:#f92672">=</span> status
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compete</span>
+</span></span><span style="display:flex;"><span>    @status <span style="color:#f92672">=</span> <span style="color:#e6db74">:complete</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>order <span style="color:#f92672">=</span> <span style="color:#66d9ef">Order</span><span style="color:#f92672">.</span>new(<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;item A&#34;</span>, <span style="color:#e6db74">&#34;item B&#34;</span>, <span style="color:#e6db74">&#34;item C&#34;</span><span style="color:#f92672">]</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> order<span style="color:#f92672">.</span>status <span style="color:#f92672">==</span> <span style="color:#e6db74">:pending</span>
+</span></span><span style="display:flex;"><span>  puts <span style="color:#e6db74">&#34;order is pending&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><p>這裡的 <code>:pending</code> 和 <code>:complete</code> 代表的是 pending 和 complete 這兩個「狀態」。Symbol 是一種「帶有名字的物件」，正如其名，Symbol 就是符號，這個符號可用來表示「已完成」或「未完成」。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>
+在上面這個例子，其實也可以用字串。</p>
+<h3 id="所以-symbol-和-string-的不同">所以 Symbol 和 String 的不同？</h3>
+<p>光看上面的例子可能無法知道兩者真正的差異。我們可以用 <code>object_id</code> 這個 method 去印出 Ruby 內部的記憶體配置編號：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Ruby" data-lang="Ruby"><span style="display:flex;"><span>puts <span style="color:#e6db74">&#34;JYU&#34;</span><span style="color:#f92672">.</span>object_id <span style="color:#75715e"># =&gt; 3720</span>
+</span></span><span style="display:flex;"><span>puts <span style="color:#e6db74">&#34;JYU&#34;</span><span style="color:#f92672">.</span>object_id <span style="color:#75715e"># =&gt; 3920</span>
+</span></span><span style="display:flex;"><span>puts <span style="color:#e6db74">:JYU</span><span style="color:#f92672">.</span>object_id <span style="color:#75715e"># =&gt; 3395748</span>
+</span></span><span style="display:flex;"><span>puts <span style="color:#e6db74">:JYU</span><span style="color:#f92672">.</span>object_id <span style="color:#75715e"># =&gt; 3395748</span>
+</span></span></code></pre></div><p>可以發現兩個字串雖然內容相同，也是不同的物件；但 Symbol 只要內容相同，就是相同的物件。這種特性讓 Symbol 的主要用途是作為 Hash 的 Key。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>所以 Symbol 相對於 String，也更省記憶體一些。</p>
+<h4 id="字串的內容可以變但-symbol-不行">字串的內容可以變，但 Symbol 不行</h4>
+<p>Symbol 和字串都有一些好用的 method，例如 <code>length</code>、<code>upcase</code> 或 <code>downcase</code> 等等。不過 Symbol 本身是不能被修改的，但字串可以：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Ruby" data-lang="Ruby"><span style="display:flex;"><span><span style="color:#e6db74">:JYu</span><span style="color:#f92672">.</span>length <span style="color:#75715e"># =&gt; 3</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">:JYu</span><span style="color:#f92672">.</span>upcase <span style="color:#75715e"># =&gt; :JYU</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">:JYu</span><span style="color:#f92672">[</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span> <span style="color:#75715e"># =&gt; &#34;u&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;JYu&#34;</span><span style="color:#f92672">[</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;U&#34;</span> <span style="color:#75715e"># =&gt; &#34;U&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">:JYu</span><span style="color:#f92672">[</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;U&#34;</span> <span style="color:#75715e"># =&gt; undefined method `[]=&#39; for :JYu:Symbol (NoMethodError)</span>
+</span></span></code></pre></div><h4 id="symbol-的-comparison-比字串快">Symbol 的 Comparison 比字串快</h4>
+<p>這裡我們直接來看高見龍的測試<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Ruby" data-lang="Ruby"><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;benchmark&#39;</span>
+</span></span><span style="display:flex;"><span>loop_times <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">Benchmark</span><span style="color:#f92672">.</span>measure <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  loop_times<span style="color:#f92672">.</span>times <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span><span style="color:#f92672">.</span>total
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sym <span style="color:#f92672">=</span> <span style="color:#66d9ef">Benchmark</span><span style="color:#f92672">.</span>measure <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  loop_times<span style="color:#f92672">.</span>times <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">:hello</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">:hello</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span><span style="color:#f92672">.</span>total
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>puts <span style="color:#e6db74">&#34;Benchmark&#34;</span>
+</span></span><span style="display:flex;"><span>puts <span style="color:#e6db74">&#34;String: </span><span style="color:#e6db74">#{</span>str<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>puts <span style="color:#e6db74">&#34;Symbol: </span><span style="color:#e6db74">#{</span>sym<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =&gt; Benchmark</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =&gt; String: 12.299999999999999</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =&gt; Symbol: 5.750000000000002</span>
+</span></span></code></pre></div><p>Symbol 的速度明顯快很多，因為 Symbol 在比較的時候，是直接比對 <code>object_id</code>，而字串還需要逐一比對字母。所以字串在做比較的時間複雜度，會隨著字母數量而增加；而 Symbol 的時間複雜度是固定的。</p>
+<hr>
+<h2 id="使用時機">使用時機</h2>
+<h3 id="symbol-適合當-hash-裡的-key">Symbol 適合當 Hash 裡的 Key</h3>
+<p>前面有提到 Symbol 的比較速度比較快，所以很適合當 Hash 的 key:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Ruby" data-lang="Ruby"><span style="display:flex;"><span>profile <span style="color:#f92672">=</span> { name: <span style="color:#e6db74">&#34;JYu&#34;</span>, <span style="color:#e6db74">age</span>: <span style="color:#ae81ff">23</span> } <span style="color:#75715e"># =&gt; {:name=&gt;&#34;JYu&#34;, :age=&gt;23} </span>
+</span></span></code></pre></div><h3 id="字串的-method-比較多">字串的 method 比較多</h3>
+<p>雖然 Symbol 可以當字串用，但是 Symbol 內建的方法沒有像 String 這麼豐富，所以如果想要字串那些好用的功能，就應該選用字串。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a class="link" href="https://ihower.tw/rails/ruby.html"  target="_blank" rel="noopener"
+    >Rails 實戰聖經：Ruby 程式語言入門</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a class="link" href="https://railsbook.tw/chapters/06-ruby-basic-2#symbol_class"  target="_blank" rel="noopener"
+    >為你自己學 Ruby on Rails：數字、字串、陣列、範圍、雜湊、符號</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a class="link" href="https://ihower.tw/rails/ruby.html"  target="_blank" rel="noopener"
+    >Rails 實戰聖經：Ruby 程式語言入門</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a class="link" href="https://railsbook.tw/chapters/06-ruby-basic-2#symbol_class"  target="_blank" rel="noopener"
+    >為你自己學 Ruby on Rails：數字、字串、陣列、範圍、雜湊、符號</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ruby/">Ruby</a>
+        
+            <a href="/tags/rubymine/">RubyMine</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/rubymine_sftp/">
+        
+        
+            <div class="article-image">
+                <img src="/post/rubymine_sftp/0.03a45f88e0b7075dc87533652dd3c8bd_hu0c1f11c072218b2f868afe9cc57a6a5d_2064333_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Rubymine 透過 SFTP 自動同步 Server 檔案"
+                        
+                        data-hash="md5-A6RfiOC3B13IdTNlLdPIvQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Rubymine 透過 SFTP 自動同步 Server 檔案</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/jetbrains_shortcut/">
+        
+        
+            <div class="article-image">
+                <img src="/post/jetbrains_shortcut/0.71009ce8075e65640747902dbd4c05d2_huc5ecd32684ac79988ff02d7c4a7517e6_153152_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Jetbrains 系列 IDE 的一些快捷鍵（PHPStorm &amp; RubyMine）"
+                        
+                        data-hash="md5-cQCc6AdeZWQHR5AtvUwF0g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Jetbrains 系列 IDE 的一些快捷鍵（PHPStorm &amp; RubyMine）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/goodidea-mind-5/">
+        
+        
+            <div class="article-image">
+                <img src="/post/goodidea-mind-5/4.ce88316655eec9d6d0638cd238f020cd_hu4e44a9238dd9439c985217ad54ea95d7_57691_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（五）：這麼多東西，要怎麼學最有效率？"
+                        
+                        data-hash="md5-zogxZlXuydbQY4zSOPAgzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（五）：這麼多東西，要怎麼學最有效率？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/goodidea-mind-4/">
+        
+        
+            <div class="article-image">
+                <img src="/post/goodidea-mind-4/4.ce88316655eec9d6d0638cd238f020cd_hu4e44a9238dd9439c985217ad54ea95d7_57691_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（四）：我快崩潰了，怎麼辦？"
+                        
+                        data-hash="md5-zogxZlXuydbQY4zSOPAgzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（四）：我快崩潰了，怎麼辦？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/goodidea-mind-3/">
+        
+        
+            <div class="article-image">
+                <img src="/post/goodidea-mind-3/4.ce88316655eec9d6d0638cd238f020cd_hu4e44a9238dd9439c985217ad54ea95d7_57691_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（三）：我好想進來好想"
+                        
+                        data-hash="md5-zogxZlXuydbQY4zSOPAgzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（三）：我好想進來好想</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
