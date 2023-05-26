@@ -68,5 +68,11 @@ keywords:
 
 ---
 
+## Clean Code
+- <kbd>Cmd</kbd> + <kbd>&#8679;</kbd> + <kbd>option</kbd> + <kbd>L</kbd> : 整理程式碼
+
+  按完之後會跑出一個選單，可以自己選是只要 reformat 選擇的部分，還是整個檔案。
+
+
 實際 Trace Code 可參考以下影片：
 {{< youtube nvAlBpbFNNs >}}

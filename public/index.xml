@@ -191,6 +191,13 @@
 &lt;li&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;N&lt;!-- raw HTML omitted --&gt; : 新增檔案&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
+&lt;h2 id=&#34;clean-code&#34;&gt;Clean Code&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Cmd&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;⇧&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;option&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;L&lt;!-- raw HTML omitted --&gt; : 整理程式碼&lt;/p&gt;
+&lt;p&gt;按完之後會跑出一個選單，可以自己選是只要 reformat 選擇的部分，還是整個檔案。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;實際 Trace Code 可參考以下影片：
 &lt;div class=&#34;video-wrapper&#34;&gt;
     &lt;iframe loading=&#34;lazy&#34; 
