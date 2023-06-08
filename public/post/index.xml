@@ -6,7 +6,141 @@
         <description>Recent content in Posts on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Mon, 29 May 2023 15:01:23 +0800</lastBuildDate><atom:link href="https://jyu1999.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 07 Jun 2023 19:18:36 +0800</lastBuildDate><atom:link href="https://jyu1999.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>好想工作室 — 後端 (Backend Camp) 培訓心得（六）：找工作之前</title>
+        <link>https://jyu1999.com/post/goodidea-mind-6/</link>
+        <pubDate>Wed, 07 Jun 2023 19:18:36 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/goodidea-mind-6/</guid>
+        <description>&lt;img src="https://jyu1999.com/post/goodidea-mind-6/4.png" alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（六）：找工作之前" /&gt;&lt;p&gt;嗨大家好，我是結語 JYu。&lt;/p&gt;
+&lt;p&gt;開始撰寫這個系列的時間是 2023 四月，也是我在好想工作室 backend camp 培訓的倒數一個月，想說可以分享一些心得，給對轉職為後端工程師的人參考。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【好想工作室 — 後端 (backend Camp)培訓心得（一）：好想工作室簡介】&lt;/a&gt;：簡單介紹好想工作室。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【好想工作室 — 後端 (backend Camp)培訓心得（二）：backend camp 在幹嘛】&lt;/a&gt;：會講後端培訓的點點滴滴。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-3/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【好想工作室 — 後端 (backend Camp)培訓心得（三）：我好想進來好想】&lt;/a&gt;：會給想進 backend camp 的一些建議。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-4/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【好想工作室 — 後端 (backend Camp)培訓心得（四）：我快崩潰了，怎麼辦？】&lt;/a&gt;：會講學員的心態管理。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-5/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【好想工作室 — 後端 (backend Camp)培訓心得（五）：這麼多東西，要怎麼學最有效率？】&lt;/a&gt;：會講學員的學習技巧。&lt;/p&gt;
+&lt;p&gt;➡️&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-6/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【好想工作室 — 後端 (backend Camp)培訓心得（六）：找工作之前】&lt;/a&gt;：會講我自己的求職心得。&lt;/p&gt;
+&lt;p&gt;本系列文章純以我的觀察和想法為出發點，不一定就是實際狀況，也不帶任何批判。&lt;/p&gt;
+&lt;p&gt;如果覺得資訊對你有用的話，不妨按下方拍手鼓勵一下我喔！&lt;/p&gt;
+&lt;p&gt;然後我都是想到什麼就寫什麼，難免會有沒有提及到的，如果你有任何疑問，歡迎寄信至 &lt;a class=&#34;link&#34; href=&#34;mailto:jk29666338@gmail.com&#34; &gt;jk29666338@gmail.com&lt;/a&gt; 來詢問我。&lt;/p&gt;
+&lt;p&gt;好，廢話都講完了，那就讓我們開始吧！&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;在開始前，我想要先講一些廢話XD。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;找到工作不是終點。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;每個人進到工作室培訓的理由都不太一樣，我自己前期和後期的目標也略有不同。但基本上在工作室當學員的人，都是為了要「成為」軟體工程師。&lt;/p&gt;
+&lt;p&gt;看起來以這個目的來說，不管是找到工作，或是純接案，已經是屬於尾聲了。但我認為找到工作僅僅代表從「好想工作室的學員」畢業，開始工作之後，先不論是否要朝 senior 邁進，一定都會感受到自己的不足，還有很多很多需要學習的東西。&lt;/p&gt;
+&lt;p&gt;所以，其實找到工作後，仍然會是學員；又抑或說是，無論是多強的軟體工程師，都一定有可以再更精進的東西。&lt;/p&gt;
+&lt;p&gt;但差別是，此時再學東西，就會更知道為何而學，也更有動力。&lt;/p&gt;
+&lt;p&gt;至少就我個人而已，找到工作後的學習動力 &amp;gt; 在好想當學員的學習動力 &amp;raquo;&amp;raquo;&amp;raquo; 在學校的學習動力。&lt;/p&gt;
+&lt;p&gt;這也和我暫時不讀研究所的原因有關，不過這又是別的話題了XD&lt;/p&gt;
+&lt;p&gt;我會在這兩篇，分享一下我在工作室培訓時，我對「找工作」這件事情的想法轉變。以及我找工作的過程中，做了什麼？又有哪些收穫和反思。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;想法轉變的過程&#34;&gt;想法轉變的過程&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;這一個段落是關於我個人的故事，不想看可以直接跳過~&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我在&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;第一篇&lt;/a&gt;說過，我剛開始的心態就是要趁著大學畢業後的一兩年好好充實自己，讓自己有能力去找後端工程師的工作。&lt;/p&gt;
+&lt;p&gt;所以其實剛進好想的時候，我也是規劃八到九個月來專心進行培訓，先不想著找工作。&lt;/p&gt;
+&lt;p&gt;後來剛好在某次的聚會上，有一位後端的學長提到他們公司最近有徵人的計畫，此時大概是 1 月，也就是我進好想的第三個月。&lt;/p&gt;
+&lt;p&gt;但這時我其實也沒有特別覺得怎樣，就只是聽過這個消息，覺得如果心有餘力可以試試看而已。&lt;/p&gt;
+&lt;p&gt;後來有一個晚上，我收到我哥的訊息，說父母因為工作的原因而大吵了一架。&lt;/p&gt;
+&lt;p&gt;其實以我父母現在的狀況，他們大可以選擇退休，而不是辛苦的硬撐，尤其是在身體有狀況的前提下。&lt;/p&gt;
+&lt;p&gt;而雖然他們沒有明說，也或許不是這樣，但我內心就產生一股自責感：「就是因為我到現在還沒工作，讓他們沒辦法安心退休」。&lt;/p&gt;
+&lt;p&gt;這股自責感讓我那段時間幾乎每個晚上都睡不好覺，都一直在想這件事情。&lt;/p&gt;
+&lt;p&gt;正如我某位朋友跟我說的：「因為你太有想法，別人怎麼說其實你都不會感到壓力；你的壓力都是自己給自己的。」&lt;/p&gt;
+&lt;p&gt;而在失眠了一個禮拜之後，我覺得必須得做出改變，不然身體真的快受不了了。&lt;/p&gt;
+&lt;p&gt;於是我決定提前開始我的求職計畫。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一開始的求職&#34;&gt;一開始的求職&lt;/h2&gt;
+&lt;p&gt;一開始我沒有採取很積極的作為，只是去問了後端的學長說徵人的消息，然後很順利就進到面試流程。&lt;/p&gt;
+&lt;p&gt;在寫筆試題的時候我發現，求職狀態某種程度來說是會跟學員身分衝突的，因為會需要投資大量時間在筆試題上面，而沒辦法專心學原本在學的東西。&lt;/p&gt;
+&lt;p&gt;於是大概寫了幾天，我就轉變策略，變成全心全意求職。&lt;/p&gt;
+&lt;p&gt;我也建議大家這樣做，而且最好是一次投 10~15 間公司，然後稍微控制收到結果的時間。這樣比較有助於你跟公司談薪水和做決定。&lt;/p&gt;
+&lt;p&gt;我個人最後是花了兩個多月才確定找到工作，總共投了 13 間，有四間面試，兩間 offer。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;你想要什麼&#34;&gt;你想要什麼？&lt;/h2&gt;
+&lt;p&gt;我認為在求職的最初期，先想好自己找工作的條件，是非常重要的一件事情。尤其對於社會經驗還不豐富的人（像我），我更建議要把條件一一列出。&lt;/p&gt;
+&lt;p&gt;不管跟技術主管、人資談話的時候，他們總會有一些方式來包裝自己的公司。我並不反對他們這樣做，但有時候這些包裝會容易讓求職者被影響。&lt;/p&gt;
+&lt;p&gt;比如說，接案公司可能會說自己是在做「客製化系統」、「協助企業做數位轉型」之類的。但如果求職者是想要有自己的產品或服務的公司，可能就比較不適合。&lt;/p&gt;
+&lt;p&gt;此外，列出條件也有助於求職者快速篩選公司，避免浪費時間。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jyu1999.com/post/goodidea-mind-6/img.png&#34;
+	width=&#34;1795&#34;
+	height=&#34;789&#34;
+	srcset=&#34;https://jyu1999.com/post/goodidea-mind-6/img_hud620155237bbf3989b3247d6eff7b8e8_214866_480x0_resize_box_3.png 480w, https://jyu1999.com/post/goodidea-mind-6/img_hud620155237bbf3989b3247d6eff7b8e8_214866_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;我初期列出的工作條件&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;227&#34;
+		data-flex-basis=&#34;546px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到我最重視的事情就是遠端工作，所以我甚至在寫筆試題之前就會先問能不能遠端，可以省下很多時間。&lt;/p&gt;
+&lt;h3 id=&#34;條件不會從一而終&#34;&gt;條件不會從一而終&lt;/h3&gt;
+&lt;p&gt;基本上，條件是需要做彈性調整的，隨著你面試愈多家，會更知道自己的條件是否合理，且是否要新增/刪除一些內容。&lt;/p&gt;
+&lt;p&gt;比如說我在面某家有自己的產品的公司時，技術主管跟我說，公司目前是用很舊版本的框架，所以需要對語言很熟悉。此外，js 的部分也不是用框架寫，原因是因為這樣要付出額外的學習成本。&lt;/p&gt;
+&lt;p&gt;這跟我自己的求職期許就不太合，我會希望公司在考量獲利的同時，也積極升級版本、試著採用其他的工具。所以後續面試我都會特別問有關於版本的問題。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;履歷寫清楚就好&#34;&gt;履歷寫清楚就好&lt;/h2&gt;
+&lt;p&gt;有些人可能會鼓勵履歷用 PS/AI 做，但我個人覺得以工程師而言，履歷寫的簡單清楚即可。最好不要超過兩頁，也不要放什麼 skills 量表。&lt;/p&gt;
+&lt;p&gt;至於要不要為了特定公司做履歷客製化，我自己是覺得不需要。&lt;/p&gt;
+&lt;p&gt;因為假設一位零基礎的學員，就算在工作室培訓整整一年，其實能學會的技能、能做出來的的（水準以上的）作品，其實真的不多。&lt;/p&gt;
+&lt;p&gt;通常可能要到工作兩三年的工程師，才比較有選擇要放哪些技能和作品的空間（我猜）。&lt;/p&gt;
+&lt;p&gt;當然如果以前做的職業，跟現在要面試的產業有對上的話，那就另當別論了。&lt;/p&gt;
+&lt;h3 id=&#34;把一個作品做好&#34;&gt;把一個作品做好&lt;/h3&gt;
+&lt;p&gt;我個人最推薦 junior 工程師，在求職前先花一兩個月，好好地雕出「一個」自己也覺得很棒的程式作品。&lt;/p&gt;
+&lt;p&gt;為什麼是一個，因為其實技術主管沒有很多時間去看每個人的 code，更別提有些 code 超級多的。&lt;/p&gt;
+&lt;p&gt;所以我認為履歷上只要放一個最滿意的作品即可，當然如果有不同性質的是可以考慮放兩個。比如說我做過 VR 應用也做過網頁應用，因為是不同性質的，所以我都會放上去。&lt;/p&gt;
+&lt;p&gt;而這個作品最好要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;README.md 盡可能完整：&lt;/p&gt;
+&lt;p&gt;我們可以想像一下 user flow。理論上面試官點進某一個 github repo，首當其衝就會看到 README。
+而 README 所扮演的角色就是簡單該要的說明這個專案是為了解決什麼問題、用了什麼技術、遇到什麼困難等等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Commit message 寫清楚&lt;/p&gt;
+&lt;p&gt;延續上面的 user flow，如果今天面試官對這個作品感興趣，可能會先看的就是 commit msg，看功能的開發順序、大概用時多長之類的。&lt;/p&gt;
+&lt;p&gt;這裡推薦大家使用約定式提交，較一目了然。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;寫一些註解&lt;/p&gt;
+&lt;p&gt;再來，當面試官對某個 feat 特別感興趣，他可能會點 commit msg 進去看細部實作，這時候適當的註解，解釋 function 或 method 在幹嘛，就尤其重要。&lt;/p&gt;
+&lt;p&gt;不然一行一行看真的蠻累的&amp;hellip;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;盡量優化&lt;/p&gt;
+&lt;p&gt;最後，當面試官開始逐行看 code 的時候，一定不會希望看到的程式碼是毫無架構的 spaghetti code，或是整個排版很亂。&lt;/p&gt;
+&lt;p&gt;盡可能讓 code 看起來閱讀體驗是好的，至少至少也用一些自動化的工具，整理一下 code。&lt;/p&gt;
+&lt;p&gt;優化也不只在程式碼閱讀體驗的部分，功能的部分也可以視時間再做優化，比如針對安全性、針對表單驗證等等內容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;作品不一定是-code&#34;&gt;作品不一定是 code&lt;/h2&gt;
+&lt;p&gt;這個段落雖然也是講作品，但我想特別拉出來寫XD&lt;/p&gt;
+&lt;p&gt;我在找工作的同時，也開始撰寫這個系列。&lt;/p&gt;
+&lt;p&gt;而在某個面試的過程，那間公司的總經理突然問我是不是有在寫部落格，他有看過我的一些文章。&lt;/p&gt;
+&lt;p&gt;後續在面試的時候，也有引用我文章裡面所述，甚至是做一些延伸的討論。&lt;/p&gt;
+&lt;p&gt;雖然有點自肥，但我覺得我寫的文章，充分的傳遞出我的人格特質和思考過程，而總經理是認同的，所以間接的幫我的面試加了不少分。&lt;/p&gt;
+&lt;p&gt;所以我也推薦正在觀看這篇文章的你，可以嘗試創造一些除了 code 以外的作品，可能是影片、文章或任何形式的內容。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;下一篇：&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-7/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【好想工作室 — 後端 (backend Camp)培訓心得（七）：投履歷之後】&lt;/a&gt;：會講開始筆試之後，我自己的經驗與心得。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>現代網路服務基礎架構</title>
         <link>https://jyu1999.com/post/web_application_infrastructure/</link>
         <pubDate>Mon, 29 May 2023 15:01:23 +0800</pubDate>
@@ -2498,6 +2632,9 @@ Backpack 預設提供兩個可以放 widgets 的 section:&lt;/p&gt;
 &lt;p&gt;本篇分享了我認為身為後端學員，有效率的一些學習方式。如果有想到其他的我再補（有時間的話）。&lt;/p&gt;
 &lt;p&gt;其實都蠻樸實無華的，畢竟學習本來就不會有捷徑，只有 chatgpt（X&lt;/p&gt;
 &lt;p&gt;當然，如果你是現役或已畢業後端學員，歡迎跟我分享你親測有效的學習方式！&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;下一篇：&lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/post/goodidea-mind-6/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【好想工作室 — 後端 (backend Camp)培訓心得（六）：找工作之前】&lt;/a&gt;：會講投履歷之前，我做了哪些事情。&lt;/p&gt;
 </description>
         </item>
         <item>
