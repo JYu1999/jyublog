@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='(封面圖片來源：https://www.linkedin.com/pulse/solid-principles-razneeknth-pradhan/)
+前言 在幾個月前我正在求職時，看到很多職缺上面都有提到「SOLID」這個關鍵字，當時的我只大概知道 SOLID 是有關於物件導向的一種設計原則，但具體裡面每個原則在幹嘛也不太清楚。
+直到最近終於有空好好來看一下這個大名鼎鼎（？）的 SOLID，看了很多文章，不管中文英文的，都覺得有看沒有懂，於是想要寫文章整理一下自己的思緒。
+由於我也只是初步研究，不敢保證正確性，如果有覺得任何值得討論的地方，歡迎跟我說喔～
+SOLID 是什麼？為什麼需要？ SOLID 是五個設計原則的縮寫，分別為：
+SRP: 單一職責原則 OCP: 開放-封閉原則 LSP: Liskov 替換原則 ISP: 介面隔離原則 DIP: 依賴反向原則 我們在後續文章會再解釋每一個原則的細節，在這篇文章我想著重在「目標」上。
+我們先來看一下 Clean Architecture 這本書對於 SOLID 目標的描述：
+這些原則的目標是建立中層級的軟體架構，這樣的結構包含：
+能容忍變化 容易理解 是在許多軟體系統中能夠使用的元件的基礎 ok，我在看這句話的時候產生了兩個疑惑：
+中層級是什麼？ 元件是什麼？ 元件（Component） 因為中層級的解釋涉及到元件，所以我們先看到第二個問題，元件是什麼？
+在 Clean Architecture 裡面是這樣定義的：
+元件（Component）是部署（Deployment）的單位。 他們是系統在部署時最小的部分實體。 在 Java 中，他們是 jar 檔。 在 Ruby 中，他們是 Gem 檔。
+如果舉一反三的話，在 PHP 中，Composer package 應該就是元件？
+中層級 中層級的架構 我們再來看第一個問題，在 Clean Architecture 的說明如下：
+「中層級」是指這些原則是程式設計師在模組層級工作時應用的原則。他們應用在程式碼層級之上，並且有助於定義模組和元件內使用的軟體結構類型。
+ok，這邊又出現了一個新名詞：模組（module）。
+模組和元件有何不同，我想這很難有一個明確的定義。不過我個人是同意在 這篇文章 的回答所看到的描述：'>
+<title>SOLID 原則（一）：Top-down 看 SOLID</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/solid/'>
+
+<link rel="stylesheet" href="/scss/style.min.2b64b87be9127a563f4c30266866588cb6bddbfe9eca6a1e4b9cc10923181833.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1363266912643938"
+        crossorigin="anonymous"></script><meta property='og:title' content='SOLID 原則（一）：Top-down 看 SOLID'>
+<meta property='og:description' content='(封面圖片來源：https://www.linkedin.com/pulse/solid-principles-razneeknth-pradhan/)
+前言 在幾個月前我正在求職時，看到很多職缺上面都有提到「SOLID」這個關鍵字，當時的我只大概知道 SOLID 是有關於物件導向的一種設計原則，但具體裡面每個原則在幹嘛也不太清楚。
+直到最近終於有空好好來看一下這個大名鼎鼎（？）的 SOLID，看了很多文章，不管中文英文的，都覺得有看沒有懂，於是想要寫文章整理一下自己的思緒。
+由於我也只是初步研究，不敢保證正確性，如果有覺得任何值得討論的地方，歡迎跟我說喔～
+SOLID 是什麼？為什麼需要？ SOLID 是五個設計原則的縮寫，分別為：
+SRP: 單一職責原則 OCP: 開放-封閉原則 LSP: Liskov 替換原則 ISP: 介面隔離原則 DIP: 依賴反向原則 我們在後續文章會再解釋每一個原則的細節，在這篇文章我想著重在「目標」上。
+我們先來看一下 Clean Architecture 這本書對於 SOLID 目標的描述：
+這些原則的目標是建立中層級的軟體架構，這樣的結構包含：
+能容忍變化 容易理解 是在許多軟體系統中能夠使用的元件的基礎 ok，我在看這句話的時候產生了兩個疑惑：
+中層級是什麼？ 元件是什麼？ 元件（Component） 因為中層級的解釋涉及到元件，所以我們先看到第二個問題，元件是什麼？
+在 Clean Architecture 裡面是這樣定義的：
+元件（Component）是部署（Deployment）的單位。 他們是系統在部署時最小的部分實體。 在 Java 中，他們是 jar 檔。 在 Ruby 中，他們是 Gem 檔。
+如果舉一反三的話，在 PHP 中，Composer package 應該就是元件？
+中層級 中層級的架構 我們再來看第一個問題，在 Clean Architecture 的說明如下：
+「中層級」是指這些原則是程式設計師在模組層級工作時應用的原則。他們應用在程式碼層級之上，並且有助於定義模組和元件內使用的軟體結構類型。
+ok，這邊又出現了一個新名詞：模組（module）。
+模組和元件有何不同，我想這很難有一個明確的定義。不過我個人是同意在 這篇文章 的回答所看到的描述：'>
+<meta property='og:url' content='https://jyu1999.com/post/solid/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SOLID' /><meta property='article:tag' content='物件導向' /><meta property='article:tag' content='OOP' /><meta property='article:tag' content='Object Oriented Programming' /><meta property='article:tag' content='System Architecture' /><meta property='article:published_time' content='2023-06-18T12:14:11&#43;08:00'/><meta property='article:modified_time' content='2023-06-18T12:14:11&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/solid/0.jpeg' />
+<meta name="twitter:site" content="@IamJYu">
+    <meta name="twitter:creator" content="@IamJYu"><meta name="twitter:title" content="SOLID 原則（一）：Top-down 看 SOLID">
+<meta name="twitter:description" content="(封面圖片來源：https://www.linkedin.com/pulse/solid-principles-razneeknth-pradhan/)
+前言 在幾個月前我正在求職時，看到很多職缺上面都有提到「SOLID」這個關鍵字，當時的我只大概知道 SOLID 是有關於物件導向的一種設計原則，但具體裡面每個原則在幹嘛也不太清楚。
+直到最近終於有空好好來看一下這個大名鼎鼎（？）的 SOLID，看了很多文章，不管中文英文的，都覺得有看沒有懂，於是想要寫文章整理一下自己的思緒。
+由於我也只是初步研究，不敢保證正確性，如果有覺得任何值得討論的地方，歡迎跟我說喔～
+SOLID 是什麼？為什麼需要？ SOLID 是五個設計原則的縮寫，分別為：
+SRP: 單一職責原則 OCP: 開放-封閉原則 LSP: Liskov 替換原則 ISP: 介面隔離原則 DIP: 依賴反向原則 我們在後續文章會再解釋每一個原則的細節，在這篇文章我想著重在「目標」上。
+我們先來看一下 Clean Architecture 這本書對於 SOLID 目標的描述：
+這些原則的目標是建立中層級的軟體架構，這樣的結構包含：
+能容忍變化 容易理解 是在許多軟體系統中能夠使用的元件的基礎 ok，我在看這句話的時候產生了兩個疑惑：
+中層級是什麼？ 元件是什麼？ 元件（Component） 因為中層級的解釋涉及到元件，所以我們先看到第二個問題，元件是什麼？
+在 Clean Architecture 裡面是這樣定義的：
+元件（Component）是部署（Deployment）的單位。 他們是系統在部署時最小的部分實體。 在 Java 中，他們是 jar 檔。 在 Ruby 中，他們是 Gem 檔。
+如果舉一反三的話，在 PHP 中，Composer package 應該就是元件？
+中層級 中層級的架構 我們再來看第一個問題，在 Clean Architecture 的說明如下：
+「中層級」是指這些原則是程式設計師在模組層級工作時應用的原則。他們應用在程式碼層級之上，並且有助於定義模組和元件內使用的軟體結構類型。
+ok，這邊又出現了一個新名詞：模組（module）。
+模組和元件有何不同，我想這很難有一個明確的定義。不過我個人是同意在 這篇文章 的回答所看到的描述："><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/post/solid/0.jpeg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+            <span class="emoji">🍌</span>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='/files/jyu_resume.pdf'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#solid-是什麼為什麼需要">SOLID 是什麼？為什麼需要？</a>
+      <ul>
+        <li><a href="#元件component">元件（Component）</a></li>
+        <li><a href="#中層級">中層級</a></li>
+        <li><a href="#小結">小結</a></li>
+      </ul>
+    </li>
+    <li><a href="#solid-的手段">SOLID 的手段？</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/backendlearningpath/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/goodidea-mind/" class="font_size_6">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_5">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_2">
+                無用的小知識
+            </a>
+        
+            <a href="/categories/ruby_on_rails/" class="font_size_1">
+                Ruby on Rails
+            </a>
+        
+            <a href="/categories/software_design_and_architecture/" class="font_size_1">
+                Software Design &amp; Architecture
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_10">
+                backend
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_8">
+                Laravel
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_6">
+                好想工作室
+            </a>
+        
+            <a href="/tags/laravel-backpack/" class="font_size_5">
+                Laravel Backpack
+            </a>
+        
+            <a href="/tags/rubymine/" class="font_size_3">
+                RubyMine
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/ruby/" class="font_size_2">
+                Ruby
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/solid/">
+                <img src="/post/solid/0_hu45ff0ea21f07ece48e7d368e07717536_42482_800x0_resize_q75_box.jpeg"
+                        srcset="/post/solid/0_hu45ff0ea21f07ece48e7d368e07717536_42482_800x0_resize_q75_box.jpeg 800w, /post/solid/0_hu45ff0ea21f07ece48e7d368e07717536_42482_1600x0_resize_q75_box.jpeg 1600w"
+                        width="800" 
+                        height="611" 
+                        loading="lazy"
+                        alt="Featured image of post SOLID 原則（一）：Top-down 看 SOLID" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/software_design_and_architecture/" >
+                Software Design &amp; Architecture
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/solid/">SOLID 原則（一）：Top-down 看 SOLID</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 18, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>(封面圖片來源：https://www.linkedin.com/pulse/solid-principles-razneeknth-pradhan/)</p>
+<h2 id="前言">前言</h2>
+<p>在幾個月前我正在求職時，看到很多職缺上面都有提到「SOLID」這個關鍵字，當時的我只大概知道 SOLID 是有關於物件導向的一種設計原則，但具體裡面每個原則在幹嘛也不太清楚。</p>
+<p>直到最近終於有空好好來看一下這個大名鼎鼎（？）的 SOLID，看了很多文章，不管中文英文的，都覺得有看沒有懂，於是想要寫文章整理一下自己的思緒。</p>
+<p>由於我也只是初步研究，不敢保證正確性，如果有覺得任何值得討論的地方，歡迎跟我說喔～</p>
+<hr>
+<h2 id="solid-是什麼為什麼需要">SOLID 是什麼？為什麼需要？</h2>
+<p>SOLID 是五個設計原則的縮寫，分別為：</p>
+<ul>
+<li>SRP: 單一職責原則</li>
+<li>OCP: 開放-封閉原則</li>
+<li>LSP: Liskov 替換原則</li>
+<li>ISP: 介面隔離原則</li>
+<li>DIP: 依賴反向原則</li>
+</ul>
+<p>我們在後續文章會再解釋每一個原則的細節，在這篇文章我想著重在「目標」上。</p>
+<p>我們先來看一下 <em>Clean Architecture</em> 這本書對於 SOLID 目標的描述：</p>
+<blockquote>
+<p><em>這些原則的目標是建立中層級的軟體架構，這樣的結構包含：</em></p>
+<ul>
+<li><em>能容忍變化</em></li>
+<li><em>容易理解</em></li>
+<li><em>是在許多軟體系統中能夠使用的元件的基礎</em></li>
+</ul>
+</blockquote>
+<p>ok，我在看這句話的時候產生了兩個疑惑：</p>
+<ol>
+<li>中層級是什麼？</li>
+<li>元件是什麼？</li>
+</ol>
+<h3 id="元件component">元件（Component）</h3>
+<p>因為中層級的解釋涉及到元件，所以我們先看到第二個問題，元件是什麼？</p>
+<p>在 <em>Clean Architecture</em> 裡面是這樣定義的：</p>
+<blockquote>
+<p><em>元件（Component）是部署（Deployment）的單位。</em>
+<em>他們是系統在部署時最小的部分實體。</em>
+<em>在 Java 中，他們是 jar 檔。</em>
+<em>在 Ruby 中，他們是 Gem 檔。</em></p>
+</blockquote>
+<p>如果舉一反三的話，在 PHP 中，Composer package 應該就是元件？</p>
+<h3 id="中層級">中層級</h3>
+<h4 id="中層級的架構">中層級的架構</h4>
+<p>我們再來看第一個問題，在 <em>Clean Architecture</em> 的說明如下：</p>
+<blockquote>
+<p><em>「中層級」是指這些原則是程式設計師在模組層級工作時應用的原則。他們應用在程式碼層級之上，並且有助於定義模組和元件內使用的軟體結構類型。</em></p>
+</blockquote>
+<p>ok，這邊又出現了一個新名詞：模組（module）。</p>
+<p>模組和元件有何不同，我想這很難有一個明確的定義。不過我個人是同意在 <a class="link" href="https://stackoverflow.com/questions/2702816/module-vs-component-design"  target="_blank" rel="noopener"
+    >這篇文章</a> 的回答所看到的描述：</p>
+<blockquote>
+<p><em>Both component and module are used to refer to a group of functions or a part of a function. Module is more logical, for example: module Finance, module HR, module Manufacturing&hellip; in ERP system. On the other hand, component is more physical. In software, it can be a dll, ocx, exe,&hellip;</em></p>
+</blockquote>
+<p>怕有人看不懂，協助翻譯一下XD。以一個 ERP 系統來說，所謂的模組可能有「金流模組」、「人力管理模組」、「製造管理模組」。而為了要去實作一個「製造管理模組」，我們可能需要很多的元件。大家可以想像，我們有時候在實作一個功能的時候，是不是也需要引用很多的套件呢？</p>
+<p>所以我們也許可以這樣理解「中層級」：</p>
+<ul>
+<li>工程師會寫一行一行的 Code，這些 Code 屬於「程式碼層級」；</li>
+<li>一行一行的 Code 組成了一個 Class，成為「類別層級」；</li>
+<li>很多個 Class 組合而成一個「元件」，成為「元件層級」；</li>
+<li>很多個「元件」組合起來，變成「模組」，成為「模組層級」；</li>
+<li>很多個「模組」組合起來，最終成為「系統層級」</li>
+</ul>
+<p>而所謂中層級，就是「程式碼層級」、「類別層級」、「元件層級」、「模組層級」的集合。至於「系統層級」算不算在「中層級」，我自己覺得不算～</p>
+<h4 id="中層級的工作">中層級的工作</h4>
+<p>到這邊我又有疑惑了，所以「中層級」到底主要在幹嘛？</p>
+<p>在 <em>Clean Architecture</em> 裡面有一張圖：</p>
+<p><img src="/post/solid/1.jpg"
+	width="655"
+	height="481"
+	srcset="/post/solid/1_hu749f096a81d823dd1826a8206967e9a8_79931_480x0_resize_q75_box.jpg 480w, /post/solid/1_hu749f096a81d823dd1826a8206967e9a8_79931_1024x0_resize_q75_box.jpg 1024w"
+	loading="lazy"
+	
+		alt="來源：https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="136"
+		data-flex-basis="326px"
+	
+></p>
+<p>在這個架構中，愈外圈被視為愈低層，而內圈被視為高層。</p>
+<p>我們其實可以這樣理解：「離I/O（輸入、輸出）越遠的元件層級越高，離I/O越近的層級越低」。這其實也很容易理解，在公司中，櫃台小姐離I/O（接電話、接待訪客）最近，通常層級比較低。董事長、總經理離I/O很遠，層級最高（通常看高階主管的辦公室位置離大門遠近就可猜出層級高低XD）。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>所以我們大概可以知道，所謂的「中層級」就是 Use Cases 和 Interface Adapters 這兩層。而這兩層大概在幹嘛呢？</p>
+<ul>
+<li>Use Cases Layer: 簡單解釋的話，就是該應用的核心商業邏輯。</li>
+<li>Interface Adapters Layer: 我們所熟知的 MVC 架構其實就在這一層，</li>
+</ul>
+<blockquote>
+<p>📕
+其實我自己也沒有很了解這兩層的具體差異在哪裡，上網找是有人說，可能要軟體架構足夠大才會有感覺QAQ</p>
+</blockquote>
+<p>具體每一層在幹嘛，大家可以參考 <a class="link" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"  target="_blank" rel="noopener"
+    >Uncle Bob 的網站</a>，會有比較詳細的解說。</p>
+<h3 id="小結">小結</h3>
+<p>ok，我們了解了元件和中層級，我們再重新回頭看一下 SOLID 的目標：</p>
+<blockquote>
+<p><em>這些原則的目標是建立中層級的軟體架構，這樣的結構包含：</em></p>
+<ul>
+<li><em>能容忍變化</em></li>
+<li><em>容易理解</em></li>
+<li><em>是在許多軟體系統中能夠使用的元件的基礎</em></li>
+</ul>
+</blockquote>
+<p>有更看得懂 SOLID 的目標了嗎（拜託說有🥺），一言以蔽之的話，SOLID 原則就是在幫助我們建造更「乾淨」的中層級。</p>
+<p>這個中層級是要能容忍變化的，不能需求一變，就要大改程式碼。而且這個架構是要能容易被理解的。</p>
+<hr>
+<h2 id="solid-的手段">SOLID 的手段？</h2>
+<p>那具體來說，SOLID 原則能怎麼協助我們呢？一樣，我們看 <em>Clean Architecture</em> 裡面是怎麼說的：</p>
+<blockquote>
+<p><em>SOLID 原則告訴我們該如何將我們的函式和資料結構安排到類別（Class）中，以及這些類別該如何相互關聯。</em></p>
+</blockquote>
+<p>我很喜歡書中對於 Clean Code（整潔的程式碼） 和 Clean Architecture 的比喻：</p>
+<blockquote>
+<p>從某方面來說，如果磚塊（Code）做得不好，那麼建築物的架構（Architecture）也就不重要了。
+從另一方面來說，你也能用精心製作的磚塊來製造大量的垃圾。</p>
+</blockquote>
+<p>所以，我們平時寫 Code 的習慣（規範？），例如有意義的 function 名稱、一行不能超過幾個字等等，就是屬於 Clean Code 的範疇。</p>
+<p>我們寫 Code 的習慣愈好，做出來的磚頭就愈精良。但光是磚頭精良是不夠的，如果亂拼的話還是可能會出問題。</p>
+<p>所以我們需要仔細思考，哪個磚頭要放在哪裡，才能讓房子更加穩固。</p>
+<p>而這個「磚頭要放在哪裡」的 Guideline 就是 SOLID 原則。</p>
+<hr>
+<p>在這一篇中我簡單講解了為什麼需要 SOLID 原則，接下來我會針對每一個原則逐一解說。</p>
+<p>如果有任何問題，歡迎討論！</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a class="link" href="http://teddy-chen-tw.blogspot.com/2018/07/clean-architecture4.html"  target="_blank" rel="noopener"
+    >Clean Architecture（4）：架構三原則首部曲—分層原則</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/solid/">SOLID</a>
+        
+            <a href="/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">物件導向</a>
+        
+            <a href="/tags/oop/">OOP</a>
+        
+            <a href="/tags/object-oriented-programming/">Object Oriented Programming</a>
+        
+            <a href="/tags/system-architecture/">System Architecture</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

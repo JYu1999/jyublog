@@ -1214,7 +1214,8 @@
 		data-flex-grow=&#34;260&#34;
 		data-flex-basis=&#34;624px&#34;
 	
-&gt;&lt;/p&gt;
+&gt;
+）&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;[!note]
 記得要在 model 設定 casting。&lt;/p&gt;

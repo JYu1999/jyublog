@@ -489,7 +489,7 @@ Table 感覺也是工作上會常常用的。
 
 做出來會如下圖：
 ![table 成果](11.png)
-
+）
 > [!note]
 > 記得要在 model 設定 casting。
 
