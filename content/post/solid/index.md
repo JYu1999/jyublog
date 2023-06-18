@@ -2,7 +2,7 @@
 title: "SOLID 原則（一）：Top-down 看 SOLID"
 date: 2023-06-18T12:14:11+08:00
 draft: false
-tags:
+keywords:
 - SOLID
 - 物件導向
 - OOP
@@ -11,6 +11,7 @@ tags:
 categories:
 - software_design_and_architecture
 image: "0.jpeg"
+
 ---
 (封面圖片來源：https://www.linkedin.com/pulse/solid-principles-razneeknth-pradhan/)
 
@@ -148,6 +149,10 @@ ok，我們了解了元件和中層級，我們再重新回頭看一下 SOLID �
 
 ---
 
-在這一篇中我簡單講解了為什麼需要 SOLID 原則，接下來我會針對每一個原則逐一解說。
+在這一篇中我簡單講解了為什麼需要 SOLID 原則。
+
+接下來我會從 OCP 開始，針對每一個原則逐一解說。
 
 如果有任何問題，歡迎討論！
+
+👉 下一篇：[SOLID 原則（二）：OCP & DIP](https://jyu1999.com/post/solid-dip/)

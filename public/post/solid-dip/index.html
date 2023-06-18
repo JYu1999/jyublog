@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 在上一篇 SOLID 原則（一）：Top-down 看 SOLID 有說明了 SOLID 的目的，從這篇開始逐一解說～
+大多數的文章都是從 SRP 開始照順序介紹，但我自己覺得 SRP 是最難懂的&amp;hellip;
+所以我從我覺得比較簡單的，逐一介紹，希望能降低讀者的閱讀門檻XD
+OCP(Open-Closed Principle) What is OCP? 這個原則相對簡單，我們先來看一下定義：
+Objects or entities should be open for extension but closed for modification.
+其實這個定義我覺得很難以理解，我們看一下 Clean Architecture 這本書是怎麼說的：
+軟體製品的行為應該是可擴展的，而且沒必要修改該製品
+我們再來看一下維基百科：
+這意味著一個實體是允許在不改變它的原始碼的前提下變更它的行為
+大家可以想一下，假設我裝了一個 Google Chrome 的 plugin，是要把每個頁面的字都變成白色的。
+如果這個 plugin 直接去改 Chrome 的原始碼，會發生什麼事情呢？
+首先可能是如果 plugin 要改很多地方的話，之後可能會很難把它改回來。
+再來，怎麼確認改了這些地方，不會造成其他地方的 bug？
+因此，比較理想的方式是，這個 plugin 可能會去繼承（or implement）Google Chrome 用來控制字體的 Class（or Interface），然後去覆蓋掉原本的設定。
+這樣我可以保證其他用到這個 Class(Interface) 的程式不會出問題，到時候要改回去也很簡單。
+如果想看範例的，可以看看 SOLID: The First 5 Principles of Object Oriented Design'>
+<meta name="keywords" content="SOLID, 物件導向, OOP, Object Oriented Programming, System Architecture"><title>SOLID 原則（二）：OCP &amp; DIP</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/solid-dip/'>
+
+<link rel="stylesheet" href="/scss/style.min.2b64b87be9127a563f4c30266866588cb6bddbfe9eca6a1e4b9cc10923181833.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1363266912643938"
+        crossorigin="anonymous"></script><meta property='og:title' content='SOLID 原則（二）：OCP &amp; DIP'>
+<meta property='og:description' content='前言 在上一篇 SOLID 原則（一）：Top-down 看 SOLID 有說明了 SOLID 的目的，從這篇開始逐一解說～
+大多數的文章都是從 SRP 開始照順序介紹，但我自己覺得 SRP 是最難懂的&amp;hellip;
+所以我從我覺得比較簡單的，逐一介紹，希望能降低讀者的閱讀門檻XD
+OCP(Open-Closed Principle) What is OCP? 這個原則相對簡單，我們先來看一下定義：
+Objects or entities should be open for extension but closed for modification.
+其實這個定義我覺得很難以理解，我們看一下 Clean Architecture 這本書是怎麼說的：
+軟體製品的行為應該是可擴展的，而且沒必要修改該製品
+我們再來看一下維基百科：
+這意味著一個實體是允許在不改變它的原始碼的前提下變更它的行為
+大家可以想一下，假設我裝了一個 Google Chrome 的 plugin，是要把每個頁面的字都變成白色的。
+如果這個 plugin 直接去改 Chrome 的原始碼，會發生什麼事情呢？
+首先可能是如果 plugin 要改很多地方的話，之後可能會很難把它改回來。
+再來，怎麼確認改了這些地方，不會造成其他地方的 bug？
+因此，比較理想的方式是，這個 plugin 可能會去繼承（or implement）Google Chrome 用來控制字體的 Class（or Interface），然後去覆蓋掉原本的設定。
+這樣我可以保證其他用到這個 Class(Interface) 的程式不會出問題，到時候要改回去也很簡單。
+如果想看範例的，可以看看 SOLID: The First 5 Principles of Object Oriented Design'>
+<meta property='og:url' content='https://jyu1999.com/post/solid-dip/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2023-06-18T15:52:19&#43;08:00'/><meta property='article:modified_time' content='2023-06-18T15:52:19&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/solid-dip/0.webp' />
+<meta name="twitter:title" content="SOLID 原則（二）：OCP &amp; DIP">
+<meta name="twitter:description" content="前言 在上一篇 SOLID 原則（一）：Top-down 看 SOLID 有說明了 SOLID 的目的，從這篇開始逐一解說～
+大多數的文章都是從 SRP 開始照順序介紹，但我自己覺得 SRP 是最難懂的&amp;hellip;
+所以我從我覺得比較簡單的，逐一介紹，希望能降低讀者的閱讀門檻XD
+OCP(Open-Closed Principle) What is OCP? 這個原則相對簡單，我們先來看一下定義：
+Objects or entities should be open for extension but closed for modification.
+其實這個定義我覺得很難以理解，我們看一下 Clean Architecture 這本書是怎麼說的：
+軟體製品的行為應該是可擴展的，而且沒必要修改該製品
+我們再來看一下維基百科：
+這意味著一個實體是允許在不改變它的原始碼的前提下變更它的行為
+大家可以想一下，假設我裝了一個 Google Chrome 的 plugin，是要把每個頁面的字都變成白色的。
+如果這個 plugin 直接去改 Chrome 的原始碼，會發生什麼事情呢？
+首先可能是如果 plugin 要改很多地方的話，之後可能會很難把它改回來。
+再來，怎麼確認改了這些地方，不會造成其他地方的 bug？
+因此，比較理想的方式是，這個 plugin 可能會去繼承（or implement）Google Chrome 用來控制字體的 Class（or Interface），然後去覆蓋掉原本的設定。
+這樣我可以保證其他用到這個 Class(Interface) 的程式不會出問題，到時候要改回去也很簡單。
+如果想看範例的，可以看看 SOLID: The First 5 Principles of Object Oriented Design"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/post/solid-dip/0.webp' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+            <span class="emoji">🍌</span>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='/files/jyu_resume.pdf'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#ocpopen-closed-principle">OCP(Open-Closed Principle)</a></li>
+    <li><a href="#what-is-ocp">What is OCP?</a></li>
+    <li><a href="#dipdependency-inversion-principle">DIP(Dependency Inversion Principle)</a>
+      <ul>
+        <li><a href="#what-is-dip">What is DIP?</a></li>
+        <li><a href="#example">Example</a></li>
+        <li><a href="#過猶不及">過猶不及</a></li>
+      </ul>
+    </li>
+    <li><a href="#留白">留白</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/backendlearningpath/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/goodidea-mind/" class="font_size_6">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_5">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/software_design_and_architecture/" class="font_size_2">
+                Software Design &amp; Architecture
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_2">
+                無用的小知識
+            </a>
+        
+            <a href="/categories/ruby_on_rails/" class="font_size_1">
+                Ruby on Rails
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_10">
+                backend
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_8">
+                Laravel
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_6">
+                好想工作室
+            </a>
+        
+            <a href="/tags/laravel-backpack/" class="font_size_5">
+                Laravel Backpack
+            </a>
+        
+            <a href="/tags/rubymine/" class="font_size_3">
+                RubyMine
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/ruby/" class="font_size_2">
+                Ruby
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/solid-dip/">
+                <img src="/post/solid-dip/0_hu1f007d480c2c00b64bdf1e44939741a8_16922_800x0_resize_q75_h2_box_2.webp"
+                        srcset="/post/solid-dip/0_hu1f007d480c2c00b64bdf1e44939741a8_16922_800x0_resize_q75_h2_box_2.webp 800w, /post/solid-dip/0_hu1f007d480c2c00b64bdf1e44939741a8_16922_1600x0_resize_q75_h2_box_2.webp 1600w"
+                        width="800" 
+                        height="599" 
+                        loading="lazy"
+                        alt="Featured image of post SOLID 原則（二）：OCP &amp; DIP" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/software_design_and_architecture/" >
+                Software Design &amp; Architecture
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/solid-dip/">SOLID 原則（二）：OCP &amp; DIP</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 18, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="前言">前言</h2>
+<p>在上一篇 <a class="link" href="https://jyu1999.com/post/solid/"  target="_blank" rel="noopener"
+    >SOLID 原則（一）：Top-down 看 SOLID</a> 有說明了 SOLID 的目的，從這篇開始逐一解說～</p>
+<p>大多數的文章都是從 SRP 開始照順序介紹，但我自己覺得 SRP 是最難懂的&hellip;</p>
+<p>所以我從我覺得比較簡單的，逐一介紹，希望能降低讀者的閱讀門檻XD</p>
+<hr>
+<h2 id="ocpopen-closed-principle">OCP(Open-Closed Principle)</h2>
+<h2 id="what-is-ocp">What is OCP?</h2>
+<p>這個原則相對簡單，我們先來看一下定義：</p>
+<blockquote>
+<p><em>Objects or entities should be open for extension but closed for modification.</em></p>
+</blockquote>
+<p>其實這個定義我覺得很難以理解，我們看一下 <em>Clean Architecture</em> 這本書是怎麼說的：</p>
+<blockquote>
+<p><em>軟體製品的行為應該是可擴展的，而且沒必要修改該製品</em></p>
+</blockquote>
+<p>我們再來看一下<a class="link" href="https://zh.wikipedia.org/wiki/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99"  target="_blank" rel="noopener"
+    >維基百科</a>：</p>
+<blockquote>
+<p><em>這意味著一個實體是允許在不改變它的原始碼的前提下變更它的行為</em></p>
+</blockquote>
+<p>大家可以想一下，假設我裝了一個 Google Chrome 的 plugin，是要把每個頁面的字都變成白色的。</p>
+<p>如果這個 plugin 直接去改 Chrome 的原始碼，會發生什麼事情呢？</p>
+<p>首先可能是如果 plugin 要改很多地方的話，之後可能會很難把它改回來。</p>
+<p>再來，怎麼確認改了這些地方，不會造成其他地方的 bug？</p>
+<p>因此，比較理想的方式是，這個 plugin 可能會去繼承（or implement）Google Chrome 用來控制字體的 Class（or Interface），然後去覆蓋掉原本的設定。</p>
+<p>這樣我可以保證其他用到這個 Class(Interface) 的程式不會出問題，到時候要改回去也很簡單。</p>
+<p>如果想看範例的，可以看看 <a class="link" href="https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design#open-closed-principle"  target="_blank" rel="noopener"
+    >SOLID: The First 5 Principles of Object Oriented Design</a></p>
+<hr>
+<h2 id="dipdependency-inversion-principle">DIP(Dependency Inversion Principle)</h2>
+<h3 id="what-is-dip">What is DIP?</h3>
+<p>一樣，先來看一下定義：</p>
+<blockquote>
+<p><em>Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.</em></p>
+</blockquote>
+<p>定義看不懂沒關係，但最好先記著，下面的解釋會一直圍繞著定義。</p>
+<h3 id="example">Example</h3>
+<p>我們先來看看實際的範例（<a class="link" href="https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design#dependency-inversion-principle"  target="_blank" rel="noopener"
+    >範例來源</a>）。</p>
+<p>假設我們今天要實作一個 <code>PasswordReminder</code> 的 Class</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MySQLConnection</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">connect</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// handle the database connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Database connection&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PasswordReminder</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> $dbConnection;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct(<span style="color:#a6e22e">MySQLConnection</span> $dbConnection)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">dbConnection</span> <span style="color:#f92672">=</span> $dbConnection;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>這個 <code>MySQLConnection</code> 就是 low-level module，<code>PasswordReminder</code> 是 high-level module。</p>
+<p>但根據定義：<em>high-level module must not depend on the low-level module</em>，我們知道 <code>PasswordReminder</code> 依賴 <code>MySQLConnection</code> 是違反 DIP 的。<code>PasswordReminder</code> 應該要 <em>depend on abstractions</em> 才對。</p>
+<p>知道是知道啦，但是為什麼不行？我們可以試想一個情況：</p>
+<blockquote>
+<p>主管突然宣布：「從今天開始，我們的 Database 不用 MySQL 了，改用 PostgreSQL 吧！」</p>
+</blockquote>
+<p>這時候工程師可能需要寫一個新的 <code>PostgreSQLConnection</code>，然後更改 <code>PasswordReminder</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PasswordReminder</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> $dbConnection;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct(<span style="color:#a6e22e">PostgreSQLConnection</span> $dbConnection)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">dbConnection</span> <span style="color:#f92672">=</span> $dbConnection;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>乍看之下很合理，但仔細想想就會有不對勁了：<strong>我換個 DB Driver，甘 <code>PasswordReminder</code> 什麼事啊？</strong>
+而且其實也違反了 OCP。</p>
+<p>也就是說，<code>PasswordReminder</code> 其實不需要知道底層是用什麼資料庫實現的，它所需要的只是建立連線而已。</p>
+<p>ok，所以我們可以把 <code>connect()</code> 這個行為「抽象化」，讓 <code>MySQLConnection</code> 這個 low-level module，<code>PasswordReminder</code> 這個 high-level module，都可以 <em>depend on abstraction</em>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">DBConnectionInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">connect</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>這個 interface 只有一個 <code>connect()</code> method，然後 <code>MySQLConnection</code> 會去 implements 這個 interface。</p>
+<p>此外，在 <code>PasswordReminder</code> 裡面，我們也可以把 type hint 換成 <code>DBConnectionInterface</code>，不用再去管用到什麼 DB Driver 了！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MySQLConnection</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">DBConnectionInterface</span> <span style="color:#75715e">//MySQLConnection 去 implements 這個 interface
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">connect</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// handle the database connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Database connection&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PasswordReminder</span> 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> $dbConnection;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct(<span style="color:#a6e22e">DBConnectionInterface</span> $dbConnection) <span style="color:#75715e">//把 type hint 換成 DBConnectionInterface
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">dbConnection</span> <span style="color:#f92672">=</span> $dbConnection;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>所以如果有人需要用到 <code>PasswordReminder</code> 這個功能的話，在使用的時候就要一併指定 DB Driver:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>$password <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PasswordReminder</span>(<span style="color:#a6e22e">MySQLConnection</span>)
+</span></span></code></pre></div><p>然後如果老闆提出要換資料庫的話，我們就新增一個 <code>PostgreConnection</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PostgreConnection</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">DBConnectionInterface</span> 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">connect</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// handle the database connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Database connection&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 要使用 PasswordReminder 的話：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$password <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PasswordReminder</span>(<span style="color:#a6e22e">PostgreSQLConnection</span>)
+</span></span></code></pre></div><p>這樣的做法其實是一種將低層模組(low-level module)的控制權從原來的高層模組(high-level module)中抽離，將兩者的耦合只放在抽象層(abstraction)上。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="過猶不及">過猶不及</h3>
+<p>那可能有人會想到，如果我們用更宏觀的角度來看系統的話，我們寫的 code 不是一樣依賴於 Framework 和 Database，甚至是 Operation System 嗎？</p>
+<p>是也沒錯，但我們可以來看看 <em>Clean Architecture</em> 怎麼說：</p>
+<blockquote>
+<p><em>我們想要避免依賴的是系統中 <strong>容易變化</strong> 的具體元素</em>。它們是我們正在發展且正在經常變化模組。</p>
+<p>基於上述理由，在應用 DIP 時，我們傾向於忽略作業系統和平台機制的穩定背景。我們容忍那些具體的依賴關係，因為我們信任它們不會改變。</p>
+</blockquote>
+<p>所以其實我們可以忽略對於 DB, Framework 乃至於 OS 的依賴～</p>
+<h2 id="留白">留白</h2>
+<blockquote>
+<p>😅
+其實本來還想寫更多的，但考量到這篇文章設定是給初入 SOLID 的人看的，就先留白吧～<del>絕對不是因為我自己也看不懂</del></p>
+<p>但怕有些人求知慾太旺盛，提供一些關鍵字以供參考</p>
+<p>在 OCP 的部分，本來想要補充實際應用案例。（Controller, Presenter, Interactor 那些）</p>
+<p>在 DIP 的部分，還想要補充 Factory Pattern 和 <em>Clean Architecture</em> 提到的編碼實戰守則。</p>
+<p>就留給大家自己研究，也有可能我有空會再寫 XD</p>
+</blockquote>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a class="link" href="https://medium.com/@ChunYeung/%E4%BD%BF%E4%BA%BA%E7%98%8B%E7%8B%82%E7%9A%84-solid-%E5%8E%9F%E5%89%87-%E4%BE%9D%E8%B3%B4%E5%8F%8D%E5%90%91%E5%8E%9F%E5%89%87-dependency-inversion-principle-a74ca045d776"  target="_blank" rel="noopener"
+    >使人瘋狂的 SOLID 原則：依賴反向原則 (Dependency Inversion Principle)</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/solid/">
+        
+        
+            <div class="article-image">
+                <img src="/post/solid/0.ef35c92084e3d31a5ff7b71d957f3160_hu45ff0ea21f07ece48e7d368e07717536_42482_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post SOLID 原則（一）：Top-down 看 SOLID"
+                        
+                        data-hash="md5-7zXJIITj0xpf97cdlX8xYA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SOLID 原則（一）：Top-down 看 SOLID</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

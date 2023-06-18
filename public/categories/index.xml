@@ -6,10 +6,10 @@
         <description>Recent content in Categories on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Sun, 18 Jun 2023 12:14:11 +0800</lastBuildDate><atom:link href="https://jyu1999.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 18 Jun 2023 15:52:19 +0800</lastBuildDate><atom:link href="https://jyu1999.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Software Design &amp; Architecture</title>
         <link>https://jyu1999.com/categories/software_design_and_architecture/</link>
-        <pubDate>Sun, 18 Jun 2023 12:14:11 +0800</pubDate>
+        <pubDate>Sun, 18 Jun 2023 15:52:19 +0800</pubDate>
         
         <guid>https://jyu1999.com/categories/software_design_and_architecture/</guid>
         <description></description>
@@ -21,6 +21,14 @@
         
         <guid>https://jyu1999.com/categories/goodidea-mind/</guid>
         <description>&lt;img src="https://jyu1999.com/categories/goodidea-mind/4.png" alt="Featured image of post 好想工作室 — 後端 (backend Camp)培訓心得" /&gt;</description>
+        </item>
+        <item>
+        <title>後端學習路徑</title>
+        <link>https://jyu1999.com/categories/backendlearningpath/</link>
+        <pubDate>Thu, 01 Jun 2023 23:37:13 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/categories/backendlearningpath/</guid>
+        <description>&lt;img src="https://jyu1999.com/categories/backendlearningpath/1.jpg" alt="Featured image of post 後端學習路徑" /&gt;</description>
         </item>
         <item>
         <title>Ruby on Rails</title>
@@ -45,14 +53,6 @@
         
         <guid>https://jyu1999.com/categories/laravel_backpack/</guid>
         <description>&lt;img src="https://jyu1999.com/categories/laravel_backpack/1.png" alt="Featured image of post Laravel Backpack 初學者之路" /&gt;</description>
-        </item>
-        <item>
-        <title>後端學習路徑</title>
-        <link>https://jyu1999.com/categories/backendlearningpath/</link>
-        <pubDate>Thu, 18 May 2023 23:52:05 +0800</pubDate>
-        
-        <guid>https://jyu1999.com/categories/backendlearningpath/</guid>
-        <description>&lt;img src="https://jyu1999.com/categories/backendlearningpath/1.jpg" alt="Featured image of post 後端學習路徑" /&gt;</description>
         </item>
         
     </channel>
