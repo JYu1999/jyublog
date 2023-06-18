@@ -20,7 +20,7 @@ keywords:
 
 > 如果你是 recruiter 或 headhunter，建議直接去看我的履歷，以下內容跟專業相關不高。
 
-Hi, 我是 結語JYu。目前在森淨科技擔任後端工程師，主要開發語言/框架為 Ruby/Rails。 同時，我也在好想工作室 Backend Camp 擔任小 mentor。
+Hi, 我是 結語JYu。目前是一個後端工程師，主要開發語言/框架為 Ruby/Rails。 同時，我也在好想工作室 Backend Camp 擔任小 mentor。
 
 現在主要在學習與鑽研的方向為網頁開發，包含但不限於前後端技術、資料庫設計與優化、系統設計、分散式系統設計等等。
 

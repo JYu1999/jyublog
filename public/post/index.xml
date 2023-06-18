@@ -135,7 +135,7 @@
 &lt;p&gt;是也沒錯，但我們可以來看看 &lt;em&gt;Clean Architecture&lt;/em&gt; 怎麼說：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;我們想要避免依賴的是系統中 &lt;strong&gt;容易變化&lt;/strong&gt; 的具體元素&lt;/em&gt;。它們是我們正在發展且正在經常變化模組。&lt;/p&gt;
-&lt;p&gt;基於上述理由，在應用 DIP 時，我們傾向於忽略作業系統和平台機制的穩定背景。我們容忍那些具體的依賴關係，因為我們信任它們不會改變。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;基於上述理由，在應用 DIP 時，我們傾向於忽略作業系統和平台機制的穩定背景。我們容忍那些具體的依賴關係，因為我們信任它們不會改變。&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;所以其實我們可以忽略對於 DB, Framework 乃至於 OS 的依賴～&lt;/p&gt;
 &lt;h2 id=&#34;留白&#34;&gt;留白&lt;/h2&gt;
