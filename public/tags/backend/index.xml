@@ -6,7 +6,26 @@
         <description>Recent content in backend on Me are 結語JYu</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-tw</language>
-        <lastBuildDate>Thu, 01 Jun 2023 23:37:13 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/backend/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 23 Aug 2023 13:32:01 +0800</lastBuildDate><atom:link href="https://jyu1999.com/tags/backend/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>你可能不需要知道的時間複雜度</title>
+        <link>https://jyu1999.com/post/time-complexity/</link>
+        <pubDate>Wed, 23 Aug 2023 13:32:01 +0800</pubDate>
+        
+        <guid>https://jyu1999.com/post/time-complexity/</guid>
+        <description>&lt;img src="https://jyu1999.com/post/time-complexity/001.jpeg" alt="Featured image of post 你可能不需要知道的時間複雜度" /&gt;&lt;p&gt;這是我 2023/8/3 在好想工作室分享時間複雜度相關的內容。
+如果有任何錯誤歡迎指正～&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/XAZphjMXbN4&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+        </item>
+        <item>
         <title>JYu&#39;s Backend Learning Path</title>
         <link>https://jyu1999.com/post/backend_learning_path_jyu/</link>
         <pubDate>Thu, 01 Jun 2023 23:37:13 +0800</pubDate>
