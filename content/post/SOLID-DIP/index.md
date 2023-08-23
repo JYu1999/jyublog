@@ -1,7 +1,7 @@
 ---
 title: "SOLID 原則（二）：OCP & DIP"
 date: 2023-06-18T15:52:19+08:00
-draft: true 
+draft: false 
 keywords:
 - SOLID
 - 物件導向
