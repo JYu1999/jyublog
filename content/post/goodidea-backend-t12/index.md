@@ -1,7 +1,7 @@
 ---
 title: "好想工作室 Backend Camp 第 12 梯招生"
 date: 2023-09-17T12:00:18+08:00
-draft: false
+draft: true
 tags:
   - 好想工作室 
 image: "logo.png"
