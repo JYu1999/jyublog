@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='大家好，我是 結語 JYu，目前是一名後端工程師，同時也是好想工作室的小 mentor。
+好想工作室即將開始招收新一梯次的 Backend Camp 成員了😁
+好想工作室？ 好想工作室是一個在台南的資訊聚落，目前位在火車站旁邊，裡面有著很多對資訊科技充滿熱情的人。
+有些人是工作者，也有些是學員，而學員分別隸屬於不同的 Camp。主要分成兩個 Camp：Web 和 Backend。
+培訓的時間、地點？ 地點是在好想工作室（廢話），地址是台南市東區北門路二段 16 號 L2A（台南文創園區內）
+時間的話，大部分的學員都是在平日 9~18 之間。
+假日要來也是可以，但請先取得 Mentor 同意。
+招生條件 自備乙台筆電，作業系統 Linux / Mac。 Backend Camp 的培訓模式 一、自學 Backend Camp 是以自學為主，基本上 mentor 會給你一個粗略的方向，或有時會有一些小作業。
+這些都不是強制的，也不會壓 Deadline 給學員。如果學員有自己想研究的方向，我們都是尊重，並盡量協助。
+雖說如此，如果學員過於懶散，或是偏離後端領域太多，mentor 還是會去關心一下喔😉
+培訓過程中，不會有答案，也不會有很詳細的規劃。學員在每天、每個禮拜、每個月甚至到這半年想要達成什麼，都是仰賴學員自己做決定。
+我們並不是放牛吃草，收進來就讓學員自生自滅。我們希望的是，學員有經過自己探索、消化並吸收後，並能試著歸納出自己的學習方向、方法、步調和目標等。
+讓學員按表操課可能可以讓學員省去很多探索的時間，但只要不再有課程表，學員可能就不知道自己可以再朝什麼方向再進化了，這是我們不願意看到的。
+畢竟對於軟體工程師來說，學習是一輩子的事情。
+當然，如果有任何問題，不管是技術上、求職上甚至是心情上的問題，都可以找 camp 的成員聊聊，聽聽大家想法，再做決定～
+二、Camp 和學員共同進化 培訓這件事情不可能是完美的，畢竟每次學員的組成和程度都不同。
+我們的培訓模式一定會有缺陷，但我們都會持續反思並和學員進行討論，最終目的就是要讓學員變得更好。
+例如在第 10 梯的時候，我們有看到學員不太知道如何對某一個主題進行深入的研究，在「分享」這件事情上也比較缺乏架構，所以在第 11 梯的時候，開始了二到三週一次的後端分享會。在進行分享會的過程中，學員們也從一開始的東拼西湊、缺乏架構，變成井井有條並能緊扣主題。
+此外，我們也發現一開始從業的軟體工程師可能在時間管理或目標設定上，會有一些困難。所以今年我們也特別設計了一個作業，模擬實際上會遇到的工作情況，如時程安排、需求確認。學員也從一開始根本不敢跟（假）業主確認需求，只看著規格書硬做，導致浪費時間。到後面能主動想到規格書上可能未盡的事項，也能對單一個需求提出多個解決方案，並跟（假）業主討論。詳情大家可以參考學員 Wade 以這個作業為主題撰寫的鐵人賽文章。
+說實話這些模式都沒有很創新，主要想講的就是：Backend Camp 的培訓模式，是會隨著學員的需求、上一屆學員的反饋和 mentor &amp;amp; 小 mentor 的經驗，而有所調整，並非是一成不變的。'>
+<meta name="keywords" content="結語, JYu, 好想工作室, Goodidea Studio, 台南, 免費軟體培訓, 後端, 後端學習, Tainan, 轉職, 軟體工程師, 轉職軟體工程師, Backend, 軟體課程, 程式教育"><title>好想工作室 Backend Camp 第 12 梯招生</title>
+
+<link rel='canonical' href='https://jyu1999.com/post/goodidea-backend-t12/'>
+
+<link rel="stylesheet" href="/scss/style.min.2b64b87be9127a563f4c30266866588cb6bddbfe9eca6a1e4b9cc10923181833.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1363266912643938"
+        crossorigin="anonymous"></script><meta property='og:title' content='好想工作室 Backend Camp 第 12 梯招生'>
+<meta property='og:description' content='大家好，我是 結語 JYu，目前是一名後端工程師，同時也是好想工作室的小 mentor。
+好想工作室即將開始招收新一梯次的 Backend Camp 成員了😁
+好想工作室？ 好想工作室是一個在台南的資訊聚落，目前位在火車站旁邊，裡面有著很多對資訊科技充滿熱情的人。
+有些人是工作者，也有些是學員，而學員分別隸屬於不同的 Camp。主要分成兩個 Camp：Web 和 Backend。
+培訓的時間、地點？ 地點是在好想工作室（廢話），地址是台南市東區北門路二段 16 號 L2A（台南文創園區內）
+時間的話，大部分的學員都是在平日 9~18 之間。
+假日要來也是可以，但請先取得 Mentor 同意。
+招生條件 自備乙台筆電，作業系統 Linux / Mac。 Backend Camp 的培訓模式 一、自學 Backend Camp 是以自學為主，基本上 mentor 會給你一個粗略的方向，或有時會有一些小作業。
+這些都不是強制的，也不會壓 Deadline 給學員。如果學員有自己想研究的方向，我們都是尊重，並盡量協助。
+雖說如此，如果學員過於懶散，或是偏離後端領域太多，mentor 還是會去關心一下喔😉
+培訓過程中，不會有答案，也不會有很詳細的規劃。學員在每天、每個禮拜、每個月甚至到這半年想要達成什麼，都是仰賴學員自己做決定。
+我們並不是放牛吃草，收進來就讓學員自生自滅。我們希望的是，學員有經過自己探索、消化並吸收後，並能試著歸納出自己的學習方向、方法、步調和目標等。
+讓學員按表操課可能可以讓學員省去很多探索的時間，但只要不再有課程表，學員可能就不知道自己可以再朝什麼方向再進化了，這是我們不願意看到的。
+畢竟對於軟體工程師來說，學習是一輩子的事情。
+當然，如果有任何問題，不管是技術上、求職上甚至是心情上的問題，都可以找 camp 的成員聊聊，聽聽大家想法，再做決定～
+二、Camp 和學員共同進化 培訓這件事情不可能是完美的，畢竟每次學員的組成和程度都不同。
+我們的培訓模式一定會有缺陷，但我們都會持續反思並和學員進行討論，最終目的就是要讓學員變得更好。
+例如在第 10 梯的時候，我們有看到學員不太知道如何對某一個主題進行深入的研究，在「分享」這件事情上也比較缺乏架構，所以在第 11 梯的時候，開始了二到三週一次的後端分享會。在進行分享會的過程中，學員們也從一開始的東拼西湊、缺乏架構，變成井井有條並能緊扣主題。
+此外，我們也發現一開始從業的軟體工程師可能在時間管理或目標設定上，會有一些困難。所以今年我們也特別設計了一個作業，模擬實際上會遇到的工作情況，如時程安排、需求確認。學員也從一開始根本不敢跟（假）業主確認需求，只看著規格書硬做，導致浪費時間。到後面能主動想到規格書上可能未盡的事項，也能對單一個需求提出多個解決方案，並跟（假）業主討論。詳情大家可以參考學員 Wade 以這個作業為主題撰寫的鐵人賽文章。
+說實話這些模式都沒有很創新，主要想講的就是：Backend Camp 的培訓模式，是會隨著學員的需求、上一屆學員的反饋和 mentor &amp;amp; 小 mentor 的經驗，而有所調整，並非是一成不變的。'>
+<meta property='og:url' content='https://jyu1999.com/post/goodidea-backend-t12/'>
+<meta property='og:site_name' content='Me are 結語JYu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='好想工作室' /><meta property='article:published_time' content='2023-09-17T12:00:18&#43;08:00'/><meta property='article:modified_time' content='2023-09-17T12:00:18&#43;08:00'/><meta property='og:image' content='https://jyu1999.com/post/goodidea-backend-t12/logo.png' />
+<meta name="twitter:title" content="好想工作室 Backend Camp 第 12 梯招生">
+<meta name="twitter:description" content="大家好，我是 結語 JYu，目前是一名後端工程師，同時也是好想工作室的小 mentor。
+好想工作室即將開始招收新一梯次的 Backend Camp 成員了😁
+好想工作室？ 好想工作室是一個在台南的資訊聚落，目前位在火車站旁邊，裡面有著很多對資訊科技充滿熱情的人。
+有些人是工作者，也有些是學員，而學員分別隸屬於不同的 Camp。主要分成兩個 Camp：Web 和 Backend。
+培訓的時間、地點？ 地點是在好想工作室（廢話），地址是台南市東區北門路二段 16 號 L2A（台南文創園區內）
+時間的話，大部分的學員都是在平日 9~18 之間。
+假日要來也是可以，但請先取得 Mentor 同意。
+招生條件 自備乙台筆電，作業系統 Linux / Mac。 Backend Camp 的培訓模式 一、自學 Backend Camp 是以自學為主，基本上 mentor 會給你一個粗略的方向，或有時會有一些小作業。
+這些都不是強制的，也不會壓 Deadline 給學員。如果學員有自己想研究的方向，我們都是尊重，並盡量協助。
+雖說如此，如果學員過於懶散，或是偏離後端領域太多，mentor 還是會去關心一下喔😉
+培訓過程中，不會有答案，也不會有很詳細的規劃。學員在每天、每個禮拜、每個月甚至到這半年想要達成什麼，都是仰賴學員自己做決定。
+我們並不是放牛吃草，收進來就讓學員自生自滅。我們希望的是，學員有經過自己探索、消化並吸收後，並能試著歸納出自己的學習方向、方法、步調和目標等。
+讓學員按表操課可能可以讓學員省去很多探索的時間，但只要不再有課程表，學員可能就不知道自己可以再朝什麼方向再進化了，這是我們不願意看到的。
+畢竟對於軟體工程師來說，學習是一輩子的事情。
+當然，如果有任何問題，不管是技術上、求職上甚至是心情上的問題，都可以找 camp 的成員聊聊，聽聽大家想法，再做決定～
+二、Camp 和學員共同進化 培訓這件事情不可能是完美的，畢竟每次學員的組成和程度都不同。
+我們的培訓模式一定會有缺陷，但我們都會持續反思並和學員進行討論，最終目的就是要讓學員變得更好。
+例如在第 10 梯的時候，我們有看到學員不太知道如何對某一個主題進行深入的研究，在「分享」這件事情上也比較缺乏架構，所以在第 11 梯的時候，開始了二到三週一次的後端分享會。在進行分享會的過程中，學員們也從一開始的東拼西湊、缺乏架構，變成井井有條並能緊扣主題。
+此外，我們也發現一開始從業的軟體工程師可能在時間管理或目標設定上，會有一些困難。所以今年我們也特別設計了一個作業，模擬實際上會遇到的工作情況，如時程安排、需求確認。學員也從一開始根本不敢跟（假）業主確認需求，只看著規格書硬做，導致浪費時間。到後面能主動想到規格書上可能未盡的事項，也能對單一個需求提出多個解決方案，並跟（假）業主討論。詳情大家可以參考學員 Wade 以這個作業為主題撰寫的鐵人賽文章。
+說實話這些模式都沒有很創新，主要想講的就是：Backend Camp 的培訓模式，是會隨著學員的需求、上一屆學員的反饋和 mentor &amp;amp; 小 mentor 的經驗，而有所調整，並非是一成不變的。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://jyu1999.com/post/goodidea-backend-t12/logo.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2E5HHC8CW"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Y2E5HHC8CW', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+        
+        <figure class="site-avatar">
+            <a href="/">
+                
+                
+
+                
+                
+                <img src="/img/avatar_hu1a99bb7746f5d93a057710097cf9840a_45495_300x0_resize_box_3.png" width="300"
+                     height="353" class="site-logo" loading="lazy" alt="Avatar">
+                
+                
+            </a>
+            
+            <span class="emoji">🍌</span>
+            
+        </figure>
+        
+        
+
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Me are 結語JYu</a></h1>
+            <h2 class="site-description">Backend Developer @ Amastek</h2>
+            <h2 class="site-description">Associate Mentor @ GoodIdea Studio Backend Camp</h2>
+        </div>
+    </header><ol class="social-menu">
+        
+        <li>
+            <a
+                    href='https://github.com/JYu1999'
+                    target="_blank"
+                    title="github"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='https://www.linkedin.com/in/chieh-yu-chan-123814190/'
+                    target="_blank"
+                    title="linkedin"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='/files/jyu_resume.pdf'
+                    target="_blank"
+                    title="cv"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-text" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <line x1="9" y1="9" x2="10" y2="9" />
+  <line x1="9" y1="13" x2="15" y2="13" />
+  <line x1="9" y1="17" x2="15" y2="17" />
+</svg>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a
+                    href='mailto:jk29666338@gmail.com'
+                    
+                    title="email"
+                    rel="me"
+            >
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+                
+            </a>
+        </li>
+        
+    </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#好想工作室">好想工作室？</a></li>
+    <li><a href="#培訓的時間地點">培訓的時間、地點？</a></li>
+    <li><a href="#招生條件">招生條件</a></li>
+    <li><a href="#backend-camp-的培訓模式">Backend Camp 的培訓模式</a>
+      <ul>
+        <li><a href="#一自學">一、自學</a></li>
+        <li><a href="#二camp-和學員共同進化">二、Camp 和學員共同進化</a></li>
+        <li><a href="#三人行必有我師焉">三、人行，必有我師焉</a></li>
+      </ul>
+    </li>
+    <li><a href="#backend-camp-主要學習方向">Backend Camp 主要學習方向</a>
+      <ul>
+        <li><a href="#技術面">技術面</a></li>
+        <li><a href="#軟實力">軟實力</a></li>
+      </ul>
+    </li>
+    <li><a href="#常見問題">常見問題</a></li>
+    <li><a href="#報名方式">報名方式</a>
+      <ul>
+        <li><a href="#階段一自我介紹經驗分享">階段一：自我介紹、經驗分享</a></li>
+        <li><a href="#階段二面談">階段二：面談</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>Search</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Categories</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/backendlearningpath/" class="font_size_9">
+                後端學習路徑
+            </a>
+        
+            <a href="/categories/goodidea-mind/" class="font_size_6">
+                好想工作室 — 後端 (backend Camp)培訓心得
+            </a>
+        
+            <a href="/categories/laravel_backpack/" class="font_size_5">
+                Laravel Backpack 初學者之路
+            </a>
+        
+            <a href="/categories/software_design_and_architecture/" class="font_size_2">
+                Software Design &amp; Architecture
+            </a>
+        
+            <a href="/categories/useless_knowledge/" class="font_size_2">
+                無用的小知識
+            </a>
+        
+            <a href="/categories/ruby_on_rails/" class="font_size_1">
+                Ruby on Rails
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/backend/" class="font_size_11">
+                backend
+            </a>
+        
+            <a href="/tags/laravel/" class="font_size_8">
+                Laravel
+            </a>
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/" class="font_size_7">
+                好想工作室
+            </a>
+        
+            <a href="/tags/laravel-backpack/" class="font_size_5">
+                Laravel Backpack
+            </a>
+        
+            <a href="/tags/rubymine/" class="font_size_3">
+                RubyMine
+            </a>
+        
+            <a href="/tags/php/" class="font_size_2">
+                PHP
+            </a>
+        
+            <a href="/tags/ruby/" class="font_size_2">
+                Ruby
+            </a>
+        
+            <a href="/tags/api/" class="font_size_1">
+                API
+            </a>
+        
+            <a href="/tags/database/" class="font_size_1">
+                Database
+            </a>
+        
+            <a href="/tags/deploy/" class="font_size_1">
+                deploy
+            </a>
+        
+    </div>
+</section>
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/goodidea-backend-t12/">
+                <img src="/post/goodidea-backend-t12/logo_hu4e44a9238dd9439c985217ad54ea95d7_57691_800x0_resize_box_3.png"
+                        srcset="/post/goodidea-backend-t12/logo_hu4e44a9238dd9439c985217ad54ea95d7_57691_800x0_resize_box_3.png 800w, /post/goodidea-backend-t12/logo_hu4e44a9238dd9439c985217ad54ea95d7_57691_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="445" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 Backend Camp 第 12 梯招生" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/goodidea-backend-t12/">好想工作室 Backend Camp 第 12 梯招生</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 17, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>大家好，我是 結語 JYu，目前是一名後端工程師，同時也是好想工作室的小 mentor。</p>
+<p>好想工作室即將開始招收新一梯次的 Backend Camp 成員了😁</p>
+<hr>
+<h2 id="好想工作室">好想工作室？</h2>
+<p>好想工作室是一個在台南的資訊聚落，目前位在火車站旁邊，裡面有著很多對資訊科技充滿熱情的人。</p>
+<p>有些人是工作者，也有些是學員，而學員分別隸屬於不同的 Camp。主要分成兩個 Camp：Web 和 Backend。</p>
+<hr>
+<h2 id="培訓的時間地點">培訓的時間、地點？</h2>
+<p>地點是在好想工作室（廢話），地址是台南市東區北門路二段 16 號 L2A（台南文創園區內）</p>
+<p>時間的話，大部分的學員都是在平日 9~18 之間。</p>
+<p>假日要來也是可以，但請先取得 Mentor 同意。</p>
+<hr>
+<h2 id="招生條件">招生條件</h2>
+<ul>
+<li>自備乙台筆電，作業系統 Linux / Mac。</li>
+</ul>
+<hr>
+<h2 id="backend-camp-的培訓模式">Backend Camp 的培訓模式</h2>
+<h3 id="一自學">一、自學</h3>
+<p>Backend Camp 是以自學為主，基本上 mentor 會給你一個粗略的方向，或有時會有一些小作業。</p>
+<p>這些都不是強制的，也不會壓 Deadline 給學員。如果學員有自己想研究的方向，我們都是尊重，並盡量協助。</p>
+<p>雖說如此，如果學員過於懶散，或是偏離後端領域太多，mentor 還是會去關心一下喔😉</p>
+<p>培訓過程中，不會有答案，也不會有很詳細的規劃。學員在每天、每個禮拜、每個月甚至到這半年想要達成什麼，都是仰賴學員自己做決定。</p>
+<p>我們並不是放牛吃草，收進來就讓學員自生自滅。我們希望的是，學員有經過自己探索、消化並吸收後，並能試著歸納出自己的學習方向、方法、步調和目標等。</p>
+<p>讓學員按表操課可能可以讓學員省去很多探索的時間，但只要不再有課程表，學員可能就不知道自己可以再朝什麼方向再進化了，這是我們不願意看到的。</p>
+<p>畢竟對於軟體工程師來說，學習是一輩子的事情。</p>
+<p>當然，如果有任何問題，不管是技術上、求職上甚至是心情上的問題，都可以找 camp 的成員聊聊，聽聽大家想法，再做決定～</p>
+<h3 id="二camp-和學員共同進化">二、Camp 和學員共同進化</h3>
+<p>培訓這件事情不可能是完美的，畢竟每次學員的組成和程度都不同。</p>
+<p>我們的培訓模式一定會有缺陷，但我們都會持續反思並和學員進行討論，最終目的就是要讓學員變得更好。</p>
+<p>例如在第 10 梯的時候，我們有看到學員不太知道如何對某一個主題進行深入的研究，在「分享」這件事情上也比較缺乏架構，所以在第 11 梯的時候，開始了二到三週一次的後端分享會。在進行分享會的過程中，學員們也從一開始的東拼西湊、缺乏架構，變成井井有條並能緊扣主題。</p>
+<p>此外，我們也發現一開始從業的軟體工程師可能在時間管理或目標設定上，會有一些困難。所以今年我們也特別設計了一個作業，模擬實際上會遇到的工作情況，如時程安排、需求確認。學員也從一開始根本不敢跟（假）業主確認需求，只看著規格書硬做，導致浪費時間。到後面能主動想到規格書上可能未盡的事項，也能對單一個需求提出多個解決方案，並跟（假）業主討論。詳情大家可以參考學員 Wade 以這個作業為主題撰寫的<a class="link" href="https://ithelp.ithome.com.tw/users/20157341/ironman/6645"  target="_blank" rel="noopener"
+    >鐵人賽文章</a>。</p>
+<p>說實話這些模式都沒有很創新，主要想講的就是：Backend Camp 的培訓模式，是會隨著學員的需求、上一屆學員的反饋和 mentor &amp; 小 mentor 的經驗，而有所調整，並非是一成不變的。</p>
+<p>當然，每次的調整我們都會和學員說明清楚目的和流程，並讓學員自己評估參與意願。</p>
+<p><img src="/post/goodidea-backend-t12/2.jpg"
+	width="4032"
+	height="3024"
+	srcset="/post/goodidea-backend-t12/2_hu3af19e985bb5775b0f9dd1192569c521_921239_480x0_resize_q75_box.jpg 480w, /post/goodidea-backend-t12/2_hu3af19e985bb5775b0f9dd1192569c521_921239_1024x0_resize_q75_box.jpg 1024w"
+	loading="lazy"
+	
+		alt="Backend 討論會開始之前"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="320px"
+	
+></p>
+<h3 id="三人行必有我師焉">三、人行，必有我師焉</h3>
+<p>工作室鼓勵分享交流，但並沒有侷限在資訊領域。</p>
+<p>來到這邊的學員，過去的經歷五花八門。我當下稍微想一下，就有專案管理相關、自己創業開店、消防員、半導體工程師…等等。</p>
+<p>除了經歷五花八門，「身分」也是很多元，大家各自都有各自的故事和經驗。</p>
+<p>以我自己為例，我剛進工作室的時候，還是一個什麼都不知道的菜鳥大學畢業生。進到工作室之後跟大家交流，不僅了解到一些「社會經驗」，也開始對很多的行業有所理解。對我來說幫助很大。</p>
+<p>說這麼多，我想引用前 Mentor Don 的一段話：</p>
+<blockquote>
+<p>Mentor 和學員的關係不是一種上對下的關係。</p>
+<p>在我的學員當中，也有同時能夠成為我的 Mentor 的夥伴，也許我在技術方面可以成為他的 Mentor，而他在面對親情方面，也能夠成為我的 Mentor，我們互相扶持共同成長。</p>
+</blockquote>
+<p><img src="/post/goodidea-backend-t12/1.jpg"
+	width="4032"
+	height="3024"
+	srcset="/post/goodidea-backend-t12/1_hu81535b7c3a4fd1efe83b53e53ff367aa_2734591_480x0_resize_q75_box.jpg 480w, /post/goodidea-backend-t12/1_hu81535b7c3a4fd1efe83b53e53ff367aa_2734591_1024x0_resize_q75_box.jpg 1024w"
+	loading="lazy"
+	
+		alt="大家交流技術"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="320px"
+	
+></p>
+<hr>
+<h2 id="backend-camp-主要學習方向">Backend Camp 主要學習方向</h2>
+<h3 id="技術面">技術面</h3>
+<ul>
+<li>
+<p>OS：Linux or MacOS</p>
+</li>
+<li>
+<p>語言：PHP</p>
+</li>
+<li>
+<p>框架：Laravel</p>
+</li>
+<li>
+<p>資料庫：MySQL</p>
+</li>
+<li>
+<p>雲端服務：AWS or GCP</p>
+</li>
+</ul>
+<p>以上都不是硬性規定，如果學員本人有想法或需求，都可以提出來討論。</p>
+<h3 id="軟實力">軟實力</h3>
+<p>除了技術之外，我們也希望幫助學員培養以下能力：</p>
+<ul>
+<li>
+<p>分析問題、拆解問題、解決問題</p>
+</li>
+<li>
+<p>自學的能力</p>
+</li>
+<li>
+<p>分享交流的能力</p>
+</li>
+<li>
+<p>自省的能力</p>
+</li>
+</ul>
+<hr>
+<h2 id="常見問題">常見問題</h2>
+<ol>
+<li>
+<p>參加培訓需要學費或額外費用嗎？</p>
+<p>台南好想工作室 Backend Camp 6 個月培訓期間內免費。</p>
+</li>
+<li>
+<p>可以偶爾請假或提早走/晚點到嗎？</p>
+<p>可以，學員要對自己的學習全權負責。</p>
+<p>每個學員的背景都不同，有些可能有小孩、有些可能住很遠，這些都是學員自己需要考量和克服的。</p>
+<p>此外，我們很關心學員的身心健康，所以如果覺得壓力太大，也可以適當請假休息。</p>
+</li>
+<li>
+<p>因白天工作，有可能晚上或遠端培訓嗎？</p>
+<p>不行！時間是工作室希望學員付出的唯一要求，如果無法付出時間來工作室，建議可以先嘗試上線上課程。</p>
+</li>
+<li>
+<p>我很怕跟不上、六個月學不完怎麼辦？</p>
+<p>每個人的學習步調和模式都不同，但只要願意嘗試學習、提出來討論並調整，都是有機會漸入佳臻的。</p>
+<p>如果六個月之後，真的還想繼續留在工作室，可以跟 mentor 申請成為「進駐學員」，mentor 會評估你的狀況再進行決定。</p>
+</li>
+<li>
+<p>招募需通過篩選機制？</p>
+<p>對，因為好想工作室的資源有限，希望把資源給需要而適合的人。</p>
+</li>
+<li>
+<p>還有更多問題？</p>
+<p>好想工作室在某些禮拜四晚上會舉辦里民大會，歡迎來交流～</p>
+</li>
+</ol>
+<h2 id="報名方式">報名方式</h2>
+<p>報名分為兩個階段：</p>
+<h3 id="階段一自我介紹經驗分享">階段一：自我介紹、經驗分享</h3>
+<p>寄件信箱：<a class="link" href="sojphp@gmail.com" >sojphp@gmail.com</a> 和 <a class="link" href="jk29666338@gmail.com" >jk29666338@gmail.com</a></p>
+<p>報名期限：即日起至 2023 年 10 月 12 日 23:59:59 止，因為空間有限，如果招募滿額也會停止繼續招生（如果停止招生會在此標示）。</p>
+<p>撰寫主旨：「好想工作室 Backend Camp 申請」</p>
+<p>內容格式：</p>
+<ol>
+<li>
+<p>自我簡介 (現居 / 過去學 / 經歷等)。</p>
+</li>
+<li>
+<p>你認為自學的定義是什麼？你是否有自學的經驗？</p>
+</li>
+<li>
+<p>你對於「分享」的看法是什麼？是否有相關的經驗？</p>
+</li>
+<li>
+<p>描述你對於「軟體工程師」的看法</p>
+</li>
+<li>
+<p>為什麼想學習後端的技術？有學習過 web or mobile 的技術嗎？</p>
+</li>
+<li>
+<p>想來好想工作室的主要原因？</p>
+</li>
+<li>
+<p>回憶過去，感恩、生氣、沮喪的經驗各描述一件事。</p>
+</li>
+</ol>
+<h3 id="階段二面談">階段二：面談</h3>
+<p>如果我們評估報名者有通過第一階段後，就會邀請報名者來好想工作室，進行一個 1 ~ 2 小時不等的面談。</p>
+<p>在面談中，我們除了會針對第一階段的問題做延伸討論，也會確認一下報名者的價值觀適不適合 Camp。</p>
+<p>面談並不是考試，過程中也許會出現技術，但都是偏向於討論。就當作一般的閒聊，不用特地準備什麼東西。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%A5%BD%E6%83%B3%E5%B7%A5%E4%BD%9C%E5%AE%A4/">好想工作室</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/goodidea-mind-6/">
+        
+        
+            <div class="article-image">
+                <img src="/post/goodidea-mind-6/4.ce88316655eec9d6d0638cd238f020cd_hu4e44a9238dd9439c985217ad54ea95d7_57691_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（六）：找工作之前"
+                        
+                        data-hash="md5-zogxZlXuydbQY4zSOPAgzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（六）：找工作之前</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/goodidea-mind-5/">
+        
+        
+            <div class="article-image">
+                <img src="/post/goodidea-mind-5/4.ce88316655eec9d6d0638cd238f020cd_hu4e44a9238dd9439c985217ad54ea95d7_57691_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（五）：這麼多東西，要怎麼學最有效率？"
+                        
+                        data-hash="md5-zogxZlXuydbQY4zSOPAgzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（五）：這麼多東西，要怎麼學最有效率？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/goodidea-mind-4/">
+        
+        
+            <div class="article-image">
+                <img src="/post/goodidea-mind-4/4.ce88316655eec9d6d0638cd238f020cd_hu4e44a9238dd9439c985217ad54ea95d7_57691_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（四）：我快崩潰了，怎麼辦？"
+                        
+                        data-hash="md5-zogxZlXuydbQY4zSOPAgzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（四）：我快崩潰了，怎麼辦？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/goodidea-mind-3/">
+        
+        
+            <div class="article-image">
+                <img src="/post/goodidea-mind-3/4.ce88316655eec9d6d0638cd238f020cd_hu4e44a9238dd9439c985217ad54ea95d7_57691_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（三）：我好想進來好想"
+                        
+                        data-hash="md5-zogxZlXuydbQY4zSOPAgzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（三）：我好想進來好想</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/goodidea-mind-2/">
+        
+        
+            <div class="article-image">
+                <img src="/post/goodidea-mind-2/4.ce88316655eec9d6d0638cd238f020cd_hu4e44a9238dd9439c985217ad54ea95d7_57691_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛"
+                        
+                        data-hash="md5-zogxZlXuydbQY4zSOPAgzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">好想工作室 — 後端 (Backend Camp) 培訓心得（二）：backend camp 在幹嘛</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2023 Me are 結語JYu
+    </section>
+    
+    <section class="powerby">
+        
+            小猴子愛吃香蕉～ <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
