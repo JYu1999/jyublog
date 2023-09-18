@@ -210,7 +210,11 @@ Backend Camp 是以自學為主，基本上 Mentor 會給你一個粗略的方�
 
 ### 階段一：自我介紹、經驗分享
 
-寄件信箱：[sojphp@gmail.com](sojphp@gmail.com) 和 [jk29666338@gmail.com](jk29666338@gmail.com)
+寄件信箱：
+- SoJ：[sojphp@gmail.com](sojphp@gmail.com)
+- 結語：[jk29666338@gmail.com](jk29666338@gmail.com)
+
+麻煩以上兩個信箱都要寄～也可以用副本的方式
 
 報名期限：即日起至 2023 年 10 月 12 日 23:59:59 止，因為空間有限，如果招募滿額也會停止繼續招生（如果停止招生會在此標示）。
 
