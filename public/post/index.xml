@@ -719,7 +719,8 @@
 接著我們進到稍微複雜一點的地帶&amp;hellip;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;-javascript-learning-path&#34;&gt;🫤 Javascript Learning Path&lt;/h3&gt;
-&lt;p&gt;主要集中在 DOM 的部分，這裡大概知道 DOM 會怎麼跟 HTML  做互動即可。沒空的話，詳細的 JS 概念（e.g. hoisting, callstack)可以不用了解。
+&lt;p&gt;主要集中在 DOM 和 API 的部分，這裡大概知道 DOM 會怎麼跟 HTML 做互動，還有前端是怎麼 call API 的。
+沒空的話，詳細的 JS 概念（e.g. hoisting, callstack)可以不用了解。
 有空的話當然就去把 JS 概念補一補～&lt;/p&gt;
 &lt;h3 id=&#34;-laravel-learning-pathhttpsjyu1999combackendlearningpathlaravel_learning_path&#34;&gt;😵‍💫 &lt;a class=&#34;link&#34; href=&#34;https://jyu1999.com/backendlearningpath/laravel_learning_path/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Laravel Learning Path&lt;/a&gt;&lt;/h3&gt;

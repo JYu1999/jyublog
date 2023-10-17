@@ -79,7 +79,8 @@ image: "1.jpg"
 > 接著我們進到稍微複雜一點的地帶...
 
 ### 🫤 Javascript Learning Path
-主要集中在 DOM 的部分，這裡大概知道 DOM 會怎麼跟 HTML  做互動即可。沒空的話，詳細的 JS 概念（e.g. hoisting, callstack)可以不用了解。
+主要集中在 DOM 和 API 的部分，這裡大概知道 DOM 會怎麼跟 HTML 做互動，還有前端是怎麼 call API 的。
+沒空的話，詳細的 JS 概念（e.g. hoisting, callstack)可以不用了解。
 有空的話當然就去把 JS 概念補一補～
 
 ### 😵‍💫 [Laravel Learning Path](https://jyu1999.com/backendlearningpath/laravel_learning_path/)
