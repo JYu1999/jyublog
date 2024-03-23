@@ -775,25 +775,6 @@
 </description>
         </item>
         <item>
-        <title>現代網路服務基礎架構</title>
-        <link>https://jyu1999.com/post/web_application_infrastructure/</link>
-        <pubDate>Mon, 29 May 2023 15:01:23 +0800</pubDate>
-        
-        <guid>https://jyu1999.com/post/web_application_infrastructure/</guid>
-        <description>&lt;img src="https://jyu1999.com/post/web_application_infrastructure/4.png" alt="Featured image of post 現代網路服務基礎架構" /&gt;&lt;p&gt;這是我 2023/5/29 跟好想工作室 Backend Camp 學員分享的內容，是我個人對於 System Design Interview 這本書的讀書心得。
-如果有任何錯誤歡迎指正～&lt;/p&gt;
-&lt;div class=&#34;video-wrapper&#34;&gt;
-    &lt;iframe loading=&#34;lazy&#34; 
-            src=&#34;https://www.youtube.com/embed/twfInkqVZMs&#34; 
-            allowfullscreen 
-            title=&#34;YouTube Video&#34;
-    &gt;
-    &lt;/iframe&gt;
-&lt;/div&gt;
-
-</description>
-        </item>
-        <item>
         <title>String and Symbol in Ruby</title>
         <link>https://jyu1999.com/post/ruby_string_symbols/</link>
         <pubDate>Wed, 24 May 2023 13:34:44 +0800</pubDate>
@@ -3764,19 +3745,15 @@ Backpack 預設提供兩個可以放 widgets 的 section:&lt;/p&gt;
 &lt;p&gt;如果你是 recruiter 或 headhunter，建議直接去看我的履歷，以下內容跟專業相關不高。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Hi, 我是 結語JYu。目前是一個後端工程師，主要開發語言/框架為 PHP/Laravel。 同時，我也在好想工作室 Backend Camp 擔任 Mentor。&lt;/p&gt;
-&lt;p&gt;現在主要在學習與鑽研的方向為網頁開發，包含但不限於前後端技術、資料庫設計與優化、系統設計、分散式系統設計等等。&lt;/p&gt;
-&lt;p&gt;很喜歡運動，特別喜歡可以一個人進行的，像是重訓、慢跑、跳繩、騎腳踏車之類的。偶爾也會去打格鬥，以踢拳擊和柔道為主。&lt;/p&gt;
-&lt;p&gt;很喜歡看書，尤其是在心情低落的時候。比較常看的是人文社科類的書，最喜歡的作家是張曼娟老師和簡媜老師。&lt;/p&gt;
-&lt;p&gt;很喜歡音樂，大多的時候都只有聽，但千萬不要問我歌名或演奏者，我一定不知道XD。有時候也會唱歌或拉小提琴，然後用 GarageBand 做一些簡單的作品，有興趣可以看看 demo XD～
-&lt;div class=&#34;video-wrapper&#34;&gt;
-    &lt;iframe loading=&#34;lazy&#34; 
-            src=&#34;https://www.youtube.com/embed/92jj1wFo6NA&#34; 
-            allowfullscreen 
-            title=&#34;YouTube Video&#34;
-    &gt;
-    &lt;/iframe&gt;
-&lt;/div&gt;
-&lt;/p&gt;
+&lt;p&gt;最近(2024/3)的生活與興趣：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;學習 System Design&lt;/li&gt;
+&lt;li&gt;學習日語和越南語&lt;/li&gt;
+&lt;li&gt;踏入 AI 領域，研究相關知識&lt;/li&gt;
+&lt;li&gt;開始努力讓自己早起&lt;/li&gt;
+&lt;li&gt;思索如何培育學員、和學員一起變得更好&lt;/li&gt;
+&lt;li&gt;買了一台電子鋼琴，陶冶性情&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;大多數的時候喜歡安靜做自己的事情，但也很喜歡分享和交流。這也是為什麼我會在好想工作室擔任 Mentor。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jyu1999.com/about/2.png&#34;
 	width=&#34;4032&#34;

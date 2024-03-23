@@ -167,25 +167,6 @@
 </description>
         </item>
         <item>
-        <title>現代網路服務基礎架構</title>
-        <link>https://jyu1999.com/post/web_application_infrastructure/</link>
-        <pubDate>Mon, 29 May 2023 15:01:23 +0800</pubDate>
-        
-        <guid>https://jyu1999.com/post/web_application_infrastructure/</guid>
-        <description>&lt;img src="https://jyu1999.com/post/web_application_infrastructure/4.png" alt="Featured image of post 現代網路服務基礎架構" /&gt;&lt;p&gt;這是我 2023/5/29 跟好想工作室 Backend Camp 學員分享的內容，是我個人對於 System Design Interview 這本書的讀書心得。
-如果有任何錯誤歡迎指正～&lt;/p&gt;
-&lt;div class=&#34;video-wrapper&#34;&gt;
-    &lt;iframe loading=&#34;lazy&#34; 
-            src=&#34;https://www.youtube.com/embed/twfInkqVZMs&#34; 
-            allowfullscreen 
-            title=&#34;YouTube Video&#34;
-    &gt;
-    &lt;/iframe&gt;
-&lt;/div&gt;
-
-</description>
-        </item>
-        <item>
         <title>Docker Learning Path</title>
         <link>https://jyu1999.com/backendlearningpath/docker_learning_path/</link>
         <pubDate>Thu, 18 May 2023 23:52:05 +0800</pubDate>
