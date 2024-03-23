@@ -54,7 +54,7 @@ newTab = false
 [[menu.social]]
 identifier = "youtube"
 name = "youtube"
-url = "www.youtube.com/@MemosofJYu"
+url = "https://www.youtube.com/@MemosofJYu"
 weight = -10
 [menu.social.params]
 icon = "video"
