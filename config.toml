@@ -51,6 +51,14 @@ weight = -5
 [menu.social.params]
 icon = "mail"
 newTab = false
+[[menu.social]]
+identifier = "youtube"
+name = "youtube"
+url = "www.youtube.com/@MemosofJYu"
+weight = -10
+[menu.social.params]
+icon = "video"
+newTab = true
 
 
 [params]
