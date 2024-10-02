@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://jyu1999.com/</loc>
-    <lastmod>2023-09-17T12:00:18+08:00</lastmod>
+    <lastmod>2024-10-02T19:04:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url><url>
     <loc>https://jyu1999.com/post/</loc>
-    <lastmod>2023-09-17T12:00:18+08:00</lastmod>
+    <lastmod>2024-10-02T19:04:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url><url>
+    <loc>https://jyu1999.com/post/thoughts-after-reading-heptabase-tutorials/</loc>
+    <lastmod>2024-10-02T19:04:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url><url>
